@@ -1,0 +1,41 @@
+﻿<Properties StartupConfiguration="{E99AD18F-940E-4208-935E-77615D4BDDDE}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Run/Objects/RunConfig.cs" relfile="MyGame2/Run/Objects/RunConfig.cs" line="9" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.BeeCreak PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MyGame2/Content/lookout.spritefont">
+    <Files>
+      <File FileName="MyGame2/Generation/Objects/WorldGenerator.cs" />
+      <File FileName="MyGame2/BeeCreak.cs" />
+      <File FileName="MyGame2/Content/Content.mgcb" />
+      <File FileName="MyGame2/Generation/Objects/TextureCollection.cs" Line="46" Column="1" />
+      <File FileName="MyGame2/Generation/Objects/World.cs" />
+      <File FileName="MyGame2/Run/Objects/Character.cs" />
+      <File FileName="MyGame2/Run/Objects/Cursor.cs" />
+      <File FileName="MyGame2/Content/lookout.spritefont" Line="61" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MyGame2" expanded="True">
+            <Node name="BeeCreak" expanded="True">
+              <Node name="bin" expanded="True" />
+              <Node name="Generation" expanded="True">
+                <Node name="Objects" expanded="True" />
+              </Node>
+              <Node name="Run" expanded="True">
+                <Node name="Objects" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MyGame2 PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

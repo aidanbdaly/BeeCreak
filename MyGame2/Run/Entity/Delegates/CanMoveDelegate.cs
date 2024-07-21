@@ -1,0 +1,1 @@
+public delegate bool CanMoveDelegate(float x, float y);

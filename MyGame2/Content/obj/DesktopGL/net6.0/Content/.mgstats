@@ -1,0 +1,11 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/cursor-hover.png","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/cursor-hover.xnb","TextureProcessor","Texture2DContent",121,4181,0.359044
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/cursor.png","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/cursor.xnb","TextureProcessor","Texture2DContent",175,4181,0.005867
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/forest.png","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/forest.xnb","TextureProcessor","Texture2DContent",2805,4181,0.210937
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/grass.png","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/grass.xnb","TextureProcessor","Texture2DContent",2944,4181,0.008161
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/lookout.spritefont","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/lookout.xnb","FontDescriptionProcessor","SpriteFontContent",2010,13343,0.338294
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-down.png","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/man-down.xnb","TextureProcessor","Texture2DContent",3190,4181,0.188243
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-left.png","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/man-left.xnb","TextureProcessor","Texture2DContent",3050,4181,0.005823
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-right.png","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/man-right.xnb","TextureProcessor","Texture2DContent",3041,4181,0.001175
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-up.png","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/man-up.xnb","TextureProcessor","Texture2DContent",3054,4181,0.001712
+"/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/stone.png","/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/stone.xnb","TextureProcessor","Texture2DContent",4628,4181,0.221328

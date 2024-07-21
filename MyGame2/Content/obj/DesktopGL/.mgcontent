@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/cursor-hover.png</File>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/cursor.png</File>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/forest.png</File>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/grass.png</File>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/lookout.spritefont</File>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-down.png</File>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-left.png</File>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-right.png</File>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-up.png</File>
+    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/stone.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
