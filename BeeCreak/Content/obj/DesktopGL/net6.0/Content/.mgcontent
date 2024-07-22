@@ -4,16 +4,16 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/cursor-hover.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/cursor.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/forest.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/grass.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/lookout.spritefont</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/man-down.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/man-left.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/man-right.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/man-up.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/stone.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor-hover.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/forest.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/grass.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/lookout.spritefont</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-down.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-left.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-right.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-up.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/stone.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

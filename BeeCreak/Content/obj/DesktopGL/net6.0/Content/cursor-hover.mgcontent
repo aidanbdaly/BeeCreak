@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/cursor-hover.png</SourceFile>
+  <SourceFile>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor-hover.png</SourceFile>
   <SourceTime>2024-07-21T22:45:07.3663333+01:00</SourceTime>
-  <DestFile>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/bin/DesktopGL/Content/cursor-hover.xnb</DestFile>
-  <DestTime>2024-07-22T15:30:32.5997895+01:00</DestTime>
+  <DestFile>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/cursor-hover.xnb</DestFile>
+  <DestTime>2024-07-22T15:35:04.557327+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T12:44:56+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

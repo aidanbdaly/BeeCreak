@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/man-down.png</SourceFile>
+  <SourceFile>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-down.png</SourceFile>
   <SourceTime>2024-07-21T22:45:07.3670628+01:00</SourceTime>
-  <DestFile>/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/Content/bin/DesktopGL/Content/man-down.xnb</DestFile>
-  <DestTime>2024-07-22T15:30:32.7248449+01:00</DestTime>
+  <DestFile>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/man-down.xnb</DestFile>
+  <DestTime>2024-07-22T15:35:04.657827+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T12:44:56+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

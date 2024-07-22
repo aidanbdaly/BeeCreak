@@ -201,11 +201,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/BeeCreak.csproj",
+      "projectUniqueName": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/BeeCreak.csproj",
       "projectName": "BeeCreak",
-      "projectPath": "/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/BeeCreak.csproj",
+      "projectPath": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/BeeCreak.csproj",
       "packagesPath": "/Users/aidandaly/.nuget/packages/",
-      "outputPath": "/Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/obj/",
+      "outputPath": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/aidandaly/.nuget/NuGet/NuGet.Config"
