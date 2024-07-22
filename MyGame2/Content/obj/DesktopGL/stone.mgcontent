@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/stone.png</SourceFile>
-  <SourceTime>2024-05-27T16:38:27.1557704+01:00</SourceTime>
+  <SourceTime>2024-07-21T22:45:07.3703622+01:00</SourceTime>
   <DestFile>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/stone.xnb</DestFile>
-  <DestTime>2024-06-22T19:11:57.0793244+01:00</DestTime>
+  <DestTime>2024-07-21T23:06:29.2163804+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T12:44:56+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

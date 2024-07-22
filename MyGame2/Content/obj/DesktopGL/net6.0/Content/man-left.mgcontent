@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-left.png</SourceFile>
-  <SourceTime>2024-06-16T13:07:00.0713683+01:00</SourceTime>
+  <SourceTime>2024-07-21T22:45:07.3671533+01:00</SourceTime>
   <DestFile>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/bin/DesktopGL/Content/man-left.xnb</DestFile>
-  <DestTime>2024-06-16T13:35:40.9404243+01:00</DestTime>
+  <DestTime>2024-07-21T23:18:00.114233+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T12:44:56+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

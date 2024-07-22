@@ -31,7 +31,7 @@ public class Character : Entity
         Context = context;
         WorldPosition = worldPosition;
 
-        Context.Dynamic.SoundController.PlayMusic("forest-ambience");
+       // Context.Dynamic.SoundController.PlayMusic("forest-ambience");
         Context.Dynamic.Camera.FocusOn(this);
 
         ScreenPosition = new Vector2(
