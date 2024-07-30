@@ -1,7 +1,8 @@
-namespace BeeCreak.Run;
-
+using BeeCreak.Run.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+
+namespace BeeCreak.Run.Tools;
 
 public enum PanType
 {
@@ -18,18 +19,26 @@ public enum Type
 public class Camera
 {
     public Vector2 Position { get; set; }
+    public Vector2 WorldPosition { get; set; }
     public Matrix Transform { get; set; }
-    public Entity Target { get; set; }
-    public bool Transitioning { get; set; }
-    public Type Type { get; set; }
+    public Matrix ZoomTransform { get; set; }
+    public int ViewPortWidth { get; set; }
+    public int ViewPortHeight { get; set; }
     public float Zoom { get; set; }
+    private Entity Target { get; set; }
+    private bool Transitioning { get; set; }
+    private Type Type { get; set; }
 
-    public Camera(Type type = Type.Static)
+    public Camera(int viewPortWidth, int viewPortHeight, Type type = Type.Static)
     {
         if (type == Type.Static)
         {
             Position = Vector2.Zero;
         }
+
+        ViewPortWidth = viewPortWidth;
+
+        ViewPortHeight = viewPortHeight;
 
         Zoom = 3.5f;
     }
@@ -41,6 +50,7 @@ public class Camera
         if (panType == PanType.Instant)
         {
             Position = Target.WorldPosition + Target.ScreenPosition;
+            WorldPosition = Target.WorldPosition;
         }
 
         if (panType == PanType.Smooth)
@@ -61,6 +71,7 @@ public class Camera
         if (Type == Type.Follow && !Transitioning)
         {
             Position = targetPosition;
+            WorldPosition = Target.WorldPosition;
         }
 
         if (Type == Type.Follow && Transitioning)
@@ -92,11 +103,16 @@ public class Camera
         UpdateTransform();
     }
 
-    public void UpdateTransform()
+    private void UpdateTransform()
     {
         Transform =
             Matrix.CreateTranslation(new Vector3(-Position, 0))
             * Matrix.CreateScale(new Vector3(Zoom, Zoom, 1))
             * Matrix.CreateTranslation(new Vector3(Target.ScreenPosition, 0));
+
+        ZoomTransform =
+            Matrix.CreateTranslation(-ViewPortWidth / 2f, -ViewPortHeight / 2f, 0)
+            * Matrix.CreateScale(Zoom)
+            * Matrix.CreateTranslation(ViewPortWidth / 2f, ViewPortHeight / 2f, 0);
     }
 }

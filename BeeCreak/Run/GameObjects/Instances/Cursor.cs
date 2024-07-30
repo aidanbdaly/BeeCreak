@@ -1,32 +1,35 @@
 using System;
+using BeeCreak.Run.Generation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace BeeCreak.Run;
+namespace BeeCreak.Run.GameObjects.Instances;
 
 public class Cursor : Entity
 {
+    private OnTileChangeDelegate OnTileChange { get; set; }
     private Texture2D Texture { get; set; }
     private Texture2D HoverTexture { get; set; }
     private Tile HoveredTile { get; set; }
     private Tile[,] TileSet { get; set; }
-    private readonly IContext Context;
+    private readonly IToolCollection Tools;
 
-    public Cursor(IContext context, Tile[,] tileSet)
+    public Cursor(IToolCollection tools, OnTileChangeDelegate onTileChange, Tile[,] tileSet)
     {
-        Texture = context.Static.SpriteController.GetTexture("cursor");
-        HoverTexture = context.Static.SpriteController.GetTexture("cursor-hover");
+        Texture = tools.Static.Sprite.GetTexture("cursor");
+        HoverTexture = tools.Static.Sprite.GetTexture("cursor-hover");
 
+        OnTileChange = onTileChange;
         TileSet = tileSet;
 
         ScreenPosition = Vector2.Zero;
-        Context = context;
+        Tools = tools;
     }
 
     public override void Update(GameTime gameTime)
     {
-        var camera = Context.Dynamic.Camera;
+        var camera = Tools.Dynamic.Camera;
 
         var mouseState = Mouse.GetState();
         var clicked = mouseState.LeftButton == ButtonState.Pressed;
@@ -40,16 +43,18 @@ public class Cursor : Entity
         var mouseWorldPosition = Vector2.Transform(mouseScreenPosition, cameraTransformInverted);
 
         var tilePosition = new Vector2(
-            (int)Math.Floor(mouseWorldPosition.X / Context.Static.TILE_SIZE),
-            (int)Math.Floor(mouseWorldPosition.Y / Context.Static.TILE_SIZE)
+            (int)Math.Floor(mouseWorldPosition.X / Tools.Static.TILE_SIZE),
+            (int)Math.Floor(mouseWorldPosition.Y / Tools.Static.TILE_SIZE)
         );
 
         var hoveredTile = TileSet[(int)tilePosition.X, (int)tilePosition.Y];
 
         if (clicked)
         {
-            hoveredTile.Texture = Context.Static.SpriteController.GetTexture("grass");
+            hoveredTile.Texture = Tools.Static.Sprite.GetTexture("grass");
             hoveredTile.IsSolid = false;
+
+            OnTileChange((int)tilePosition.X, (int)tilePosition.Y);
         }
 
         TileSet[(int)tilePosition.X, (int)tilePosition.Y] = hoveredTile;
@@ -59,18 +64,14 @@ public class Cursor : Entity
 
     public override void Draw()
     {
-        var camera = Context.Dynamic.Camera;
+        var camera = Tools.Dynamic.Camera;
 
-        Context.Static.SpriteController.Batch.Begin(
+        Tools.Static.Sprite.Batch.Begin(
             transformMatrix: camera.Transform,
             samplerState: SamplerState.PointClamp,
             blendState: BlendState.AlphaBlend
         );
-        Context.Static.SpriteController.Batch.Draw(
-            HoverTexture,
-            HoveredTile.Position,
-            Color.White * 0.5f
-        );
-        Context.Static.SpriteController.Batch.End();
+        Tools.Static.Sprite.Batch.Draw(HoverTexture, HoveredTile.Position, Color.White * 0.5f);
+        Tools.Static.Sprite.Batch.End();
     }
 }

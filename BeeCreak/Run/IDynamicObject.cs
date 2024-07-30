@@ -1,6 +1,6 @@
-namespace BeeCreak.Run;
-
 using Microsoft.Xna.Framework;
+
+namespace BeeCreak.Run;
 
 public interface IDynamicObject
 {

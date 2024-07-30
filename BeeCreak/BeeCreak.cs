@@ -1,19 +1,25 @@
-﻿namespace BeeCreak.Run;
-
+﻿using System;
+using BeeCreak.Run;
+using BeeCreak.Run.Generation;
+using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+namespace BeeCreak;
+
 public class BeeCreak : Game
 {
-    private IContext context;
-    private World World;
-    private UIController uiController;
-    private readonly GraphicsDeviceManager graphics;
+    private IToolCollection Tools;
+    private Scene Scene;
+    private UI UI;
+    private readonly GraphicsDeviceManager Graphics;
 
     public BeeCreak()
     {
-        graphics = new GraphicsDeviceManager(this);
+        Graphics = new GraphicsDeviceManager(this);
+
+        IsFixedTimeStep = false;
 
         Content.RootDirectory = "Content";
 
@@ -22,38 +28,40 @@ public class BeeCreak : Game
 
     protected override void Initialize()
     {
-        graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
-        graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
-        graphics.ToggleFullScreen();
-        graphics.ApplyChanges();
+        Graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+        Graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
 
-        var TILE_SIZE = 32;
+        Graphics.SynchronizeWithVerticalRetrace = false;
 
-        var staticContext = new StaticContext
+        Graphics.ToggleFullScreen();
+        Graphics.ApplyChanges();
+
+        Tools = new ToolCollection
         {
-            SpriteController = new SpriteController(Content, GraphicsDevice),
-            GraphicsDevice = GraphicsDevice,
-            TILE_SIZE = TILE_SIZE,
+            Static = new ToolCollection.StaticTools
+            {
+                Sprite = new Sprite(Content, GraphicsDevice),
+                GraphicsDevice = GraphicsDevice,
+                TILE_SIZE = 32
+            },
+            Dynamic = new ToolCollection.DynamicTools
+            {
+                Sound = new Sound(),
+                Time = new Time(),
+                Camera = new Camera(
+                    GraphicsDevice.Adapter.CurrentDisplayMode.Width,
+                    GraphicsDevice.Adapter.CurrentDisplayMode.Height
+                )
+            }
         };
-
-        var dynamicContext = new DynamicContext
-        {
-            SoundController = new SoundController(),
-            TimeController = new TimeController(),
-            Camera = new Camera()
-        };
-
-        var context = new Context { Static = staticContext, Dynamic = dynamicContext, };
-
-        this.context = context;
 
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
-        World = new World(context, 300);
-        uiController = new UIController(context);
+        Scene = new Scene(Tools, 300);
+        UI = new UI(Tools);
     }
 
     protected override void Update(GameTime gameTime)
@@ -64,18 +72,18 @@ public class BeeCreak : Game
         )
             Exit();
 
-        context.Dynamic.Update(gameTime);
+        Tools.Dynamic.Update(gameTime);
 
-        World.Update(gameTime);
-        uiController.Update(gameTime);
+        Scene.Update(gameTime);
+        UI.Update(gameTime);
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        World.Draw();
-        uiController.Draw();
+        Scene.Draw();
+        UI.Draw();
 
         base.Draw(gameTime);
     }

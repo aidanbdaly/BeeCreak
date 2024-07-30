@@ -1,7 +1,7 @@
-﻿namespace BeeCreak.Run;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+namespace BeeCreak.Run.Generation;
 
 public class Tile
 {
@@ -13,8 +13,8 @@ public class Tile
 
     public Tile(Texture2D texture, Vector2 position, bool isSolid = false)
     {
-        this.Texture = texture;
-        this.Position = position;
-        this.IsSolid = isSolid;
+        Texture = texture;
+        Position = position;
+        IsSolid = isSolid;
     }
 }

@@ -1,8 +1,8 @@
-namespace BeeCreak.Run;
-
 using Microsoft.Xna.Framework;
 
-public abstract class Entity
+namespace BeeCreak.Run.GameObjects;
+
+public abstract class Entity : IEntity
 {
     public Vector2 ScreenPosition { get; set; }
     public Vector2 WorldPosition { get; set; }

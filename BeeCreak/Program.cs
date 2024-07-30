@@ -3,11 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();
 
-services.AddScoped<IContext, Context>();
-services.AddTransient<BeeCreak.Run.BeeCreak>();
+services.AddScoped<IToolCollection, ToolCollection>();
+services.AddTransient<BeeCreak.BeeCreak>();
 
 using var serviceProvider = services.BuildServiceProvider();
 
 using var scope = serviceProvider.CreateScope();
 
-scope.ServiceProvider.GetRequiredService<BeeCreak.Run.BeeCreak>().Run();
+scope.ServiceProvider.GetRequiredService<BeeCreak.BeeCreak>().Run();

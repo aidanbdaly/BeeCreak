@@ -1,6 +1,7 @@
-namespace BeeCreak.Run;
-
 using System;
+using Microsoft.Xna.Framework;
+
+namespace BeeCreak.Run.Tools;
 
 public enum DirectionType
 {
@@ -12,10 +13,10 @@ public enum DirectionType
 
 public struct Direction
 {
-    public (int, int) Value { get; set; }
+    public Vector2 Value { get; set; }
     public DirectionType Type { get; set; }
 
-    private Direction((int, int) value)
+    private Direction(Vector2 value)
     {
         Value = value;
         Type = value switch
@@ -28,19 +29,19 @@ public struct Direction
         };
     }
 
-    public static Direction Up => new((0, 1));
-    public static Direction Down => new((0, -1));
-    public static Direction Left => new((-1, 0));
-    public static Direction Right => new((1, 0));
+    public static Direction Up => new(Vector2.UnitY);
+    public static Direction Down => new(-Vector2.UnitY);
+    public static Direction Left => new(-Vector2.UnitX);
+    public static Direction Right => new(Vector2.UnitX);
 
     public static Direction Next(Direction direction)
     {
         return direction.Type switch
         {
-            DirectionType.Up => Direction.Right,
-            DirectionType.Right => Direction.Down,
-            DirectionType.Down => Direction.Left,
-            DirectionType.Left => Direction.Up,
+            DirectionType.Up => Right,
+            DirectionType.Right => Down,
+            DirectionType.Down => Left,
+            DirectionType.Left => Up,
             _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
         };
     }
@@ -49,10 +50,10 @@ public struct Direction
     {
         return direction.Type switch
         {
-            DirectionType.Up => Direction.Left,
-            DirectionType.Left => Direction.Down,
-            DirectionType.Down => Direction.Right,
-            DirectionType.Right => Direction.Up,
+            DirectionType.Up => Left,
+            DirectionType.Left => Down,
+            DirectionType.Down => Right,
+            DirectionType.Right => Up,
             _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
         };
     }

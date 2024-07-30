@@ -1,16 +1,25 @@
-namespace BeeCreak.Run;
-
 using System.Collections.Generic;
-public struct Graphic
+using System.Linq;
+using BeeCreak.Run.Tools;
+
+namespace BeeCreak.Run.Generation;
+
+public enum ShapeType
+{
+    Circle,
+    Line
+}
+
+public struct Shape
 {
     public List<(int, int)> Coordinates { get; set; }
 
-    private Graphic(List<(int, int)> coordinates)
+    private Shape(List<(int, int)> coordinates)
     {
         Coordinates = coordinates;
     }
 
-    public static Graphic Circle(int radius)
+    public static Shape Circle(int radius)
     {
         var coordinates = new List<(int, int)>();
 
@@ -41,27 +50,24 @@ public struct Graphic
             }
         }
 
-        return new Graphic(coordinates);
+        return new Shape(coordinates);
     }
 
-    public static Graphic Line(int length, int thickness, Direction direction)
+    public static Shape Line(int length, int thickness)
     {
         var coordinates = new List<(int, int)>();
 
-        var (yFactor, xFactor) = direction.Value;
-
-        for (int i = 0; i < length + 1; i++)
+        for (int i = -thickness / 2; i < thickness / 2 + 1; i++)
         {
-            for (int j = -thickness / 2; j < thickness / 2 + 1; j++)
-            {
-                var X = i * xFactor + j * yFactor;
-                var Y = i * yFactor + j * xFactor;
-
-                coordinates.Add((X, Y));
-            }
+            coordinates.AddRange(DrawHorizontalLine(-length / 2, length / 2, i));
         }
 
-        return new Graphic(coordinates);
+        return new Shape(coordinates);
+    }
+
+    public static List<(int, int)> Rotate(List<(int, int)> coordinates, Direction direction)
+    {
+        return coordinates.Select(coordinate => RotateCoordinate(coordinate, direction)).ToList();
     }
 
     private static List<(int, int)> DrawHorizontalLine(int startX, int endX, int y)
@@ -74,5 +80,20 @@ public struct Graphic
         }
 
         return coordinates;
+    }
+
+    private static (int, int) RotateCoordinate((int, int) coordinate, Direction direction)
+    {
+        int x = coordinate.Item1;
+        int y = coordinate.Item2;
+
+        return direction.Type switch
+        {
+            DirectionType.Right => (x, y), // 0 degrees or no rotation
+            DirectionType.Down => (y, -x), // 90 degrees clockwise
+            DirectionType.Left => (-x, -y), // 180 degrees
+            DirectionType.Up => (-y, x), // 270 degrees clockwise (90 degrees counterclockwise)
+            _ => (x, y),
+        };
     }
 }

@@ -1,12 +1,12 @@
-namespace BeeCreak.Run;
-
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-public class SpriteController
+namespace BeeCreak.Run.Tools;
+
+public class Sprite
 {
     public Dictionary<string, Texture2D> Textures { get; set; } = default!;
     public Dictionary<string, SpriteFont> Fonts { get; set; } = default!;
@@ -22,7 +22,7 @@ public class SpriteController
             AlphaBlendFunction = BlendFunction.Add
         };
 
-    public SpriteController(ContentManager contentManager, GraphicsDevice graphicsDevice)
+    public Sprite(ContentManager contentManager, GraphicsDevice graphicsDevice)
     {
         Textures = GetAvailable<Texture2D>(contentManager, "png");
         Fonts = GetAvailable<SpriteFont>(contentManager, "spritefont");

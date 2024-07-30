@@ -1,8 +1,8 @@
-namespace BeeCreak.Run;
-
 using Microsoft.Xna.Framework;
 
-public abstract class Element
+namespace BeeCreak.Run.GameObjects;
+
+public abstract class Element : IElement
 {
     public Vector2 ScreenPosition { get; set; }
     public abstract void Draw();

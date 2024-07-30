@@ -1,20 +1,21 @@
-namespace BeeCreak.Run;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FMOD;
 using Microsoft.Xna.Framework;
-public class SoundController : IDynamicObject
-{
-    public Channel EffectChannel;
-    public Channel MusicChannel;
-    public ChannelGroup ChannelGroup;
-    public FMOD.System System;
-    public Dictionary<string, Sound> SoundCollection;
 
-    public SoundController()
+namespace BeeCreak.Run.Tools;
+
+public class Sound : IDynamicObject
+{
+    private Channel EffectChannel;
+    private Channel MusicChannel;
+    private ChannelGroup ChannelGroup;
+    private FMOD.System System;
+    private Dictionary<string, FMOD.Sound> SoundCollection;
+
+    public Sound()
     {
         Factory.System_Create(out System);
 
@@ -49,15 +50,17 @@ public class SoundController : IDynamicObject
         System.update();
     }
 
-    private Dictionary<string, Sound> GetAvailableSounds()
+    private Dictionary<string, FMOD.Sound> GetAvailableSounds()
     {
-        var soundDictionary = new Dictionary<string, Sound>();
+        var soundDictionary = new Dictionary<string, FMOD.Sound>();
 
         var contentDirectory = "Audio";
 
         var files = Directory
-            .GetFiles(contentDirectory, "*.wav", SearchOption.AllDirectories)
+            .GetFiles(contentDirectory, "*.ogg", SearchOption.AllDirectories)
             .ToList();
+
+            
 
         foreach (var file in files)
         {
