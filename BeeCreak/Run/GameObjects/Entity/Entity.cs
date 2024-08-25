@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Run.GameObjects;
+namespace BeeCreak.Run.GameObjects.Entity;
 
 public abstract class Entity : IEntity
 {

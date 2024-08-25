@@ -1,6 +1,5 @@
-﻿using System;
-using BeeCreak.Run;
-using BeeCreak.Run.Generation;
+﻿using BeeCreak.Run;
+using BeeCreak.Run.GameObjects;
 using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -72,9 +71,10 @@ public class BeeCreak : Game
         )
             Exit();
 
+        Scene.Update(gameTime);
+
         Tools.Dynamic.Update(gameTime);
 
-        Scene.Update(gameTime);
         UI.Update(gameTime);
 
         base.Update(gameTime);

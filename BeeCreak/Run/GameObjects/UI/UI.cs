@@ -3,7 +3,7 @@ using BeeCreak.Run.GameObjects;
 using BeeCreak.Run.GameObjects.Instances;
 using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Run;
+namespace BeeCreak.Run.GameObjects;
 
 public class UI : IGameObject
 {

@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Run.Generation;
+namespace BeeCreak.Run.GameObjects;
 
 public struct LightSource
 {

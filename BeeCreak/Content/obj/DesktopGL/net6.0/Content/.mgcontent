@@ -4,6 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/creature.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor-hover.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/forest.png</File>
@@ -16,6 +17,7 @@
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/stone.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

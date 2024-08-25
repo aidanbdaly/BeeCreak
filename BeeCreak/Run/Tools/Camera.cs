@@ -1,92 +1,49 @@
-using BeeCreak.Run.GameObjects;
+using System;
+using BeeCreak.Run.GameObjects.Entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak.Run.Tools;
 
-public enum PanType
-{
-    Smooth,
-    Instant
-}
-
-public enum Type
-{
-    Follow,
-    Static
-}
-
 public class Camera
 {
-    public Vector2 Position { get; set; }
     public Vector2 WorldPosition { get; set; }
-    public Matrix Transform { get; set; }
     public Matrix ZoomTransform { get; set; }
     public int ViewPortWidth { get; set; }
     public int ViewPortHeight { get; set; }
+    public Rectangle Source { get; set; }
+    public Rectangle Destination => new(0, 0, ViewPortWidth, ViewPortHeight);
     public float Zoom { get; set; }
     private Entity Target { get; set; }
-    private bool Transitioning { get; set; }
-    private Type Type { get; set; }
 
-    public Camera(int viewPortWidth, int viewPortHeight, Type type = Type.Static)
+    public Camera(int viewPortWidth, int viewPortHeight)
     {
-        if (type == Type.Static)
-        {
-            Position = Vector2.Zero;
-        }
-
         ViewPortWidth = viewPortWidth;
-
         ViewPortHeight = viewPortHeight;
 
         Zoom = 3.5f;
+
+        GetTransform();
     }
 
-    public void FocusOn(Entity target, PanType panType = PanType.Instant)
+    public void FocusOn(Entity target)
     {
         Target = target;
 
-        if (panType == PanType.Instant)
-        {
-            Position = Target.WorldPosition + Target.ScreenPosition;
-            WorldPosition = Target.WorldPosition;
-        }
+        WorldPosition = Target.WorldPosition + new Vector2(16, 16);
 
-        if (panType == PanType.Smooth)
+        Source = new Rectangle
         {
-            Transitioning = true;
-        }
+            X = (int)WorldPosition.X,
+            Y = (int)WorldPosition.Y,
+            Width = ViewPortWidth,
+            Height = ViewPortHeight
+        };
     }
 
     public void Update(GameTime gameTime)
     {
-        if (Target == null)
-        {
-            return;
-        }
-
-        var targetPosition = Target.WorldPosition + Target.ScreenPosition;
-
-        if (Type == Type.Follow && !Transitioning)
-        {
-            Position = targetPosition;
-            WorldPosition = Target.WorldPosition;
-        }
-
-        if (Type == Type.Follow && Transitioning)
-        {
-            var direction = targetPosition - Position;
-
-            if (direction.Length() < 1)
-            {
-                Position = targetPosition;
-
-                Transitioning = false;
-            }
-
-            Position += direction * 0.1f;
-        }
+        WorldPosition = Target.WorldPosition + new Vector2(16, 16);
 
         var keyboardState = Keyboard.GetState();
 
@@ -100,16 +57,18 @@ public class Camera
             Zoom -= 0.01f;
         }
 
-        UpdateTransform();
+        var source = Source;
+
+        source.X = (int)Math.Floor(WorldPosition.X);
+        source.Y = (int)Math.Floor(WorldPosition.Y);
+
+        Source = source;
+
+        GetTransform();
     }
 
-    private void UpdateTransform()
+    private void GetTransform()
     {
-        Transform =
-            Matrix.CreateTranslation(new Vector3(-Position, 0))
-            * Matrix.CreateScale(new Vector3(Zoom, Zoom, 1))
-            * Matrix.CreateTranslation(new Vector3(Target.ScreenPosition, 0));
-
         ZoomTransform =
             Matrix.CreateTranslation(-ViewPortWidth / 2f, -ViewPortHeight / 2f, 0)
             * Matrix.CreateScale(Zoom)

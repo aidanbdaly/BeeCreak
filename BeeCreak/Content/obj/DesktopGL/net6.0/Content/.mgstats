@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/creature.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/creature.xnb","TextureProcessor","Texture2DContent",239,4181,0.166808
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor-hover.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/cursor-hover.xnb","TextureProcessor","Texture2DContent",121,4181,0.084433
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/cursor.xnb","TextureProcessor","Texture2DContent",175,4181,0.00133
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/forest.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/forest.xnb","TextureProcessor","Texture2DContent",2805,4181,0.000864

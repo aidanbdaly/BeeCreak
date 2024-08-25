@@ -89,10 +89,10 @@ public struct Shape
 
         return direction.Type switch
         {
-            DirectionType.Right => (x, y), // 0 degrees or no rotation
-            DirectionType.Down => (y, -x), // 90 degrees clockwise
-            DirectionType.Left => (-x, -y), // 180 degrees
-            DirectionType.Up => (-y, x), // 270 degrees clockwise (90 degrees counterclockwise)
+            DirectionType.East => (x, y), // 0 degrees or no rotation
+            DirectionType.South => (y, -x), // 90 degrees clockwise
+            DirectionType.West => (-x, -y), // 180 degrees
+            DirectionType.North => (-y, x), // 270 degrees clockwise (90 degrees counterclockwise)
             _ => (x, y),
         };
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BeeCreak.Run.GameObjects;
 using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,7 +20,7 @@ public class ShapeRouter
     {
         Tools = tools;
 
-        Bit = new RouterBit(new Vector2(size / 2, size / 2), Direction.Right);
+        Bit = new RouterBit(new Vector2(size / 2, size / 2), Direction.East);
 
         Commands = new List<RouterCommand> { new Circle(7), new Line(5, 3), new Circle(3) };
 
@@ -72,10 +73,8 @@ public class ShapeRouter
 
         foreach (var (x, y) in shapeCoordinates)
         {
-            var X =
-                x + (int)Bit.Position.X + command.Offset * (int)Bit.Direction.Value.X;
-            var Y =
-                y + (int)Bit.Position.Y + command.Offset * (int)Bit.Direction.Value.Y;
+            var X = x + (int)Bit.Position.X + command.Offset * (int)Bit.Direction.Value.X;
+            var Y = y + (int)Bit.Position.Y + command.Offset * (int)Bit.Direction.Value.Y;
 
             if (!IsInWorld(X, Y) || TileSet[X, Y] != null)
             {
@@ -85,10 +84,8 @@ public class ShapeRouter
 
         foreach (var (x, y) in shapeCoordinates)
         {
-            var X =
-                x + (int)Bit.Position.X + command.Offset * (int)Bit.Direction.Value.X;
-            var Y =
-                y + (int)Bit.Position.Y + command.Offset * (int)Bit.Direction.Value.Y;
+            var X = x + (int)Bit.Position.X + command.Offset * (int)Bit.Direction.Value.X;
+            var Y = y + (int)Bit.Position.Y + command.Offset * (int)Bit.Direction.Value.Y;
 
             var position = new Vector2(X * Tools.Static.TILE_SIZE, Y * Tools.Static.TILE_SIZE);
 
@@ -113,7 +110,14 @@ public class ShapeRouter
                         y * Tools.Static.TILE_SIZE
                     );
 
-                    TileSet[x, y] = new Tile(texture, position, true);
+                    var bounds = new Rectangle(
+                        (int)position.X,
+                        (int)position.Y,
+                        Tools.Static.TILE_SIZE,
+                        Tools.Static.TILE_SIZE
+                    );
+
+                    TileSet[x, y] = new Tile(texture, position, bounds, true);
                 }
             }
         }

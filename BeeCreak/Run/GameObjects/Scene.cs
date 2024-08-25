@@ -1,17 +1,17 @@
 using System.Collections.Generic;
-using BeeCreak.Run.GameObjects;
-using BeeCreak.Run.GameObjects.Instances;
+using BeeCreak.Run.GameObjects.Entity;
+using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace BeeCreak.Run.Generation;
+namespace BeeCreak.Run.GameObjects;
 
 public class Scene : IGameObject
 {
-    private Vector2 SpawnPoint { get; set; } = default!;
-    private List<Entity> Entities { get; set; } = default!;
-    private List<LightSource> LightSources { get; set; } = default!;
     private TileManager TileManager { get; set; } = default!;
+    private LightManager LightManager { get; set; } = default!;
+    private EntityManager EntityManager { get; set; } = default!;
+    private Vector2 SpawnPoint { get; set; } = default!;
     private IToolCollection Tools { get; set; } = default!;
 
     public Scene(IToolCollection tools, int size)
@@ -27,47 +27,63 @@ public class Scene : IGameObject
 
         SpawnPoint = maxPosition / 2;
 
-        LightSources = new()
-        {
-            new() { Position = new Vector2(size / 2, size / 2), Radius = 150 }, // Sun
-        };
+        TileManager = new TileManager(Tools, size, sizeInPixels, 0);
+        LightManager = new LightManager(Tools, IsOpaque, size, sizeInPixels);
+        EntityManager = new EntityManager(Clamp, Tools, SpawnPoint, sizeInPixels);
+    }
 
-        TileManager = new TileManager(Tools, size, 0, LightSources);
+    private bool Clamp(Vector2 position, Rectangle bounds, Direction direction)
+    {
+        var tilesToTestForIntersection = new List<(int, int)> { };
 
-        Entities = new()
+        var X = (int)position.X / Tools.Static.TILE_SIZE;
+        var Y = (int)position.Y / Tools.Static.TILE_SIZE;
+
+        tilesToTestForIntersection.Add((X, Y));
+        tilesToTestForIntersection.Add((X, Y + 1));
+        tilesToTestForIntersection.Add((X, Y - 1));
+        tilesToTestForIntersection.Add((X + 1, Y));
+        tilesToTestForIntersection.Add((X - 1, Y));
+        tilesToTestForIntersection.Add((X + 1, Y + 1));
+        tilesToTestForIntersection.Add((X - 1, Y - 1));
+        tilesToTestForIntersection.Add((X + 1, Y - 1));
+        tilesToTestForIntersection.Add((X - 1, Y + 1));
+
+        var isInWorld = X >= 0 && Y >= 0 && X < TileManager.Size && Y < TileManager.Size;
+
+        foreach (var (x, y) in tilesToTestForIntersection)
         {
-            new Character(Tools, CanMove, SpawnPoint),
-            new Cursor(Tools, HandleTileChange, TileManager.TileSet),
-        };
+            if (isInWorld)
+            {
+                var tile = TileManager.TileSet[x, y];
+
+                if (tile.Bounds.Intersects(bounds))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsOpaque(int X, int Y)
+    {
+        var tile = TileManager.TileSet[X, Y];
+
+        var isInWorld = X >= 0 && Y >= 0 && X < TileManager.Size && Y < TileManager.Size;
+
+        return isInWorld && tile.Opaque;
     }
 
     public void Update(GameTime gameTime)
     {
-        foreach (var entity in Entities)
-        {
-            entity.Update(gameTime);
-        }
+        EntityManager.Update(gameTime);
     }
 
     public void Draw()
     {
         var camera = Tools.Dynamic.Camera;
-
-        var sourceRectangle = new Rectangle
-        {
-            X = (int)camera.WorldPosition.X,
-            Y = (int)camera.WorldPosition.Y,
-            Width = camera.ViewPortWidth,
-            Height = camera.ViewPortHeight
-        };
-
-        var destinationRectangle = new Rectangle
-        {
-            X = 0,
-            Y = 0,
-            Width = camera.ViewPortWidth,
-            Height = camera.ViewPortHeight
-        };
 
         Tools.Static.GraphicsDevice.SetRenderTarget(null);
 
@@ -79,51 +95,33 @@ public class Scene : IGameObject
 
         Tools.Static.Sprite.Batch.Draw(
             TileManager.SceneTarget,
-            destinationRectangle,
-            sourceRectangle,
+            camera.Destination,
+            camera.Source,
+            Color.White
+        );
+
+        Tools.Static.Sprite.Batch.Draw(
+            EntityManager.EntityTarget,
+            camera.Destination,
+            camera.Source,
             Color.White
         );
 
         Tools.Static.Sprite.Batch.End();
 
-        foreach (var entity in Entities)
-        {
-            entity.Draw();
-        }
+        // Tools.Static.Sprite.Batch.Begin(
+        //     samplerState: SamplerState.PointClamp,
+        //     blendState: Tools.Static.Sprite.Multiply,
+        //     transformMatrix: camera.ZoomTransform
+        // );
 
-        Tools.Static.Sprite.Batch.Begin(
-            blendState: Tools.Static.Sprite.Multiply,
-            transformMatrix: camera.Transform
-        );
+        // Tools.Static.Sprite.Batch.Draw(
+        //     LightManager.LightTarget,
+        //     camera.Destination,
+        //     camera.Source,
+        //     Color.White
+        // );
 
-        Tools.Static.Sprite.Batch.Draw(
-            TileManager.LightMap,
-            Vector2.Zero,
-            null,
-            Color.White,
-            0f,
-            Vector2.Zero,
-            Tools.Static.TILE_SIZE,
-            SpriteEffects.None,
-            0f
-        );
-
-        Tools.Static.Sprite.Batch.End();
-    }
-
-    private void HandleTileChange(int x, int y)
-    {
-        TileManager.UpdateLightMapPoint(x, y);
-        TileManager.RedrawTile(x, y);
-    }
-
-    private bool CanMove(float x, float y)
-    {
-        var X = (int)x / Tools.Static.TILE_SIZE;
-        var Y = (int)y / Tools.Static.TILE_SIZE;
-
-        var tile = TileManager.TileSet[X, Y];
-
-        return !tile.IsSolid && TileManager.IsInWorld(X, Y);
+        // Tools.Static.Sprite.Batch.End();
     }
 }
