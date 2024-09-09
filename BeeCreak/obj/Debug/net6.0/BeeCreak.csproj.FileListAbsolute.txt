@@ -113,3 +113,5 @@
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/obj/Debug/net6.0/BeeCreak.genruntimeconfig.cache
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/obj/Debug/net6.0/ref/BeeCreak.dll
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/creature.xnb
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/dialog.xnb
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/prompt.xnb

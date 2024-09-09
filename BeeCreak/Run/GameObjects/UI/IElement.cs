@@ -1,8 +1,8 @@
 using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Run.GameObjects;
+namespace BeeCreak.Run.UI;
 
-public interface IElement : IGameObject
+public interface IElement : IDynamicObject
 {
-    Vector2 ScreenPosition { get; set; }
+    public void Draw();
 }

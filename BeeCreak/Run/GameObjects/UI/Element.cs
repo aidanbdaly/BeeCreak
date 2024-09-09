@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Run.GameObjects;
+namespace BeeCreak.Run.UI;
 
 public abstract class Element : IElement
 {

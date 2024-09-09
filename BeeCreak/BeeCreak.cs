@@ -1,17 +1,18 @@
-﻿using BeeCreak.Run;
+﻿using System.Collections.Generic;
+using BeeCreak.Run;
 using BeeCreak.Run.GameObjects;
+using BeeCreak.Run.GameObjects.Entity;
+using BeeCreak.Run.Generation;
 using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak;
 
 public class BeeCreak : Game
 {
     private IToolCollection Tools;
-    private Scene Scene;
-    private UI UI;
+    private GameManager GameManager;
     private readonly GraphicsDeviceManager Graphics;
 
     public BeeCreak()
@@ -41,10 +42,11 @@ public class BeeCreak : Game
             {
                 Sprite = new Sprite(Content, GraphicsDevice),
                 GraphicsDevice = GraphicsDevice,
-                TILE_SIZE = 32
+                TILE_SIZE = 32,
             },
             Dynamic = new ToolCollection.DynamicTools
             {
+                Input = new Input(this),
                 Sound = new Sound(),
                 Time = new Time(),
                 Camera = new Camera(
@@ -59,31 +61,21 @@ public class BeeCreak : Game
 
     protected override void LoadContent()
     {
-        Scene = new Scene(Tools, 300);
-        UI = new UI(Tools);
+        EventBus eventBus = new();
+        GameManager = new GameManager(Tools, eventBus);
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (
-            GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-            || Keyboard.GetState().IsKeyDown(Keys.Escape)
-        )
-            Exit();
-
-        Scene.Update(gameTime);
-
+        GameManager.Update(gameTime);
         Tools.Dynamic.Update(gameTime);
-
-        UI.Update(gameTime);
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        Scene.Draw();
-        UI.Draw();
+        GameManager.Draw();
 
         base.Draw(gameTime);
     }

@@ -1,28 +1,22 @@
-using System.Collections.Generic;
-using BeeCreak.Run.Generation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace BeeCreak.Run.GameObjects;
+namespace BeeCreak.Run.GameObjects.World.Tile;
 
 public class TileManager
 {
-    public int Size { get; set; }
-    public Tile[,] TileSet { get; set; }
-    public RenderTarget2D SceneTarget { get; set; }
+    public ICell Cell { get; set; }
+    public RenderTarget2D Target { get; set; }
     private IToolCollection Tools { get; set; }
-    public RenderTarget2D EntityTarget { get; set; }
 
-    public TileManager(IToolCollection tools, int size, int sizeInPixels, int seed)
+    public TileManager(IToolCollection tools, ICell cell)
     {
         Tools = tools;
-        Size = size;
+        Cell = cell;
 
-        var shapeRouter = new ShapeRouter(tools, seed, size);
+        var sizeInPixels = cell.Size * Tools.Static.TILE_SIZE;
 
-        TileSet = shapeRouter.Route();
-
-        SceneTarget = new RenderTarget2D(
+        Target = new RenderTarget2D(
             tools.Static.GraphicsDevice,
             sizeInPixels,
             sizeInPixels,
@@ -33,12 +27,12 @@ public class TileManager
             RenderTargetUsage.PreserveContents
         );
 
-        CalculateSceneTarget();
+        DrawTarget();
     }
 
     public void DrawTile(int x, int y)
     {
-        var tile = TileSet[x, y];
+        var tile = Cell.Map[x, y];
 
         var sourceRectangle = new Rectangle
         {
@@ -48,7 +42,7 @@ public class TileManager
             Height = Tools.Static.TILE_SIZE
         };
 
-        Tools.Static.GraphicsDevice.SetRenderTarget(SceneTarget);
+        Tools.Static.GraphicsDevice.SetRenderTarget(Target);
 
         Tools.Static.Sprite.Batch.Begin(
             samplerState: SamplerState.PointClamp,
@@ -60,25 +54,25 @@ public class TileManager
         Tools.Static.Sprite.Batch.End();
     }
 
-    private void CalculateSceneTarget()
+    private void DrawTarget()
     {
-        Tools.Static.GraphicsDevice.SetRenderTarget(SceneTarget);
-        Tools.Static.GraphicsDevice.Clear(Color.Black);
+        Tools.Static.GraphicsDevice.SetRenderTarget(Target);
 
         Tools.Static.Sprite.Batch.Begin(
             samplerState: SamplerState.PointClamp,
             blendState: BlendState.AlphaBlend
         );
 
-        for (int x = 0; x < Size; x++)
+        foreach (var tile in Cell.Map)
         {
-            for (int y = 0; y < Size; y++)
-            {
-                var tile = TileSet[x, y];
-                Tools.Static.Sprite.Batch.Draw(tile.Texture, tile.Position, Color.White);
-            }
+            Tools.Static.Sprite.Batch.Draw(tile.Texture, tile.Position, Color.White);
         }
 
         Tools.Static.Sprite.Batch.End();
+    }
+
+    public void Draw()
+    {
+        Tools.Static.Sprite.Batch.Draw(Target, Vector2.Zero, Color.White);
     }
 }

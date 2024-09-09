@@ -19,12 +19,14 @@ public class ToolCollection : IToolCollection
 
     public class DynamicTools : IDynamicToolCollection
     {
+        public Input Input { get; set; }
         public Sound Sound { get; set; }
         public Time Time { get; set; }
         public Camera Camera { get; set; }
 
         public void Update(GameTime gameTime)
         {
+            Input.Update(gameTime);
             Sound.Update(gameTime);
             Time.Update(gameTime);
             Camera.Update(gameTime);

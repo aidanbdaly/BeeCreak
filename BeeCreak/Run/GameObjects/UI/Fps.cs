@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Run.GameObjects.Instances;
+namespace BeeCreak.Run.UI;
 
 public class Fps : Element
 {

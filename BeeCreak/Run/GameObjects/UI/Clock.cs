@@ -1,7 +1,8 @@
 using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace BeeCreak.Run.GameObjects.Instances;
+namespace BeeCreak.Run.UI;
 
 public class Clock : Element
 {
@@ -10,7 +11,7 @@ public class Clock : Element
 
     public Clock(IToolCollection tools)
     {
-        ScreenPosition = new Vector2(10, 10);
+        ScreenPosition = new Vector2(20, 20);
         Tools = tools;
     }
 
@@ -23,12 +24,28 @@ public class Clock : Element
     {
         var Sprite = Tools.Static.Sprite;
 
-        Sprite.Batch.Begin();
+        var suffix = Time switch
+        {
+            0 => "AM",
+            12 => "PM",
+            _ => Time < 12 ? "AM" : "PM"
+        };
+
+        Sprite.Batch.Begin(
+            sortMode: SpriteSortMode.Deferred,
+            blendState: BlendState.AlphaBlend,
+            samplerState: SamplerState.PointClamp
+        );
         Sprite.Batch.DrawString(
             Sprite.GetFont("lookout"),
-            $"Time: {Time}",
+            $"Time: {Time} {suffix}",
             ScreenPosition,
-            Color.White
+            Color.White,
+            0,
+            Vector2.Zero,
+            1.5f,
+            SpriteEffects.None,
+            0
         );
         Sprite.Batch.End();
     }

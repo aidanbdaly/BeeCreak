@@ -1,11 +1,10 @@
-using System;
-using BeeCreak.Run.GameObjects.Entity;
+using BeeCreak.Run.GameObjects.World.Entity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak.Run.Tools;
 
-public class Camera
+public class Camera : IDynamicObject
 {
     public Vector2 WorldPosition { get; set; }
     public Matrix ZoomTransform { get; set; }
@@ -30,20 +29,18 @@ public class Camera
     {
         Target = target;
 
-        WorldPosition = Target.WorldPosition + new Vector2(16, 16);
-
-        Source = new Rectangle
-        {
-            X = (int)WorldPosition.X,
-            Y = (int)WorldPosition.Y,
-            Width = ViewPortWidth,
-            Height = ViewPortHeight
-        };
+        WorldPosition =
+            Target.WorldPosition
+            + new Vector2(16, 16)
+            - new Vector2(ViewPortWidth / 2, ViewPortHeight / 2);
     }
 
     public void Update(GameTime gameTime)
     {
-        WorldPosition = Target.WorldPosition + new Vector2(16, 16);
+        WorldPosition =
+            Target.WorldPosition
+            + new Vector2(16, 16)
+            - new Vector2(ViewPortWidth / 2, ViewPortHeight / 2);
 
         var keyboardState = Keyboard.GetState();
 
@@ -57,21 +54,15 @@ public class Camera
             Zoom -= 0.01f;
         }
 
-        var source = Source;
-
-        source.X = (int)Math.Floor(WorldPosition.X);
-        source.Y = (int)Math.Floor(WorldPosition.Y);
-
-        Source = source;
-
         GetTransform();
     }
 
     private void GetTransform()
     {
         ZoomTransform =
-            Matrix.CreateTranslation(-ViewPortWidth / 2f, -ViewPortHeight / 2f, 0)
+            Matrix.CreateTranslation(-WorldPosition.X, -WorldPosition.Y, 0)
+            * Matrix.CreateTranslation(-ViewPortWidth / 2, -ViewPortHeight / 2, 0)
             * Matrix.CreateScale(Zoom)
-            * Matrix.CreateTranslation(ViewPortWidth / 2f, ViewPortHeight / 2f, 0);
+            * Matrix.CreateTranslation(ViewPortWidth / 2, ViewPortHeight / 2, 0);
     }
 }

@@ -18,6 +18,7 @@ public interface IToolCollection
 
     public interface IDynamicToolCollection : IDynamicObject
     {
+        public Input Input { get; set; }
         public Sound Sound { get; set; }
         public Time Time { get; set; }
         public Camera Camera { get; set; }

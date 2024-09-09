@@ -12,6 +12,6 @@ public class Time : IDynamicObject
     {
         var secondsInGameDay = 1800;
 
-        Current = (int)(gameTime.TotalGameTime.TotalSeconds / secondsInGameDay * 100);
+        Current = (int)(gameTime.TotalGameTime.TotalSeconds / secondsInGameDay * 24);
     }
 }

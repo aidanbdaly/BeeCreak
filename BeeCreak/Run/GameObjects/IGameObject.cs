@@ -1,9 +1,6 @@
-using Microsoft.Xna.Framework;
-
 namespace BeeCreak.Run.GameObjects;
 
-public interface IGameObject
+public interface IGameObject : IDynamicObject
 {
     void Draw();
-    void Update(GameTime gameTime);
 }

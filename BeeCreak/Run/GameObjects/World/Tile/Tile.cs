@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace BeeCreak.Run.GameObjects;
+namespace BeeCreak.Run.GameObjects.World.Tile;
 
-public class Tile
+public class Tile : ITile
 {
     public Texture2D Texture { get; set; }
     public Vector2 Position { get; set; }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework.Content;
@@ -38,6 +39,11 @@ public class Sprite
     public SpriteFont GetFont(string fontName)
     {
         return Fonts[fontName];
+    }
+
+    public Rectangle GetBounds(string textureName)
+    {
+        return new Rectangle(0, 0, Textures[textureName].Width, Textures[textureName].Height);
     }
 
     private static Dictionary<string, T> GetAvailable<T>(ContentManager content, string extension)
