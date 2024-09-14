@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak.Run.Tools;
 
-public class Camera : IDynamicObject
+public class Camera : IDynamic
 {
     public Vector2 WorldPosition { get; set; }
     public Matrix ZoomTransform { get; set; }
@@ -13,7 +13,7 @@ public class Camera : IDynamicObject
     public Rectangle Source { get; set; }
     public Rectangle Destination => new(0, 0, ViewPortWidth, ViewPortHeight);
     public float Zoom { get; set; }
-    private Entity Target { get; set; }
+    private MoveableEntity Target { get; set; }
 
     public Camera(int viewPortWidth, int viewPortHeight)
     {
@@ -25,7 +25,7 @@ public class Camera : IDynamicObject
         GetTransform();
     }
 
-    public void FocusOn(Entity target)
+    public void FocusOn(MoveableEntity target)
     {
         Target = target;
 

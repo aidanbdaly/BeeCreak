@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using BeeCreak.Run.GameObjects;
+using BeeCreak.Run.GameObjects.World.Tile;
 using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

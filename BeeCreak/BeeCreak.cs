@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using BeeCreak.Run;
+﻿using BeeCreak.Run;
 using BeeCreak.Run.GameObjects;
-using BeeCreak.Run.GameObjects.Entity;
-using BeeCreak.Run.Generation;
 using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -61,7 +58,7 @@ public class BeeCreak : Game
 
     protected override void LoadContent()
     {
-        EventBus eventBus = new();
+        EventManager eventBus = new();
         GameManager = new GameManager(Tools, eventBus);
     }
 

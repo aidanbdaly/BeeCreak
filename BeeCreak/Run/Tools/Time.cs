@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 namespace BeeCreak.Run.Tools;
 
-public class Time : IDynamicObject
+public class Time : IDynamic
 {
     public int Current { get; set; }
 

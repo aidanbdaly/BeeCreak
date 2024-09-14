@@ -1,6 +1,6 @@
 namespace BeeCreak.Run.GameObjects;
 
-public interface IGameObject : IDynamicObject
+public interface IDynamicDrawable : IDynamic
 {
     void Draw();
 }

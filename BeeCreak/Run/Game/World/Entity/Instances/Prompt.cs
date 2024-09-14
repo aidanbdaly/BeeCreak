@@ -3,11 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Run.GameObjects.World.Entity;
 
-public class Prompt : Entity
+public class Prompt : MoveableEntity
 {
-    private Texture2D Texture;
-    private string Text;
-    private IToolCollection Tools;
+    private readonly string Text;
 
     public Prompt(IToolCollection tools, Vector2 worldPosition, string text)
     {
@@ -15,7 +13,7 @@ public class Prompt : Entity
         WorldPosition = worldPosition;
         Text = text;
 
-        Texture = Tools.Static.Sprite.GetTexture("prompt");
+        ActiveTexture = Tools.Static.Sprite.GetTexture("prompt");
     }
 
     public override void Update(GameTime gameTime) { }
@@ -24,13 +22,8 @@ public class Prompt : Entity
     {
         var Sprite = Tools.Static.Sprite;
 
-        Sprite.Batch.Begin(
-            sortMode: SpriteSortMode.Deferred,
-            blendState: BlendState.AlphaBlend,
-            samplerState: SamplerState.PointClamp
-        );
         Sprite.Batch.Draw(
-            Texture,
+            ActiveTexture,
             WorldPosition,
             null,
             Color.White,
@@ -45,14 +38,13 @@ public class Prompt : Entity
             Text,
             new Vector2(
                 WorldPosition.X
-                    + Texture.Width / 2
+                    + ActiveTexture.Width / 2
                     - Sprite.GetFont("lookout").MeasureString(Text).X / 2,
                 WorldPosition.Y
-                    + Texture.Height / 2
+                    + ActiveTexture.Height / 2
                     - Sprite.GetFont("lookout").MeasureString(Text).Y / 2
             ),
             Color.White
         );
-        Sprite.Batch.End();
     }
 }

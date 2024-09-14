@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 namespace BeeCreak.Run;
 
-public interface IDynamicObject
+public interface IDynamic
 {
     void Update(GameTime gameTime);
 }

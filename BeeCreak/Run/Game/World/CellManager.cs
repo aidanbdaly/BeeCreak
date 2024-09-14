@@ -8,54 +8,23 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Run.GameObjects.World;
 
-public class CellManager : IGameObject
+public class CellManager : IDynamicDrawable
 {
     private TileManager TileManager { get; set; } = default!;
     private LightManager LightManager { get; set; } = default!;
     private EntityManager EntityManager { get; set; } = default!;
     private ICell Cell { get; set; } = default!;
-    private IEventBus EventBus { get; set; } = default!;
+    private IEventManager EventBus { get; set; } = default!;
     private IToolCollection Tools { get; set; } = default!;
 
-    public CellManager(IToolCollection tools, IEventBus eventBus, ICell cell)
+    public CellManager(IToolCollection tools, IEventManager eventBus, ICell cell)
     {
         Tools = tools;
         Cell = cell;
 
         TileManager = new TileManager(Tools, cell);
         LightManager = new LightManager(Tools, IsOpaque, cell);
-        EntityManager = new EntityManager(Tools, eventBus, Collision, cell);
-    }
-
-    private bool Collision(Vector2 position, Rectangle bounds)
-    {
-        var X = (int)Math.Round(position.X) / Tools.Static.TILE_SIZE;
-        var Y = (int)Math.Round(position.Y) / Tools.Static.TILE_SIZE;
-
-        var tilesToTestForIntersection = new List<(int, int)>
-        {
-            (X, Y),
-            (X, Y + 1),
-            (X, Y - 1),
-            (X + 1, Y),
-            (X - 1, Y),
-            (X + 1, Y + 1),
-            (X - 1, Y - 1),
-            (X + 1, Y - 1),
-            (X - 1, Y + 1),
-        };
-
-        foreach (var (x, y) in tilesToTestForIntersection)
-        {
-            var tile = Cell.Map[x, y];
-
-            if (tile.Bounds.Intersects(bounds))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        EntityManager = new EntityManager(Tools, eventBus, cell);
     }
 
     private bool IsOpaque(int X, int Y)
@@ -72,6 +41,7 @@ public class CellManager : IGameObject
 
     public void Update(GameTime gameTime)
     {
+        Cell.Update(gameTime);
         EntityManager.Update(gameTime);
         LightManager.Update(gameTime);
     }

@@ -7,18 +7,18 @@ namespace BeeCreak.Run.UI;
 public class UIManager
 {
     public List<Element> Elements { get; set; } = default!;
-    private IEventBus EventBus { get; set; } = default!;
+    private IEventManager EventBus { get; set; } = default!;
     private IToolCollection Tools { get; set; } = default!;
 
-    public UIManager(IToolCollection context, IEventBus eventBus)
+    public UIManager(IToolCollection context, IEventManager eventBus)
     {
         Tools = context;
         EventBus = eventBus;
 
         Elements = new List<Element> { new Clock(Tools), new Fps(Tools) };
 
-        EventBus.Subscribe<AddUiElementEvent>(AddUiElement);
-        EventBus.Subscribe<RemoveUiElementEvent>(RemoveUiElement);
+        EventBus.Listen<AddUiElementEvent>(AddUiElement);
+        EventBus.Listen<RemoveUiElementEvent>(RemoveUiElement);
     }
 
     private void RemoveUiElement(RemoveUiElementEvent e)

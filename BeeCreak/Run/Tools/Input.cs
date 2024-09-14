@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak.Run.Tools;
 
-public class Input : IDynamicObject
+public class Input : IDynamic
 {
-    private KeyboardState PreviousState;
+    public KeyboardState PreviousState;
     private readonly Game Game;
 
     public Input(Game game)
@@ -15,7 +15,7 @@ public class Input : IDynamicObject
 
     public bool OnKeyClick(Keys key)
     {
-        var keyboardState = Keyboard.GetState();
+        KeyboardState keyboardState = Keyboard.GetState();
 
         return keyboardState.IsKeyUp(key) && PreviousState.IsKeyDown(key);
     }
@@ -26,7 +26,7 @@ public class Input : IDynamicObject
         {
             Game.Exit();
         }
-        
+
         PreviousState = Keyboard.GetState();
     }
 }

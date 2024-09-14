@@ -27,7 +27,19 @@ public class TileManager
             RenderTargetUsage.PreserveContents
         );
 
-        DrawTarget();
+        Tools.Static.GraphicsDevice.SetRenderTarget(Target);
+
+        Tools.Static.Sprite.Batch.Begin(
+            samplerState: SamplerState.PointClamp,
+            blendState: BlendState.AlphaBlend
+        );
+
+        foreach (var tile in Cell.Map)
+        {
+            Tools.Static.Sprite.Batch.Draw(tile.Texture, tile.Position, Color.White);
+        }
+
+        Tools.Static.Sprite.Batch.End();
     }
 
     public void DrawTile(int x, int y)
@@ -50,23 +62,6 @@ public class TileManager
         );
 
         Tools.Static.Sprite.Batch.Draw(tile.Texture, sourceRectangle, Color.White);
-
-        Tools.Static.Sprite.Batch.End();
-    }
-
-    private void DrawTarget()
-    {
-        Tools.Static.GraphicsDevice.SetRenderTarget(Target);
-
-        Tools.Static.Sprite.Batch.Begin(
-            samplerState: SamplerState.PointClamp,
-            blendState: BlendState.AlphaBlend
-        );
-
-        foreach (var tile in Cell.Map)
-        {
-            Tools.Static.Sprite.Batch.Draw(tile.Texture, tile.Position, Color.White);
-        }
 
         Tools.Static.Sprite.Batch.End();
     }

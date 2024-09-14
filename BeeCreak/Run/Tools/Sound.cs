@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace BeeCreak.Run.Tools;
 
-public class Sound : IDynamicObject
+public class Sound : IDynamic
 {
     private Channel EffectChannel;
     private Channel MusicChannel;

@@ -16,7 +16,7 @@ public interface IToolCollection
         public int TILE_SIZE { get; set; }
     }
 
-    public interface IDynamicToolCollection : IDynamicObject
+    public interface IDynamicToolCollection : IDynamic
     {
         public Input Input { get; set; }
         public Sound Sound { get; set; }

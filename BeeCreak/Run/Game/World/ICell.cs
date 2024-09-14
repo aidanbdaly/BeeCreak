@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace BeeCreak.Run.GameObjects.World;
 
-public interface ICell
+public interface ICell : IDynamic
 {
     public string Name { get; set; }
     public ITile[,] Map { get; set; }
