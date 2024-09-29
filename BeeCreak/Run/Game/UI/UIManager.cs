@@ -1,24 +1,23 @@
 using System.Collections.Generic;
-using BeeCreak.Run.UI.Events;
+using BeeCreak.Run.Game.Objects.Time;
+using BeeCreak.Run.Game.UI.Events;
+using BeeCreak.Run.Game.UI.Instances;
+using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Run.UI;
+namespace BeeCreak.Run.Game.UI;
 
 public class UIManager
 {
-    public List<Element> Elements { get; set; } = default!;
-    private IEventManager EventBus { get; set; } = default!;
-    private IToolCollection Tools { get; set; } = default!;
+    public List<Element> Elements { get; set; }
+    private ITime Time { get; set; }
+    private IToolCollection Tools { get; set; }
 
-    public UIManager(IToolCollection context, IEventManager eventBus)
+    public UIManager(IToolCollection context)
     {
         Tools = context;
-        EventBus = eventBus;
 
-        Elements = new List<Element> { new Clock(Tools), new Fps(Tools) };
-
-        EventBus.Listen<AddUiElementEvent>(AddUiElement);
-        EventBus.Listen<RemoveUiElementEvent>(RemoveUiElement);
+        Elements = new List<Element> { new Clock(Tools, Time), new Fps(Tools) };
     }
 
     private void RemoveUiElement(RemoveUiElementEvent e)

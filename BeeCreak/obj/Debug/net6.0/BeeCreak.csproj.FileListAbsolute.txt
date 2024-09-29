@@ -115,3 +115,4 @@
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/creature.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/dialog.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/prompt.xnb
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Newtonsoft.Json.dll

@@ -1,4 +1,4 @@
-namespace BeeCreak.Run.UI.Events;
+namespace BeeCreak.Run.Game.UI.Events;
 
 public class AddUiElementEvent
 {

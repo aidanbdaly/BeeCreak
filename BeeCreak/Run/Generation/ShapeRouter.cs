@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using BeeCreak.Run.GameObjects.World.Tile;
+using BeeCreak.Run.Game.Scene.Tile;
+using BeeCreak.Run.Game.Scene.Tile.Instances;
 using BeeCreak.Run.Tools;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Run.Generation;
 
@@ -37,7 +37,7 @@ public class ShapeRouter
         {
             var command = Commands[Random.Next(0, Commands.Count)];
 
-            var success = Execute(command, Tools.Static.Sprite.GetTexture("grass"));
+            var success = Execute(command);
 
             if (!success)
             {
@@ -57,12 +57,12 @@ public class ShapeRouter
             }
         }
 
-        Flood(Tools.Static.Sprite.GetTexture("forest"));
+        Flood();
 
         return TileSet;
     }
 
-    private bool Execute(RouterCommand command, Texture2D texture)
+    private bool Execute(RouterCommand command)
     {
         var shapeCoordinates = command.Shape.Coordinates;
 
@@ -89,7 +89,7 @@ public class ShapeRouter
 
             var position = new Vector2(X * Tools.Static.TILE_SIZE, Y * Tools.Static.TILE_SIZE);
 
-            TileSet[X, Y] = new Tile(texture, position);
+            TileSet[X, Y] = new GrassTile(Tools, position);
         }
 
         Bit = command.MoveRouterBit(Bit);
@@ -97,7 +97,7 @@ public class ShapeRouter
         return true;
     }
 
-    private void Flood(Texture2D texture)
+    private void Flood()
     {
         for (int x = 0; x < Size; x++)
         {
@@ -110,14 +110,7 @@ public class ShapeRouter
                         y * Tools.Static.TILE_SIZE
                     );
 
-                    var bounds = new Rectangle(
-                        (int)position.X,
-                        (int)position.Y,
-                        Tools.Static.TILE_SIZE,
-                        Tools.Static.TILE_SIZE
-                    );
-
-                    TileSet[x, y] = new Tile(texture, position, bounds, true);
+                    TileSet[x, y] = new ForestTile(Tools, position);
                 }
             }
         }

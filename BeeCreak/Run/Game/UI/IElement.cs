@@ -1,6 +1,4 @@
-using Microsoft.Xna.Framework;
-
-namespace BeeCreak.Run.UI;
+namespace BeeCreak.Run.Game.UI;
 
 public interface IElement : IDynamic
 {

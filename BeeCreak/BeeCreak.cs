@@ -1,8 +1,10 @@
-﻿using BeeCreak.Run;
-using BeeCreak.Run.GameObjects;
+﻿using BeeCreak.Run.Game;
 using BeeCreak.Run.Tools;
+using BeeCreak.Run.Tools.Dynamic;
+using BeeCreak.Run.Tools.Static;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak;
 
@@ -10,6 +12,7 @@ public class BeeCreak : Game
 {
     private IToolCollection Tools;
     private GameManager GameManager;
+    private ModeManager ModeManager;
     private readonly GraphicsDeviceManager Graphics;
 
     public BeeCreak()
@@ -33,46 +36,68 @@ public class BeeCreak : Game
         Graphics.ToggleFullScreen();
         Graphics.ApplyChanges();
 
-        Tools = new ToolCollection
+        IStaticToolCollection staticTools = new StaticTools
         {
-            Static = new ToolCollection.StaticTools
-            {
-                Sprite = new Sprite(Content, GraphicsDevice),
-                GraphicsDevice = GraphicsDevice,
-                TILE_SIZE = 32,
-            },
-            Dynamic = new ToolCollection.DynamicTools
-            {
-                Input = new Input(this),
-                Sound = new Sound(),
-                Time = new Time(),
-                Camera = new Camera(
-                    GraphicsDevice.Adapter.CurrentDisplayMode.Width,
-                    GraphicsDevice.Adapter.CurrentDisplayMode.Height
-                )
-            }
+            GraphicsDevice = GraphicsDevice,
+            Sprite = new Sprite(Content, GraphicsDevice),
+            Events = new EventManager(),
+            TILE_SIZE = 32,
         };
+
+        IDynamicToolCollection dynamicTools = new DynamicTools
+        {
+            Input = new Input(),
+            Sound = new Sound(),
+        };
+
+        Tools = new ToolCollection { Static = staticTools, Dynamic = dynamicTools, };
+
+        ModeManager = new ModeManager();
+        GameManager = new GameManager(Tools);
 
         base.Initialize();
     }
 
-    protected override void LoadContent()
-    {
-        EventManager eventBus = new();
-        GameManager = new GameManager(Tools, eventBus);
-    }
+    protected override void LoadContent() { }
 
     protected override void Update(GameTime gameTime)
     {
-        GameManager.Update(gameTime);
-        Tools.Dynamic.Update(gameTime);
+        if (Tools.Dynamic.Input.OnKeyClick(Keys.Escape))
+        {
+            Exit();
+        }
+
+        switch (ModeManager.CurrentMode)
+        {
+            case Mode.Game:
+                GameManager.Update(gameTime);
+                Tools.Dynamic.Update(gameTime);
+                break;
+            case Mode.MainMenu:
+                break;
+            case Mode.Settings:
+                break;
+            case Mode.Loading:
+                break;
+        }
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GameManager.Draw();
+        switch (ModeManager.CurrentMode)
+        {
+            case Mode.Game:
+                GameManager.Draw();
+                break;
+            case Mode.MainMenu:
+                break;
+            case Mode.Settings:
+                break;
+            case Mode.Loading:
+                break;
+        }
 
         base.Draw(gameTime);
     }

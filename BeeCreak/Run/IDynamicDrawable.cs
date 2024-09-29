@@ -1,4 +1,4 @@
-namespace BeeCreak.Run.GameObjects;
+namespace BeeCreak.Run.Game;
 
 public interface IDynamicDrawable : IDynamic
 {

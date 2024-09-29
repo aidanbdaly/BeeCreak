@@ -1,10 +1,9 @@
-﻿using BeeCreak.Run;
+﻿using BeeCreak.Run.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();
 
 services.AddScoped<IToolCollection, ToolCollection>();
-services.AddScoped<IEventManager, EventManager>();
 services.AddTransient<BeeCreak.BeeCreak>();
 
 using var serviceProvider = services.BuildServiceProvider();
