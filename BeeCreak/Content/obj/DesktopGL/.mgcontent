@@ -4,6 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button-hovered.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/menu-background.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/prompt.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/dialog.png</File>
     <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/cursor.png</File>

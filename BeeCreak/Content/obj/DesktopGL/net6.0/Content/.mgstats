@@ -1,4 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button-hovered.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/button-hovered.xnb","TextureProcessor","Texture2DContent",175,2133,0.163346
+"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/button.xnb","TextureProcessor","Texture2DContent",175,2133,0.000941
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/creature.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/creature.xnb","TextureProcessor","Texture2DContent",239,4181,0.166808
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor-hover.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/cursor-hover.xnb","TextureProcessor","Texture2DContent",121,4181,0.084433
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/cursor.xnb","TextureProcessor","Texture2DContent",175,4181,0.00133
@@ -10,5 +12,6 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-left.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/man-left.xnb","TextureProcessor","Texture2DContent",3050,4181,0.001936
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-right.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/man-right.xnb","TextureProcessor","Texture2DContent",3041,4181,0.000612
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-up.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/man-up.xnb","TextureProcessor","Texture2DContent",3054,4181,0.000604
+"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/menu-background.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/menu-background.xnb","TextureProcessor","Texture2DContent",355961,640085,0.092137
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/prompt.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/prompt.xnb","TextureProcessor","Texture2DContent",270,4181,0.065947
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/stone.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/Content/stone.xnb","TextureProcessor","Texture2DContent",4628,4181,0.000819

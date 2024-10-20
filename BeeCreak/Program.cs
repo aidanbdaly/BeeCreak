@@ -1,4 +1,4 @@
-﻿using BeeCreak.Run.Tools;
+﻿using BeeCreak.Tools;
 using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();

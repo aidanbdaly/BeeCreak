@@ -1,104 +1,91 @@
-﻿using BeeCreak.Run.Game;
-using BeeCreak.Run.Tools;
-using BeeCreak.Run.Tools.Dynamic;
-using BeeCreak.Run.Tools.Static;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace BeeCreak;
-
-public class BeeCreak : Game
+﻿namespace BeeCreak
 {
-    private IToolCollection Tools;
-    private GameManager GameManager;
-    private ModeManager ModeManager;
-    private readonly GraphicsDeviceManager Graphics;
+    using System.Collections.Generic;
+    using global::BeeCreak.Game;
+    using global::BeeCreak.Menu;
+    using global::BeeCreak.Tools;
+    using global::BeeCreak.Tools.Dynamic;
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
-    public BeeCreak()
+    public class BeeCreak : Microsoft.Xna.Framework.Game
     {
-        Graphics = new GraphicsDeviceManager(this);
+        private readonly GraphicsDeviceManager graphics;
+        private IToolCollection tools;
+        private SaveManager saveManager;
+        private Dictionary<RunMode, IDynamicRenderable> modes;
+        private Mode<RunMode> mode;
 
-        IsFixedTimeStep = false;
-
-        Content.RootDirectory = "Content";
-
-        IsMouseVisible = true;
-    }
-
-    protected override void Initialize()
-    {
-        Graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
-        Graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
-
-        Graphics.SynchronizeWithVerticalRetrace = false;
-
-        Graphics.ToggleFullScreen();
-        Graphics.ApplyChanges();
-
-        IStaticToolCollection staticTools = new StaticTools
+        public BeeCreak()
         {
-            GraphicsDevice = GraphicsDevice,
-            Sprite = new Sprite(Content, GraphicsDevice),
-            Events = new EventManager(),
-            TILE_SIZE = 32,
-        };
+            graphics = new GraphicsDeviceManager(this);
 
-        IDynamicToolCollection dynamicTools = new DynamicTools
-        {
-            Input = new Input(),
-            Sound = new Sound(),
-        };
+            IsFixedTimeStep = false;
 
-        Tools = new ToolCollection { Static = staticTools, Dynamic = dynamicTools, };
+            Content.RootDirectory = "Content";
 
-        ModeManager = new ModeManager();
-        GameManager = new GameManager(Tools);
-
-        base.Initialize();
-    }
-
-    protected override void LoadContent() { }
-
-    protected override void Update(GameTime gameTime)
-    {
-        if (Tools.Dynamic.Input.OnKeyClick(Keys.Escape))
-        {
-            Exit();
+            IsMouseVisible = true;
         }
 
-        switch (ModeManager.CurrentMode)
+        protected override void Initialize()
         {
-            case Mode.Game:
-                GameManager.Update(gameTime);
-                Tools.Dynamic.Update(gameTime);
-                break;
-            case Mode.MainMenu:
-                break;
-            case Mode.Settings:
-                break;
-            case Mode.Loading:
-                break;
+            graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+
+            graphics.SynchronizeWithVerticalRetrace = false;
+
+            graphics.ToggleFullScreen();
+            graphics.ApplyChanges();
+
+            IStaticToolCollection staticTools = new StaticTools
+            {
+                GraphicsDevice = GraphicsDevice,
+                Sprite = new Sprite(Content, GraphicsDevice),
+                Events = new EventManager(),
+                TILE_SIZE = 32,
+            };
+
+            IDynamicToolCollection dynamicTools = new DynamicTools
+            {
+                Input = new Input(),
+                Sound = new Sound(),
+            };
+
+            tools = new ToolCollection { Static = staticTools, Dynamic = dynamicTools, };
+            saveManager = new SaveManager(tools);
+
+            mode = new Mode<RunMode>(RunMode.MainMenu);
+
+            modes = new Dictionary<RunMode, IDynamicRenderable>
+            {
+                { RunMode.MainMenu, new MenuManager(tools, mode, saveManager) },
+                { RunMode.Game, new GameManager(tools, mode, saveManager) },
+            };
+
+            base.Initialize();
         }
 
-        base.Update(gameTime);
-    }
-
-    protected override void Draw(GameTime gameTime)
-    {
-        switch (ModeManager.CurrentMode)
+        protected override void LoadContent()
         {
-            case Mode.Game:
-                GameManager.Draw();
-                break;
-            case Mode.MainMenu:
-                break;
-            case Mode.Settings:
-                break;
-            case Mode.Loading:
-                break;
         }
 
-        base.Draw(gameTime);
+        protected override void Update(GameTime gameTime)
+        {
+            if (Input.OnActionHold(InputAction.Exit))
+            {
+                Exit();
+            }
+
+            modes[mode.Current].Update(gameTime);
+            tools.Dynamic.Update(gameTime);
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            modes[mode.Current].Draw();
+            base.Draw(gameTime);
+        }
     }
 }

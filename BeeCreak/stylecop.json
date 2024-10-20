@@ -1,0 +1,24 @@
+{
+  "settings": {
+    "documentationRules": {
+      "excludePaths": [
+        "libs/**"
+      ]
+    },
+    "orderingRules": {
+      "excludePaths": [
+        "libs/**"
+      ]
+    },
+    "layoutRules": {
+      "excludePaths": [
+        "libs/**"
+      ]
+    },
+    "namingRules": {
+      "excludePaths": [
+        "libs/**"
+      ]
+    }
+  }
+}

@@ -74,8 +74,12 @@
 /Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/obj/Debug/net6.0/BeeCreak.pdb
 /Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/obj/Debug/net6.0/BeeCreak.genruntimeconfig.cache
 /Users/aidandaly/Projects/Coding/MyGame2/BeeCreak/obj/Debug/net6.0/ref/BeeCreak.dll
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/button-hovered.xnb
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/button.xnb
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/creature.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/cursor-hover.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/cursor.xnb
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/dialog.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/forest.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/grass.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/lookout.xnb
@@ -83,6 +87,8 @@
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/man-left.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/man-right.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/man-up.xnb
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/menu-background.xnb
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/prompt.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/stone.xnb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/BeeCreak
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/BeeCreak.deps.json
@@ -92,6 +98,7 @@
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.dll
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/MonoGame.Framework.dll
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Newtonsoft.Json.dll
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/runtimes/linux-x64/native/libSDL2-2.0.so.0
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/runtimes/linux-x64/native/libopenal.so.1
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/runtimes/osx/native/libSDL2.dylib
@@ -112,7 +119,5 @@
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/obj/Debug/net6.0/BeeCreak.pdb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/obj/Debug/net6.0/BeeCreak.genruntimeconfig.cache
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/obj/Debug/net6.0/ref/BeeCreak.dll
-/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/creature.xnb
-/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/dialog.xnb
-/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/prompt.xnb
-/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Newtonsoft.Json.dll
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/runtimes/osx/native/libfmod.dylib
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/runtimes/osx/native/libfmodL.dylib
