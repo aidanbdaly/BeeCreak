@@ -1,121 +1,93 @@
-using System;
-using BeeCreak.Generation;
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace BeeCreak.Game.Scene.Light;
-
-public class Light : ILight
+namespace BeeCreak.Game.Scene.Light
 {
-    public Vector2 Position { get; set; }
-    public int Radius { get; set; }
-    public int Period { get; set; }
-    public float Scale { get; set; } = 1f;
-    public float MaxScale { get; set; } = 1.5f;
-    private Texture2D LightMap { get; set; }
-    private IToolCollection Tools { get; set; }
+    using System;
+    using global::BeeCreak.Config;
+    using global::BeeCreak.Generation;
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
-    public Light(IToolCollection tools, Vector2 position, int radius, float maxScale, int period)
+    public class Light : ILight
     {
-        Tools = tools;
-        Position = position;
-        Radius = radius;
-
-        MaxScale = maxScale;
-        Period = period;
-
-        LightMap = new Texture2D(tools.Static.GraphicsDevice, Radius * 2 + 1, Radius * 2 + 1);
-
-        GetLightTarget();
-    }
-
-    public Light(IToolCollection tools, Vector2 position, int radius)
-    {
-        Tools = tools;
-        Position = position;
-        Radius = radius;
-
-        MaxScale = 1f;
-        Period = 0;
-
-        LightMap = new Texture2D(tools.Static.GraphicsDevice, Radius * 2, Radius * 2);
-
-        GetLightTarget();
-    }
-
-    public LightDTO ToDTO()
-    {
-        return new LightDTO
+        public Light(ISprite sprite)
         {
-            Position = Position,
-            Radius = Radius,
-            Period = Period,
-            Scale = Scale,
-            MaxScale = MaxScale
-        };
-    }
+            Sprite = sprite;
 
-    public void GetLightTarget()
-    {
-        var diameter = Radius * 2 + 1; // since the origin (0, 0) is also a tile
-
-        var colorData = new Color[diameter * diameter];
-
-        foreach (var (x, y) in Shape.Circle(Radius).Coordinates)
-        {
-            float distanceToLight = Vector2.Distance(new Vector2(x, y), Vector2.Zero);
-
-            float intensity = MathHelper.Clamp(1 - distanceToLight / Radius, 0f, 1f);
-
-            byte intensityByte = (byte)(intensity * 255);
-
-            int indexX = x + Radius; // Shift x to ensure it's within bounds
-            int indexY = y + Radius; // Shift y to ensure it's within bounds
-            int arrayIndex = indexY * diameter + indexX;
-
-            colorData[arrayIndex] = new Color(
-                intensityByte,
-                intensityByte,
-                intensityByte,
-                (byte)255
-            );
+            GetLightTexture();
         }
 
-        LightMap.SetData(colorData);
-    }
+        public int Radius { get; set; }
 
-    public void Update(GameTime gameTime)
-    {
-        var newScale =
-            1f
-            + (MaxScale - 1f)
-                * 0.5f
-                * (
-                    1f + (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * 2 * Math.PI / Period)
-                );
+        public int Period { get; set; }
 
-        if (Math.Abs(newScale - Scale) > 0.001f)
+        public float Scale { get; set; } = 1f;
+
+        public float MaxScale { get; set; }
+
+        private Texture2D Texture { get; set; }
+
+        private ISprite Sprite { get; set; }
+
+        public void GetLightTexture()
         {
-            Scale = newScale;
-        }
-    }
+            var diameter = (Radius * 2) + 1; // since the origin (0, 0) is also a tile
 
-    public void Draw()
-    {
-        Tools.Static.Sprite.Batch.Draw(
-            LightMap,
-            new Vector2(
-                Position.X * Tools.Static.TILE_SIZE + 16,
-                Position.Y * Tools.Static.TILE_SIZE + 16
-            ),
-            null,
-            Color.White,
-            0f,
-            new Vector2(LightMap.Width / 2f, LightMap.Height / 2f),
-            Tools.Static.TILE_SIZE * Scale,
-            SpriteEffects.None,
-            0f
-        );
+            var texture = new Texture2D(Sprite.GraphicsDevice, diameter, diameter);
+
+            var colorData = new Color[diameter * diameter];
+
+            foreach (var (x, y) in Shape.Circle(Radius).Coordinates)
+            {
+                float distanceToLight = Vector2.Distance(new Vector2(x, y), Vector2.Zero);
+
+                float intensity = MathHelper.Clamp(1 - (distanceToLight / Radius), 0f, 1f);
+
+                byte intensityByte = (byte)(intensity * 255);
+
+                // We have to shift the x and y coordinates because the coordinates above have the origin at (0, 0)
+                int indexX = x + Radius;
+                int indexY = y + Radius;
+
+                int arrayIndex = (indexY * diameter) + indexX;
+
+                colorData[arrayIndex] = new Color(
+                    intensityByte,
+                    intensityByte,
+                    intensityByte,
+                    (byte)255);
+            }
+
+            texture.SetData(colorData);
+
+            Texture = texture;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            var newScale =
+                1f
+                + ((MaxScale - 1f)
+                    * 0.5f
+                    * (1f + (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * 2 * Math.PI / Period)));
+
+            if (Math.Abs(newScale - Scale) > 0.001f)
+            {
+                Scale = newScale;
+            }
+        }
+
+        public void Draw(Vector2 position)
+        {
+            Sprite.Batch.Draw(
+                Texture,
+                position,
+                null,
+                Color.White,
+                0f,
+                new Vector2(Texture.Width / 2f, Texture.Height / 2f),
+                Globals.TileSize * Scale,
+                SpriteEffects.None,
+                0f);
+        }
     }
 }

@@ -1,24 +1,33 @@
 ﻿namespace BeeCreak
 {
-    using System.Collections.Generic;
+    using System;
     using global::BeeCreak.Game;
     using global::BeeCreak.Menu;
-    using global::BeeCreak.Tools;
     using global::BeeCreak.Tools.Dynamic;
-    using global::BeeCreak.Tools.Static;
+    using global::BeeCreak.Tools.Dynamic.Input;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     public class BeeCreak : Microsoft.Xna.Framework.Game
     {
         private readonly GraphicsDeviceManager graphics;
-        private IToolCollection tools;
-        private SaveManager saveManager;
-        private Dictionary<RunMode, IDynamicRenderable> modes;
-        private Mode<RunMode> mode;
+        private readonly IInput input;
+        private readonly ISound sound;
+        private readonly IServiceProvider serviceProvider;
+        private readonly IAppRouter appRouter;
 
-        public BeeCreak()
+        public BeeCreak(
+            IServiceProvider serviceProvider,
+            IAppRouter appRouter,
+            IInput input,
+            ISound sound)
         {
+            this.serviceProvider = serviceProvider;
+            this.appRouter = appRouter;
+            this.input = input;
+            this.sound = sound;
+
             graphics = new GraphicsDeviceManager(this);
 
             IsFixedTimeStep = false;
@@ -38,53 +47,55 @@
             graphics.ToggleFullScreen();
             graphics.ApplyChanges();
 
-            IStaticToolCollection staticTools = new StaticTools
-            {
-                GraphicsDevice = GraphicsDevice,
-                Sprite = new Sprite(Content, GraphicsDevice),
-                Events = new EventManager(),
-                TILE_SIZE = 32,
-            };
-
-            IDynamicToolCollection dynamicTools = new DynamicTools
-            {
-                Input = new Input(),
-                Sound = new Sound(),
-            };
-
-            tools = new ToolCollection { Static = staticTools, Dynamic = dynamicTools, };
-            saveManager = new SaveManager(tools);
-
-            mode = new Mode<RunMode>(RunMode.MainMenu);
-
-            modes = new Dictionary<RunMode, IDynamicRenderable>
-            {
-                { RunMode.MainMenu, new MenuManager(tools, mode, saveManager) },
-                { RunMode.Game, new GameManager(tools, mode, saveManager) },
-            };
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            var gameNode = new AppNode();
+
+            gameNode.Mode = serviceProvider.GetRequiredService<GameManager>();
+
+            var mainMenuNode = new AppNode();
+            var loadMenuNode = new AppNode();
+            var settingsMenuNode = new AppNode();
+
+            mainMenuNode.Mode = serviceProvider.GetRequiredService<Main>();
+            loadMenuNode.Mode = serviceProvider.GetRequiredService<Load>();
+            settingsMenuNode.Mode = serviceProvider.GetRequiredService<Settings>();
+
+            mainMenuNode.SubNodes.Add("load", loadMenuNode);
+            mainMenuNode.SubNodes.Add("settings", settingsMenuNode);
+
+            var root = new AppNode();
+
+            root.SubNodes.Add("game", gameNode);
+            root.SubNodes.Add("mainMenu", mainMenuNode);
+
+            appRouter.SetRoot(root);
+
+            appRouter.Navigate("mainMenu");
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (Input.OnActionHold(InputAction.Exit))
+            if (input.OnActionHold(InputAction.Exit))
             {
                 Exit();
             }
 
-            modes[mode.Current].Update(gameTime);
-            tools.Dynamic.Update(gameTime);
+            appRouter.CurrentNode.Mode.Update(gameTime);
+
+            input.Update(gameTime);
+            sound.Update(gameTime);
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            modes[mode.Current].Draw();
+            appRouter.CurrentNode.Mode.Draw();
+
             base.Draw(gameTime);
         }
     }

@@ -1,10 +1,7 @@
-using BeeCreak.Tools;
-
-namespace BeeCreak.Game.Objects.Time;
-
-public interface ITime : IDynamic
+namespace BeeCreak.Game.Time
 {
-    int Current { get; set; }
-
-    TimeDTO ToDTO();
+    public interface ITime : IDynamic
+    {
+        int Current { get; set; }
+    }
 }

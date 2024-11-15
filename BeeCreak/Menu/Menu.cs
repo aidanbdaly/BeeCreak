@@ -1,17 +1,17 @@
 namespace BeeCreak.Menu
 {
-    using global::BeeCreak.Tools;
+    using global::BeeCreak.Tools.Static;
     using global::BeeCreak.UI;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     public abstract class Menu : Element
     {
-        private readonly IToolCollection tools;
+        private readonly ISprite sprite;
 
-        public Menu(IToolCollection tools)
+        public Menu(ISprite sprite)
         {
-            this.tools = tools;
+            this.sprite = sprite;
         }
 
         public override void Update(GameTime gameTime)
@@ -24,20 +24,20 @@ namespace BeeCreak.Menu
 
         public override void Draw()
         {
+            sprite.Batch.Begin(
+            SpriteSortMode.Deferred,
+            BlendState.AlphaBlend,
+            SamplerState.PointClamp);
+
             var position = new Vector2(
-                tools.Static.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2,
-                tools.Static.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2);
+                sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2,
+                sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2);
 
             var backgroundScale =
-                (float)tools.Static.GraphicsDevice.Adapter.CurrentDisplayMode.Width
+                (float)sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Width
                 / Texture.Width;
 
-            tools.Static.Sprite.Batch.Begin(
-                SpriteSortMode.Deferred,
-                BlendState.AlphaBlend,
-                SamplerState.PointClamp);
-
-            tools.Static.Sprite.Batch.Draw(
+            sprite.Batch.Draw(
                 Texture,
                 position,
                 null,
@@ -48,12 +48,27 @@ namespace BeeCreak.Menu
                 SpriteEffects.None,
                 0);
 
+            sprite.Batch.DrawString(
+                sprite.GetFont("lookout"),
+                "Bee Creak",
+                new Vector2(
+                        sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2,
+                        sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Height * 1 / 4),
+                Color.Black,
+                0f,
+                new Vector2(
+                    sprite.GetFont("lookout").MeasureString("Bee Creak").X / 2,
+                    sprite.GetFont("lookout").MeasureString("Bee Creak").Y / 2),
+                10f,
+                SpriteEffects.None,
+                0f);
+
             foreach (var element in Children)
             {
                 element.Draw();
             }
 
-            tools.Static.Sprite.Batch.End();
+            sprite.Batch.End();
         }
     }
 }

@@ -1,13 +1,12 @@
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-
-namespace BeeCreak.Game.Scene.Tile;
-
-public abstract class TileDTO
+namespace BeeCreak.Game.Scene.Tile
 {
-    public TileType Type;
-    public Vector2 Position { get; set; }
-    public Rectangle Bounds { get; set; }
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework;
 
-    public abstract Tile FromDTO(IToolCollection tools);
+    public class TileDTO
+    {
+        public TileType Type;
+
+        public Rectangle Bounds { get; set; }
+    }
 }

@@ -3,85 +3,85 @@ namespace BeeCreak.Game
     using System;
     using global::BeeCreak.Events;
     using global::BeeCreak.Game.Scene;
-    using global::BeeCreak.Tools;
+    using global::BeeCreak.Tools.Dynamic.Input;
+    using global::BeeCreak.Tools.Static;
     using global::BeeCreak.UI;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Xna.Framework;
 
-    public class GameManager : IDynamicRenderable
+    public class GameManager : IGameObject
     {
-        private readonly Mode<RunMode> runMode;
 
-        private readonly SaveManager saveManager;
+        private readonly ISaveManager saveManager;
 
-        private readonly IToolCollection tools;
+        private readonly IInput input;
 
         private CellManager cellManager;
 
-        private UIManager uIManager;
+        private UIManager uiManager;
 
-        public GameManager(IToolCollection tools, Mode<RunMode> runMode, SaveManager saveManager)
+        private IAppRouter appRouter;
+
+        private IServiceProvider serviceProvider;
+
+        public GameManager(IEventManager events, IInput input, IAppRouter appRouter, ISaveManager saveManager, IServiceProvider serviceProvider)
         {
-            this.tools = tools;
-            this.runMode = runMode;
+            this.input = input;
+            this.appRouter = appRouter;
             this.saveManager = saveManager;
+            this.serviceProvider = serviceProvider;
 
-            tools.Static.Events.Listen<NewGameEvent>(HandleNewGame);
-            tools.Static.Events.Listen<LoadGameEvent>(HandleLoadGame);
+            events.Listen<NewGameEvent>(HandleNewGame);
+            events.Listen<LoadGameEvent>(HandleLoadGame);
         }
 
-        public GameState GameState { get; set; }
+        public Game Game { get; set; }
 
         public void Update(GameTime gameTime)
         {
-            if (tools.Dynamic.Input.OnActionClick(InputAction.Confirm))
+            if (input.OnActionClick(InputAction.Confirm))
             {
                 Console.WriteLine("Saving");
 
-                saveManager.Save(this.GameState);
+                saveManager.Save(Game);
 
                 Console.WriteLine("Saved");
             }
 
-            if (tools.Dynamic.Input.OnActionClick(InputAction.Open))
-            {
-                runMode.Switch(RunMode.MainMenu);
-            }
-
             cellManager.Update(gameTime);
-            uIManager.Update(gameTime);
+            uiManager.Update(gameTime);
 
-            GameState.Time.Update(gameTime);
-            GameState.Camera.Update(gameTime);
+            Game.Time.Update(gameTime);
+            Game.Camera.Update(gameTime);
         }
 
         public void Draw()
         {
-            cellManager.Draw(GameState.Camera);
-            uIManager.Draw();
+            cellManager.Draw(Game.Camera);
+            uiManager.Draw();
         }
 
         private void HandleNewGame(NewGameEvent e)
         {
-            GameState gameState = saveManager.New();
-
-            Initialize(gameState);
+            Initialize(saveManager.New());
         }
 
         private void HandleLoadGame(LoadGameEvent e)
         {
-            GameState gameState = saveManager.Load(e.Name);
-
-            Initialize(gameState);
+            Initialize(saveManager.Load(e.Name));
         }
 
-        private void Initialize(GameState gameState)
+        private void Initialize(Game game)
         {
-            GameState = gameState;
+            Game = game;
 
-            cellManager = new CellManager(tools, GameState.ActiveCell);
-            uIManager = new UIManager(tools, GameState.Time);
+            cellManager = serviceProvider.GetRequiredService<CellManager>();
+            uiManager = serviceProvider.GetRequiredService<UIManager>();
 
-            runMode.Switch(RunMode.Game);
+            cellManager.SetActiveCell(Game.ActiveCell);
+            uiManager.SetTime(Game.Time);
+
+            appRouter.Navigate("game");
         }
     }
 }

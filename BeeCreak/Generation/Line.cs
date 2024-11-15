@@ -1,30 +1,34 @@
-using System;
-using BeeCreak.Generation;
-using Microsoft.Xna.Framework;
-
-public class Line : RouterCommand
+namespace BeeCreak.Generation
 {
-    public override bool IsSymmetric { get; } = false;
-    public override Shape Shape { get; }
-    public override int Offset { get; }
-    private int Length { get; set; }
+    using Microsoft.Xna.Framework;
 
-    public Line(int length, int width)
+    public class Line : RouterCommand
     {
-        Shape = Shape.Line(length, width);
-        Length = length;
+        public Line(int length, int width)
+        {
+            Shape = Shape.Line(length, width);
+            Length = length;
 
-        Offset = length / 2;
-    }
+            Offset = length / 2;
+        }
 
-    public override RouterBit MoveRouterBit(RouterBit routerBit)
-    {
-        var newDirection = routerBit.Direction;
+        public override bool IsSymmetric { get; } = false;
 
-        var (xFactor, yFactor) = newDirection.Value;
+        public override Shape Shape { get; }
 
-        routerBit.Position += new Vector2(Length * xFactor, Length * yFactor);
+        public override int Offset { get; }
 
-        return routerBit;
+        private int Length { get; set; }
+
+        public override RouterBit MoveRouterBit(RouterBit routerBit)
+        {
+            var newDirection = routerBit.Direction;
+
+            var (xFactor, yFactor) = newDirection.Value;
+
+            routerBit.Position += new Vector2(Length * xFactor, Length * yFactor);
+
+            return routerBit;
+        }
     }
 }

@@ -1,22 +1,20 @@
-using Microsoft.Xna.Framework;
-
-namespace BeeCreak.Game.Objects.Time;
-
-public class Time : ITime
+namespace BeeCreak.Game.Time
 {
-    public int Current { get; set; }
+    using Microsoft.Xna.Framework;
 
-    public Time() { }
-
-    public TimeDTO ToDTO()
+    public class Time : ITime
     {
-        return new TimeDTO() { Current = Current };
-    }
+        public Time()
+        {
+        }
 
-    public void Update(GameTime gameTime)
-    {
-        var secondsInGameDay = 1800;
+        public int Current { get; set; }
 
-        Current = (int)(gameTime.TotalGameTime.TotalSeconds / secondsInGameDay * 24);
+        public void Update(GameTime gameTime)
+        {
+            var secondsInGameDay = 1800;
+
+            Current = (int)(gameTime.TotalGameTime.TotalSeconds / secondsInGameDay * 24);
+        }
     }
 }

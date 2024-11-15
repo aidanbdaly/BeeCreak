@@ -1,45 +1,45 @@
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-
-namespace BeeCreak.Game.UI.Instances;
-
-public class Fps : Element
+namespace BeeCreak.Game.UI.Instances
 {
-    private int FrameCount;
-    private int FPS;
-    private double ElapsedTime;
-    private IToolCollection Tools;
+    using global::BeeCreak.Tools.Static;
+    using global::BeeCreak.UI;
+    using Microsoft.Xna.Framework;
 
-    public Fps(IToolCollection tools)
+    public class Fps : Element
     {
-        Position = new Vector2(10, 40);
-        Tools = tools;
-    }
+        private int frameCount;
+        private int fps;
+        private double elapsedTime;
 
-    public override void Update(GameTime gameTime)
-    {
-        ElapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
-        FrameCount++;
-
-        if (ElapsedTime >= 1)
+        public Fps(ISprite sprite)
         {
-            FPS = FrameCount;
-            FrameCount = 0;
-            ElapsedTime = 0;
+            Sprite = sprite;
+            Position = new Vector2(10, 40);
         }
-    }
 
-    public override void Draw()
-    {
-        var Sprite = Tools.Static.Sprite;
+        private ISprite Sprite { get; set; }
 
-        Sprite.Batch.Begin();
-        Sprite.Batch.DrawString(
-            Sprite.GetFont("lookout"),
-            $"FPS: {FPS}",
-            Position,
-            Color.White
-        );
-        Sprite.Batch.End();
+        public override void Update(GameTime gameTime)
+        {
+            elapsedTime += gameTime.ElapsedGameTime.TotalSeconds;
+            frameCount++;
+
+            if (elapsedTime >= 1)
+            {
+                fps = frameCount;
+                frameCount = 0;
+                elapsedTime = 0;
+            }
+        }
+
+        public override void Draw()
+        {
+            Sprite.Batch.Begin();
+            Sprite.Batch.DrawString(
+                Sprite.GetFont("lookout"),
+                $"FPS: {fps}",
+                Position,
+                Color.White);
+            Sprite.Batch.End();
+        }
     }
 }

@@ -1,57 +1,48 @@
-using System;
-using System.Collections.Generic;
-using BeeCreak.Game.Objects.Camera;
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace BeeCreak.Game.Scene.Entity.Instances.Character;
-
-public class Character : ControllableEntity
+namespace BeeCreak.Game.Scene.Entity.Instances.Character
 {
-    public Character(IToolCollection tools, Vector2 worldPosition)
+    using System.Collections.Generic;
+    using global::BeeCreak.Game.Camera;
+    using global::BeeCreak.Tools;
+    using global::BeeCreak.Tools.Dynamic.Input;
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
+    public class Character : ControllableEntity
     {
-        Tools = tools;
-        WorldPosition = worldPosition;
+        private readonly ISprite sprite;
 
-        var sprite = tools.Static.Sprite;
-
-        TextureVariants = new Dictionary<Direction, Texture2D>
+        public Character(ISprite sprite, IInput input, IEventManager events)
+        : base(input)
         {
-            { Direction.North, sprite.GetTexture("man-up") },
-            { Direction.South, sprite.GetTexture("man-down") },
-            { Direction.West, sprite.GetTexture("man-left") },
-            { Direction.East, sprite.GetTexture("man-right") }
-        };
+            this.sprite = sprite;
 
-        EntityType = EntityType.Character;
+            TextureVariants = new Dictionary<Direction, Texture2D>
+            {
+                { Direction.North, sprite.GetTexture("man-up") },
+                { Direction.South, sprite.GetTexture("man-down") },
+                { Direction.West, sprite.GetTexture("man-left") },
+                { Direction.East, sprite.GetTexture("man-right") },
+            };
 
-        Direction = Direction.East;
-        ActiveTexture = TextureVariants[Direction];
+            Type = EntityType.Character;
 
-        tools.Static.Events.Dispatch(new FocusOnEvent(this));
+            Direction = Direction.East;
+            ActiveTexture = TextureVariants[Direction];
 
-        Speed = 100;
-    }
+            events.Dispatch(new FocusOnEvent(this));
 
-    public override void Update(GameTime gameTime)
-    {
-        HandleInput(Tools.Dynamic.Input.PreviousState, gameTime);
-    }
+            Speed = 100;
+        }
 
-    public override void Draw()
-    {
-        Tools.Static.Sprite.Batch.Draw(ActiveTexture, WorldPosition, Color.White);
-    }
-
-    public override CharacterDTO ToDTO()
-    {
-        return new CharacterDTO
+        public override void Update(GameTime gameTime)
         {
-            WorldPosition = WorldPosition,
-            Direction = Direction,
-            EntityType = EntityType,
-            Speed = Speed
-        };
+            HandleInput(gameTime);
+        }
+
+        public override void Draw()
+        {
+            sprite.Batch.Draw(ActiveTexture, WorldPosition, Color.White);
+        }
     }
 }

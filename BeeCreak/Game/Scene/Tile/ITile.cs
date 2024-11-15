@@ -1,15 +1,14 @@
 namespace BeeCreak.Game.Scene.Tile
 {
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
     public interface ITile
     {
-        Vector2 Position { get; set; }
+        TileType Type { get; set; }
+
+        Texture2D Texture { get; set; }
 
         Rectangle Bounds { get; set; }
-
-        void Draw();
-
-        TileDTO ToDTO();
     }
 }

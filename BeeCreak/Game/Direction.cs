@@ -17,9 +17,6 @@ public enum DirectionType
 
 public struct Direction
 {
-    public Vector2 Value { get; set; } = Vector2.Zero;
-    public DirectionType Type { get; set; }
-
     private Direction(Vector2 value)
     {
         Value = value;
@@ -38,13 +35,24 @@ public struct Direction
     }
 
     public static Direction North => new(-Vector2.UnitY);
+
     public static Direction NorthEast => new(-Vector2.UnitY + Vector2.UnitX);
+
     public static Direction East => new(Vector2.UnitX);
+
     public static Direction SouthEast => new(Vector2.UnitY + Vector2.UnitX);
+
     public static Direction South => new(Vector2.UnitY);
+
     public static Direction SouthWest => new(Vector2.UnitY - Vector2.UnitX);
+
     public static Direction West => new(-Vector2.UnitX);
+
     public static Direction NorthWest => new(-Vector2.UnitY - Vector2.UnitX);
+
+    public Vector2 Value { get; set; } = Vector2.Zero;
+
+    public DirectionType Type { get; set; }
 
     public static Direction Next(Direction direction)
     {

@@ -1,13 +1,7 @@
-using BeeCreak.Tools;
-
-namespace BeeCreak.Game.Objects.Time;
-
-public class TimeDTO
+namespace BeeCreak.Game.Time
 {
-    public int Current { get; set; }
-
-    public Time FromDTO(IToolCollection Tools)
+    public class TimeDTO
     {
-        return new Time() { Current = Current };
+        public int Current { get; set; }
     }
 }

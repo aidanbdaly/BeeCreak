@@ -2,19 +2,19 @@ namespace BeeCreak.Menu
 {
     using System.Collections.Generic;
     using global::BeeCreak.Game;
-    using global::BeeCreak.Tools;
+    using global::BeeCreak.Tools.Static;
     using global::BeeCreak.UI;
     using global::BeeCreak.UI.Components;
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class Load : Menu
     {
-        private readonly Mode<MenuMode> menuMode;
-
-        public Load(IToolCollection tools, UISettings uISettings, Mode<MenuMode> menuMode, SaveManager saveManager)
-            : base(tools)
+        public Load(
+            ISprite sprite, IUISettings uISettings, IAppRouter appRouter, ISaveManager saveManager)
+            : base(sprite)
         {
-            Texture = tools.Static.Sprite.GetTexture("menu-background");
+            Texture = sprite.GetTexture("menu-background");
 
             var saveFiles = saveManager.GetSaves();
 
@@ -22,18 +22,18 @@ namespace BeeCreak.Menu
 
             foreach (var save in saveFiles)
             {
-                buttons.Add(new Button(tools, uISettings, save, () => { }));
+                buttons.Add(new Button(sprite, uISettings, save, () => { }));
             }
 
-            buttons.Add(new Button(tools, uISettings, "Back", () => menuMode.Switch(MenuMode.Main)));
+            buttons.Add(new Button(sprite, uISettings, "Back", () => appRouter.Navigate("mainMenu")));
 
             Children = new List<Element>
             {
                 new ElementArray(
                     uISettings,
                     new Vector2(
-                        tools.Static.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2,
-                        tools.Static.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2),
+                        sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2,
+                        sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Height * 2 / 3),
                     buttons,
                     16),
             };

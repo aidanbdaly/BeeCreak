@@ -1,6 +1,6 @@
 namespace BeeCreak.UI
 {
-    public class UISettings
+    public class UISettings : IUISettings
     {
         public UISettings()
         {

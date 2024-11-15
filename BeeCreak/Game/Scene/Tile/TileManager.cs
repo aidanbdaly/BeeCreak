@@ -1,74 +1,82 @@
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace BeeCreak.Game.Scene.Tile;
-
-public class TileManager
+namespace BeeCreak.Game.Scene.Tile
 {
-    public ITile[,] Tiles { get; set; }
-    private RenderTarget2D Target { get; set; }
-    private IToolCollection Tools { get; set; }
+    using global::BeeCreak.Config;
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
-    public TileManager(IToolCollection tools, ITile[,] tiles, int size)
+    public class TileManager
     {
-        Tools = tools;
-        Tiles = tiles;
+        private readonly ISprite sprite;
 
-        var sizeInPixels = size * Tools.Static.TILE_SIZE;
-
-        Target = new RenderTarget2D(
-            tools.Static.GraphicsDevice,
-            sizeInPixels,
-            sizeInPixels,
-            false,
-            SurfaceFormat.Color,
-            DepthFormat.None,
-            0,
-            RenderTargetUsage.PreserveContents
-        );
-
-        Tools.Static.GraphicsDevice.SetRenderTarget(Target);
-
-        Tools.Static.Sprite.Batch.Begin(
-            samplerState: SamplerState.PointClamp,
-            blendState: BlendState.AlphaBlend
-        );
-
-        foreach (var tile in Tiles)
+        public TileManager(ISprite sprite)
         {
-            tile.Draw();
+            this.sprite = sprite;
         }
 
-        Tools.Static.Sprite.Batch.End();
-    }
+        public ITileMap TileMap { get; set; }
 
-    public void DrawTile(int x, int y)
-    {
-        var tile = Tiles[x, y];
+        private RenderTarget2D Target { get; set; }
 
-        var sourceRectangle = new Rectangle
+        public void SetTileMap(ITileMap tileMap)
         {
-            X = (int)tile.Position.X,
-            Y = (int)tile.Position.Y,
-            Width = Tools.Static.TILE_SIZE,
-            Height = Tools.Static.TILE_SIZE
-        };
+            var tiles = tileMap.Tiles;
 
-        Tools.Static.GraphicsDevice.SetRenderTarget(Target);
+            var sizeInPixels = Globals.TileSize * tiles.GetLength(0);
 
-        Tools.Static.Sprite.Batch.Begin(
-            samplerState: SamplerState.PointClamp,
-            blendState: BlendState.AlphaBlend
-        );
+            Target = new RenderTarget2D(
+              sprite.GraphicsDevice,
+              sizeInPixels,
+              sizeInPixels,
+              false,
+              SurfaceFormat.Color,
+              DepthFormat.None,
+              0,
+              RenderTargetUsage.PreserveContents);
 
-        tile.Draw();
+            sprite.GraphicsDevice.SetRenderTarget(Target);
 
-        Tools.Static.Sprite.Batch.End();
-    }
+            sprite.Batch.Begin(
+                samplerState: SamplerState.PointClamp,
+                blendState: BlendState.AlphaBlend);
 
-    public void Draw()
-    {
-        Tools.Static.Sprite.Batch.Draw(Target, Vector2.Zero, Color.White);
+            for (var x = 0; x < tiles.GetLength(0); x++)
+            {
+                for (var y = 0; y < tiles.GetLength(1); y++)
+                {
+                    var tile = tiles[x, y];
+
+                    sprite.Batch.Draw(
+                        tile.Texture,
+                        new Vector2(x * Globals.TileSize, y * Globals.TileSize),
+                        Color.White);
+                }
+            }
+
+            sprite.Batch.End();
+        }
+
+        public void DrawTile(int x, int y)
+        {
+            var tile = TileMap.Tiles[x, y];
+
+            sprite.GraphicsDevice.SetRenderTarget(Target);
+
+            sprite.Batch.Begin(
+                samplerState: SamplerState.PointClamp,
+                blendState: BlendState.AlphaBlend);
+
+            sprite.Batch.Draw(
+                tile.Texture,
+                new Vector2(x * Globals.TileSize, y * Globals.TileSize),
+                Color.White);
+
+            sprite.Batch.End();
+        }
+
+        public void Draw()
+        {
+            sprite.Batch.Draw(Target, Vector2.Zero, Color.White);
+        }
     }
 }

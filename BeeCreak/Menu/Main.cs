@@ -2,30 +2,31 @@ namespace BeeCreak.Menu
 {
     using System.Collections.Generic;
     using global::BeeCreak.Events;
-    using global::BeeCreak.Tools;
+    using global::BeeCreak.Tools.Dynamic;
+    using global::BeeCreak.Tools.Static;
     using global::BeeCreak.UI;
     using global::BeeCreak.UI.Components;
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class Main : Menu
     {
-        private readonly UISettings settings;
-        private readonly Mode<MenuMode> menuMode;
+        private readonly IUISettings settings;
 
-        public Main(IToolCollection tools, UISettings uISettings, Mode<MenuMode> menuModeManager)
-            : base(tools)
+        public Main(ISprite sprite, ISound sound, IEventManager events, IUISettings uISettings, IAppRouter appRouter)
+            : base(sprite)
         {
             settings = uISettings;
-            Texture = tools.Static.Sprite.GetTexture("menu-background");
-            menuMode = menuModeManager;
+            Texture = sprite.GetTexture("menu-background");
+
+            sound.PlayMusic("menu");
 
             var buttons = new List<Element>
             {
-                new Button(tools, settings, "New Game", () => tools.Static.Events.Dispatch(new NewGameEvent())),
-                new Button(tools, settings, "Load Game", () => menuMode.Switch(MenuMode.Load)),
-                new Button(tools, settings, "Settings", () => menuMode.Switch(MenuMode.Settings)),
-                new Button(tools, settings, "Exit Game", () => { }),
+                new Button(sprite, settings, "New Game", () => events.Dispatch(new NewGameEvent())),
+                new Button(sprite, settings, "Load Game", () => appRouter.Navigate("mainMenu/load")),
+                new Button(sprite, settings, "Settings", () => appRouter.Navigate("mainMenu/settings")),
+                new Button(sprite, settings, "Exit Game", () => { }),
             };
 
             Children = new List<Element>
@@ -33,8 +34,8 @@ namespace BeeCreak.Menu
                 new ElementArray(
                     settings,
                     new Vector2(
-                        tools.Static.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2,
-                        tools.Static.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2),
+                        sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2,
+                        sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Height * 2 / 3),
                     buttons,
                     16),
             };

@@ -1,13 +1,16 @@
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-
-namespace BeeCreak.Game.Scene.Entity;
-
-public abstract class EntityDTO
+namespace BeeCreak.Game.Scene.Entity
 {
-    public EntityType EntityType { get; set; }
-    public Vector2 WorldPosition { get; set; }
-    public Direction Direction { get; set; }
-    public float Speed { get; set; }
-    public abstract Entity FromDTO(IToolCollection tools);
+    using global::BeeCreak.Tools;
+    using Microsoft.Xna.Framework;
+
+    public abstract class EntityDTO
+    {
+        public EntityType Type { get; set; }
+
+        public Vector2 WorldPosition { get; set; }
+
+        public Direction Direction { get; set; }
+
+        public float Speed { get; set; }
+    }
 }

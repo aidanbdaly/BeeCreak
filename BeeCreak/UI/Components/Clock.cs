@@ -1,33 +1,39 @@
 namespace BeeCreak.UI.Components
 {
-    using global::BeeCreak.Game.Objects.Time;
+    using global::BeeCreak.Game.Time;
     using global::BeeCreak.Tools;
+    using global::BeeCreak.Tools.Static;
     using global::BeeCreak.UI;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
-    public class Clock : Element
+    public class Clock : IClock
     {
-        public Clock(IToolCollection tools, ITime time)
+        public Clock(ISprite sprite)
         {
+            this.Sprite = sprite;
+
             Position = new Vector2(20, 20);
-            Time = time;
-            Tools = tools;
         }
+
+        public Vector2 Position { get; set; }
 
         private ITime Time { get; set; }
 
-        private IToolCollection Tools { get; set; }
+        private ISprite Sprite { get; set; }
 
-        public override void Update(GameTime gameTime)
+        public void SetTime(ITime time)
+        {
+            Time = time;
+        }
+
+        public void Update(GameTime gameTime)
         {
             Time.Update(gameTime);
         }
 
-        public override void Draw()
+        public void Draw()
         {
-            var sprite = Tools.Static.Sprite;
-
             var suffix = Time.Current switch
             {
                 0 => "AM",
@@ -35,12 +41,12 @@ namespace BeeCreak.UI.Components
                 _ => Time.Current < 12 ? "AM" : "PM"
             };
 
-            sprite.Batch.Begin(
+            Sprite.Batch.Begin(
                 sortMode: SpriteSortMode.Deferred,
                 blendState: BlendState.AlphaBlend,
                 samplerState: SamplerState.PointClamp);
-            sprite.Batch.DrawString(
-                sprite.GetFont("lookout"),
+            Sprite.Batch.DrawString(
+                Sprite.GetFont("lookout"),
                 $"Time: {Time} {suffix}",
                 Position,
                 Color.White,
@@ -49,7 +55,7 @@ namespace BeeCreak.UI.Components
                 1.5f,
                 SpriteEffects.None,
                 0);
-            sprite.Batch.End();
+            Sprite.Batch.End();
         }
     }
 }

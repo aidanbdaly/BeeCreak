@@ -1,52 +1,45 @@
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-
-namespace BeeCreak.Game.Scene.Entity.Instances.Creature;
-
-public class Creature : Entity
+namespace BeeCreak.Game.Scene.Entity.Instances.Creature
 {
-    public bool IsMoving { get; set; } = false;
+    using global::BeeCreak.Tools.Dynamic.Input;
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework;
 
-    public Creature(IToolCollection tools, Vector2 worldPosition)
+    public class Creature : Entity
     {
-        Tools = tools;
-        WorldPosition = worldPosition;
+        private readonly ISprite sprite;
 
-        EntityType = EntityType.Creature;
+        private readonly IInput input;
 
-        Speed = 50;
-
-        ActiveTexture = tools.Static.Sprite.GetTexture("creature");
-    }
-
-    public override void Update(GameTime gameTime)
-    {
-        if (Tools.Dynamic.Input.OnActionClick(InputAction.Open))
+        public Creature(ISprite sprite, IInput input)
         {
-            IsMoving = !IsMoving;
+            this.sprite = sprite;
+            this.input = input;
+
+            Type = EntityType.Creature;
+
+            Speed = 50;
+
+            ActiveTexture = sprite.GetTexture("creature");
         }
 
-        if (IsMoving)
+        public bool IsMoving { get; set; } = false;
+
+        public override void Update(GameTime gameTime)
         {
-            Move(Direction.East, gameTime);
+            if (input.OnActionClick(InputAction.Up))
+            {
+                IsMoving = !IsMoving;
+            }
+
+            if (IsMoving)
+            {
+                Move(Direction, gameTime);
+            }
         }
-    }
 
-    public override void Draw()
-    {
-        Tools.Static.Sprite.Batch.Draw(ActiveTexture, WorldPosition, Color.White);
-    }
-
-    public override CreatureDTO ToDTO()
-    {
-        return new CreatureDTO
+        public override void Draw()
         {
-            WorldPosition = WorldPosition,
-            Direction = Direction,
-            EntityType = EntityType,
-            Speed = Speed,
-            IsMoving = IsMoving
-        };
+            sprite.Batch.Draw(ActiveTexture, WorldPosition, Color.White);
+        }
     }
 }

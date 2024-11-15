@@ -1,33 +1,21 @@
-﻿using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace BeeCreak.Game.Scene.Tile;
-
-public abstract class Tile : ITile
+﻿namespace BeeCreak.Game.Scene.Tile
 {
-    public TileType Type;
-    public Vector2 Position { get; set; }
-    public Rectangle Bounds { get; set; }
-    protected Texture2D Texture { get; set; }
-    protected IToolCollection Tools { get; set; }
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
-    public Tile(IToolCollection tools, Vector2 position, Rectangle bounds = default)
+    public class Tile : ITile
     {
-        Tools = tools;
-        Position = position;
-        Bounds = bounds;
-    }
+        public Tile(ISprite sprite, TileType type)
+        {
+            Texture = sprite.GetTexture(TileDictionary.Textures[type]);
+            Type = type;
+        }
 
-    public Tile(IToolCollection tools)
-    {
-        Tools = tools;
-    }
+        public TileType Type { get; set; }
 
-    public abstract TileDTO ToDTO();
+        public Rectangle Bounds { get; set; }
 
-    public void Draw()
-    {
-        Tools.Static.Sprite.Batch.Draw(Texture, Position, Color.White);
+        public Texture2D Texture { get; set; }
     }
 }

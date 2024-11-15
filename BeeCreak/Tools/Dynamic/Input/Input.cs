@@ -1,66 +1,64 @@
-using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-
-namespace BeeCreak.Tools;
-
-public class Input : IDynamic
+namespace BeeCreak.Tools.Dynamic.Input
 {
-    public KeyboardState PreviousState;
-    public GamePadState PreviousGamePadState;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Input;
 
-    public Input()
+    public class Input : IInput
     {
-        PreviousState = Keyboard.GetState();
-    }
+        private KeyboardState previousState;
+        private GamePadState previousGamePadState;
 
-    public static bool OnActionHold(InputMap action)
-    {
-        KeyboardState keyboardState = Keyboard.GetState();
-        GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-
-        if (action.Keys != null && keyboardState.IsKeyDown(action.Keys.Value))
+        public Input()
         {
-            return true;
+            previousState = Keyboard.GetState();
         }
 
-        if (action.Buttons != null && gamePadState.IsButtonDown(action.Buttons.Value))
+        public bool OnActionHold(InputMap action)
         {
-            return true;
+            KeyboardState keyboardState = Keyboard.GetState();
+            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+
+            if (action.Keys != null && keyboardState.IsKeyDown(action.Keys.Value))
+            {
+                return true;
+            }
+
+            if (action.Buttons != null && gamePadState.IsButtonDown(action.Buttons.Value))
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        return false;
-    }
-
-    public bool OnActionClick(InputMap action)
-    {
-        KeyboardState keyboardState = Keyboard.GetState();
-        GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-
-        if (
-            action.Keys != null
-            && keyboardState.IsKeyDown(action.Keys.Value)
-            && PreviousState.IsKeyUp(action.Keys.Value)
-        )
+        public bool OnActionClick(InputMap action)
         {
-            return true;
+            KeyboardState keyboardState = Keyboard.GetState();
+            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+
+            if (
+                action.Keys != null
+                && keyboardState.IsKeyDown(action.Keys.Value)
+                && previousState.IsKeyUp(action.Keys.Value))
+            {
+                return true;
+            }
+
+            if (
+                action.Buttons != null
+                && gamePadState.IsButtonDown(action.Buttons.Value)
+                && previousGamePadState.IsButtonUp(action.Buttons.Value))
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        if (
-            action.Buttons != null
-            && gamePadState.IsButtonDown(action.Buttons.Value)
-            && PreviousGamePadState.IsButtonUp(action.Buttons.Value)
-        )
+        public void Update(GameTime gameTime)
         {
-            return true;
+            previousState = Keyboard.GetState();
+            previousGamePadState = GamePad.GetState(PlayerIndex.One);
         }
-
-        return false;
-    }
-
-    public void Update(GameTime gameTime)
-    {
-        PreviousState = Keyboard.GetState();
-        PreviousGamePadState = GamePad.GetState(PlayerIndex.One);
     }
 }

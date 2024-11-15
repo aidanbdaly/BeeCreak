@@ -1,18 +1,16 @@
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-
-namespace BeeCreak.Game.Scene.Light;
-
-public class LightDTO
+namespace BeeCreak.Game.Scene.Light
 {
-    public Vector2 Position { get; set; }
-    public int Radius { get; set; }
-    public int Period { get; set; }
-    public float Scale { get; set; } = 1f;
-    public float MaxScale { get; set; } = 1.5f;
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework.Graphics;
 
-    public Light FromDTO(IToolCollection tools)
+    public class LightDTO
     {
-        return new Light(tools, Position, Radius, MaxScale, Period) { Scale = Scale };
+        public int Radius { get; set; }
+
+        public int Period { get; set; }
+
+        public float Scale { get; set; }
+
+        public float MaxScale { get; set; }
     }
 }

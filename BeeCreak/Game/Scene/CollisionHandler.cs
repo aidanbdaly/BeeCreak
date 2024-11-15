@@ -2,43 +2,40 @@ namespace BeeCreak.Game.Scene
 {
     using System;
     using System.Collections.Generic;
+    using global::BeeCreak.Config;
     using global::BeeCreak.Game.Scene.Tile;
-    using global::BeeCreak.Tools;
     using Microsoft.Xna.Framework;
 
     public class CollisionHandler : ICollisionHandler
     {
-        public CollisionHandler(IToolCollection tools, ITile[,] tiles)
+        public CollisionHandler(ITileMap tileMap)
         {
-            Tools = tools;
-            Tiles = tiles;
+            TileMap = tileMap;
         }
 
-        private ITile[,] Tiles { get; set; }
-
-        private IToolCollection Tools { get; set; }
+        private ITileMap TileMap { get; set; }
 
         public bool CheckCollision(Vector2 position, Rectangle bounds)
         {
-            var X = (int)Math.Round(position.X) / Tools.Static.TILE_SIZE;
-            var Y = (int)Math.Round(position.Y) / Tools.Static.TILE_SIZE;
+            var x = (int)Math.Round(position.X) / Globals.TileSize;
+            var y = (int)Math.Round(position.Y) / Globals.TileSize;
 
             var tilesToTestForIntersection = new List<(int, int)>
             {
-                (X, Y),
-                (X, Y + 1),
-                (X, Y - 1),
-                (X + 1, Y),
-                (X - 1, Y),
-                (X + 1, Y + 1),
-                (X - 1, Y - 1),
-                (X + 1, Y - 1),
-                (X - 1, Y + 1),
+                (x, y),
+                (x, y + 1),
+                (x, y - 1),
+                (x + 1, y),
+                (x - 1, y),
+                (x + 1, y + 1),
+                (x - 1, y - 1),
+                (x + 1, y - 1),
+                (x - 1, y + 1),
             };
 
-            foreach (var (x, y) in tilesToTestForIntersection)
+            foreach (var (gridPositionX, gridPositionY) in tilesToTestForIntersection)
             {
-                var tile = Tiles[x, y];
+                var tile = TileMap.GetTile(gridPositionX, gridPositionY);
 
                 if (tile.Bounds.Intersects(bounds))
                 {

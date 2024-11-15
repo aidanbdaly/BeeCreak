@@ -7,29 +7,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Tools.Static;
 
-public class Sprite
+public class Sprite : ISprite
 {
-    public Dictionary<string, Texture2D> Textures { get; set; } = default!;
-    public Dictionary<string, SpriteFont> Fonts { get; set; } = default!;
-    public SpriteBatch Batch { get; set; } = default!;
-    public BlendState Multiply =
-        new()
-        {
-            ColorSourceBlend = Blend.DestinationColor,
-            ColorDestinationBlend = Blend.Zero,
-            ColorBlendFunction = BlendFunction.Add,
-            AlphaSourceBlend = Blend.One,
-            AlphaDestinationBlend = Blend.Zero,
-            AlphaBlendFunction = BlendFunction.Add
-        };
-
-    public Sprite(ContentManager contentManager, GraphicsDevice graphicsDevice)
+    public Sprite(ContentManager contentManager, BeeCreak game)
     {
         Textures = GetAvailable<Texture2D>(contentManager, "png");
         Fonts = GetAvailable<SpriteFont>(contentManager, "spritefont");
 
-        Batch = new SpriteBatch(graphicsDevice);
+        Batch = new SpriteBatch(game.GraphicsDevice);
+        GraphicsDevice = game.GraphicsDevice;
     }
+
+    public SpriteBatch Batch { get; set; }
+
+    public GraphicsDevice GraphicsDevice { get; set; }
+
+    private Dictionary<string, Texture2D> Textures { get; set; }
+
+    private Dictionary<string, SpriteFont> Fonts { get; set; }
 
     public Texture2D GetTexture(string textureName)
     {

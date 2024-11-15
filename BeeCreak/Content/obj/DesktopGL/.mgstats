@@ -1,6 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button-hovered.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/button-hovered.xnb","TextureProcessor","Texture2DContent",624,180085,0.173018
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/button.xnb","TextureProcessor","Texture2DContent",623,180085,0.074909
+"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/cursor.xnb","TextureProcessor","Texture2DContent",175,4181,0.16402
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/dialog.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/dialog.xnb","TextureProcessor","Texture2DContent",566,120085,0.173761
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/menu-background.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/menu-background.xnb","TextureProcessor","Texture2DContent",1997003,4194389,0.265736
 "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/prompt.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/bin/DesktopGL/prompt.xnb","TextureProcessor","Texture2DContent",270,4181,0.076286

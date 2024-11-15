@@ -1,22 +1,24 @@
 namespace BeeCreak.Game.Scene
 {
-    using global::BeeCreak.Game.Objects.Camera;
+    using global::BeeCreak.Game.Camera;
     using global::BeeCreak.Game.Scene.Entity;
     using global::BeeCreak.Game.Scene.Light;
     using global::BeeCreak.Game.Scene.Tile;
-    using global::BeeCreak.Tools;
+    using global::BeeCreak.Tools.Static;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     public class CellManager
     {
-        public CellManager(IToolCollection tools, ICell cell)
-        {
-            Tools = tools;
+        private readonly ISprite sprite;
 
-            TileManager = new TileManager(Tools, cell.Tiles, cell.Size);
-            LightManager = new LightManager(Tools, cell.Lights, cell.Size);
-            EntityManager = new EntityManager(Tools, cell.Entities, cell.Name);
+        public CellManager(ISprite sprite, TileManager tileManager, LightManager lightManager, EntityManager entityManager)
+        {
+            this.sprite = sprite;
+
+            TileManager = tileManager;
+            LightManager = lightManager;
+            EntityManager = entityManager;
         }
 
         private TileManager TileManager { get; set; }
@@ -25,7 +27,12 @@ namespace BeeCreak.Game.Scene
 
         private EntityManager EntityManager { get; set; }
 
-        private IToolCollection Tools { get; set; }
+        public void SetActiveCell(ICell cell)
+        {
+            TileManager.SetTileMap(cell.TileMap);
+            LightManager.SetLightMap(cell.LightMap);
+            EntityManager.SetEntities(cell.Entities);
+        }
 
         public void Update(GameTime gameTime)
         {
@@ -35,9 +42,9 @@ namespace BeeCreak.Game.Scene
 
         public void Draw(ICamera camera)
         {
-            Tools.Static.GraphicsDevice.SetRenderTarget(null);
+            sprite.GraphicsDevice.SetRenderTarget(null);
 
-            Tools.Static.Sprite.Batch.Begin(
+            sprite.Batch.Begin(
                 samplerState: SamplerState.PointClamp,
                 blendState: BlendState.AlphaBlend,
                 transformMatrix: camera.ZoomTransform);
@@ -45,15 +52,9 @@ namespace BeeCreak.Game.Scene
             TileManager.Draw();
             EntityManager.Draw();
 
-            Tools.Static.Sprite.Batch.End();
+            sprite.Batch.End();
 
-            Tools.Static.Sprite.Batch.Begin(
-                blendState: Tools.Static.Sprite.Multiply,
-                transformMatrix: camera.ZoomTransform);
-
-            LightManager.Draw();
-
-            Tools.Static.Sprite.Batch.End();
+            LightManager.Draw(camera);
         }
     }
 }

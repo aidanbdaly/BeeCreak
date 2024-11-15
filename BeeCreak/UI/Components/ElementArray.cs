@@ -8,7 +8,7 @@ namespace BeeCreak.Menu
     {
         private readonly int gap;
 
-        public ElementArray(UISettings settings, Vector2 position, List<Element> children, int gap)
+        public ElementArray(IUISettings settings, Vector2 position, List<Element> children, int gap)
         {
             this.gap = gap;
 

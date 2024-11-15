@@ -1,16 +1,9 @@
-using BeeCreak.Tools;
-
-namespace BeeCreak.Game.Scene.Entity.Instances.Character;
-
-public class CharacterDTO : EntityDTO
+namespace BeeCreak.Game.Scene.Entity.Instances.Character
 {
-    public override Character FromDTO(IToolCollection tools)
+    using global::BeeCreak.Tools.Dynamic.Input;
+    using global::BeeCreak.Tools.Static;
+
+    public class CharacterDTO : EntityDTO
     {
-        return new Character(tools, WorldPosition)
-        {
-            EntityType = EntityType,
-            Direction = Direction,
-            Speed = Speed
-        };
     }
 }

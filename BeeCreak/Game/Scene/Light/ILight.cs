@@ -1,12 +1,17 @@
-using BeeCreak.Game;
-using Microsoft.Xna.Framework;
-
-namespace BeeCreak.Game.Scene.Light;
-
-public interface ILight : IDynamicRenderable
+namespace BeeCreak.Game.Scene.Light
 {
-    public Vector2 Position { get; set; }
-    public int Radius { get; set; }
-    public int Period { get; set; }
-    public LightDTO ToDTO();
+    using Microsoft.Xna.Framework;
+
+    public interface ILight : IDynamic
+    {
+        public int Radius { get; set; }
+
+        public int Period { get; set; }
+
+        public float Scale { get; set; }
+
+        public float MaxScale { get; set; }
+
+        public void Draw(Vector2 position);
+    }
 }

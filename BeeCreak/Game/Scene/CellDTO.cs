@@ -1,39 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BeeCreak.Game.Scene.Entity;
-using BeeCreak.Game.Scene.Light;
-using BeeCreak.Game.Scene.Tile;
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-
-namespace BeeCreak.Game.Scene;
-
-public class CellDTO
+namespace BeeCreak.Game.Scene
 {
-    public string Name { get; set; }
-    public TileDTO[,] Tiles { get; set; }
-    public int Size { get; set; }
-    public int SizeInPixels { get; set; }
-    public List<EntityDTO> Entities { get; set; }
-    public List<LightDTO> Lights { get; set; }
-    public Vector2 SpawnPoint { get; set; }
+    using System.Collections.Generic;
+    using System.Linq;
+    using global::BeeCreak.Game.Scene.Entity;
+    using global::BeeCreak.Game.Scene.Light;
+    using global::BeeCreak.Game.Scene.Tile;
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework.Graphics;
 
-    public Cell FromDTO(IToolCollection tools)
+    public class CellDTO
     {
-        var TileArray = new Tile.Tile[Size, Size];
+        public string Name { get; set; }
 
-        for (var x = 0; x < Size; x++)
-        {
-            for (var y = 0; y < Size; y++)
-            {
-                TileArray[x, y] = Tiles[x, y].FromDTO(tools);
-            }
-        }
+        public TileMapDTO TileMap { get; set; }
 
-        var entities = Entities.Select(entity => entity.FromDTO(tools)).ToList();
-        var lights = Lights.Select(light => light.FromDTO(tools)).ToList();
+        public int SizeInPixels { get; set; }
 
-        return new Cell(tools, lights, entities, SpawnPoint, Size, Name);
+        public List<EntityDTO> Entities { get; set; }
+
+        public LightMapDTO LightMap { get; set; }
     }
 }

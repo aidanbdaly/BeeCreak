@@ -1,29 +1,17 @@
-using BeeCreak.Game.Scene.Entity;
-using BeeCreak.Tools;
-using Microsoft.Xna.Framework;
-
-namespace BeeCreak.Game.Objects.Camera;
-
-public class CameraDTO
+namespace BeeCreak.Game.Camera
 {
-    public Vector2 WorldPosition { get; set; }
-    public Matrix ZoomTransform { get; set; }
-    public int ViewPortWidth { get; set; }
-    public int ViewPortHeight { get; set; }
-    public Rectangle Source { get; set; }
-    public Rectangle Destination { get; set; }
-    public float Zoom { get; set; }
+    using global::BeeCreak.Tools.Static;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
 
-    public Camera FromDTO(IToolCollection Tools)
+    public class CameraDTO
     {
-        return new Camera(Tools)
-        {
-            WorldPosition = WorldPosition,
-            ZoomTransform = ZoomTransform,
-            ViewPortWidth = ViewPortWidth,
-            ViewPortHeight = ViewPortHeight,
-            Source = Source,
-            Zoom = Zoom
-        };
+        public Matrix ZoomTransform { get; set; }
+
+        public int ViewPortWidth { get; set; }
+
+        public int ViewPortHeight { get; set; }
+
+        public float Zoom { get; set; }
     }
 }
