@@ -10,5 +10,7 @@ namespace BeeCreak.Game.Scene.Tile
         Texture2D Texture { get; set; }
 
         Rectangle Bounds { get; set; }
+
+        void SetBounds(Rectangle bounds);
     }
 }

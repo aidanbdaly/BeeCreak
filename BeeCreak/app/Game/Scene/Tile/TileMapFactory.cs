@@ -41,6 +41,8 @@ namespace BeeCreak.Game.Scene.Tile
 
         public TileMap CreateTileMap(TileMapDTO tileMapDTO)
         {
+            var tileMap = new TileMap(sprite);
+
             var tiles = tileMapDTO.Tiles;
 
             var size = tiles.GetLength(0);
@@ -59,7 +61,9 @@ namespace BeeCreak.Game.Scene.Tile
                 }
             }
 
-            return new TileMap(tileArray);
+            tileMap.SetTiles(tileArray);
+
+            return tileMap;
         }
     }
 }

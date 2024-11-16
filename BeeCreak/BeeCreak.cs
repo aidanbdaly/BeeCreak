@@ -5,6 +5,7 @@
     using global::BeeCreak.Menu;
     using global::BeeCreak.Tools.Dynamic;
     using global::BeeCreak.Tools.Dynamic.Input;
+    using global::BeeCreak.Tools.Static;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -52,6 +53,12 @@
 
         protected override void LoadContent()
         {
+            // Load content
+            var sprite = serviceProvider.GetRequiredService<ISprite>();
+
+            sprite.LoadContent(Content, GraphicsDevice);
+
+            // App tree setup
             var gameNode = new AppNode();
 
             gameNode.Mode = serviceProvider.GetRequiredService<GameManager>();
@@ -84,10 +91,10 @@
                 Exit();
             }
 
-            appRouter.CurrentNode.Mode.Update(gameTime);
-
             input.Update(gameTime);
             sound.Update(gameTime);
+
+            appRouter.CurrentNode.Mode.Update(gameTime);
 
             base.Update(gameTime);
         }

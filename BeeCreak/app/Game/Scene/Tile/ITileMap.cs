@@ -5,5 +5,9 @@ namespace BeeCreak.Game.Scene.Tile
         ITile[,] Tiles { get; set; }
 
         ITile GetTile(int x, int y);
+
+        void SetTiles(ITile[,] tiles);
+
+        void Draw();
     }
 }

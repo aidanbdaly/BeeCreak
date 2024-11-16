@@ -1,5 +1,6 @@
 namespace BeeCreak.Tools.Static
 {
+    using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
     public interface ISprite
@@ -7,6 +8,8 @@ namespace BeeCreak.Tools.Static
         GraphicsDevice GraphicsDevice { get; }
 
         SpriteBatch Batch { get; }
+
+        void LoadContent(ContentManager content, GraphicsDevice graphicsDevice);
 
         Texture2D GetTexture(string textureName);
 

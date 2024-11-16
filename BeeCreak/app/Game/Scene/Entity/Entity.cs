@@ -1,5 +1,6 @@
 namespace BeeCreak.Game.Scene.Entity
 {
+    using System;
     using System.Collections.Generic;
     using global::BeeCreak.Config;
     using global::BeeCreak.Tools;
@@ -15,6 +16,8 @@ namespace BeeCreak.Game.Scene.Entity
         public Vector2 WorldPosition { get; set; }
 
         public float Speed { get; set; }
+
+        public bool IsMoving { get; set; }
 
         protected ICollisionHandler CollisionHandler { get; set; }
 

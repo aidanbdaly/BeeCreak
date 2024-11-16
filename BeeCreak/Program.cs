@@ -21,17 +21,11 @@ services.AddSingleton<IAppRouter, AppRouter>();
 
 services.AddSingleton<ISound, Sound>();
 services.AddSingleton<IInput, Input>();
+services.AddSingleton<ISprite, Sprite>();
 
-services.AddScoped<ISprite, Sprite>();
 services.AddScoped<ISaveManager, SaveManager>();
 services.AddScoped<IEventManager, EventManager>();
 services.AddScoped<IUISettings, UISettings>();
-
-services.AddScoped<ContentManager>(provider =>
-{
-    var game = provider.GetRequiredService<BeeCreak.BeeCreak>();
-    return game.Content;
-});
 
 // App Nodes
 services.AddScoped<GameManager>();

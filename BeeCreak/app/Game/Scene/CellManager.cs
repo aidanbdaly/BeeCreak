@@ -37,7 +37,7 @@ namespace BeeCreak.Game.Scene
         public void Update(GameTime gameTime)
         {
             EntityManager.Update(gameTime);
-            LightManager.Update(gameTime);
+            //LightManager.Update(gameTime);
         }
 
         public void Draw(ICamera camera)
@@ -54,7 +54,7 @@ namespace BeeCreak.Game.Scene
 
             sprite.Batch.End();
 
-            LightManager.Draw(camera);
+            //LightManager.Draw(camera);
         }
     }
 }

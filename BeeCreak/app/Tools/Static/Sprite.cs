@@ -9,13 +9,8 @@ namespace BeeCreak.Tools.Static;
 
 public class Sprite : ISprite
 {
-    public Sprite(ContentManager contentManager, BeeCreak game)
+    public Sprite()
     {
-        Textures = GetAvailable<Texture2D>(contentManager, "png");
-        Fonts = GetAvailable<SpriteFont>(contentManager, "spritefont");
-
-        Batch = new SpriteBatch(game.GraphicsDevice);
-        GraphicsDevice = game.GraphicsDevice;
     }
 
     public SpriteBatch Batch { get; set; }
@@ -25,6 +20,15 @@ public class Sprite : ISprite
     private Dictionary<string, Texture2D> Textures { get; set; }
 
     private Dictionary<string, SpriteFont> Fonts { get; set; }
+
+    public void LoadContent(ContentManager content, GraphicsDevice graphicsDevice)
+    {
+        Textures = GetAvailable<Texture2D>(content, "png");
+        Fonts = GetAvailable<SpriteFont>(content, "spritefont");
+
+        Batch = new SpriteBatch(graphicsDevice);
+        GraphicsDevice = graphicsDevice;
+    }
 
     public Texture2D GetTexture(string textureName)
     {

@@ -2,6 +2,7 @@ namespace BeeCreak.Generation
 {
     using System;
     using System.Collections.Generic;
+    using global::BeeCreak.Config;
     using global::BeeCreak.Game.Scene.Tile;
     using global::BeeCreak.Tools;
     using global::BeeCreak.Tools.Static;
@@ -58,7 +59,10 @@ namespace BeeCreak.Generation
 
             Flood(size);
 
-            return new TileMap(Tiles);
+            var tileMap = new TileMap(sprite);
+            tileMap.SetTiles(Tiles);
+
+            return tileMap;
         }
 
         private void Flood(int size)
@@ -69,7 +73,10 @@ namespace BeeCreak.Generation
                 {
                     if (Tiles[x, y] == null)
                     {
-                        Tiles[x, y] = new Tile(sprite, TileType.Forest);
+                        var tile = new Tile(sprite, TileType.Forest);
+                        tile.SetBounds(new Rectangle(x * Globals.TileSize, y * Globals.TileSize, Globals.TileSize, Globals.TileSize));
+
+                        Tiles[x, y] = tile;
                     }
                 }
             }

@@ -19,7 +19,7 @@ namespace BeeCreak.Menu
             settings = uISettings;
             Texture = sprite.GetTexture("menu-background");
 
-            sound.PlayMusic("menu");
+            sound.PlayMusic("garden-sanctuary");
 
             var buttons = new List<Element>
             {

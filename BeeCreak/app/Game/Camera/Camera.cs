@@ -12,6 +12,8 @@ namespace BeeCreak.Game.Camera
 
         public Camera(ISprite sprite, IEventManager events)
         {
+            this.sprite = sprite;
+
             ViewPortWidth = sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Width;
             ViewPortHeight = sprite.GraphicsDevice.Adapter.CurrentDisplayMode.Height;
 

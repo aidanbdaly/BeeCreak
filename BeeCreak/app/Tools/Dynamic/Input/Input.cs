@@ -1,29 +1,37 @@
 namespace BeeCreak.Tools.Dynamic.Input
 {
+    using System;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
 
     public class Input : IInput
     {
         private KeyboardState previousState;
+
         private GamePadState previousGamePadState;
+
+        private KeyboardState currentState;
+
+        private GamePadState currentGamePadState;
 
         public Input()
         {
-            previousState = Keyboard.GetState();
+            currentState = Keyboard.GetState();
+            currentGamePadState = GamePad.GetState(PlayerIndex.One);
+
+            previousState = currentState;
+            previousGamePadState = currentGamePadState;
         }
 
         public bool OnActionHold(InputMap action)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-
-            if (action.Keys != null && keyboardState.IsKeyDown(action.Keys.Value))
+            if (action.Keys != null && currentState.IsKeyDown(action.Keys.Value))
             {
+                Console.WriteLine("Key is down" + action.Keys.Value);
                 return true;
             }
 
-            if (action.Buttons != null && gamePadState.IsButtonDown(action.Buttons.Value))
+            if (action.Buttons != null && currentGamePadState.IsButtonDown(action.Buttons.Value))
             {
                 return true;
             }
@@ -33,12 +41,9 @@ namespace BeeCreak.Tools.Dynamic.Input
 
         public bool OnActionClick(InputMap action)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-
             if (
                 action.Keys != null
-                && keyboardState.IsKeyDown(action.Keys.Value)
+                && currentState.IsKeyDown(action.Keys.Value)
                 && previousState.IsKeyUp(action.Keys.Value))
             {
                 return true;
@@ -46,7 +51,7 @@ namespace BeeCreak.Tools.Dynamic.Input
 
             if (
                 action.Buttons != null
-                && gamePadState.IsButtonDown(action.Buttons.Value)
+                && currentGamePadState.IsButtonDown(action.Buttons.Value)
                 && previousGamePadState.IsButtonUp(action.Buttons.Value))
             {
                 return true;
@@ -57,8 +62,12 @@ namespace BeeCreak.Tools.Dynamic.Input
 
         public void Update(GameTime gameTime)
         {
-            previousState = Keyboard.GetState();
-            previousGamePadState = GamePad.GetState(PlayerIndex.One);
+            Console.WriteLine("Updating input");
+            previousState = currentState;
+            previousGamePadState = currentGamePadState;
+
+            currentState = Keyboard.GetState();
+            currentGamePadState = GamePad.GetState(PlayerIndex.One);
         }
     }
 }

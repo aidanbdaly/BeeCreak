@@ -57,7 +57,7 @@ namespace BeeCreak.Tools.Dynamic
             var contentDirectory = "Audio";
 
             var files = Directory
-                .GetFiles(contentDirectory, "*.wav", SearchOption.AllDirectories)
+                .GetFiles(contentDirectory, "*.ogg", SearchOption.AllDirectories)
                 .ToList();
 
             foreach (var file in files)

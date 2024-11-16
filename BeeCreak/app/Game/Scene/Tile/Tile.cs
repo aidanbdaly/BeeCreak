@@ -17,5 +17,10 @@
         public Rectangle Bounds { get; set; }
 
         public Texture2D Texture { get; set; }
+
+        public void SetBounds(Rectangle bounds)
+        {
+            Bounds = bounds;
+        }
     }
 }
