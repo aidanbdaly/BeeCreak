@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "J+cCS+6G/4w=",
+  "dgSpecHash": "rmLzs5c4h6E=",
   "success": true,
   "projectFilePath": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/BeeCreak.csproj",
   "expectedPackageFiles": [
@@ -9,10 +9,9 @@
     "/Users/aidandaly/.nuget/packages/monogame.content.builder.task/3.8.1.303/monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "/Users/aidandaly/.nuget/packages/monogame.framework.desktopgl/3.8.1.303/monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
     "/Users/aidandaly/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
-    "/Users/aidandaly/.nuget/packages/stylecop.analyzers/1.1.118/stylecop.analyzers.1.1.118.nupkg.sha512",
-    "/Users/aidandaly/.nuget/packages/microsoft.netcore.app.ref/6.0.32/microsoft.netcore.app.ref.6.0.32.nupkg.sha512",
-    "/Users/aidandaly/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.32/microsoft.aspnetcore.app.ref.6.0.32.nupkg.sha512",
-    "/Users/aidandaly/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.32/microsoft.netcore.app.host.osx-arm64.6.0.32.nupkg.sha512"
+    "/Users/aidandaly/.nuget/packages/microsoft.netcore.app.ref/6.0.36/microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "/Users/aidandaly/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.36/microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512",
+    "/Users/aidandaly/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.36/microsoft.netcore.app.host.osx-arm64.6.0.36.nupkg.sha512"
   ],
   "logs": []
 }

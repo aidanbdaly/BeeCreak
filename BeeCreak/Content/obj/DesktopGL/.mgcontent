@@ -4,21 +4,15 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/tiles.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button-hovered.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/lookout.spritefont</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-down.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-left.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-right.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-up.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/menu-background.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/prompt.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/dialog.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/cursor.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/cursor-hover.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/forest.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/grass.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-down.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-left.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-right.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/man-up.png</File>
-    <File>/Users/aidandaly/Projects/Coding/MyGame2/MyGame2/Content/stone.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

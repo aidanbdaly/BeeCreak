@@ -6,29 +6,15 @@
   <SourceFiles>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button-hovered.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/creature.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor-hover.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/cursor.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/dialog.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/forest.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/grass.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/lookout.spritefont</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-down.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-left.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-right.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-up.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/menu-background.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/prompt.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/stone.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/tiles.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -121,3 +121,4 @@
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/obj/Debug/net6.0/ref/BeeCreak.dll
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/runtimes/osx/native/libfmod.dylib
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/runtimes/osx/native/libfmodL.dylib
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/Debug/net6.0/Content/tiles.xnb
