@@ -1,0 +1,26 @@
+[
+  {
+    "type": "Default",
+    "variant": "Default",
+    "atlasX": "0",
+    "atlasY": "0",
+    "atlasWidth": "32",
+    "atlasHeight": "32",
+    "boundsX": "0",
+    "boundsY": "8",
+    "boundsWidth": "32",
+    "boundsHeight": "16"
+  },
+  {
+    "type": "Default",
+    "variant": "Hovered",
+    "atlasX": "32",
+    "atlasY": "0",
+    "atlasWidth": "32",
+    "atlasHeight": "32",
+    "boundsX": "0",
+    "boundsY": "8",
+    "boundsWidth": "32",
+    "boundsHeight": "16"
+  }
+]

@@ -4,21 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button-hovered.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/button.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/lookout.spritefont</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-down.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-left.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-right.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/man-up.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/menu-background.png</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/tiles.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/font/lookout.spritefont</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/textures/buttons.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/textures/entities.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/textures/menu-background.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/textures/tiles.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

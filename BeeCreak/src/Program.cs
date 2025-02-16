@@ -1,62 +1,60 @@
-﻿using BeeCreak;
-using BeeCreak.App;
-using BeeCreak.Components.Button;
-using BeeCreak.Features.Game.Tile;
-using BeeCreak.Features.Menu;
-using BeeCreak.Game;
-using BeeCreak.Game.Scene;
-using BeeCreak.Game.Scene.Entity;
-using BeeCreak.Game.Scene.Light;
-using BeeCreak.Game.Scene.Tile;
-using BeeCreak.Game.State;
-using BeeCreak.Generation;
-using BeeCreak.Tools.Dynamic;
-using BeeCreak.Tools.Dynamic.Input;
-using BeeCreak.Tools.Static;
-using BeeCreak.UI;
-using BeeCreak.UI.Components;
-using BeeCreak.Utilities.Static;
+﻿using BeeCreak.App;
+using BeeCreak.Scene.Main;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+
+using System.IO;
+using BeeCreak.Shared.Data.Config;
+using BeeCreak.Shared.Services.Static;
+using BeeCreak.Shared.Services.Dynamic;
+using BeeCreak.Shared.Data.Models;
+using BeeCreak.Scene.Menu;
+using BeeCreak.Shared.UI;
+
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .Build();
 
 var services = new ServiceCollection();
 
+services.Configure<AppSettings>(configuration.GetSection("Asset"));
+services.AddSingleton<IUISettings, UISettings>();
+
+// Services
 services.AddSingleton<BeeCreak.BeeCreak>();
-services.AddSingleton<IApp, App>();
-services.AddSingleton<ISprite, Sprite>();
+services.AddSingleton<ISceneController, SceneController>();
+services.AddSingleton<ISpriteController, SpriteController>();
 services.AddSingleton<ISound, Sound>();
 services.AddSingleton<IInput, Input>();
-services.AddScoped<IEventManager, EventManager>();
-services.AddScoped<IUISettings, UISettings>();
 
-// Textures
-services.AddSingleton<ISpriteSheetManager, SpriteSheetManager>();
-services.AddSingleton<ITileVariantCalculator, TileVariantCalculator>();
-services.AddSingleton<ITileAtlas, TileAtlas>();
-services.AddSingleton<IButtonAtlas, ButtonAtlas>();
+services.AddScoped<IShapeRouter, ShapeRouter>();
 
-services.AddSingleton<IShapeRouter, ShapeRouter>();
+// Asset
+services.AddSingleton<ITileAssetProvider, TileAssetProvider>();
+services.AddSingleton<IButtonAssetProvider, ButtonAssetProvider>();
+services.AddSingleton<IVisualAssetProvider, VisualAssetProvider>();
+services.AddSingleton<IGameProvider, GameProvider>();
 
-// Save
-services.AddScoped<ISaveManager, SaveManager>();
-services.AddScoped<GameFactory>();
-services.AddScoped<CellFactory>();
-services.AddScoped<LightFactory>();
-services.AddScoped<TileMapFactory>();
-services.AddScoped<EntityFactory>();
 
-// Scene Nodes
+// Scene 
 services.AddScoped<GameScene>();
 services.AddScoped<MenuScene>();
-services.AddScoped<CellManager>();
-services.AddScoped<UIManager>();
-services.AddScoped<TileManager>();
+services.AddScoped<CellController>();
+services.AddScoped<HUDController>();
 services.AddScoped<LightManager>();
-services.AddScoped<EntityManager>();
+
+services.AddSingleton<ICamera, Camera>();
 
 // Transient
 services.AddTransient<IButton, Button>();
 services.AddTransient<MenuActions>();
 services.AddTransient<ITileMap, TileMap>();
+services.AddTransient<ITileVariantCalculator, TileVariantCalculator>();
+services.AddTransient<ITile, Tile>();
+services.AddTransient<ITime, Time>();
+services.AddTransient<Player>();
+services.AddTransient<IControlBehavior, ControlBehavior>();
 
 
 using var serviceProvider = services.BuildServiceProvider();

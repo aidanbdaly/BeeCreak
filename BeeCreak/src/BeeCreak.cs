@@ -1,11 +1,8 @@
 ﻿using System;
-using BeeCreak.App;
-using BeeCreak.Features.Game.Tile;
-using BeeCreak.Features.Menu;
-using BeeCreak.Tools.Dynamic;
-using BeeCreak.Tools.Dynamic.Input;
-using BeeCreak.Tools.Static;
-using BeeCreak.Utilities.Static;
+using BeeCreak.Scene;
+using BeeCreak.Scene.Menu;
+using BeeCreak.Shared.Services.Dynamic;
+using BeeCreak.Shared.Services.Static;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,17 +18,17 @@ public class BeeCreak : Microsoft.Xna.Framework.Game
     private readonly ISound sound;
 
     private readonly IServiceProvider serviceProvider;
-    
-    private readonly IApp app;
+
+    private readonly ISceneController sceneController;
 
     public BeeCreak(
         IServiceProvider serviceProvider,
-        IApp app,
+        ISceneController app,
         IInput input,
         ISound sound)
     {
         this.serviceProvider = serviceProvider;
-        this.app = app;
+        this.sceneController = app;
         this.input = input;
         this.sound = sound;
 
@@ -59,20 +56,11 @@ public class BeeCreak : Microsoft.Xna.Framework.Game
 
     protected override void LoadContent()
     {
-        var spriteSheetManager = serviceProvider.GetRequiredService<ISpriteSheetManager>();
-        spriteSheetManager.LoadSpriteSheets(Content);
-
-        var sprite = serviceProvider.GetRequiredService<ISprite>();
-
-        sprite.Load(Content.Load<SpriteFont>("lookout"), GraphicsDevice);
-
-        var tileTextureManager = serviceProvider.GetRequiredService<ITileAtlas>();
-        tileTextureManager.Load(spriteSheetManager.GetSpriteSheet("tiles"));
+        var spriteController = serviceProvider.GetRequiredService<ISpriteController>();
+        spriteController.Load(Content.Load<SpriteFont>("lookout"), GraphicsDevice);
 
         var menuScene = serviceProvider.GetRequiredService<MenuScene>();
-
-        menuScene.Load(spriteSheetManager.GetSpriteSheet("menu-background"));
-
+        menuScene.Load(Content.Load<Texture2D>("menu-background"));
         menuScene.Enter();
     }
 
@@ -86,14 +74,14 @@ public class BeeCreak : Microsoft.Xna.Framework.Game
         input.Update(gameTime);
         sound.Update(gameTime);
 
-        app.Update(gameTime);
+        sceneController.Update(gameTime);
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        app.Draw();
+        sceneController.Draw();
 
         base.Draw(gameTime);
     }
