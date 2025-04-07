@@ -1,0 +1,91 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+/reference:../../BeeCreak.Content.Extensions/bin/Debug/net6.0/BeeCreak.Content.Extensions.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin src/Animation/test.animation
+/importer:AnimationImporter
+/processor:AnimationProcessor
+/build:src/Animation/test.animation
+
+#begin src/Font/lookout.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:src/Font/lookout.spritefont
+
+#begin src/Image/buttons.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:src/Image/buttons.png
+
+#begin src/Image/entities.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:src/Image/entities.png
+
+#begin src/Image/menu-background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:src/Image/menu-background.png
+
+#begin src/Image/tiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:src/Image/tiles.png
+
+#begin src/Spritesheet/buttons.spritesheet
+/importer:SpritesheetImporter
+/processor:SpritesheetProcessor
+/build:src/Spritesheet/buttons.spritesheet
+
+#begin src/Spritesheet/entities.spritesheet
+/importer:SpritesheetImporter
+/processor:SpritesheetProcessor
+/build:src/Spritesheet/entities.spritesheet
+
+#begin src/Spritesheet/tile.spritesheet
+/importer:SpritesheetImporter
+/processor:SpritesheetProcessor
+/build:src/Spritesheet/tile.spritesheet
+

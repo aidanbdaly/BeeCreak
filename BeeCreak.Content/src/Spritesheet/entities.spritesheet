@@ -1,0 +1,9 @@
+{
+  "ImageName": "entities",
+  "Frames": {
+    "player_facing_west": { "X": 0, "Y": 0, "Width": 32, "Height": 32 },
+    "player_facing_north": { "X": 32, "Y": 0, "Width": 32, "Height": 32 },
+    "player_facing_east": { "X": 64, "Y": 0, "Width": 32, "Height": 32 },
+    "player_facing_south": { "X": 96, "Y": 0, "Width": 32, "Height": 32 }
+  }
+}

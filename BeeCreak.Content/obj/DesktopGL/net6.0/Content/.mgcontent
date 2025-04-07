@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/src/Animation/test.animation</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/src/Font/lookout.spritefont</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/src/Image/buttons.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/src/Image/entities.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/src/Image/menu-background.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/src/Image/tiles.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/src/Spritesheet/buttons.spritesheet</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/src/Spritesheet/entities.spritesheet</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/src/Spritesheet/tile.spritesheet</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

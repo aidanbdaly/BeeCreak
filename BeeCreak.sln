@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1704.4
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak", "BeeCreak\BeeCreak.csproj", "{E99AD18F-940E-4208-935E-77615D4BDDDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeeCreak", "BeeCreak.csproj", "{4018EFD0-916F-4A69-8B17-500EC4FCBA80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak.Content.Extensions", "..\BeeCreak.Content.Extensions\BeeCreak.Content.Extensions.csproj", "{57A63C56-A833-432C-AFFA-5F3D6609092A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak.Engine", "..\BeeCreak.Engine\BeeCreak.Engine.csproj", "{3B78430A-B704-452B-83DF-D23A02EC0D9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +15,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E99AD18F-940E-4208-935E-77615D4BDDDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E99AD18F-940E-4208-935E-77615D4BDDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E99AD18F-940E-4208-935E-77615D4BDDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E99AD18F-940E-4208-935E-77615D4BDDDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4018EFD0-916F-4A69-8B17-500EC4FCBA80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4018EFD0-916F-4A69-8B17-500EC4FCBA80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4018EFD0-916F-4A69-8B17-500EC4FCBA80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4018EFD0-916F-4A69-8B17-500EC4FCBA80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A63C56-A833-432C-AFFA-5F3D6609092A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A63C56-A833-432C-AFFA-5F3D6609092A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A63C56-A833-432C-AFFA-5F3D6609092A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A63C56-A833-432C-AFFA-5F3D6609092A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B78430A-B704-452B-83DF-D23A02EC0D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B78430A-B704-452B-83DF-D23A02EC0D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B78430A-B704-452B-83DF-D23A02EC0D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B78430A-B704-452B-83DF-D23A02EC0D9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {2E23064C-C00F-41E3-9F12-65AB8CB81652}
+		SolutionGuid = {7A0DF2EA-6023-4663-8445-5F29A527BB15}
 	EndGlobalSection
 EndGlobal
