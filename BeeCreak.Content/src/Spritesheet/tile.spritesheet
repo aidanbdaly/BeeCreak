@@ -1,5 +1,5 @@
 {
-  "ImageName": "tiles",
+  "ImageName": "../BeeCreak.Content/src/Image/tiles.png",
   "Frames": {
     "GrassOnWater_Right": { "X": 0, "Y": 0, "Width": 32, "Height": 32 },
     "GrassOnWater_Top": { "X": 32, "Y": 0, "Width": 32, "Height": 32 },

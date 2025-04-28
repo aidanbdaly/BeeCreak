@@ -64,3 +64,5 @@
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Content.Extensions/obj/Debug/net6.0/refint/BeeCreak.Content.Extensions.dll
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Content.Extensions/obj/Debug/net6.0/BeeCreak.Content.Extensions.pdb
 /Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Content.Extensions/obj/Debug/net6.0/ref/BeeCreak.Content.Extensions.dll
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Content.Extensions/bin/Debug/net6.0/runtimes/osx/native/libfmod.dylib
+/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Content.Extensions/bin/Debug/net6.0/runtimes/osx/native/libfmodL.dylib

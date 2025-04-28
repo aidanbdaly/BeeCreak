@@ -24,7 +24,15 @@ public class SaveMounter
     {
         SaveMounting?.Invoke(sender, e);
 
-        gameContext.Instance = saveManager.GetSave(gameContext.SaveId);
+        try
+        {
+            gameContext.Instance = saveManager.GetSave(gameContext.SaveId);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to mount save: {ex.Message}");
+            return;
+        }
 
         SaveMounted?.Invoke(sender, e);
     }

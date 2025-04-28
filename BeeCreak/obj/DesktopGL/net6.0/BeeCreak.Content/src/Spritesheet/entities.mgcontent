@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/../BeeCreak.Content/src/Spritesheet/entities.spritesheet</SourceFile>
+  <SourceTime>2025-04-24T18:36:12.3158527+01:00</SourceTime>
+  <DestFile>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/DesktopGL/Content/../BeeCreak.Content/src/Spritesheet/entities.xnb</DestFile>
+  <DestTime>2025-04-24T18:38:21.8965836+01:00</DestTime>
+  <Importer>SpriteSheetImporter</Importer>
+  <ImporterTime>2025-04-24T18:38:13.1977985+01:00</ImporterTime>
+  <Processor>SpritesheetProcessor</Processor>
+  <ProcessorTime>2025-04-24T18:38:13.1977985+01:00</ProcessorTime>
+  <Dependencies>
+    <string>../BeeCreak.Content/src/Image/entities.png</string>
+  </Dependencies>
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

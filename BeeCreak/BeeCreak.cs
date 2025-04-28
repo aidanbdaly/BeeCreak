@@ -1,6 +1,6 @@
-﻿using System;
-using BeeCreak.Shared.Services;
+﻿using BeeCreak.Shared.Services;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak;
 
@@ -8,11 +8,11 @@ public class BeeCreak : Game
 {
     private readonly GraphicsDeviceManager graphicsDeviceManager;
 
-    private readonly SceneManager sceneManager;
+    private readonly LayerManager sceneManager;
 
     private readonly AppState appState;
 
-    public BeeCreak(WindowEventPublisher windowEventPublisher, SceneManager sceneManager, AppState appState)
+    public BeeCreak(WindowEventPublisher windowEventPublisher, LayerManager sceneManager, AppState appState)
     {
         this.sceneManager = sceneManager;
         this.appState = appState;
@@ -36,6 +36,8 @@ public class BeeCreak : Game
         graphicsDeviceManager.ToggleFullScreen();
         graphicsDeviceManager.ApplyChanges();
 
+        sceneManager.Initialize(new SpriteBatch(GraphicsDevice));
+
         appState.SwitchState(AppStateType.Intro);
 
         base.Initialize();
@@ -53,7 +55,7 @@ public class BeeCreak : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        sceneManager.RenderLayers();
+        sceneManager.Draw();
         
         base.Draw(gameTime);
     }

@@ -17,7 +17,7 @@ public class AppState
 
     public AppStateType State { get; set; }
 
-    public AppState() {}
+    public AppState() { }
 
     public void SwitchState(AppStateType newState)
     {
@@ -49,24 +49,11 @@ public class AppState
         switch (oldState)
         {
             case AppStateType.Game:
-                if (newState == AppStateType.Menu)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return newState == AppStateType.Menu;
 
             case AppStateType.Menu:
-                if (newState == AppStateType.Game)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return newState == AppStateType.Game;
+                
             case AppStateType.Intro:
                 if (newState == AppStateType.Menu)
                 {

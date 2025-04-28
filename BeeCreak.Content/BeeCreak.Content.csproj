@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<ItemGroup>
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+</ItemGroup>
+<PropertyGroup>
+    <RootNamespace>BeeCreak.Content</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+</PropertyGroup>
+</Project>

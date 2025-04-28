@@ -1,5 +1,5 @@
 {
-  "ImageName": "entities",
+  "ImageName": "../BeeCreak.Content/src/Image/entities.png",
   "Frames": {
     "player_facing_west": { "X": 0, "Y": 0, "Width": 32, "Height": 32 },
     "player_facing_north": { "X": 32, "Y": 0, "Width": 32, "Height": 32 },
