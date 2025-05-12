@@ -1,45 +1,46 @@
-using BeeCreak.Shared.Data.Models;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 
 namespace BeeCreak.Shared.Services;
 
-public static class AssetManager
+public class AssetManager
 {
-    private static readonly Dictionary<Type, Dictionary<string, object>> assets = new();
+    private readonly Dictionary<string, object> assets = new();
 
-    public static void LoadAll(ContentManager content)
+    public void Load<T>(ContentManager content, string source)
     {
-        Load<SpriteSheet>(content, "../../Content/src/Spritesheet");
-        Load<Animation>(content, "../../Content/src/Animations");
-        Load<Texture2D>(content, "../../Content/src/Images");
-        Load<Song>(content, "../../Content/src/Sounds");
-    }
-
-    private static void Load<T>(ContentManager content, string source)
-    {
-        var assetDictionary = new Dictionary<string, object>();
-
         foreach (var file in Directory.EnumerateFiles(source))
         {
-            var name = Path.GetFileNameWithoutExtension(file);
+            var name = Path.GetRelativePath(content.RootDirectory, Path.ChangeExtension(file, null))
+                    .Replace('\\', '/');
 
             try
             {
-                assetDictionary[name] = content.Load<T>(name);
+                Console.WriteLine(name);
+                var asset = content.Load<T>(name);
+                Console.WriteLine($"Loaded asset: {name}");
+                assets[name] = asset;
             }
-            catch (ContentLoadException error)
+            catch (ContentLoadException)
             {
+                Console.WriteLine($"Failed to load asset: {name}");
+                // Log or skip failed asset
                 continue;
             }
         }
-
-        assets[typeof(T)] = assetDictionary;
     }
 
-    public static T Get<T>(string name)
+    public T Get<T>(string name)
     {
-        return (T)assets[typeof(T)][name];
+        if (!assets.TryGetValue(name, out var asset))
+        {
+            throw new KeyNotFoundException($"Asset '{name}' not found.");
+        }
+
+        if (asset is T typedAsset)
+        {
+            return typedAsset;
+        }
+
+        throw new InvalidCastException($"Asset '{name}' is not of type {typeof(T).Name}.");
     }
 }

@@ -14,19 +14,19 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../BeeCreak.Content/src/Animation/test.animation
+#begin Content/Animation/test.animation
 /importer:AnimationImporter
 /processor:AnimationProcessor
-/build:../BeeCreak.Content/src/Animation/test.animation
+/build:Content/Animation/test.animation
 
-#begin ../BeeCreak.Content/src/Font/lookout.spritefont
+#begin Content/Font/lookout.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:../BeeCreak.Content/src/Font/lookout.spritefont
+/build:Content/Font/lookout.spritefont
 
-#begin ../BeeCreak.Content/src/Image/buttons.png
+#begin Content/Image/buttons.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -36,9 +36,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../BeeCreak.Content/src/Image/buttons.png
+/build:Content/Image/buttons.png
 
-#begin ../BeeCreak.Content/src/Image/entities.png
+#begin Content/Image/entities.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -48,9 +48,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../BeeCreak.Content/src/Image/entities.png
+/build:Content/Image/entities.png
 
-#begin ../BeeCreak.Content/src/Image/menu-background.png
+#begin Content/Image/menu-background.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -60,9 +60,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../BeeCreak.Content/src/Image/menu-background.png
+/build:Content/Image/menu-background.png
 
-#begin ../BeeCreak.Content/src/Image/tiles.png
+#begin Content/Image/tiles.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -72,20 +72,20 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../BeeCreak.Content/src/Image/tiles.png
+/build:Content/Image/tiles.png
 
-#begin ../BeeCreak.Content/src/Spritesheet/buttons.spritesheet
+#begin Content/Spritesheet/buttons.spritesheet
 /importer:SpriteSheetImporter
 /processor:SpritesheetProcessor
-/build:../BeeCreak.Content/src/Spritesheet/buttons.spritesheet
+/build:Content/Spritesheet/buttons.spritesheet
 
-#begin ../BeeCreak.Content/src/Spritesheet/entities.spritesheet
+#begin Content/Spritesheet/entities.spritesheet
 /importer:SpriteSheetImporter
 /processor:SpritesheetProcessor
-/build:../BeeCreak.Content/src/Spritesheet/entities.spritesheet
+/build:Content/Spritesheet/entities.spritesheet
 
-#begin ../BeeCreak.Content/src/Spritesheet/tile.spritesheet
+#begin Content/Spritesheet/tile.spritesheet
 /importer:SpriteSheetImporter
 /processor:SpritesheetProcessor
-/build:../BeeCreak.Content/src/Spritesheet/tile.spritesheet
+/build:Content/Spritesheet/tile.spritesheet
 

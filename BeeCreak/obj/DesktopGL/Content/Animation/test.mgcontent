@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Animation/test.animation</SourceFile>
+  <SourceTime>2025-05-01T20:20:55.1650284+01:00</SourceTime>
+  <DestFile>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/DesktopGL/Content/Animation/test.xnb</DestFile>
+  <DestTime>2025-05-01T20:24:00.4634689+01:00</DestTime>
+  <Importer>AnimationImporter</Importer>
+  <ImporterTime>2025-05-01T19:49:18.5909805+01:00</ImporterTime>
+  <Processor>AnimationProcessor</Processor>
+  <ProcessorTime>2025-05-01T19:49:18.5909805+01:00</ProcessorTime>
+  <Dependencies>
+    <string>Content/Image/tiles.png</string>
+  </Dependencies>
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

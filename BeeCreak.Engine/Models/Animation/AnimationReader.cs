@@ -2,6 +2,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+namespace BeeCreak.Engine.Models;
+
 public class AnimationReader : ContentTypeReader<Animation>
 {
     protected override Animation Read(ContentReader input, Animation existingInstance)

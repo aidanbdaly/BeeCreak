@@ -7,14 +7,15 @@ internal class SpriteSheetWriter : ContentTypeWriter<SpriteSheetContent>
     protected override void Write(ContentWriter output, SpriteSheetContent value)
     {
         output.WriteObject(value.Image);
-
         output.Write(value.Frames.Count);
+
         foreach (var frame in value.Frames)
         {
-            output.Write(frame.X);
-            output.Write(frame.Y);
-            output.Write(frame.Width);
-            output.Write(frame.Height);
+            output.Write(frame.Key);
+            output.Write(frame.Value.X);
+            output.Write(frame.Value.Y);
+            output.Write(frame.Value.Width);
+            output.Write(frame.Value.Height);
         }
     }
 

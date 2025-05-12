@@ -1,7 +1,0 @@
-{
-  "ImageName": "../BeeCreak.Content/src/Image/buttons.png",
-  "Frames": {
-    "default_default": { "X": 0, "Y": 0, "Width": 32, "Height": 32 },
-    "default_hovered": { "X": 32, "Y": 0, "Width": 32, "Height": 32 }
-  }
-}
