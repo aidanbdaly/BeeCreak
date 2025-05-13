@@ -28,7 +28,7 @@ public class ButtonComponent : IComponent, IUpdateable
 
     public void LoadContent(AssetManager assetManager)
     {
-        SpriteSheet = assetManager.Get<SpriteSheet>("button");
+        SpriteSheet = assetManager.Get<SpriteSheet>("Spritesheet/buttons");
 
         if (SpriteSheet != null)
         {

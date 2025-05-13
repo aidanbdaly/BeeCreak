@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Font/lookout.spritefont</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/buttons.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/entities.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/menu-background.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/tiles.png</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Spritesheet/buttons.spritesheet</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Spritesheet/entities.spritesheet</File>
+    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Spritesheet/tile.spritesheet</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

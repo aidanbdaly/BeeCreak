@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content.Pipeline;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace BeeCreak.Shared.Data.Models;
 
-internal class AnimationDTO
+namespace BeeCreak.Content.Extensions;
+
+public class AnimationDTO
 {
     public string ImageName { get; set; }
     

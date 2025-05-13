@@ -4,10 +4,6 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Spritesheet/buttons.spritesheet</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Spritesheet/entities.spritesheet</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Spritesheet/tile.spritesheet</File>
-    <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Animation/test.animation</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Font/lookout.spritefont</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/buttons.png</File>
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/entities.png</File>
@@ -15,6 +11,8 @@
     <File>/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/tiles.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

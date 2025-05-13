@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class MenuScene : IScene
 {
-    private readonly List<IComponent> components = new();
+    private readonly List<IComponent> components = [];
 
     public MenuScene()
     {
-        components.Add(new FullscreenComponent("Textures/Backgrounds/MenuBackground"));
+        components.Add(new FullscreenComponent("Image/menu-background"));
         components.Add(new MenuOptionsComponent());
     }
 

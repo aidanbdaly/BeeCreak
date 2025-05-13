@@ -1,8 +1,6 @@
-using BeeCreak.Shared.Data.Models;
-
 using Microsoft.Xna.Framework.Content.Pipeline;
 
-namespace BeeCreak.ContentPipeline;
+namespace BeeCreak.Content.Extensions;
 
 [ContentImporter(".animation", DisplayName = "Animation Importer", DefaultProcessor = "AnimationProcessor")]
-internal sealed class AnimationImporter : JsonImporter<AnimationDTO> {}
+public sealed class AnimationImporter : JsonImporter<AnimationDTO> {}

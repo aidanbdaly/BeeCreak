@@ -1,8 +1,10 @@
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
+namespace BeeCreak.Content.Extensions;
+
 [ContentTypeWriter]
-internal class SpriteSheetWriter : ContentTypeWriter<SpriteSheetContent>
+public class SpriteSheetWriter : ContentTypeWriter<SpriteSheetContent>
 {
     protected override void Write(ContentWriter output, SpriteSheetContent value)
     {

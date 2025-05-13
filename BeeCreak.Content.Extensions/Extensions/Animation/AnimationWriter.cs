@@ -1,8 +1,10 @@
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
+namespace BeeCreak.Content.Extensions;
+
 [ContentTypeWriter]
-internal class AnimationWriter : ContentTypeWriter<AnimationContent>
+public class AnimationWriter : ContentTypeWriter<AnimationContent>
 {
     protected override void Write(ContentWriter output, AnimationContent value)
     {

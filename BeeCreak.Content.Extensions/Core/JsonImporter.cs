@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Newtonsoft.Json;
 
-namespace BeeCreak.ContentPipeline;
+namespace BeeCreak.Content.Extensions;
 
 public class JsonImporter<T> : ContentImporter<T>
 {

@@ -10,14 +10,9 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:../BeeCreak.Content.Extensions/bin/Debug/net6.0/BeeCreak.Content.Extensions.dll
+/reference:../BeeCreak.Content.Extensions/bin/Debug/net8.0/BeeCreak.Content.Extensions.dll
 
 #---------------------------------- Content ---------------------------------#
-
-#begin Content/Animation/test.animation
-/importer:AnimationImporter
-/processor:AnimationProcessor
-/build:Content/Animation/test.animation
 
 #begin Content/Font/lookout.spritefont
 /importer:FontDescriptionImporter
@@ -76,16 +71,16 @@
 
 #begin Content/Spritesheet/buttons.spritesheet
 /importer:SpriteSheetImporter
-/processor:SpritesheetProcessor
+/processor:SpriteSheetProcessor
 /build:Content/Spritesheet/buttons.spritesheet
 
 #begin Content/Spritesheet/entities.spritesheet
 /importer:SpriteSheetImporter
-/processor:SpritesheetProcessor
+/processor:SpriteSheetProcessor
 /build:Content/Spritesheet/entities.spritesheet
 
-#begin Content/Spritesheet/tile.spritesheet
+#begin Content/Spritesheet/tiles.spritesheet
 /importer:SpriteSheetImporter
-/processor:SpritesheetProcessor
+/processor:SpriteSheetProcessor
 /build:Content/Spritesheet/tile.spritesheet
 

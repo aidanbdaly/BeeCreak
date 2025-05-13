@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-internal class SpriteSheetDTO
+
+namespace BeeCreak.Content.Extensions;
+
+public class SpriteSheetDTO
 {
     public string ImageName { get; set; }
     

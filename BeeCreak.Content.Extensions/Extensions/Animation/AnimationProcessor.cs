@@ -1,14 +1,10 @@
-using System.Linq;
-using BeeCreak.Shared.Data.Models;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace BeeCreak.ContentPipeline;
+namespace BeeCreak.Content.Extensions;
 
 [ContentProcessor(DisplayName = "Animation Processor")]
-internal sealed class AnimationProcessor : ContentProcessor<AnimationDTO, AnimationContent>
+public sealed class AnimationProcessor : ContentProcessor<AnimationDTO, AnimationContent>
 {
     public override AnimationContent Process(AnimationDTO input, ContentProcessorContext context)
     {

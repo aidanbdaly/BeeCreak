@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Content.Pipeline;
 
-namespace BeeCreak.ContentPipeline;
+namespace BeeCreak.Content.Extensions;
 
-[ContentImporter(".spritesheet", DisplayName = "Spritesheet Importer", DefaultProcessor = "SpritesheetProcessor")]
-internal sealed class SpriteSheetImporter : JsonImporter<SpriteSheetDTO> { }
+[ContentImporter(".spritesheet", DisplayName = "SpriteSheet Importer", DefaultProcessor = "SpriteSheetProcessor")]
+public sealed class SpriteSheetImporter : JsonImporter<SpriteSheetDTO> { }

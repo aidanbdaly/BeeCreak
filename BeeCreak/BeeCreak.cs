@@ -41,11 +41,8 @@ public class BeeCreak : Game
 
         graphicsDeviceManager.SynchronizeWithVerticalRetrace = false;
 
-        graphicsDeviceManager.ToggleFullScreen();
         graphicsDeviceManager.ApplyChanges();
 
-        var v = SDL2.SDL.SDL_GetVersion(out var ver);
-        Console.WriteLine($"SDL version in use: {ver.major}.{ver.minor}.{ver.patch}");
 
         Window.AllowUserResizing = true;
         Window.ClientSizeChanged += (object sender, EventArgs e) =>

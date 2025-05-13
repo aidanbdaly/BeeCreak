@@ -1,12 +1,10 @@
-using BeeCreak.Shared.Data.Models;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace BeeCreak.ContentPipeline;
+namespace BeeCreak.Content.Extensions;
 
-[ContentProcessor(DisplayName = "Spritesheet Processor")]
-internal sealed class SpritesheetProcessor : ContentProcessor<SpriteSheetDTO, SpriteSheetContent>
+[ContentProcessor(DisplayName = "SpriteSheet Processor")]
+public sealed class SpriteSheetProcessor : ContentProcessor<SpriteSheetDTO, SpriteSheetContent>
 {
     public override SpriteSheetContent Process(SpriteSheetDTO input, ContentProcessorContext context)
     {
