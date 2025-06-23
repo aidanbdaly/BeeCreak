@@ -1,0 +1,19 @@
+{
+  "ImageName": "Image/tiles.png",
+  "Frames": {
+    "GrassOnWater_Right": { "X": 0, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_Top": { "X": 32, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_Left": { "X": 64, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_Bottom": { "X": 96, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_BottomRightInner": { "X": 128, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_BottomLeftInner": { "X": 160, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_TopLeftInner": { "X": 192, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_TopRightInner": { "X": 224, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_CenterForeground": { "X": 256, "Y": 0, "Width": 32, "Height": 32 },
+    "Water_CenterForeground": { "X": 288, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_TopLeftOuter": { "X": 320, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_TopRightOuter": { "X": 352, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_BottomRightOuter": { "X": 384, "Y": 0, "Width": 32, "Height": 32 },
+    "GrassOnWater_BottomLeftOuter": { "X": 416, "Y": 0, "Width": 32, "Height": 32 }
+  }
+}

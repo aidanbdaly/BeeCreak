@@ -1,0 +1,21 @@
+{
+  "ActiveCell": "0",
+  "Cells": {
+    "0": {
+      "Entities": [
+        {
+          "PersistentId": "Player",
+          "Position": "4800, 4800",
+          "Velocity": 60.0,
+          "Sprite": "player_facing_west",
+          "HitBox": {
+            "Width": 32,
+            "Height": 32
+          },
+          "Controlled": true
+        }
+      ],
+      "Tiles": []
+    }
+  }
+}

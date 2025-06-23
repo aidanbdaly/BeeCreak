@@ -1,33 +1,25 @@
 ﻿using BeeCreak.Scene.Main;
 using Microsoft.Extensions.DependencyInjection;
-using BeeCreak.Shared.Services.Static;
 using BeeCreak.Shared.Services.Dynamic;
-using BeeCreak.Shared.Services;
 
 var services = new ServiceCollection();
 
-// Services
-services.AddSingleton<BeeCreak.BeeCreak>();
-services.AddSingleton<ISound, Sound>();
-
-// Global Services
-services.AddSingleton<AssetManager>();
-
-services.AddSingleton(provider => services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>());
-
-
-// Game Scene Services
-services.AddSingleton<Camera>();
-services.AddSingleton<Player>();
-services.AddScoped<DungeonGenerator>();
-
-// Menu Scene Services
+services.AddSingleton<Game>();
 services.AddScoped<MenuScene>();
+services.AddScoped<GameScene>();
+services.AddScoped<MainMenuComponent>();
+services.AddScoped<LoadMenuComponent>();
+services.AddScoped<EntityLayerComponent>();
+services.AddScoped<CellManager>();
+services.AddScoped<TileMapComponent>();
+services.AddScoped<TileVariator>();
+services.AddScoped<PlayerBehavior>();
+services.AddScoped<EntityManager>();
+services.AddScoped<TileManager>();
+services.AddScoped<Camera>();
+services.AddScoped<Player>();
 
 
+var game = new BeeCreak.BeeCreak(services);
 
-using var serviceProvider = services.BuildServiceProvider();
-
-using var scope = serviceProvider.CreateScope();
-
-scope.ServiceProvider.GetRequiredService<BeeCreak.BeeCreak>().Run();
+game.Run();

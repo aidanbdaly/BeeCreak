@@ -1,6 +1,0 @@
-Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Font/lookout.spritefont","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/DesktopGL/Content/Font/lookout.xnb","FontDescriptionProcessor","SpriteFontContent",2010,13343,0.158568
-"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/buttons.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/DesktopGL/Content/Image/buttons.xnb","TextureProcessor","Texture2DContent",1118,18517,0.014443
-"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/entities.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/DesktopGL/Content/Image/entities.xnb","TextureProcessor","Texture2DContent",3774,16469,0.001732
-"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/menu-background.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/DesktopGL/Content/Image/menu-background.xnb","TextureProcessor","Texture2DContent",355961,640085,0.019426
-"/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/Content/Image/tiles.png","/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/bin/DesktopGL/Content/Image/tiles.xnb","TextureProcessor","Texture2DContent",6370,57429,0.003009

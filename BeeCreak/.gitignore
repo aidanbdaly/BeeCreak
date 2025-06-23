@@ -1,0 +1,42 @@
+# MonoGame build output
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.csproj.user
+
+# Visual Studio files
+.vs/
+*.dbmdl
+*.pdb
+*.cache
+*.log
+
+# MonoDevelop files
+*.pidb
+*.userprefs
+
+# Mac OS files
+.DS_Store
+
+# Rider files
+.idea/
+*.sln.iml
+
+# MonoGame content pipeline output
+Content/bin/
+Content/obj/
+
+# NuGet packages
+*.nupkg
+packages/
+*.snupkg
+
+# Other
+*.swp
+*.bak
+*.tmp
+*.orig
+*.rej
+*.sln.docstates

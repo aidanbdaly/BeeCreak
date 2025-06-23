@@ -24,11 +24,11 @@ public class AnimationWriter : ContentTypeWriter<AnimationContent>
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.Engine.Models.AnimationReader, BeeCreak.Engine"; 
+        return "BeeCreak.src.Models.AnimationReader, BeeCreak"; 
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.Engine.Models.Animation, BeeCreak.Engine";
+        return "BeeCreak.src.Models.Animation, BeeCreak";
     }
 }

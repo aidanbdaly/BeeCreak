@@ -23,11 +23,11 @@ public class SpriteSheetWriter : ContentTypeWriter<SpriteSheetContent>
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.Engine.Models.SpriteSheetReader, BeeCreak.Engine";
+        return "BeeCreak.src.Models.SpriteSheetReader, BeeCreak";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.Engine.Models.SpriteSheet, BeeCreak.Engine";
+        return "BeeCreak.src.Models.SpriteSheet, BeeCreak";
     }
 }

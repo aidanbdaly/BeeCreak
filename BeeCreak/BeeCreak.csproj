@@ -11,7 +11,6 @@
     <TieredCompilation>false</TieredCompilation>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -23,10 +22,10 @@
     <None Remove="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\\BeeCreak.Content.Extensions\\BeeCreak.Content.Extensions.csproj" ReferenceOutputAssembly="false" OutputItemType="MonoGameContentReference" />
+    <MonoGameContentReference Include="src/Content/Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../BeeCreak.Engine/BeeCreak.Engine.csproj" />
+    <ProjectReference Include="..\\BeeCreak.Content.Extensions\\BeeCreak.Content.Extensions.csproj" ReferenceOutputAssembly="false" OutputItemType="MonoGameContentReference" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

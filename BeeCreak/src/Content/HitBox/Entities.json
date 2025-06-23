@@ -1,0 +1,28 @@
+{
+  "HitBoxes": {
+    "player_facing_west": {
+      "x": 0,
+      "y": 0,
+      "width": 16,
+      "height": 16
+    },
+    "player_facing_east": {
+      "x": 0,
+      "y": 0,
+      "width": 16,
+      "height": 16
+    },
+    "player_facing_north": {
+      "x": 0,
+      "y": 0,
+      "width": 16,
+      "height": 16
+    },
+    "player_facing_south": {
+      "x": 0,
+      "y": 0,
+      "width": 16,
+      "height": 16
+    }
+  }
+}

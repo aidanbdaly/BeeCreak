@@ -361,19 +361,6 @@
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
         }
-      },
-      "BeeCreak.Engine/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "MonoGame.Framework.DesktopGL": "3.8.2.1105"
-        },
-        "compile": {
-          "bin/placeholder/BeeCreak.Engine.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/BeeCreak.Engine.dll": {}
-        }
       }
     }
   },
@@ -950,16 +937,10 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "BeeCreak.Engine/1.0.0": {
-      "type": "project",
-      "path": "../BeeCreak.Engine/BeeCreak.Engine.csproj",
-      "msbuildProject": "../BeeCreak.Engine/BeeCreak.Engine.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "BeeCreak.Engine >= 1.0.0",
       "Microsoft.Extensions.Configuration >= 9.0.1",
       "Microsoft.Extensions.Configuration.Json >= 9.0.1",
       "Microsoft.Extensions.DependencyInjection >= 7.0.0",
@@ -992,11 +973,7 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {
-            "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Engine/BeeCreak.Engine.csproj": {
-              "projectPath": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Engine/BeeCreak.Engine.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
