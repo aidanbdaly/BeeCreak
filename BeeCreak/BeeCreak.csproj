@@ -11,6 +11,7 @@
     <TieredCompilation>false</TieredCompilation>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>BeeCreak</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -22,11 +23,15 @@
     <None Remove="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="src/Content/Content.mgcb" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\\BeeCreak.Content.Extensions\\BeeCreak.Content.Extensions.csproj" ReferenceOutputAssembly="false" OutputItemType="MonoGameContentReference" />
+    <ProjectReference Include="..\\BeeCreak.Content\\BeeCreak.Content.csproj" />
   </ItemGroup>
+  <Target Name="CopyContentFiles" AfterTargets="Build">
+    <ItemGroup>
+      <ContentFiles Include="../BeeCreak.Content/bin/DesktopGL/Content/**/*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ContentFiles)" DestinationFolder="$(OutputPath)Content/%(RecursiveDir)" />
+  </Target>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />

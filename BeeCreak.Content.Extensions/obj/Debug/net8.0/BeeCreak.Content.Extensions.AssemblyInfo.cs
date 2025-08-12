@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BeeCreak.Content.Extensions")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e65b050cd43993067769cfd3ca4b9a52fa635daf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a7cb7dc76e3a97703b91399468d827e65ed5b96")]
 [assembly: System.Reflection.AssemblyProductAttribute("BeeCreak.Content.Extensions")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BeeCreak.Content.Extensions")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

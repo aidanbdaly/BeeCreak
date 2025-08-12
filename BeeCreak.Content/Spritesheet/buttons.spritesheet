@@ -1,0 +1,8 @@
+{
+  "ImageName": "Image/buttons.png",
+  "Resolution": 64,
+  "Frames": {
+    "Normal": { "X": 64, "Y": 0, "Width": 64, "Height": 36 },
+    "Hovered": { "X": 0, "Y": 0, "Width": 64, "Height": 36 }
+  }
+}

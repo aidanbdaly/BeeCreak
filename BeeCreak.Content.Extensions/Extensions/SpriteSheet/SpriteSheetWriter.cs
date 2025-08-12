@@ -9,6 +9,7 @@ public class SpriteSheetWriter : ContentTypeWriter<SpriteSheetContent>
     protected override void Write(ContentWriter output, SpriteSheetContent value)
     {
         output.WriteObject(value.Image);
+        output.Write(value.Resolution);
         output.Write(value.Frames.Count);
 
         foreach (var frame in value.Frames)

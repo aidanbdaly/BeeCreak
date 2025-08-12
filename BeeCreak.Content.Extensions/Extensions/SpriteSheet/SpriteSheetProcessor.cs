@@ -11,6 +11,7 @@ public sealed class SpriteSheetProcessor : ContentProcessor<SpriteSheetDTO, Spri
         var spriteSheet = new SpriteSheetContent
         {
             Image = context.BuildAndLoadAsset<Texture2DContent, Texture2DContent>(new ExternalReference<Texture2DContent>(input.ImageName), "TextureProcessor"),
+            Resolution = input.Resolution,
             Frames = input.Frames
         };
 

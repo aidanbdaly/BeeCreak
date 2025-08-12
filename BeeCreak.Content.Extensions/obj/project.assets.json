@@ -1560,19 +1560,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/aidandaly/.nuget/packages/": {}
+    "/Users/aidan/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Content.Extensions/BeeCreak.Content.Extensions.csproj",
+      "projectUniqueName": "/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content.Extensions/BeeCreak.Content.Extensions.csproj",
       "projectName": "BeeCreak.Content.Extensions",
-      "projectPath": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Content.Extensions/BeeCreak.Content.Extensions.csproj",
-      "packagesPath": "/Users/aidandaly/.nuget/packages/",
-      "outputPath": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak.Content.Extensions/obj/",
+      "projectPath": "/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content.Extensions/BeeCreak.Content.Extensions.csproj",
+      "packagesPath": "/Users/aidan/.nuget/packages/",
+      "outputPath": "/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content.Extensions/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/aidandaly/.nuget/NuGet/NuGet.Config"
+        "/Users/aidan/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -1596,7 +1596,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -1631,11 +1631,11 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
+            "version": "[8.0.17, 8.0.17]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
+            "version": "[8.0.17, 8.0.17]"
           }
         ],
         "frameworkReferences": {
@@ -1643,7 +1643,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

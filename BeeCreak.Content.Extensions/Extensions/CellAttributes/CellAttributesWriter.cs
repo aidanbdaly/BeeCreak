@@ -12,14 +12,6 @@ public class CellAttributesWriter : ContentTypeWriter<CellAttributesContent>
         output.Write(value.Tint);
         output.Write(value.LengthOfDay);
         output.Write(value.LengthOfNight);
-
-        output.Write(value.TileMap.Width);
-        output.Write(value.TileMap.Height);
-
-        foreach (var tile in value.TileMap.Tiles)
-        {
-            output.Write(tile);
-        }
     }
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Spritesheet/tile.spritesheet</SourceFile>
+  <SourceTime>2025-07-24T18:09:29.8844489+01:00</SourceTime>
+  <DestFile>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/bin/DesktopGL/Content/Spritesheet/tile.xnb</DestFile>
+  <DestTime>2025-07-25T19:42:54.8158023+01:00</DestTime>
+  <Importer>SpriteSheetImporter</Importer>
+  <ImporterTime>2025-07-25T19:42:54.3857526+01:00</ImporterTime>
+  <Processor>SpriteSheetProcessor</Processor>
+  <ProcessorTime>2025-07-25T19:42:54.3857526+01:00</ProcessorTime>
+  <Dependencies>
+    <string>Image/tiles.png</string>
+  </Dependencies>
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

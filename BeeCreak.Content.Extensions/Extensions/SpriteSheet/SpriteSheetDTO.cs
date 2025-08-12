@@ -7,5 +7,7 @@ public class SpriteSheetDTO
 {
     public string ImageName { get; set; }
     
+    public int Resolution { get; set; }
+    
     public Dictionary<string, Rectangle> Frames { get; set; } = new();
 }

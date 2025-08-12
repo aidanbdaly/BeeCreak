@@ -15,4 +15,8 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  
+  <Target Name="CopyToBeeCreakBin" AfterTargets="Build">
+    <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="../BeeCreak/bin/Debug/net8.0/" />
+  </Target>
 </Project>

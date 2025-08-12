@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Audio/button-hover.ogg</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Audio/button-press.ogg</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Font/lookout.spritefont</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Image/buttons.png</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Image/entities.png</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Image/menu-background.png</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Image/tiles.png</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Image/cursor.png</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Spritesheet/buttons.spritesheet</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Spritesheet/entities.spritesheet</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Spritesheet/tile.spritesheet</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Animation/test.animation</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/default.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/ancient_ruins.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/bamboo_grove.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/cave_entrance.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/cliff_edge.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/crystal_cavern.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/desert_oasis.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/flower_meadow.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/forest_clearing.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/frozen_lake.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/hidden_valley.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/mountain_peak.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/ocean_shore.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/swamp_marsh.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/village_center.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Attributes/volcanic_crater.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/default.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/forest_clearing.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/mountain_peak.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/ocean_shore.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/desert_oasis.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/cave_entrance.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/village_center.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/ancient_ruins.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/flower_meadow.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/crystal_cavern.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/volcanic_crater.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/frozen_lake.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/bamboo_grove.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/swamp_marsh.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/cliff_edge.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Cell/Blueprints/hidden_valley.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Entity/player.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Tile/Tile.json</File>
+    <File>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/BeeCreak.json</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

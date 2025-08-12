@@ -361,6 +361,20 @@
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
         }
+      },
+      "BeeCreak.Content/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "MonoGame.Content.Builder.Task": "3.8.2.1105",
+          "MonoGame.Framework.DesktopGL": "3.8.2.1105"
+        },
+        "compile": {
+          "bin/placeholder/BeeCreak.Content.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BeeCreak.Content.dll": {}
+        }
       }
     }
   },
@@ -937,10 +951,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "BeeCreak.Content/1.0.0": {
+      "type": "project",
+      "path": "../BeeCreak.Content/BeeCreak.Content.csproj",
+      "msbuildProject": "../BeeCreak.Content/BeeCreak.Content.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "BeeCreak.Content >= 1.0.0",
       "Microsoft.Extensions.Configuration >= 9.0.1",
       "Microsoft.Extensions.Configuration.Json >= 9.0.1",
       "Microsoft.Extensions.DependencyInjection >= 7.0.0",
@@ -950,19 +970,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/aidandaly/.nuget/packages/": {}
+    "/Users/aidan/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/BeeCreak.csproj",
+      "projectUniqueName": "/Users/aidan/Repos/Github/BeeCreak/BeeCreak/BeeCreak.csproj",
       "projectName": "BeeCreak",
-      "projectPath": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/BeeCreak.csproj",
-      "packagesPath": "/Users/aidandaly/.nuget/packages/",
-      "outputPath": "/Users/aidandaly/Projects/Coding/BeeCreak/BeeCreak/obj/",
+      "projectPath": "/Users/aidan/Repos/Github/BeeCreak/BeeCreak/BeeCreak.csproj",
+      "packagesPath": "/Users/aidan/.nuget/packages/",
+      "outputPath": "/Users/aidan/Repos/Github/BeeCreak/BeeCreak/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/aidandaly/.nuget/NuGet/NuGet.Config"
+        "/Users/aidan/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -973,7 +993,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/BeeCreak.Content.csproj": {
+              "projectPath": "/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/BeeCreak.Content.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -986,7 +1010,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -1031,15 +1055,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
+            "version": "[8.0.17, 8.0.17]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[8.0.11, 8.0.11]"
+            "version": "[8.0.17, 8.0.17]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
+            "version": "[8.0.17, 8.0.17]"
           }
         ],
         "frameworkReferences": {
@@ -1047,7 +1071,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

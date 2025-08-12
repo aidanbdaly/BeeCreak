@@ -13,43 +13,28 @@ public class TileCatalogueWriter : ContentTypeWriter<TileCatalogueContent>
     {
         output.Write(catalogue.Count);
 
-        foreach (KeyValuePair<string, TileTypeContent> pair in catalogue)
+        foreach (KeyValuePair<string, TileAttributesContent> pair in catalogue)
         {
             string typeKey = pair.Key;
-            TileTypeContent tt = pair.Value;
+            TileAttributesContent attributes = pair.Value;
 
             output.Write(typeKey);
 
-            WriteVariant(output, tt.Default);
+            // Write hitBox
+            bool hasHitBox = attributes.HitBox.HasValue;
+            output.Write(hasHitBox);
 
-            output.Write(tt.Variants.Count);
-            foreach (KeyValuePair<string, TileVariantContent> vPair in tt.Variants)
+            if (hasHitBox)
             {
-                output.Write(vPair.Key);          // variant name
-                WriteVariant(output, vPair.Value);
+                Rectangle r = attributes.HitBox.Value;
+                output.Write(r.X);
+                output.Write(r.Y);
+                output.Write(r.Width);
+                output.Write(r.Height);
             }
-        }
-    }
 
-    private static void WriteVariant(ContentWriter w, TileVariantContent variant)
-    {
-        if (variant is null)
-        {
-            w.Write(false); 
-            return;
-        }
-
-        bool hasHitBox = variant.HitBox.HasValue;
-        
-        w.Write(hasHitBox);
-
-        if (hasHitBox)
-        {
-            Rectangle r = variant.HitBox.Value;
-            w.Write(r.X);
-            w.Write(r.Y);
-            w.Write(r.Width);
-            w.Write(r.Height);
+            // Write isVariable
+            output.Write(attributes.IsVariable);
         }
     }
 

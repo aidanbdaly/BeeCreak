@@ -5,32 +5,23 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 namespace BeeCreak.Content.Extensions;
 
 [ContentProcessor(DisplayName = "Tile Catalogue Processor")]
-
 public sealed class TileCatalogueProcessor : ContentProcessor<TileCatalogueDto, TileCatalogueContent>
 {
     public override TileCatalogueContent Process(TileCatalogueDto input, ContentProcessorContext context)
     {
-        var tileCatalogueContent = new Dictionary<string, TileTypeContent>();
+        var tileCatalogueContent = new TileCatalogueContent();
 
         foreach (var tileType in input)
         {
-            var tileTypeContent = new TileTypeContent
+            var tileAttributesContent = new TileAttributesContent
             {
-                Default = new TileVariantContent
-                {
-                    HitBox = tileType.Value.Default.HitBox
-                },
-                Variants = tileType.Value.Variants.ToDictionary(
-                    variant => variant.Key,
-                    variant => new TileVariantContent
-                    {
-                        HitBox = variant.Value.HitBox
-                    })
+                HitBox = tileType.Value.HitBox,
+                IsVariable = tileType.Value.IsVariable
             };
 
-            tileCatalogueContent[tileType.Key] = tileTypeContent;
+            tileCatalogueContent[tileType.Key] = tileAttributesContent;
         }
 
-        return tileCatalogueContent as TileCatalogueContent;
+        return tileCatalogueContent;
     }
 }

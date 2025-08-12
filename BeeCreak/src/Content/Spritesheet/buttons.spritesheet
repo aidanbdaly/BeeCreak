@@ -1,7 +1,0 @@
-{
-  "ImageName": "Image/buttons.png",
-  "Frames": {
-    "normal": { "X": 64, "Y": 0, "Width": 64, "Height": 36 },
-    "hovered": { "X": 0, "Y": 0, "Width": 64, "Height": 36 }
-  }
-}
