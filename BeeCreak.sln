@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak", "BeeCreak\BeeCre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak.Content.Extensions", "BeeCreak.Content.Extensions\BeeCreak.Content.Extensions.csproj", "{1F38A680-693C-469D-95BE-3BF9585380C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak.Content", "BeeCreak.Content\BeeCreak.Content.csproj", "{2B4C8F12-3D7E-4A9B-B8F5-6E2A1C9D4E8F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{1F38A680-693C-469D-95BE-3BF9585380C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F38A680-693C-469D-95BE-3BF9585380C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F38A680-693C-469D-95BE-3BF9585380C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B4C8F12-3D7E-4A9B-B8F5-6E2A1C9D4E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B4C8F12-3D7E-4A9B-B8F5-6E2A1C9D4E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B4C8F12-3D7E-4A9B-B8F5-6E2A1C9D4E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B4C8F12-3D7E-4A9B-B8F5-6E2A1C9D4E8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

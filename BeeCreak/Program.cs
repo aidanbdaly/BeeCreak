@@ -1,6 +1,6 @@
-﻿using BeeCreak.Shared.Services.Dynamic;
+﻿using BeeCreak.Engine.Core;
+using BeeCreak.Intro;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak
 {
@@ -13,42 +13,13 @@ namespace BeeCreak
                 var services = new ServiceCollection();
 
                 services.AddSingleton<BeeCreak>();
-                services.AddSingleton<GameManager>();
-                services.AddSingleton<GameFactory>();
-                services.AddSingleton<UserDataManager>();
-                services.AddSingleton<SceneManager>();
-                services.AddSingleton<AppContext>();
+                
+                var serviceProvider = services.BuildServiceProvider();
 
-                services.AddScoped<CellFactory>();
-                services.AddScoped<TileFactory>();
-                services.AddScoped<EntityFactory>();
-
-                // Register scenes
-                services.AddScoped<MenuScene>();
-                services.AddScoped<GameScene>();
-                services.AddScoped<IntroScene>();
-
-                // Register components
-                services.AddScoped<TextComponent>();
-                services.AddScoped<MainMenu>();
-                services.AddScoped<LoadMenuComponent>();
-                services.AddScoped<TileMapComponent>();
-                services.AddScoped<EntityComponentCollection>();
-
-                // Register managers and services
-                services.AddScoped<CellManager>();
-                services.AddScoped<EntityManager>();
-                services.AddScoped<TileManager>();
-
-                // Register other components
-                services.AddScoped<TileVariator>();
-                services.AddScoped<PlayerBehavior>();
-                services.AddScoped<Camera>();
-                services.AddScoped<Player>();
-
-                using var sceneManager = new BeeCreak(services);
-
-                sceneManager.Run();
+                using (var game = serviceProvider.GetRequiredService<BeeCreak>())
+                {
+                    game.Run();
+                }
             }
             catch (Exception ex)
             {
