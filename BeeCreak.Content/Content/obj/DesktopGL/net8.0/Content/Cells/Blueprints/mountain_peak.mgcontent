@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Content/Cells/Blueprints/mountain_peak.json</SourceFile>
+  <SourceTime>2025-10-06T17:34:10.4105582+01:00</SourceTime>
+  <DestFile>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Content/bin/DesktopGL/Content/Cells/Blueprints/mountain_peak.xnb</DestFile>
+  <DestTime>2025-10-14T12:11:55.1228703+01:00</DestTime>
+  <Importer>CellBlueprintImporter</Importer>
+  <ImporterTime>2025-10-14T12:01:54.6957594+01:00</ImporterTime>
+  <Processor>CellBlueprintProcessor</Processor>
+  <ProcessorTime>2025-10-14T12:01:54.6957594+01:00</ProcessorTime>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

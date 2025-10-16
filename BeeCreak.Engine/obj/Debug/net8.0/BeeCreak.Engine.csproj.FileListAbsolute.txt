@@ -1,0 +1,13 @@
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/bin/Debug/net8.0/BeeCreak.Engine.deps.json
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/bin/Debug/net8.0/BeeCreak.Engine.dll
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/bin/Debug/net8.0/BeeCreak.Engine.pdb
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.csproj.AssemblyReference.cache
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.GeneratedMSBuildEditorConfig.editorconfig
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.AssemblyInfoInputs.cache
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.AssemblyInfo.cs
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.csproj.CoreCompileInputs.cache
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.sourcelink.json
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.dll
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/refint/BeeCreak.Engine.dll
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.pdb
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/obj/Debug/net8.0/ref/BeeCreak.Engine.dll

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Content/UI/buttons.spritesheet</SourceFile>
+  <SourceTime>2025-10-06T17:33:20.6310931+01:00</SourceTime>
+  <DestFile>/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/Content/bin/DesktopGL/Content/UI/buttons.xnb</DestFile>
+  <DestTime>2025-10-15T18:05:24.1304113+01:00</DestTime>
+  <Importer>SpriteSheetImporter</Importer>
+  <ImporterTime>2025-10-14T12:01:54.6957594+01:00</ImporterTime>
+  <Processor>SpriteSheetProcessor</Processor>
+  <ProcessorTime>2025-10-14T12:01:54.6957594+01:00</ProcessorTime>
+  <Dependencies>
+    <string>UI/buttons.png</string>
+  </Dependencies>
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>
