@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZX4C51+Xvbo=",
+  "dgSpecHash": "2NF6LuyiK8Y=",
   "success": true,
   "projectFilePath": "/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Content/BeeCreak.Content.csproj",
   "expectedPackageFiles": [
@@ -10,8 +10,8 @@
     "/Users/aidan/.nuget/packages/nvorbis/0.10.4/nvorbis.0.10.4.nupkg.sha512",
     "/Users/aidan/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
     "/Users/aidan/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
-    "/Users/aidan/.nuget/packages/microsoft.netcore.app.ref/8.0.17/microsoft.netcore.app.ref.8.0.17.nupkg.sha512",
-    "/Users/aidan/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.17/microsoft.aspnetcore.app.ref.8.0.17.nupkg.sha512"
+    "/Users/aidan/.nuget/packages/microsoft.netcore.app.ref/8.0.21/microsoft.netcore.app.ref.8.0.21.nupkg.sha512",
+    "/Users/aidan/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512"
   ],
   "logs": []
 }

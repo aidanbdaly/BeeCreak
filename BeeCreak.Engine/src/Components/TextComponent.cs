@@ -8,17 +8,17 @@ namespace BeeCreak.Engine.Components
     {
         private readonly AssetHandle<SpriteFont> fontAsset;
 
+        private readonly string text;
+
         public TextComponent(string text, AssetHandle<SpriteFont> fontAsset)
         {
             this.fontAsset = fontAsset;
-            Text = text;
+            this.text = text;
         }
-
-        public string Text { get; set; }
 
         public override Rectangle GetBounds()
         {
-            var size = fontAsset.Asset.MeasureString(Text) * WorldTransform.Scale;
+            var size = fontAsset.Asset.MeasureString(text) * WorldTransform.Scale;
 
             return new Rectangle(
                 (int)WorldTransform.Position.X,
@@ -28,16 +28,20 @@ namespace BeeCreak.Engine.Components
             );
         }
 
-        public override void Dispose()
-        {
-            fontAsset.Dispose();
-        }
-
-        public override void Update(GameTime gameTime) { }
-
+        public override void Dispose() => fontAsset.Dispose();
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(fontAsset.Asset, Text, WorldTransform.Position, Color.White, WorldTransform.Rotation, Origin, WorldTransform.Scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(
+                fontAsset.Asset,
+                text,
+                WorldTransform.Position,
+                Color.White,
+                WorldTransform.Rotation,
+                Origin,
+                WorldTransform.Scale,
+                SpriteEffects.None,
+                0f);
         }
     }
 }

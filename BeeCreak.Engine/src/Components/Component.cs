@@ -5,18 +5,14 @@ namespace BeeCreak.Engine.Components
 {
     public abstract class Component : IComponent
     {
-        // Transform
         public Transform LocalTransform { get; set; } = new();
         public Transform WorldTransform { get; private set; } = new();
-
-        // Rendering properties
         public bool IsEnabled { get; set; } = true;
         public Color Color { get; set; } = Color.White;
         public Vector2 Origin { get; set; } = Vector2.Zero;
         public SpriteEffects Effects { get; set; } = SpriteEffects.None;
         public float LayerDepth { get; set; } = 0.0f;
 
-        // Transform management
         public void UpdateWorldTransform(Transform parentWorldTransform)
         {
             WorldTransform.Position = parentWorldTransform.Position + LocalTransform.Position;
@@ -30,11 +26,7 @@ namespace BeeCreak.Engine.Components
             if (rotation.HasValue) { LocalTransform.Rotation = rotation.Value; }
             if (scale.HasValue) { LocalTransform.Scale = scale.Value; }
         }
-
-        // Virtual lifecycle methods (can be overridden if needed)
         public virtual void Update(GameTime gameTime) { }
-
-        // Abstract methods (must be implemented)
         public abstract Rectangle GetBounds();
         public abstract void Draw(SpriteBatch spriteBatch);
         public abstract void Dispose();

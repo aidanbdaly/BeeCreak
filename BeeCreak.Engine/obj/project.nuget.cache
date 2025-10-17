@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "B4Vy7UPC/Wg=",
+  "dgSpecHash": "TsRDZgB+MT0=",
   "success": true,
   "projectFilePath": "/Users/aidan/Repos/Github/BeeCreak/BeeCreak.Engine/BeeCreak.Engine.csproj",
   "expectedPackageFiles": [
@@ -23,8 +23,8 @@
     "/Users/aidan/.nuget/packages/system.text.encodings.web/9.0.1/system.text.encodings.web.9.0.1.nupkg.sha512",
     "/Users/aidan/.nuget/packages/system.text.json/9.0.1/system.text.json.9.0.1.nupkg.sha512",
     "/Users/aidan/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
-    "/Users/aidan/.nuget/packages/microsoft.netcore.app.ref/8.0.17/microsoft.netcore.app.ref.8.0.17.nupkg.sha512",
-    "/Users/aidan/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.17/microsoft.aspnetcore.app.ref.8.0.17.nupkg.sha512"
+    "/Users/aidan/.nuget/packages/microsoft.netcore.app.ref/8.0.21/microsoft.netcore.app.ref.8.0.21.nupkg.sha512",
+    "/Users/aidan/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512"
   ],
   "logs": []
 }

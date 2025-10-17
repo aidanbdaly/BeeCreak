@@ -7,14 +7,10 @@ namespace BeeCreak.Engine.Components
     {
         private readonly AssetHandle<SpriteSheet> spriteSheetHandle;
 
-        public SpriteComponent(AssetHandle<SpriteSheet> spriteSheetHandle, string defaultSprite = null) : base(spriteSheetHandle.Asset.Image)
+        public SpriteComponent(AssetHandle<SpriteSheet> spriteSheetHandle, string defaultSprite) : base(spriteSheetHandle.Asset.Image)
         {
             this.spriteSheetHandle = spriteSheetHandle;
-            
-            if (defaultSprite != null)
-            {
-                SetSprite(defaultSprite);
-            }
+            SetSprite(defaultSprite);
         }
 
         public override Rectangle GetBounds()
@@ -41,7 +37,7 @@ namespace BeeCreak.Engine.Components
 
         public override void Dispose()
         {
-            spriteSheetHandle?.Dispose();
+            spriteSheetHandle.Dispose();
         }
     }
 }

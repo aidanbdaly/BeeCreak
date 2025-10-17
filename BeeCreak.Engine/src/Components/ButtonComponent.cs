@@ -1,8 +1,6 @@
-using BeeCreak.Engine.Assets;
 using Microsoft.Xna.Framework;
 using BeeCreak.Engine.Input;
-using BeeCreak.Engine.Components;
-using BeeCreak.Engine.Core;
+using BeeCreak.Engine.Assets;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Engine.Components
@@ -13,37 +11,35 @@ namespace BeeCreak.Engine.Components
         Hovered,
     }
 
-    public record ButtonProps(AssetHandle<SpriteSheet> SpriteSheet, AssetHandle<SpriteFont> Font, string Text, Action OnClick, Func<Point> GetMousePosition);
-
-    public class ButtonComponent : ComponentCollection<Component>
+    public sealed class ButtonComponent : Component
     {
-        private readonly ButtonProps props;
-
         private readonly SpriteComponent spriteComponent;
 
         private readonly TextComponent textComponent;
 
-        public ButtonComponent(ButtonProps props)
+        private readonly Action OnClick;
+
+        private readonly Func<Point> GetMousePosition;
+
+        public ButtonComponent(
+            string Text,
+            AssetHandle<SpriteSheet> SpriteSheet,
+            AssetHandle<SpriteFont> Font,
+            Action OnClick,
+            Func<Point> GetMousePosition
+        )
         {
-            this.props = props;
+            spriteComponent = new SpriteComponent(SpriteSheet, CurrentState.ToString());
+            textComponent = new TextComponent(Text, Font);
 
-            spriteComponent = new SpriteComponent(props.SpriteSheet);
-            textComponent = new TextComponent(props.Text, props.Font) { Color = Color.Black };
-
-            spriteComponent.SetSprite(ButtonComponentState.Normal.ToString());
+            this.OnClick = OnClick;
+            this.GetMousePosition = GetMousePosition;
 
             spriteComponent.Origin = spriteComponent.GetBounds().Size.ToVector2() / 2;
 
             textComponent.Origin = textComponent.GetBounds().Size.ToVector2() / 2;
 
-            textComponent.UpdateLocalTransform(
-                    new Vector2(0, -4), // Slight offset to look more centered
-                    0,
-                    1
-            );
-
-            components.Add(spriteComponent);
-            components.Add(textComponent);
+            textComponent.UpdateLocalTransform(new Vector2(0, -4), 0, 1);
         }
 
         private ButtonComponentState CurrentState { get; set; } = ButtonComponentState.Normal;
@@ -56,24 +52,16 @@ namespace BeeCreak.Engine.Components
             {
                 if (InputManager.IsMouseClicked())
                 {
-                    props.OnClick?.Invoke();
+                    OnClick?.Invoke();
                 }
 
                 newState = ButtonComponentState.Hovered;
-                textComponent.UpdateLocalTransform(
-                    new Vector2(0, 0), // Slight offset to look more centered
-                    0,
-                    1
-                );
+                textComponent.UpdateLocalTransform(new Vector2(0, 0), 0, 1);
             }
             else
             {
                 newState = ButtonComponentState.Normal;
-                textComponent.UpdateLocalTransform(
-                    new Vector2(0, -4), // Slight offset to look more centered
-                    0,
-                    1
-                );
+                textComponent.UpdateLocalTransform(new Vector2(0, -4), 0, 1);
             }
 
             if (newState != CurrentState)
@@ -85,6 +73,23 @@ namespace BeeCreak.Engine.Components
             base.Update(gameTime);
         }
 
-        private bool IsHovered => spriteComponent.GetBounds().Contains(props.GetMousePosition());
+        public override Rectangle GetBounds()
+        {
+            return Rectangle.Union(spriteComponent.GetBounds(), textComponent.GetBounds());
+        }
+
+        public override void Dispose()
+        {
+            spriteComponent.Dispose();
+            textComponent.Dispose();
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteComponent.Draw(spriteBatch);
+            textComponent.Draw(spriteBatch);
+        }
+
+        private bool IsHovered => spriteComponent.GetBounds().Contains(GetMousePosition());
     };
 }

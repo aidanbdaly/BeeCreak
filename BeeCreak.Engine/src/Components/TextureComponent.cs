@@ -23,11 +23,13 @@ namespace BeeCreak.Engine.Components
                 (int)(texture.Height * WorldTransform.Scale)
                 );
         }
+
         public override void Dispose()
         {
             texture?.Dispose();
             GC.SuppressFinalize(this);
         }
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (IsEnabled)

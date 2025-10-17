@@ -4,13 +4,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace BeeCreak.Engine.Components
 {
     // componentcollection and cachedcomponentcollection
-    public class ComponentCollection<T> : Component where T : Component
+    public class ComponentCollection: Component
     {
-        protected List<T> components = new();
+        protected List<IComponent> components = [];
 
         public ComponentCollection() { }
 
-        public ComponentCollection(IEnumerable<T> components)
+        public ComponentCollection(IEnumerable<IComponent> components)
         {
             if (components != null)
                 this.components.AddRange(components);

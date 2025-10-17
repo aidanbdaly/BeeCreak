@@ -3,44 +3,21 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Engine.Components
 {
-    public class CachedComponentCollection<T> : Component where T : Component
+    public class CachedComponentCollection: Component
     {
-        protected List<T> components = new();
+        protected readonly List<IComponent> components;
 
         private readonly GraphicsDevice graphicsDevice;
 
-        public CachedComponentCollection(GraphicsDevice graphicsDevice, IEnumerable<T> components)
+        public CachedComponentCollection(GraphicsDevice graphicsDevice, IEnumerable<IComponent> components)
         {
-            this.graphicsDevice = graphicsDevice;
-            if (components != null)
-                this.components.AddRange(components);
+            this.graphicsDevice = graphicsDevice;   
+            this.components = [.. components];
         }
 
         private RenderTarget2D Cache { get; set; }
 
         public bool IsDirty { get; set; } = true;
-
-        public void Add(T component)
-        {
-            components.Add(component); IsDirty = true;
-        }
-
-        public bool Remove(T component)
-        {
-            var removed = components.Remove(component);
-            if (removed) IsDirty = true;
-            return removed;
-        }
-
-        public void Clear()
-        {
-            components.Clear(); IsDirty = true;
-        }
-
-        public void AddRange(IEnumerable<T> components)
-        {
-            this.components.AddRange(components); IsDirty = true;
-        }
 
         public override void Dispose() => components.ForEach(c => c.Dispose());
 
@@ -65,6 +42,7 @@ namespace BeeCreak.Engine.Components
                 var previousRenderTarget = graphicsDevice.GetRenderTargets().FirstOrDefault().RenderTarget;
 
                 var bounds = GetBounds();
+
                 if (Cache == null || bounds.Size != Cache.Bounds.Size)
                 {
                     Cache?.Dispose();
@@ -77,7 +55,7 @@ namespace BeeCreak.Engine.Components
                 }
 
                 graphicsDevice.SetRenderTarget(Cache);
-                graphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
+                graphicsDevice.Clear(Color.Transparent);
 
                 spriteBatch.Begin();
 

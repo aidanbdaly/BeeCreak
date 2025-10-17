@@ -1,10 +1,9 @@
 using Microsoft.Xna.Framework;
-using BeeCreak.Engine.Assets;
 using BeeCreak.Engine.Components;
 
 namespace BeeCreak.Engine.Core
 {
-    public class Scene : ComponentCollection<Component>, IScene
+    public class Scene : ComponentCollection, IScene
     {
         public Color Clear { get; set; } = Color.Black;
 
