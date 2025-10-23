@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak.Engine.Input
 {
-    static class InputManager
+    public class InputManager
     {
         public static MouseState CurrentMouseState { get; private set; } = Mouse.GetState();
 

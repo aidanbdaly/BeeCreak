@@ -1,27 +1,19 @@
 ﻿using BeeCreak.Engine.Core;
-using BeeCreak.Engine.Transitions;
-using BeeCreak.Intro;
+using BeeCreak.Intro.Scenes;
+using BeeCreak.Menu.Scenes;
+using BeeCreak.Play.Scenes;
 
 namespace BeeCreak
 {
     public class BeeCreak : Game
     {
-        public BeeCreak() : base()
+        protected override void Initialize()
         {
-            StartScene = "MenuScene";
-        }
+            sceneManager.Scenes.Register("MenuScene", context => new MenuScene(context));
+            sceneManager.Scenes.Register("IntroScene", context => new IntroScene(context));
+            sceneManager.Scenes.Register("PlayScene", context => new PlayScene(context));
 
-        protected async override void Initialize()
-        {
             base.Initialize();
-
-            sceneFactory.RegisterScene("MenuScene", (context, services) => new MenuScene(context, services));
-            sceneFactory.RegisterScene("IntroScene", (context, services) => new IntroScene(context, services));
-            sceneFactory.RegisterScene("GameScene", (context, services) => new GameScene(context, services));
-
-            transitionFactory.RegisterTransition(Transition.FadeIn, duration => new FadeInTransition(GraphicsDevice, duration));
-            transitionFactory.RegisterTransition(Transition.FadeOut, duration => new FadeOutTransition(GraphicsDevice, duration));
         }
     }
 }
-

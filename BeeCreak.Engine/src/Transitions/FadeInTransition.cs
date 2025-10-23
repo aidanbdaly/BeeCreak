@@ -1,10 +1,10 @@
+using BeeCreak.Engine.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using BeeCreak.Engine.Transitions;
 
 namespace BeeCreak.Engine.Transitions
 {
-    public class FadeInTransition : ITransition
+    public sealed class FadeInTransition : Renderable, ITransition, Components.IUpdateable
     {
         private readonly float duration;
 
@@ -14,18 +14,16 @@ namespace BeeCreak.Engine.Transitions
         {
             this.graphicsDevice = graphicsDevice;
             this.duration = duration;
-
-            Overlay = new Texture2D(graphicsDevice, 1, 1);
-            Overlay.SetData([Color.White]);
         }
 
-        private bool IsPlaying { get; set; }
+        public override void Initialize()
+        {
+            Overlay = new Texture2D(graphicsDevice, 1, 1); Overlay.SetData([Color.White]);
+        }
 
         private float Opacity { get; set; } = 1f;
 
         private Texture2D Overlay { get; set; }
-
-        private Rectangle DestinationRectangle { get; set; }
 
         private TaskCompletionSource TransitionCompletionSource { get; set; }
 
@@ -35,19 +33,19 @@ namespace BeeCreak.Engine.Transitions
 
             try
             {
-                IsPlaying = true;
+                IsEnabled = true;
                 if (ct.CanBeCanceled)
                 {
                     ct.Register(() =>
                     {
-                        IsPlaying = false;
+                        IsEnabled = false;
                         TransitionCompletionSource.TrySetCanceled(ct);
                     });
                 }
             }
             catch (Exception e)
             {
-                IsPlaying = false;
+                IsEnabled = false;
                 TransitionCompletionSource.TrySetException(e);
             }
 
@@ -56,21 +54,31 @@ namespace BeeCreak.Engine.Transitions
 
         public void Update(GameTime gameTime)
         {
-            if (IsPlaying)
+            if (IsEnabled)
             {
                 Opacity -= (float)gameTime.ElapsedGameTime.TotalSeconds / duration;
 
                 if (Opacity <= 0)
                 {
-                    IsPlaying = false;
+                    IsEnabled = false;
                     TransitionCompletionSource.TrySetResult();
                 }
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override Rectangle GetBounds()
         {
-            if (IsPlaying)
+            return graphicsDevice.PresentationParameters.Bounds;
+        }
+
+        public override void Dispose()
+        {
+            Overlay.Dispose();
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (IsEnabled)
             {
                 spriteBatch.Begin();
                 spriteBatch.Draw(Overlay, graphicsDevice.PresentationParameters.Bounds, Color.Black * Opacity);

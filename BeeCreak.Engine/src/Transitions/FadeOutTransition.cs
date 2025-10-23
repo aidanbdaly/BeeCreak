@@ -1,28 +1,24 @@
+using BeeCreak.Engine.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Engine.Transitions
 {
-    public class FadeOutTransition : ITransition
+    public sealed class FadeOutTransition : Renderable, ITransition, Components.IUpdateable
     {
         private readonly float duration;
 
+        private readonly GraphicsDevice graphicsDevice;
+
         public FadeOutTransition(GraphicsDevice graphicsDevice, float duration)
         {
+            this.graphicsDevice = graphicsDevice;
             this.duration = duration;
-
-            Overlay = new Texture2D(graphicsDevice, 1, 1);
-            Overlay.SetData([Color.White]);
-            DestinationRectangle = new Rectangle(0, 0, graphicsDevice.PresentationParameters.Bounds.Width, graphicsDevice.PresentationParameters.Bounds.Height);
         }
-
-        private bool IsPlaying { get; set; }
 
         private float CurrentTime { get; set; } = 0f;
 
         private Texture2D Overlay { get; set; }
-
-        private Rectangle DestinationRectangle { get; set; }
 
         private TaskCompletionSource TransitionCompletionSource { get; set; }
 
@@ -32,47 +28,63 @@ namespace BeeCreak.Engine.Transitions
 
             try
             {
-                IsPlaying = true;
+                IsEnabled = true;
                 if (ct.CanBeCanceled)
                 {
                     ct.Register(() =>
                     {
-                        IsPlaying = false;
+                        IsEnabled = false;
                         TransitionCompletionSource.TrySetCanceled(ct);
                     });
                 }
             }
             catch (Exception e)
             {
-                IsPlaying = false;
+                IsEnabled = false;
                 TransitionCompletionSource.TrySetException(e);
             }
 
             return TransitionCompletionSource.Task;
         }
 
+        public override void Initialize()
+        {
+            Overlay = new Texture2D(graphicsDevice, 1, 1);
+            Overlay.SetData([Color.White]);
+        }
+
+        public override Rectangle GetBounds()
+        {
+            return graphicsDevice.PresentationParameters.Bounds;
+        }
+
+        public override void Dispose()
+        {
+            Overlay.Dispose();
+        }
+
         public void Update(GameTime gameTime)
         {
-            if (IsPlaying)
+            if (IsEnabled)
             {
                 CurrentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 if (CurrentTime > duration)
                 {
-                    IsPlaying = false;
+                    IsEnabled = false;
                     TransitionCompletionSource.TrySetResult();
                 }
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            if (IsPlaying)
+            if (IsEnabled)
             {
                 var opacity = CurrentTime / duration;
 
                 spriteBatch.Begin();
-                spriteBatch.Draw(Overlay, DestinationRectangle, Color.Black * opacity);
+                spriteBatch.Draw(Overlay, graphicsDevice.PresentationParameters.Bounds, Color.Black * opacity);
                 spriteBatch.End();
             }
         }

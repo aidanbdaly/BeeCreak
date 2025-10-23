@@ -192,10 +192,6 @@
         }
       },
       "NVorbis/0.10.4": {
-        "dependencies": {
-          "System.Memory": "4.5.3",
-          "System.ValueTuple": "4.5.0"
-        },
         "runtime": {
           "lib/netstandard2.0/NVorbis.dll": {
             "assemblyVersion": "0.10.4.0",
@@ -211,7 +207,6 @@
           }
         }
       },
-      "System.Memory/4.5.3": {},
       "System.Text.Encodings.Web/9.0.1": {
         "runtime": {
           "lib/net8.0/System.Text.Encodings.Web.dll": {
@@ -239,8 +234,7 @@
             "fileVersion": "9.0.124.61010"
           }
         }
-      },
-      "System.ValueTuple/4.5.0": {}
+      }
     }
   },
   "libraries": {
@@ -354,13 +348,6 @@
       "path": "system.io.pipelines/9.0.1",
       "hashPath": "system.io.pipelines.9.0.1.nupkg.sha512"
     },
-    "System.Memory/4.5.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
-      "path": "system.memory/4.5.3",
-      "hashPath": "system.memory.4.5.3.nupkg.sha512"
-    },
     "System.Text.Encodings.Web/9.0.1": {
       "type": "package",
       "serviceable": true,
@@ -374,13 +361,6 @@
       "sha512": "sha512-eqWHDZqYPv1PvuvoIIx5pF74plL3iEOZOl/0kQP+Y0TEbtgNnM2W6k8h8EPYs+LTJZsXuWa92n5W5sHTWvE3VA==",
       "path": "system.text.json/9.0.1",
       "hashPath": "system.text.json.9.0.1.nupkg.sha512"
-    },
-    "System.ValueTuple/4.5.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
-      "path": "system.valuetuple/4.5.0",
-      "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
     }
   }
 }

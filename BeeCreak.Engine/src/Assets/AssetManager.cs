@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace BeeCreak.Engine.Assets;
 
-public class AssetHandle<T> : IDisposable
+public sealed class Asset<T> : IDisposable
 {
     private readonly AssetManager assetManager;
 
@@ -10,14 +10,14 @@ public class AssetHandle<T> : IDisposable
 
     private bool disposed;
 
-    public T Asset { get; }
+    public T Value { get; }
 
-    public AssetHandle(AssetManager assetManager, string source, T asset)
+    public Asset(AssetManager assetManager, string source, T asset)
     {
         this.assetManager = assetManager;
         this.source = source;
 
-        Asset = asset;
+        Value = asset;
     }
 
     public void Dispose()
@@ -41,7 +41,7 @@ public class AssetManager
         this.contentManager = contentManager;
     }
 
-    public AssetHandle<T> Acquire<T>(string source)
+    public Asset<T> Acquire<T>(string source)
     {
         var asset = contentManager.Load<T>(source);
 
@@ -51,7 +51,7 @@ public class AssetManager
             loadedAssets[source] = count + 1;
         }
 
-        return new AssetHandle<T>(this, source, asset);
+        return new Asset<T>(this, source, asset);
     }
 
     public void Release(string source)

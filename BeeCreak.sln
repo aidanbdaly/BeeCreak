@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak.Engine", "BeeCreak
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak.Content.Pipeline.Extensions", "BeeCreak.Content.Pipeline.Extensions\BeeCreak.Content.Pipeline.Extensions.csproj", "{1F38A680-693C-469D-95BE-3BF9585380C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak.Content", "BeeCreak.Content\BeeCreak.Content.csproj", "{9A4D5F2E-8B3C-4E7A-9D1F-6C8E2A5B4F3D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{1F38A680-693C-469D-95BE-3BF9585380C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F38A680-693C-469D-95BE-3BF9585380C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F38A680-693C-469D-95BE-3BF9585380C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A4D5F2E-8B3C-4E7A-9D1F-6C8E2A5B4F3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A4D5F2E-8B3C-4E7A-9D1F-6C8E2A5B4F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A4D5F2E-8B3C-4E7A-9D1F-6C8E2A5B4F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A4D5F2E-8B3C-4E7A-9D1F-6C8E2A5B4F3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,41 +1,16 @@
-using BeeCreak.Engine.Assets;
-using BeeCreak.Engine.Transitions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak.Engine.Core
 {
-    public record SceneServices(
-        AssetManager AssetManager,
-        GraphicsDevice GraphicsDevice,
-        Func<Point> GetMousePosition,
-        Func<string, CancellationToken, Task> ChangeScene
-    );
-
-    public class SceneManager
+    public class SceneManager(Context context)
     {
-        private readonly TransitionFactory transitionFactory;
+        private readonly SceneCollection scenes = new();
 
-        private readonly SceneFactory sceneFactory;
+        public SceneCollection Scenes => scenes;
 
-        public SceneManager(
-            SceneFactory sceneFactory,
-            TransitionFactory transitionFactory,
-            GraphicsDevice graphicsDevice,
-            AssetManager assetManager,
-            )
-        {
-            this.sceneFactory = sceneFactory;
-            this.transitionFactory = transitionFactory;
-
-            Services = new SceneServices(
-                AssetManager: assetManager,
-                GraphicsDevice: graphicsDevice,
-                GetMousePosition: GetMousePosition,
-                ChangeScene: ChangeSceneAsync
-            );
-        }
+        private readonly Context context = context;
 
         private RenderTarget2D renderTarget;
 
@@ -43,37 +18,19 @@ namespace BeeCreak.Engine.Core
 
         public IScene Scene { get; set; }
 
-        public ITransition Transition { get; private set; }
+        public string StartScene { get; set; }
 
-        public SceneServices Services { get; private set; }
-
-        private void CreateRenderTarget()
-        {
-            renderTarget?.Dispose();
-
-            if (Scene != null && Scene.Width > 0 && Scene.Height > 0)
-            {
-                renderTarget = new RenderTarget2D(
-                    Services.GraphicsDevice,
-                    Scene.Width,
-                    Scene.Height,
-                    false,
-                    SurfaceFormat.Color,
-                    DepthFormat.None,
-                    0,
-                    RenderTargetUsage.DiscardContents);
-
-                RecomputeScaleUp();
-            }
-        }
+        public void OnWindowResized() => RecomputeScaleUp();
 
         private void RecomputeScaleUp()
         {
             if (renderTarget == null)
-                return;
+            {
+                throw new InvalidOperationException("Render target is not created.");
+            }
 
-            int backW = Services.GraphicsDevice.PresentationParameters.BackBufferWidth;
-            int backH = Services.GraphicsDevice.PresentationParameters.BackBufferHeight;
+            int backW = context.graphicsDevice.PresentationParameters.BackBufferWidth;
+            int backH = context.graphicsDevice.PresentationParameters.BackBufferHeight;
 
             int nativeW = renderTarget.Width;
             int nativeH = renderTarget.Height;
@@ -105,66 +62,79 @@ namespace BeeCreak.Engine.Core
             int offY = destinationRectangle.Y;
 
             return new Point(
-
                 (int)((mousePosition.X - offX) / scaleX),
                 (int)((mousePosition.Y - offY) / scaleY));
         }
 
-        public async Task ExitSceneAsync(CancellationToken ct = default)
+        public void UnloadScene(CancellationToken ct = default)
         {
             if (Scene is { })
             {
-                try
-                {
-                    Transition = transitionFactory.GetTransition(Scene.ExitTransition, 1);
-                    await Transition.PlayAsync(ct);
-                }
-                finally
-                {
-                    Scene.Dispose();
-                    renderTarget?.Dispose();
-                    renderTarget = null;
-                }
+                Scene.Dispose();
+                renderTarget?.Dispose();
+                renderTarget = null;
             }
         }
 
-        private async Task EnterSceneAsync(CancellationToken ct = default)
+        public void Startup()
         {
-            if (Scene is { })
+            if (string.IsNullOrEmpty(StartScene))
             {
-                Transition = transitionFactory.GetTransition(Scene.EntranceTransition, 1);
-                await Transition.PlayAsync(ct);
+                throw new InvalidOperationException("StartScene is not set.");
             }
+
+            LoadScene(StartScene);
         }
 
-        public async Task ChangeSceneAsync(string sceneId, CancellationToken ct = default)
+        public void LoadScene(string sceneId)
         {
-            await ExitSceneAsync(ct);
+            Scene = scenes.Get(context, sceneId);
 
-            Scene = sceneFactory.GetScene(Context, Services, sceneId);
-
-            if (Scene != null)
+            if (Scene == null)
             {
-                CreateRenderTarget();
+                throw new InvalidOperationException($"Scene '{sceneId}' not found.");
             }
 
-            await EnterSceneAsync(ct);
+            if (!Scene.Validate())
+            {
+                throw new InvalidOperationException($"Scene '{sceneId}' has invalid dimensions.");
+            }
+
+            renderTarget = new RenderTarget2D(
+                context.graphicsDevice,
+                Scene.Width,
+                Scene.Height,
+                false,
+                SurfaceFormat.Color,
+                DepthFormat.None,
+                0,
+                RenderTargetUsage.DiscardContents);
+
+            RecomputeScaleUp();
         }
 
-        public void OnWindowResize() => RecomputeScaleUp();
+        public void SwitchScene(string sceneId)
+        {
+            UnloadScene();
+            LoadScene(sceneId);
+        }
 
         public void Update(GameTime gameTime)
         {
-            Scene?.Update(gameTime);
-            Transition.Update(gameTime);
+            if (Scene == null)
+            {
+                throw new InvalidOperationException("No scene loaded.");
+            }
+
+            Scene.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             if (Scene != null && renderTarget != null)
             {
-                Services.GraphicsDevice.SetRenderTarget(renderTarget);
-                Services.GraphicsDevice.Clear(Scene.Clear);
+                context.graphicsDevice.SetRenderTarget(renderTarget);
+                context.graphicsDevice.Clear(Scene.Clear);
 
                 spriteBatch.Begin(
                     sortMode: SpriteSortMode.Deferred,
@@ -178,7 +148,7 @@ namespace BeeCreak.Engine.Core
 
                 spriteBatch.End();
 
-                Services.GraphicsDevice.SetRenderTarget(null);
+                context.graphicsDevice.SetRenderTarget(null);
 
                 if (destinationRectangle.Width > 0 && destinationRectangle.Height > 0)
                 {
@@ -187,8 +157,6 @@ namespace BeeCreak.Engine.Core
                     spriteBatch.End();
                 }
             }
-
-            Transition?.Draw(spriteBatch);
         }
     }
 }

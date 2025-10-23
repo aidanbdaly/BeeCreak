@@ -1,18 +1,70 @@
-using Microsoft.Xna.Framework;
 using BeeCreak.Engine.Components;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Engine.Core
 {
-    public class Scene : ComponentCollection, IScene
+    public abstract class Scene : IScene
     {
+        private readonly List<IComponent> components;
+
+        public IReadOnlyList<IComponent> Components => components.AsReadOnly();
+
         public Color Clear { get; set; } = Color.Black;
-
-        public Transition EntranceTransition { get; init; } = Transition.None;
-
-        public Transition ExitTransition { get; init; } = Transition.None;
 
         public int Width { get; init; }
 
         public int Height { get; init; }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            foreach (var component in Components)
+            {
+                if (component is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
+        }
+
+        public void AddComponent(IComponent component)
+        {
+            components.Add(component);
+        }
+
+        public void RemoveComponent(IComponent component)
+        {
+            components.Remove(component);
+        }
+
+        public abstract void LoadContent();
+
+        public void Update(GameTime gameTime)
+        {
+            foreach (var component in Components)
+            {
+                if (component is Components.IUpdateable updateable)
+                {
+                    updateable.Update(gameTime);
+                }
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (var component in Components)
+            {
+                if (component is IRenderable renderable)
+                {
+                    renderable.Draw(spriteBatch);
+                }
+            }
+        }
+
+        public bool Validate()
+        {
+            return Width > 0 && Height > 0;
+        }
     }
 }

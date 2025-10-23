@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using BeeCreak.Engine.Assets;
 using BeeCreak.Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,19 +6,13 @@ namespace BeeCreak.Engine.Core
 {
     public class Game : Microsoft.Xna.Framework.Game
     {
-        protected readonly GraphicsDeviceManager graphicsDeviceManager;
-
-        protected SpriteBatch spriteBatch;
+        private readonly GraphicsDeviceManager graphicsDeviceManager;
 
         protected SceneManager sceneManager;
 
-        protected readonly SceneFactory sceneFactory = new();
+        private SpriteBatch spriteBatch;
 
-        protected readonly TransitionFactory transitionFactory = new();
-
-        protected readonly AssetManager assetManager;
-
-        protected string StartScene { get; set; }
+        private Context context;
 
         public static readonly string AppDataDirectory =
           Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BeeCreak");
@@ -29,11 +21,9 @@ namespace BeeCreak.Engine.Core
         {
             IsFixedTimeStep = false;
             IsMouseVisible = true;
-
             Content.RootDirectory = "Content";
 
             graphicsDeviceManager = new GraphicsDeviceManager(this);
-            assetManager = new AssetManager(Content);
         }
 
         protected override void Initialize()
@@ -43,32 +33,23 @@ namespace BeeCreak.Engine.Core
             graphicsDeviceManager.ApplyChanges();
 
             Window.AllowUserResizing = true;
-            Window.ClientSizeChanged += (_, __) => sceneManager?.OnWindowResize();
+            Window.ClientSizeChanged += (_, __) => sceneManager.OnWindowResized();
 
             if (!Directory.Exists(AppDataDirectory))
             {
                 Directory.CreateDirectory(AppDataDirectory);
             }
 
-            Exiting += async (_, __) => await sceneManager.ExitSceneAsync(default);
+            Exiting += (_, __) => sceneManager.UnloadScene();
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            sceneManager = new SceneManager(
-                sceneFactory,
-                transitionFactory,
-                GraphicsDevice,
-                assetManager
-                );
-
+         
             base.Initialize();
         }
 
-        protected override async void LoadContent()
+        protected override void LoadContent()
         {
-            await sceneManager.ChangeSceneAsync(StartScene);
-
-            base.LoadContent();
+            sceneManager.Startup();
         }
 
         protected override void Update(GameTime gameTime)
@@ -83,6 +64,8 @@ namespace BeeCreak.Engine.Core
         protected override void Draw(GameTime gameTime)
         {
             sceneManager.Draw(spriteBatch);
+
+            base.Draw(gameTime);
         }
     }
 }
