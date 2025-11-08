@@ -21,7 +21,7 @@ public sealed class CellReferenceWriter : ContentTypeWriter<CellReferenceContent
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.Core.Readers.CellReferenceReader, BeeCreak";
+        return "BeeCreak.App.Game.Readers.CellReferenceReader, BeeCreak";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
