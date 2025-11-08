@@ -14,297 +14,45 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin UI/button-hover.ogg
-/importer:OggImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:UI/button-hover.ogg
-
-#begin UI/button-press.ogg
-/importer:OggImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:UI/button-press.ogg
-
-#begin UI/lookout.spritefont
+#begin Font/lookout.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:UI/lookout.spritefont
+/processorParam:TextureFormat=Color
+/build:Font/lookout.spritefont
 
-#begin UI/buttons.png
+#begin Image/menu_button.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
+/processorParam:ColorKeyEnabled=False
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/buttons.png
+/build:Image/menu_button.png
 
-#begin Entities/entities.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/entities.png
-
-#begin UI/menu-background.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/menu-background.png
-
-#begin Tiles/tiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tiles/tiles.png
-
-#begin UI/cursor.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/cursor.png
-
-#begin UI/buttons.spritesheet
+#begin Spritesheet/menu_button.spritesheet
 /importer:SpriteSheetImporter
 /processor:SpriteSheetProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/buttons.spritesheet
+/build:Spritesheet/menu_button.spritesheet
 
-#begin Entities/entities.spritesheet
-/importer:SpriteSheetImporter
-/processor:SpriteSheetProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/entities.spritesheet
+#begin Game/default.game
+/importer:GameRecordImporter
+/processor:GameRecordProcessor
+/build:Game/default.game
 
-#begin Tiles/tiles.spritesheet
-/importer:SpriteSheetImporter
-/processor:SpriteSheetProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Tiles/tiles.spritesheet
+#begin Cell/default.cell
+/importer:CellRecordImporter
+/processor:CellRecordProcessor
+/build:Cell/default.cell
 
-#begin Animation/test.animation
-/importer:AnimationImporter
-/processor:AnimationProcessor
-/build:Animation/test.animation
+#begin Audio/button-hover.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/button-hover.ogg
 
-#begin Cells/Attributes/default.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/default.json
-
-#begin Cells/Attributes/ancient_ruins.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/ancient_ruins.json
-
-#begin Cells/Attributes/bamboo_grove.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/bamboo_grove.json
-
-#begin Cells/Attributes/cave_entrance.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/cave_entrance.json
-
-#begin Cells/Attributes/cliff_edge.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/cliff_edge.json
-
-#begin Cells/Attributes/crystal_cavern.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/crystal_cavern.json
-
-#begin Cells/Attributes/desert_oasis.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/desert_oasis.json
-
-#begin Cells/Attributes/flower_meadow.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/flower_meadow.json
-
-#begin Cells/Attributes/forest_clearing.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/forest_clearing.json
-
-#begin Cells/Attributes/frozen_lake.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/frozen_lake.json
-
-#begin Cells/Attributes/hidden_valley.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/hidden_valley.json
-
-#begin Cells/Attributes/mountain_peak.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/mountain_peak.json
-
-#begin Cells/Attributes/ocean_shore.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/ocean_shore.json
-
-#begin Cells/Attributes/swamp_marsh.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/swamp_marsh.json
-
-#begin Cells/Attributes/village_center.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/village_center.json
-
-#begin Cells/Attributes/volcanic_crater.json
-/importer:CellAttributesImporter
-/processor:CellAttributesProcessor
-/build:Cells/Attributes/volcanic_crater.json
-
-#begin Cells/Blueprints/default.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/default.json
-
-#begin Cells/Blueprints/forest_clearing.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/forest_clearing.json
-
-#begin Cells/Blueprints/mountain_peak.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/mountain_peak.json
-
-#begin Cells/Blueprints/ocean_shore.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/ocean_shore.json
-
-#begin Cells/Blueprints/desert_oasis.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/desert_oasis.json
-
-#begin Cells/Blueprints/cave_entrance.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/cave_entrance.json
-
-#begin Cells/Blueprints/village_center.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/village_center.json
-
-#begin Cells/Blueprints/ancient_ruins.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/ancient_ruins.json
-
-#begin Cells/Blueprints/flower_meadow.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/flower_meadow.json
-
-#begin Cells/Blueprints/crystal_cavern.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/crystal_cavern.json
-
-#begin Cells/Blueprints/volcanic_crater.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/volcanic_crater.json
-
-#begin Cells/Blueprints/frozen_lake.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/frozen_lake.json
-
-#begin Cells/Blueprints/bamboo_grove.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/bamboo_grove.json
-
-#begin Cells/Blueprints/swamp_marsh.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/swamp_marsh.json
-
-#begin Cells/Blueprints/cliff_edge.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/cliff_edge.json
-
-#begin Cells/Blueprints/hidden_valley.json
-/importer:CellBlueprintImporter
-/processor:CellBlueprintProcessor
-/build:Cells/Blueprints/hidden_valley.json
-
-#begin Entities/player.json
-/importer:EntityAttributesImporter
-/processor:EntityAttributesProcessor
-/build:Entities/player.json
-
-#begin Tiles/catalogue.json
-/importer:TileCatalogueImporter
-/processor:TileCatalogueProcessor
-/build:Tiles/catalogue.json
-
-#begin Game/game.json
-/importer:GameBlueprintImporter
-/processor:GameBlueprintProcessor
-/build:Game/game.json
+#begin Audio/button-press.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/button-press.ogg

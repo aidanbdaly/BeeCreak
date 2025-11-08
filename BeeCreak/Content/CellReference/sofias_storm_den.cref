@@ -1,0 +1,8 @@
+{
+  "id": "interior_sofias_storm_den",
+  "base" : "interior",
+  "entities": [
+    "player_sofias_storm_den"
+  ],
+  "tileMap": "sofias_storm_den"
+}

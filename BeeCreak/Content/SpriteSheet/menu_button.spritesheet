@@ -1,0 +1,18 @@
+{
+  "id": "menu_button",
+  "image": "menu_button",
+  "sprites": {
+    "normal": {
+      "x": 0,
+      "y": 0,
+      "width": 64,
+      "height": 36
+    },
+    "hovered": {
+      "x": 64,
+      "y": 0,
+      "width": 64,
+      "height": 36
+    }
+  }
+}

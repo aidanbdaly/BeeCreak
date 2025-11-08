@@ -1,5 +1,5 @@
-﻿using BeeCreak.Engine.Core;
-using BeeCreak.Intro;
+﻿using BeeCreak.Core;
+using BeeCreak.App.Intro;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BeeCreak

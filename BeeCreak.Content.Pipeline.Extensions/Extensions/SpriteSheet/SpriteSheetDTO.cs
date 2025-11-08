@@ -1,13 +1,23 @@
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Content.Pipeline.Extensions;
+namespace BeeCreak.Content.Pipeline.Extensions.SpriteSheet;
 
-public class SpriteSheetDTO
+public sealed class SpriteSheetDto
 {
-    public string ImageName { get; set; }
+    public string Id { get; set; }
+
+    public string Image { get; set; }
     
-    public int Resolution { get; set; }
-    
-    public Dictionary<string, Rectangle> Frames { get; set; } = new();
+    public Dictionary<string, SpriteFrameDto> Sprites { get; set; } = [];
+}
+
+public sealed class SpriteFrameDto
+{
+    public int X { get; set; }
+
+    public int Y { get; set; }
+
+    public int Width { get; set; }
+
+    public int Height { get; set; }
 }

@@ -1,0 +1,5 @@
+{
+  "id": "player",
+  "spritesheet": "entity_player",
+  "behaviours": ["control"]
+}

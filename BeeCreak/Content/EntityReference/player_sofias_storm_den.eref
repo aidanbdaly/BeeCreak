@@ -1,0 +1,10 @@
+{
+    "id" : "player_sofias_storm_den",
+    "base": "player",
+    "cell": "sofias_storm_den",
+    "variant" : "south",
+    "position" : {
+        "x" : 5,
+        "y" : 5
+    }
+}

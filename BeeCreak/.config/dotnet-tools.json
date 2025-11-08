@@ -5,18 +5,6 @@
     "dotnet-mgcb": {
       "version": "3.8.2.1105",
       "commands": ["mgcb"]
-    },
-    "dotnet-mgcb-editor": {
-      "version": "3.8.2.1105",
-      "commands": ["mgcb-editor"]
-    },
-    "dotnet-mgcb-editor-mac": {
-      "version": "3.8.2.1105",
-      "commands": ["mgcb-editor-mac"]
-    },
-    "csharpier": {
-      "version": "0.28.2",
-      "commands": ["dotnet-csharpier"]
     }
   }
 }

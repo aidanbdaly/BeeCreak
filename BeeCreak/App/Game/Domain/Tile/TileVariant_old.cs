@@ -1,0 +1,17 @@
+namespace BeeCreak.App.Game.Domain.Tile;
+
+public enum TileVariant {
+    Default,
+    Left,
+    Top,
+    Right,
+    Bottom,
+    TopLeftInner,
+    TopRightInner,
+    BottomRightInner,
+    BottomLeftInner,
+    TopLeftOuter,
+    TopRightOuter,
+    BottomRightOuter,
+    BottomLeftOuter,
+}

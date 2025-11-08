@@ -23,7 +23,6 @@
     <None Remove="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BeeCreak.Engine\BeeCreak.Engine.csproj" />
     <ProjectReference Include="..\BeeCreak.Content.Pipeline.Extensions\BeeCreak.Content.Pipeline.Extensions.csproj" ReferenceOutputAssembly="false" OutputItemType="MonoGameContentReference" />
   </ItemGroup>
   <ItemGroup>
