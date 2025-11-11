@@ -1,7 +1,7 @@
 using BeeCreak.Core.Components;
 using BeeCreak.Core;
-using BeeCreak.App.Game.Models;
-using BeeCreak.App.Game.Domain.Tile;
+using Microsoft.Xna.Framework;
+using BeeCreak.App.Game.Domain.Entity;
 
 namespace BeeCreak.App.Game
 {
@@ -11,11 +11,9 @@ namespace BeeCreak.App.Game
 
         private const int DefaultHeight = 600;
 
-        private const string DefaultSaveId = "default";
-
         private readonly Context context;
 
-        private readonly ComponentFactory componentFactory;
+        private readonly BehaviourFactory behaviours;
 
         public GameScene(Context context)
         {
@@ -24,28 +22,42 @@ namespace BeeCreak.App.Game
             Width = DefaultWidth;
             Height = DefaultHeight;
 
-            componentFactory = new ComponentFactory(context);
+            behaviours = new BehaviourFactory();
+        }
+
+        public void Initialize()
+        {
+            behaviours.Register(Behaviour.Control, ctx => new ControlBehaviour(context.inputManager, ctx.TileMap, ctx.Entity));
         }
 
         public override void LoadContent()
         {
-            var saveId = string.IsNullOrWhiteSpace(context.SaveId) ? DefaultSaveId : context.SaveId;
+            var game = context.content.Load<GameRecord>("Game/default");
 
-            var save = SaveManager.GetSave(saveId);
+            var cell = game.ActiveCell;
 
-            save ??= context.content.Load<GameRecord>("Game/default");
-
-            var cell = context.content.Load<CellRecord>(save.ActiveCellId);
-
-            var tileMap = new TileMap(cell.Value.Tiles);
-
-            cell.Value.Tiles.ForEach(t => 
-                AddComponent(componentFactory.Sprite(t.Id))
-            );
-
-            cell.Value.Entities.ForEach(e =>
+            cell.TileMap.Tiles.ToList().ForEach((entry) =>
             {
-                AddComponent(entityFactory.CreateEntity(e, tileMap));
+                var sprite = new Sprite(cell.TileMap.SpriteSheet)
+                {
+                    Position = new Vector2(
+                        entry.Key.X * 32,
+                        entry.Key.Y * 32
+                    )
+                };
+                sprite.SetSprite(entry.Value);
+
+                AddComponent(sprite);
+            });
+
+            cell.Entities.ForEach(e =>
+            {
+                e.Base.Behaviours.ForEach(b =>
+                {
+                    AddComponent(behaviours.Create(b, new(cell.TileMap, e)));
+                });
+
+                AddComponent(new Animation(e.Base.AnimationSheet));
             });
         }
     }

@@ -3,15 +3,9 @@ using Microsoft.Xna.Framework;
 
 namespace BeeCreak.Core.Components
 {
-    public class Sprite : Texture
+    public class Sprite(SpriteSheet spriteSheet) : Texture(spriteSheet.Texture)
     {
-        private readonly SpriteSheet spriteSheet;
-
-        public Sprite(SpriteSheet spriteSheet, string defaultSprite) : base(spriteSheet.Image)
-        {
-            this.spriteSheet = spriteSheet;
-            SetSprite(defaultSprite);
-        }
+        private readonly SpriteSheet spriteSheet = spriteSheet;
 
         public override Rectangle GetBounds()
         {
@@ -36,11 +30,6 @@ namespace BeeCreak.Core.Components
             {
                 throw new ArgumentException($"Sprite '{spriteName}' not found in sprite sheet.");
             }
-        }
-
-        public override void Dispose()
-        {
-            spriteSheet.Dispose();
         }
     }
 }

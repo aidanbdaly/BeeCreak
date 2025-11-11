@@ -1,3 +1,7 @@
+using System;
+using BeeCreak.Content.Pipeline.Extensions.CellRecord;
+using BeeCreak.Content.Pipeline.Extensions.EntityReference;
+using BeeCreak.Content.Pipeline.Extensions.TileMap;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Content.Pipeline.Extensions.CellReference;
@@ -27,24 +31,69 @@ public sealed class CellReferenceProcessor : ContentProcessor<CellReferenceDto, 
             throw new InvalidContentException($"Cell reference '{input.Id}' requires a tile map id.");
         }
 
+        var baseCell = LoadCellRecord(input.Base, context, input.Id);
+        var tileMap = LoadTileMap(input.TileMap, context, input.Id);
+
         var content = new CellReferenceContent
         {
             Id = input.Id,
-            BaseCellId = input.Base,
-            TileMapId = input.TileMap
+            BaseCell = baseCell,
+            TileMap = tileMap
         };
 
         if (input.Entities is not null)
         {
             foreach (var entityId in input.Entities)
             {
-                if (!string.IsNullOrWhiteSpace(entityId))
+                if (string.IsNullOrWhiteSpace(entityId))
                 {
-                    content.EntityReferenceIds.Add(entityId);
+                    continue;
                 }
+
+                var entityReference = LoadEntityReference(entityId, context, input.Id);
+                content.EntityReferences.Add(entityReference);
             }
         }
 
         return content;
+    }
+
+    private static CellRecordContent LoadCellRecord(string cellId, ContentProcessorContext context, string referenceId)
+    {
+        var reference = new ExternalReference<CellRecordContent>($"CellRecord/{cellId}.crec");
+        try
+        {
+            return context.BuildAndLoadAsset<CellRecordContent, CellRecordContent>(reference, "CellRecordProcessor");
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"Cell reference '{referenceId}' failed to load base cell '{cellId}': {ex.Message}", ex);
+        }
+    }
+
+    private static TileMapContent LoadTileMap(string tileMapId, ContentProcessorContext context, string referenceId)
+    {
+        var reference = new ExternalReference<TileMapContent>($"TileMap/{tileMapId}.tref");
+        try
+        {
+            return context.BuildAndLoadAsset<TileMapContent, TileMapContent>(reference, "TileMapProcessor");
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"Cell reference '{referenceId}' failed to load tile map '{tileMapId}': {ex.Message}", ex);
+        }
+    }
+
+    private static EntityReferenceContent LoadEntityReference(string entityReferenceId, ContentProcessorContext context, string referenceId)
+    {
+        var reference = new ExternalReference<EntityReferenceContent>($"EntityReference/{entityReferenceId}.eref");
+        try
+        {
+            return context.BuildAndLoadAsset<EntityReferenceContent, EntityReferenceContent>(reference, "EntityReferenceProcessor");
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"Cell reference '{referenceId}' failed to load entity reference '{entityReferenceId}': {ex.Message}", ex);
+        }
     }
 }

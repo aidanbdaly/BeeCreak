@@ -1,5 +1,5 @@
 {
-    "id": "player",
+    "id": "entity_player",
     "image": "",
     "animations": {
         "walk_right" : [

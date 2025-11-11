@@ -1,19 +1,12 @@
-using System.Text.Json;
-using BeeCreak.Core;
-using BeeCreak.App.Game.Models;
-
 namespace BeeCreak.App.Game
 {
     public class SaveManager
     {
-        public static GameRecord? GetSave(string saveId)
+        public static SaveRecord? GetSave(string saveId)
         {
             try
             {
-                using var reader = new StreamReader(Game.AppDataDirectory + $"/saves/{saveId}.json");
-                var record = JsonSerializer.Deserialize<GameRecord>(reader.ReadToEnd());
-
-                return record;
+                return null;
             }
             catch
             {

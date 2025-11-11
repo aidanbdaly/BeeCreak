@@ -12,6 +12,7 @@
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>BeeCreak</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>

@@ -4,7 +4,6 @@ namespace BeeCreak.App.Game
 {
     public record GameRecord
     (
-        string ActiveCellId,
-        EntityRecord Player
+        CellReference ActiveCell
     );
 }

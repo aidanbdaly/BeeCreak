@@ -8,12 +8,12 @@ public sealed class GameRecordWriter : ContentTypeWriter<GameRecordContent>
 {
     protected override void Write(ContentWriter output, GameRecordContent value)
     {
-        output.Write(value.ActiveCellId ?? string.Empty);
+        output.WriteObject(value.ActiveCell);
     }
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.Core.Readers.GameRecordReader, BeeCreak";
+        return "BeeCreak.App.Game.Readers.GameRecordReader, BeeCreak";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)

@@ -6,7 +6,7 @@ namespace BeeCreak.App.Game.Domain.Tile
     
     public class TileUtils
     {
-        public static readonly Point[] WithNeighborOffsets =
+        public static readonly Point[] PointWithNeighbors =
         [
             new(0, 0), new(1, 0), new(0, 1),
             new(1, 1), new(-1, 0), new(0, -1),

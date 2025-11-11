@@ -1,3 +1,4 @@
+using BeeCreak.Content.Pipeline.Extensions.CellReference;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Content.Pipeline.Extensions.Game;
@@ -12,14 +13,18 @@ public sealed class GameRecordProcessor : ContentProcessor<GameRecordDto, GameRe
             throw new InvalidContentException("Game record payload is empty.");
         }
 
-        if (string.IsNullOrWhiteSpace(input.ActiveCellId))
+        if (string.IsNullOrWhiteSpace(input.ActiveCell))
         {
-            throw new InvalidContentException("Game record requires an ActiveCellId.");
+            throw new InvalidContentException("Game record requires an activeCell id.");
         }
+
+        var cellReference = context.BuildAndLoadAsset<CellReferenceContent, CellReferenceContent>(
+            new ExternalReference<CellReferenceContent>($"CellReference/{input.ActiveCell}.cref"),
+            "CellReferenceProcessor");
 
         return new GameRecordContent
         {
-            ActiveCellId = input.ActiveCellId
+            ActiveCell = cellReference
         };
     }
 }

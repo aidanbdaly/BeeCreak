@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using BeeCreak.Content.Pipeline.Extensions.CellRecord;
+using BeeCreak.Content.Pipeline.Extensions.EntityReference;
+using BeeCreak.Content.Pipeline.Extensions.TileMap;
 
 namespace BeeCreak.Content.Pipeline.Extensions.CellReference;
 
@@ -6,9 +9,9 @@ public sealed class CellReferenceContent
 {
     public string Id { get; set; }
 
-    public string BaseCellId { get; set; }
+    public CellRecordContent BaseCell { get; set; }
 
-    public List<string> EntityReferenceIds { get; } = [];
+    public TileMapContent TileMap { get; set; }
 
-    public string TileMapId { get; set; }
+    public List<EntityReferenceContent> EntityReferences { get; } = [];
 }

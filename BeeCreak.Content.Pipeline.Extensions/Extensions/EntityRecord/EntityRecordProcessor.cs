@@ -1,5 +1,5 @@
 using System;
-using BeeCreak.Content.Pipeline.Extensions.SpriteSheet;
+using BeeCreak.Content.Pipeline.Extensions.AnimationSheet;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Content.Pipeline.Extensions.EntityRecord;
@@ -19,17 +19,17 @@ public sealed class EntityRecordProcessor : ContentProcessor<EntityRecordDto, En
             throw new InvalidContentException("Entity record requires an id.");
         }
 
-        if (string.IsNullOrWhiteSpace(input.SpriteSheet))
+        if (string.IsNullOrWhiteSpace(input.AnimationSheet))
         {
-            throw new InvalidContentException($"Entity record '{input.Id}' requires a spritesheet id.");
+            throw new InvalidContentException($"Entity record '{input.Id}' requires an animation sheet id.");
         }
 
-        var spriteSheet = BuildSpriteSheet(input.SpriteSheet, context, input.Id);
+        var animationSheet = BuildAnimationSheet(input.AnimationSheet, context, input.Id);
 
         var content = new EntityRecordContent
         {
             Id = input.Id,
-            SpriteSheet = spriteSheet
+            AnimationSheet = animationSheet
         };
 
         if (input.Behaviours is not null)
@@ -46,18 +46,18 @@ public sealed class EntityRecordProcessor : ContentProcessor<EntityRecordDto, En
         return content;
     }
 
-    private static SpriteSheetContent BuildSpriteSheet(string spriteSheetId, ContentProcessorContext context, string entityId)
+    private static AnimationSheetContent BuildAnimationSheet(string animationSheetId, ContentProcessorContext context, string entityId)
     {
-        var path = $"SpriteSheet/{spriteSheetId}.spritesheet";
-        var reference = new ExternalReference<SpriteSheetContent>(path);
+        var path = $"AnimationSheet/{animationSheetId}.as";
+        var reference = new ExternalReference<AnimationSheetContent>(path);
 
         try
         {
-            return context.BuildAndLoadAsset<SpriteSheetContent, SpriteSheetContent>(reference, "SpriteSheetProcessor");
+            return context.BuildAndLoadAsset<AnimationSheetContent, AnimationSheetContent>(reference, "AnimationSheetProcessor");
         }
         catch (Exception ex)
         {
-            throw new InvalidContentException($"Entity record '{entityId}' failed to load sprite sheet '{spriteSheetId}': {ex.Message}", ex);
+            throw new InvalidContentException($"Entity record '{entityId}' failed to load animation sheet '{animationSheetId}': {ex.Message}", ex);
         }
     }
 }

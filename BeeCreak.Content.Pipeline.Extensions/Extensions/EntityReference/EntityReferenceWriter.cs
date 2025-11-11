@@ -9,8 +9,7 @@ public sealed class EntityReferenceWriter : ContentTypeWriter<EntityReferenceCon
     protected override void Write(ContentWriter output, EntityReferenceContent value)
     {
         output.Write(value.Id ?? string.Empty);
-        output.Write(value.BaseId ?? string.Empty);
-        output.Write(value.CellId ?? string.Empty);
+        output.WriteObject(value.BaseEntity);
         output.Write(value.Variant ?? string.Empty);
         output.Write(value.Position.X);
         output.Write(value.Position.Y);

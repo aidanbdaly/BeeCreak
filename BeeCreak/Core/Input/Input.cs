@@ -1,11 +1,9 @@
-using BeeCreak.Core;
-using BeeCreak.Core.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak.Core.Input
 {
-    public class Input(SceneManager sceneManager)
+    public class InputManager(SceneManager sceneManager)
     {
         private KeyboardState previousState;
 

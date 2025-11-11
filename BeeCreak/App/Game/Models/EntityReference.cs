@@ -8,7 +8,7 @@ namespace BeeCreak.App.Game.Models
 
         public EntityRecord Base { get; init; }
 
-        public CellReference Cell { get; init; }
+        public CellReference Cell { get; set; }
 
         public string Variant { get; set; }
 

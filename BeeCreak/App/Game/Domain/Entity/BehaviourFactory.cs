@@ -1,5 +1,5 @@
-using BeeCreak.Core.Input;
 using BeeCreak.Core.Components;
+using BeeCreak.App.Game.Models;
 
 namespace BeeCreak.App.Game.Domain.Entity
 {
@@ -10,18 +10,15 @@ namespace BeeCreak.App.Game.Domain.Entity
 
     public record BehaviourContext
     (
-        Input Input
+        TileMapRecord TileMap,
+        EntityReference Entity
     );
 
-    public class BehaviourFactory
+    public class BehaviourFactory()
     {
-        private readonly Dictionary<Behaviour, Func<BehaviourContext, IUpdateable>> factories = [];
+        private readonly Dictionary<Behaviour, Func<BehaviourContext, Updateable>> factories = [];
 
-        public BehaviourFactory()
-        {
-        }
-
-        public IUpdateable CreateBehaviour(Behaviour behaviour, BehaviourContext context)
+        public Updateable Create(Behaviour behaviour, BehaviourContext context)
         {
             if (factories.TryGetValue(behaviour, out var factory))
             {
@@ -31,7 +28,7 @@ namespace BeeCreak.App.Game.Domain.Entity
             throw new ArgumentException($"No factory registered for behaviour {behaviour}");
         }
 
-        public void RegisterBehaviour(Behaviour behaviour, Func<BehaviourContext, IUpdateable> factory)
+        public void Register(Behaviour behaviour, Func<BehaviourContext, Updateable> factory)
         {
             factories[behaviour] = factory;
         }

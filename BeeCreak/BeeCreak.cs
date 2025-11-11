@@ -1,22 +1,23 @@
-﻿using BeeCreak.Core;
-using BeeCreak.App.Intro;
+﻿using BeeCreak.App.Intro;
 using BeeCreak.App.Menu;
 using BeeCreak.App.Game;
 
+using CoreApp = BeeCreak.Core.App;
+
 namespace BeeCreak
 {
-    public class BeeCreak : Game
+    public class BeeCreak : CoreApp
     {
         public BeeCreak()
         {
-            StartScene = "MenuScene";    
+            StartScene = "MenuScene";
         }
 
         protected override void Initialize()
         {
-            sceneManager.Scenes.Register("MenuScene", context => new MenuScene(context));
-            sceneManager.Scenes.Register("IntroScene", context => new IntroScene(context));
-            sceneManager.Scenes.Register("PlayScene", context => new GameScene(context));
+            sceneCollection.Register("MenuScene", context => new MenuScene(context));
+            sceneCollection.Register("IntroScene", context => new IntroScene(context));
+            sceneCollection.Register("PlayScene", context => new GameScene(context));
 
             base.Initialize();
         }

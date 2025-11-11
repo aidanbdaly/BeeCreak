@@ -1,37 +1,39 @@
 using BeeCreak.Core.Input;
-using BeeCreak.Core.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Core
 {
-    public class Game : Microsoft.Xna.Framework.Game
+    public class App : Game
     {
         private readonly GraphicsDeviceManager graphicsDeviceManager;
 
-        protected SceneManager sceneManager;
+        private readonly SceneManager sceneManager;
 
-        private SpriteBatch spriteBatch;
+        protected readonly SceneCollection sceneCollection;
 
-        private Context context;
+        private SpriteBatch? spriteBatch;
 
-        private Input input;
+        public required string StartScene { get; set; }
 
-        public string StartScene { get; set; }
+        public static readonly string UserDataDirectory =
+          Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            Path.GetFileNameWithoutExtension(Environment.ProcessPath) ?? "bad");
 
-        public static readonly string AppDataDirectory =
-          Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BeeCreak");
-
-        public Game()
+        public App()
         {
             IsFixedTimeStep = false;
             IsMouseVisible = true;
             Content.RootDirectory = "Content";
 
+            sceneCollection = new SceneCollection();
+
             graphicsDeviceManager = new GraphicsDeviceManager(this);
 
             sceneManager = new SceneManager(
-              contentManager: Content
+              contentManager: Content, 
+              sceneCollection: sceneCollection
           );
         }
 
@@ -44,9 +46,9 @@ namespace BeeCreak.Core
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += (_, __) => sceneManager.RecomputeScaleUp();
 
-            if (!Directory.Exists(AppDataDirectory))
+            if (!Directory.Exists(UserDataDirectory))
             {
-                Directory.CreateDirectory(AppDataDirectory);
+                Directory.CreateDirectory(UserDataDirectory);
             }
 
             Exiting += (_, __) => sceneManager.UnloadScene();
@@ -66,11 +68,17 @@ namespace BeeCreak.Core
         protected override void Update(GameTime gameTime)
         {
             sceneManager.Update(gameTime);
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            if (spriteBatch is null)
+            {
+                throw new InvalidOperationException("SpriteBatch is not initialized.");
+            }
+
             sceneManager.Draw(spriteBatch);
 
             base.Draw(gameTime);

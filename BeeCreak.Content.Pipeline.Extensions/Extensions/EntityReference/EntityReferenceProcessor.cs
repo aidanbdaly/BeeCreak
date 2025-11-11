@@ -1,3 +1,5 @@
+using System;
+using BeeCreak.Content.Pipeline.Extensions.EntityRecord;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
@@ -23,15 +25,34 @@ public sealed class EntityReferenceProcessor : ContentProcessor<EntityReferenceD
             throw new InvalidContentException($"Entity reference '{input.Id}' requires a position.");
         }
 
+        var baseEntity = LoadEntityRecord(input.Base, context, input.Id);
+
         var content = new EntityReferenceContent
         {
             Id = input.Id,
-            BaseId = input.Base,
-            CellId = input.Cell,
+            BaseEntity = baseEntity,
             Variant = string.IsNullOrWhiteSpace(input.Variant) ? "default" : input.Variant,
             Position = new Vector2(input.Position.X, input.Position.Y)
         };
 
         return content;
+    }
+
+    private static EntityRecordContent LoadEntityRecord(string entityId, ContentProcessorContext context, string referenceId)
+    {
+        if (string.IsNullOrWhiteSpace(entityId))
+        {
+            throw new InvalidContentException($"Entity reference '{referenceId}' requires a base entity id.");
+        }
+
+        var reference = new ExternalReference<EntityRecordContent>($"EntityRecord/{entityId}.erec");
+        try
+        {
+            return context.BuildAndLoadAsset<EntityRecordContent, EntityRecordContent>(reference, "EntityRecordProcessor");
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"Entity reference '{referenceId}' failed to load base entity '{entityId}': {ex.Message}", ex);
+        }
     }
 }

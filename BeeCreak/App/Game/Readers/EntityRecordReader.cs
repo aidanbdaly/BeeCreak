@@ -12,7 +12,7 @@ public sealed class EntityRecordReader : ContentTypeReader<EntityRecord>
     protected override EntityRecord Read(ContentReader input, EntityRecord existingInstance)
     {
         string id = input.ReadString();
-        SpriteSheet spriteSheet = input.ReadObject<SpriteSheet>();
+        AnimationSheet animationSheet = input.ReadObject<AnimationSheet>();
 
         int behaviourCount = input.ReadInt32();
         var behaviours = new List<Behaviour>(behaviourCount);
@@ -28,6 +28,6 @@ public sealed class EntityRecordReader : ContentTypeReader<EntityRecord>
             behaviours.Add(behaviour);
         }
 
-        return new EntityRecord(id, spriteSheet, behaviours);
+        return new EntityRecord(id, animationSheet, behaviours);
     }
 }

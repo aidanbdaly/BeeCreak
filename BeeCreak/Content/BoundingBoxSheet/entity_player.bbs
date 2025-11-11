@@ -1,0 +1,21 @@
+{
+    "id": "entity_player",
+    "boundingBoxes" {
+        "walk_right" : {
+            "w": 32,
+            "h": 64
+        },
+        "walk_left" : {
+            "w": 32,
+            "h": 64
+        },
+        "walk_down" : {
+            "w": 32,
+            "h": 64
+        },
+        "walk_up" : {
+            "w": 32,
+            "h": 64
+        }
+    }
+}

@@ -1,5 +1,6 @@
 {
   "id": "player",
-  "spritesheet": "entity_player",
+  "animationSheet": "entity_player",
+  "boundingBoxSheet": "entity_player",
   "behaviours": ["control"]
 }

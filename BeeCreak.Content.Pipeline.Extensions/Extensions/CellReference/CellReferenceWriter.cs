@@ -9,13 +9,13 @@ public sealed class CellReferenceWriter : ContentTypeWriter<CellReferenceContent
     protected override void Write(ContentWriter output, CellReferenceContent value)
     {
         output.Write(value.Id ?? string.Empty);
-        output.Write(value.BaseCellId ?? string.Empty);
-        output.Write(value.TileMapId ?? string.Empty);
+        output.WriteObject(value.BaseCell);
+        output.WriteObject(value.TileMap);
 
-        output.Write(value.EntityReferenceIds.Count);
-        foreach (var entityId in value.EntityReferenceIds)
+        output.Write(value.EntityReferences.Count);
+        foreach (var entity in value.EntityReferences)
         {
-            output.Write(entityId ?? string.Empty);
+            output.WriteObject(entity);
         }
     }
 

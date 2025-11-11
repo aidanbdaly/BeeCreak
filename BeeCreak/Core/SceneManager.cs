@@ -1,6 +1,4 @@
 using BeeCreak.Core.Input;
-using BeeCreak.Core.Models;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,12 +6,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace BeeCreak.Core
 {
     public class SceneManager(
-        ContentManager contentManager
+        ContentManager contentManager,
+        SceneCollection sceneCollection
     )
     {
         private readonly ContentManager contentManager = contentManager;
 
-        private readonly SceneCollection scenes = new();
+        private readonly SceneCollection scenes = sceneCollection;
 
         public SceneCollection Scenes => scenes;
 
@@ -67,9 +66,9 @@ namespace BeeCreak.Core
         public void Initialize(GraphicsDevice graphicsDevice)
         {
             context = new Context(
-                assetManager: new AssetManager(contentManager),
+                contentManager: contentManager,
                 graphicsDevice: graphicsDevice,
-                input: new Input(this),
+                inputManager: new InputManager(this),
                 sceneManager: this
             );
         }

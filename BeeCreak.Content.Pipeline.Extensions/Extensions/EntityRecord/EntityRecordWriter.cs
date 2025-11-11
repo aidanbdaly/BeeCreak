@@ -9,7 +9,7 @@ public sealed class EntityRecordWriter : ContentTypeWriter<EntityRecordContent>
     protected override void Write(ContentWriter output, EntityRecordContent value)
     {
         output.Write(value.Id ?? string.Empty);
-        output.WriteObject(value.SpriteSheet);
+        output.WriteObject(value.AnimationSheet);
 
         output.Write(value.Behaviours.Count);
         foreach (var behaviour in value.Behaviours)
