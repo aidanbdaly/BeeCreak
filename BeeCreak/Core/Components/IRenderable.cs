@@ -3,19 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Core.Components
 {
-    public interface IComponent
-    {
-        bool IsEnabled { get; set; }
-
-        void Initialize();
-    }
-
-    public interface IUpdateable
-    {
-        void Update(GameTime gameTime);
-    }
-
-    public interface IRenderable : IDisposable
+    public interface IRenderable 
     {
         Vector2 Position { get; set; }
 

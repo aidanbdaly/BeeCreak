@@ -1,6 +1,6 @@
 {
   "id": "menu_button",
-  "image": "menu_button",
+  "image": "spritesheet_menu_button",
   "sprites": {
     "normal": {
       "x": 0,

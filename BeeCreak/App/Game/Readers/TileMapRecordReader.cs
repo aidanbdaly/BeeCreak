@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using BeeCreak.App.Game.Models;
 using BeeCreak.Core.Models;
 using Microsoft.Xna.Framework;
@@ -12,9 +12,10 @@ public sealed class TileMapRecordReader : ContentTypeReader<TileMapRecord>
     {
         string id = input.ReadString();
         SpriteSheet spriteSheet = input.ReadObject<SpriteSheet>();
+        BoundingBoxSheet boundingBoxSheet = input.ReadObject<BoundingBoxSheet>();
 
         int tileCount = input.ReadInt32();
-        var tiles = new Dictionary<Point, string>(tileCount);
+        var tiles = ImmutableDictionary.CreateBuilder<Point, string>();
 
         for (int i = 0; i < tileCount; i++)
         {
@@ -24,6 +25,6 @@ public sealed class TileMapRecordReader : ContentTypeReader<TileMapRecord>
             tiles[new Point(x, y)] = spriteId;
         }
 
-        return new TileMapRecord(id, spriteSheet, tiles);
+        return new TileMapRecord(id, spriteSheet, boundingBoxSheet, tiles.ToImmutable());
     }
 }

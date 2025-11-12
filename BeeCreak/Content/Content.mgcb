@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:../../BeeCreak.Content.Pipeline.Extensions/bin/Debug/net8.0/BeeCreak.Content.Pipeline.Extensions.dll
+/reference:../../BeeCreak.Extensions/bin/Debug/net8.0/BeeCreak.Extensions.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -40,10 +40,15 @@
 /processor:GameRecordProcessor
 /build:Game/default.game
 
-#begin Cell/default.cell
-/importer:CellRecordImporter
-/processor:CellRecordProcessor
-/build:Cell/default.cell
+#begin BoundingBoxSheet/entity_player.bbs
+/importer:BoundingBoxSheetImporter
+/processor:BoundingBoxSheetProcessor
+/build:BoundingBoxSheet/entity_player.bbs
+
+#begin BoundingBoxSheet/tilemap_sofias_storm_den.bbs
+/importer:BoundingBoxSheetImporter
+/processor:BoundingBoxSheetProcessor
+/build:BoundingBoxSheet/tilemap_sofias_storm_den.bbs
 
 #begin Audio/button-hover.ogg
 /importer:OggImporter
@@ -56,3 +61,28 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/button-press.ogg
+
+#begin EntityRecord/player.erec
+/importer:EntityRecordImporter
+/processor:EntityRecordProcessor
+/build:EntityRecord/player.erec
+
+#begin EntityReference/player_sofias_storm_den.eref
+/importer:EntityReferenceImporter
+/processor:EntityReferenceProcessor
+/build:EntityReference/player_sofias_storm_den.eref
+
+#begin TileMap/sofias_storm_den.tref
+/importer:TileMapImporter
+/processor:TileMapProcessor
+/build:TileMap/sofias_storm_den.tref
+
+#begin CellRecord/interior.crec
+/importer:CellRecordImporter
+/processor:CellRecordProcessor
+/build:CellRecord/interior.crec
+
+#begin CellReference/sofias_storm_den.cref
+/importer:CellReferenceImporter
+/processor:CellReferenceProcessor
+/build:CellReference/sofias_storm_den.cref

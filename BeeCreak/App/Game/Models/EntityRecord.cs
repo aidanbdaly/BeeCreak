@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using BeeCreak.Core.Models;
 using BeeCreak.App.Game.Domain.Entity;
 
@@ -7,6 +8,6 @@ namespace BeeCreak.App.Game.Models
     (   string Id,
         AnimationSheet AnimationSheet,
         BoundingBoxSheet BoundingBoxSheet,
-        List<Behaviour> Behaviours
+        ImmutableList<EntityBehaviour> Behaviours
     );
 }

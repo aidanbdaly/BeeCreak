@@ -1,6 +1,5 @@
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using BeeCreak.Core.Models;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,13 +13,13 @@ public sealed class AnimationSheetReader : ContentTypeReader<AnimationSheet>
         Texture2D texture = input.ReadObject<Texture2D>();
 
         int animationCount = input.ReadInt32();
-        var animations = new Dictionary<string, List<Rectangle>>(animationCount);
+        var animations = ImmutableDictionary.CreateBuilder<string, ImmutableList<ImmutableRectangle>>();
 
         for (int i = 0; i < animationCount; i++)
         {
             string animationId = input.ReadString();
             int frameCount = input.ReadInt32();
-            var frames = new List<Rectangle>(frameCount);
+            var frames = ImmutableList.CreateBuilder<ImmutableRectangle>();
 
             for (int frameIndex = 0; frameIndex < frameCount; frameIndex++)
             {
@@ -28,12 +27,12 @@ public sealed class AnimationSheetReader : ContentTypeReader<AnimationSheet>
                 int y = input.ReadInt32();
                 int width = input.ReadInt32();
                 int height = input.ReadInt32();
-                frames.Add(new Rectangle(x, y, width, height));
+                frames.Add(new ImmutableRectangle(x, y, width, height));
             }
 
-            animations[animationId] = frames;
+            animations[animationId] = frames.ToImmutable();
         }
 
-        return new AnimationSheet(id, texture, animations);
+        return new AnimationSheet(id, texture, animations.ToImmutable());
     }
 }

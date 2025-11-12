@@ -1,7 +1,7 @@
-using BeeCreak.Core.Components;
 using BeeCreak.Core;
 using Microsoft.Xna.Framework;
 using BeeCreak.App.Game.Domain.Entity;
+using BeeCreak.Core.Components.Controllers;
 
 namespace BeeCreak.App.Game
 {
@@ -13,7 +13,11 @@ namespace BeeCreak.App.Game
 
         private readonly Context context;
 
-        private readonly BehaviourFactory behaviours;
+        private readonly SpriteController spriteController;
+
+        private readonly EntityController entityController;
+
+        private readonly EntityBehaviourFactory entityBehaviourFactory;
 
         public GameScene(Context context)
         {
@@ -22,7 +26,19 @@ namespace BeeCreak.App.Game
             Width = DefaultWidth;
             Height = DefaultHeight;
 
-            behaviours = new BehaviourFactory();
+            entityBehaviourFactory = new();
+            spriteController = new(this);
+
+            var behaviourController = new BehaviourController(this);
+
+            entityController = new EntityController(
+                entityBehaviourFactory,
+                behaviourController,
+                new(
+                    behaviourController,
+                    spriteController
+                )
+            );
         }
 
         public void Initialize()
@@ -37,28 +53,10 @@ namespace BeeCreak.App.Game
             var cell = game.ActiveCell;
 
             cell.TileMap.Tiles.ToList().ForEach((entry) =>
-            {
-                var sprite = new Sprite(cell.TileMap.SpriteSheet)
-                {
-                    Position = new Vector2(
-                        entry.Key.X * 32,
-                        entry.Key.Y * 32
-                    )
-                };
-                sprite.SetSprite(entry.Value);
+                spriteController.Mount($"tile_{entry.Key.X}_{entry.Key.Y}", cell.TileMap.SpriteSheet.GetSprite(entry.Value))
+            );
 
-                AddComponent(sprite);
-            });
-
-            cell.Entities.ForEach(e =>
-            {
-                e.Base.Behaviours.ForEach(b =>
-                {
-                    AddComponent(behaviours.Create(b, new(cell.TileMap, e)));
-                });
-
-                AddComponent(new Animation(e.Base.AnimationSheet));
-            });
+            cell.Entities.ForEach(e => entityController.Mount(e));
         }
     }
 }

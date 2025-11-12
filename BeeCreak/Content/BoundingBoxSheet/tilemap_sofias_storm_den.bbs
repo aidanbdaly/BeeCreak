@@ -1,0 +1,6 @@
+{
+  "id": "tilemap_sofias_storm_den",
+  "boundingBoxes": {
+    "floor_wood": { "x": 0, "y": 22, "w": 32, "h": 10 }
+  }
+}

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak", "BeeCreak\BeeCreak.csproj", "{A5CD63DF-6FD9-4944-A145-5CCA15EAB895}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak.Content.Pipeline.Extensions", "BeeCreak.Content.Pipeline.Extensions\BeeCreak.Content.Pipeline.Extensions.csproj", "{1F38A680-693C-469D-95BE-3BF9585380C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeCreak.Extensions", "BeeCreak.Extensions\BeeCreak.Extensions.csproj", "{1F38A680-693C-469D-95BE-3BF9585380C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

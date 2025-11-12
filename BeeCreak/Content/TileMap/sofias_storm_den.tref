@@ -1,10 +1,9 @@
 {
-    "id": "sofias_storm_den",
-    "spriteSheet": "tilemap_sofias_storm_den",
-    "boundingBoxSheet": "tilemap_sofias_storm_den",
-    "tiles": {
-        "0_0" : "floor_wood",
-        "1_0" : "floor_wood",
-        "2_0" : "floor_wood",
-    }
+  "id": "sofias_storm_den",
+  "spritesheet": "tile_sofias_storm_den",
+  "boundingBoxSheet": "tilemap_sofias_storm_den",
+  "tiles": {
+    "0_0": "storm_den_floor",
+    "1_0": "storm_den_floor"
+  }
 }

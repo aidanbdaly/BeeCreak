@@ -1,21 +1,9 @@
 {
-    "id": "entity_player",
-    "boundingBoxes" {
-        "walk_right" : {
-            "w": 32,
-            "h": 64
-        },
-        "walk_left" : {
-            "w": 32,
-            "h": 64
-        },
-        "walk_down" : {
-            "w": 32,
-            "h": 64
-        },
-        "walk_up" : {
-            "w": 32,
-            "h": 64
-        }
-    }
+  "id": "entity_player",
+  "boundingBoxes": {
+    "walk_right": { "x": 0, "y": 0, "w": 32, "h": 64 },
+    "walk_left": { "x": 0, "y": 0, "w": 32, "h": 64 },
+    "walk_down": { "x": 0, "y": 0, "w": 32, "h": 64 },
+    "walk_up": { "x": 0, "y": 0, "w": 32, "h": 64 }
+  }
 }

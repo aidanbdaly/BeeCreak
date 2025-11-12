@@ -1,8 +1,8 @@
-using Microsoft.Xna.Framework;
+using System.Collections.Immutable;
 
 namespace BeeCreak.Core.Models;
 
 public record BoundingBoxSheet(
     string Id,
-    Dictionary<string, Rectangle> BoundingBoxes
+    ImmutableDictionary<string, ImmutableRectangle> BoundingBoxes
 );

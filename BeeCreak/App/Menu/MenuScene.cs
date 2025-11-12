@@ -8,15 +8,12 @@ namespace BeeCreak.App.Menu
     {
         private readonly Context context;
 
-        private readonly ComponentFactory factory;
-
         public MenuScene(Context context)
         {
             Width = 640;
             Height = 360;
 
             this.context = context;
-            factory = new ComponentFactory(context);
         }
 
         public override void LoadContent()

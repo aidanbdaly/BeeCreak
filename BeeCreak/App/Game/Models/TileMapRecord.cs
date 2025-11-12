@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using BeeCreak.Core.Models;
 using Microsoft.Xna.Framework;
 
@@ -7,5 +8,5 @@ public record TileMapRecord(
     string Id,
     SpriteSheet SpriteSheet,
     BoundingBoxSheet BoundingBoxSheet,
-    Dictionary<Point, string> Tiles
+    ImmutableDictionary<Point, string> Tiles
 );

@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using BeeCreak.App.Game.Domain.Entity;
 using BeeCreak.App.Game.Models;
 using BeeCreak.Core.Models;
@@ -13,14 +13,15 @@ public sealed class EntityRecordReader : ContentTypeReader<EntityRecord>
     {
         string id = input.ReadString();
         AnimationSheet animationSheet = input.ReadObject<AnimationSheet>();
+        BoundingBoxSheet boundingBoxSheet = input.ReadObject<BoundingBoxSheet>();
 
         int behaviourCount = input.ReadInt32();
-        var behaviours = new List<Behaviour>(behaviourCount);
+        var behaviours = ImmutableList.CreateBuilder<EntityBehaviour>();
 
         for (int i = 0; i < behaviourCount; i++)
         {
             string behaviourId = input.ReadString();
-            if (!Enum.TryParse<Behaviour>(behaviourId, true, out var behaviour))
+            if (!Enum.TryParse<EntityBehaviour>(behaviourId, true, out var behaviour))
             {
                 throw new InvalidOperationException($"Entity '{id}' references unknown behaviour '{behaviourId}'.");
             }
@@ -28,6 +29,6 @@ public sealed class EntityRecordReader : ContentTypeReader<EntityRecord>
             behaviours.Add(behaviour);
         }
 
-        return new EntityRecord(id, animationSheet, behaviours);
+        return new EntityRecord(id, animationSheet, boundingBoxSheet, behaviours.ToImmutable());
     }
 }

@@ -1,17 +1,11 @@
-using Microsoft.Xna.Framework;
+using BeeCreak.App.Game.Domain.Entity;
 
 namespace BeeCreak.App.Game.Models
 {
-    public class EntityReference
-    {
-        public string Id { get; init; }
-
-        public EntityRecord Base { get; init; }
-
-        public CellReference Cell { get; set; }
-
-        public string Variant { get; set; }
-
-        public Vector2 Position { get; set; } = Vector2.Zero;
-    }
+    public record EntityReference(
+        string Id,
+        EntityRecord Base,
+        CellReference Cell,
+        EntityState State
+    );
 }

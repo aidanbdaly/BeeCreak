@@ -1,5 +1,5 @@
+using System.Collections.Immutable;
 using BeeCreak.Core.Models;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,7 +13,7 @@ public class SpriteSheetReader : ContentTypeReader<SpriteSheet>
         var texture = input.ReadObject<Texture2D>();
 
         int frameCount = input.ReadInt32();
-        var frames = new Dictionary<string, Rectangle>();
+        var frames = ImmutableDictionary.CreateBuilder<string, ImmutableRectangle>();
 
         for (int i = 0; i < frameCount; i++)
         {
@@ -22,13 +22,13 @@ public class SpriteSheetReader : ContentTypeReader<SpriteSheet>
             int y = input.ReadInt32();
             int w = input.ReadInt32();
             int h = input.ReadInt32();
-            frames[name] = new Rectangle(x, y, w, h);
+            frames[name] = new ImmutableRectangle(x, y, w, h);
         }
         
         return new SpriteSheet(
             id,
             texture,
-            frames
+            frames.ToImmutable()
         );
     }
 }
