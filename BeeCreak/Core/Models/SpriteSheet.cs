@@ -10,7 +10,7 @@ public record SpriteSheet
     ImmutableDictionary<string, ImmutableRectangle> Frames
 )
 {
-    public Sprite GetSprite(string frameId)
+    public Sprite TryGetSprite(string frameId)
     {
         if (!Frames.TryGetValue(frameId, out ImmutableRectangle frame))
         {

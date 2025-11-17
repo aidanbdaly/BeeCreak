@@ -13,11 +13,11 @@ public sealed class GameRecordWriter : ContentTypeWriter<GameRecordContent>
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.App.Game.Readers.GameRecordReader, BeeCreak";
+        return "BeeCreak.Game.Readers.GameRecordReader, BeeCreak";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.App.Game.Models.GameRecord, BeeCreak";
+        return "BeeCreak.Game.Models.GameRecord, BeeCreak";
     }
 }

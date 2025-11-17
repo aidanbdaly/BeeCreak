@@ -1,3 +1,4 @@
+using BeeCreak.Core.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -5,11 +6,11 @@ namespace BeeCreak.Core.Components
 {
     public interface IRenderable 
     {
-        Vector2 Position { get; set; }
+        State<Vector2> Position { get; set; }
 
         float Rotation { get; set; }
 
-        float Scale { get; set; }
+        Vector2 Scale { get; set; }
 
         Color Color { get; set; }
 

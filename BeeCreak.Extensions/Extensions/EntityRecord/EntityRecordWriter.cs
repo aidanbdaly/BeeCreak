@@ -21,11 +21,11 @@ public sealed class EntityRecordWriter : ContentTypeWriter<EntityRecordContent>
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.App.Game.Readers.EntityRecordReader, BeeCreak";
+        return "BeeCreak.Game.Readers.EntityRecordReader, BeeCreak";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.App.Game.Models.EntityRecord, BeeCreak";
+        return "BeeCreak.Game.Models.EntityRecord, BeeCreak";
     }
 }

@@ -17,11 +17,11 @@ public sealed class EntityReferenceWriter : ContentTypeWriter<EntityReferenceCon
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.App.Game.Readers.EntityReferenceReader, BeeCreak";
+        return "BeeCreak.Game.Readers.EntityReferenceReader, BeeCreak";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.App.Game.Models.EntityReference, BeeCreak";
+        return "BeeCreak.Game.Models.EntityReference, BeeCreak";
     }
 }

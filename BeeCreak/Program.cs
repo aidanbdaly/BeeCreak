@@ -1,6 +1,7 @@
 ﻿using BeeCreak.Core;
-using BeeCreak.App.Intro;
-using Microsoft.Extensions.DependencyInjection;
+using BeeCreak.Game;
+using BeeCreak.Intro;
+using BeeCreak.Menu;
 
 namespace BeeCreak
 {
@@ -10,16 +11,13 @@ namespace BeeCreak
         {
             try
             {
-                var services = new ServiceCollection();
+                using var app = new App();
 
-                services.AddSingleton<BeeCreak>();
-                
-                var serviceProvider = services.BuildServiceProvider();
+                app.RegisterScene("MenuScene", () => new MenuScene(app));
+                app.RegisterScene("IntroScene", () => new IntroScene(app));
+                app.RegisterScene("PlayScene", () => new GameScene(app));
 
-                using (var game = serviceProvider.GetRequiredService<BeeCreak>())
-                {
-                    game.Run();
-                }
+                app.Run();
             }
             catch (Exception ex)
             {

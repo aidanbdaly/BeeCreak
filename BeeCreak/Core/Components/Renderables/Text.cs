@@ -5,28 +5,17 @@ namespace BeeCreak.Core.Components
 {
     public class Text(string text, SpriteFont fontAsset, int? maxWidth = null) : Renderable
     {
-        private readonly SpriteFont fontAsset = fontAsset;
-
         private readonly string renderedText = PrepareText(text, fontAsset, maxWidth);
 
         public override Rectangle GetBounds()
-        {
-            var size = fontAsset.MeasureString(renderedText) * Scale;
-
-            return new Rectangle(
-                (int)Position.X,
-                (int)Position.Y,
-                (int)size.X,
-                (int)size.Y
-            );
-        }
+            => new(Position.Value.ToPoint(), (fontAsset.MeasureString(renderedText) * Scale).ToPoint());
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(
                 fontAsset,
                 renderedText,
-                Position,
+                Position.Value,
                 Color,
                 Rotation,
                 Origin,

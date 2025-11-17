@@ -1,9 +1,11 @@
-namespace BeeCreak.Core.Models 
+using System.Collections.Immutable;
+
+namespace BeeCreak.Core.Models
 {
     public record Locale(
         string Id,
         ImmutableDictionary<string, string> Translations
-    );
+    )
     {
         public string GetTranslation(string key)
         {
@@ -12,7 +14,7 @@ namespace BeeCreak.Core.Models
                 return translation;
             }
 
-            return key; // Fallback to key if translation not found
+            return key;
         }
     }
 }

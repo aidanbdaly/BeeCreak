@@ -1,9 +1,21 @@
+using BeeCreak.Core.State;
+
 namespace BeeCreak.Core.Components
 {
+
     public class Component : IComponent
     {
-        public bool IsEnabled { get; set; } = true;
+        public Guid Id { get; } = Guid.NewGuid();
 
-        public virtual void Initialize() { }
+        public bool IsEnabled { get; set; } = true;
+    }
+
+    public class Feature(Renderable renderable, Updateable updateable, ActionBuffer bindings)
+    {
+        public Renderable Renderable { get; init; } = renderable;
+
+        public Updateable Updateable { get; init; } = updateable;
+
+        public ActionBuffer Bindings { get; init; } = bindings;
     }
 }

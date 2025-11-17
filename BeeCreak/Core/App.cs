@@ -1,25 +1,18 @@
+using System.Globalization;
 using BeeCreak.Core.Input;
+using BeeCreak.Core.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Core
 {
-    public class App : Game
+    public class App : Microsoft.Xna.Framework.Game
     {
         private readonly GraphicsDeviceManager graphicsDeviceManager;
 
         private readonly SceneManager sceneManager;
 
-        protected readonly SceneCollection sceneCollection;
-
-        private SpriteBatch? spriteBatch;
-
-        public required string StartScene { get; set; }
-
-        public static readonly string UserDataDirectory =
-          Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            Path.GetFileNameWithoutExtension(Environment.ProcessPath) ?? "bad");
+        private readonly SceneCollection sceneCollection;
 
         public App()
         {
@@ -31,10 +24,16 @@ namespace BeeCreak.Core
 
             graphicsDeviceManager = new GraphicsDeviceManager(this);
 
-            sceneManager = new SceneManager(
-              contentManager: Content, 
-              sceneCollection: sceneCollection
-          );
+            sceneManager = new SceneManager(sceneCollection);
+
+            Services.AddService(
+                 new InputManager(sceneManager)
+            );
+        }
+
+        public void RegisterScene(string Id, Func<Scene> factory)
+        {
+            sceneCollection.Register(Id, factory);
         }
 
         protected override void Initialize()
@@ -46,23 +45,20 @@ namespace BeeCreak.Core
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += (_, __) => sceneManager.RecomputeScaleUp();
 
-            if (!Directory.Exists(UserDataDirectory))
-            {
-                Directory.CreateDirectory(UserDataDirectory);
-            }
-
             Exiting += (_, __) => sceneManager.UnloadScene();
-
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            sceneManager.Initialize(GraphicsDevice);
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            sceneManager.LoadScene(StartScene);
+            Services.AddService(
+                new AppContext(
+                    Content.Load<Locale>($"Locales/{CultureInfo.CurrentCulture.Name}")
+                )
+            );
+
+            sceneManager.Scene.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
@@ -74,12 +70,7 @@ namespace BeeCreak.Core
 
         protected override void Draw(GameTime gameTime)
         {
-            if (spriteBatch is null)
-            {
-                throw new InvalidOperationException("SpriteBatch is not initialized.");
-            }
-
-            sceneManager.Draw(spriteBatch);
+            sceneManager.Draw();
 
             base.Draw(gameTime);
         }

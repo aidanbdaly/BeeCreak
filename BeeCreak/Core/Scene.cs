@@ -4,22 +4,58 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Core
 {
-    public abstract class Scene : IScene
+    public class Scene(GraphicsDevice graphicsDevice, int width, int height) : IScene
     {
+        private readonly SpriteBatch spriteBatch = new(graphicsDevice);
+
+        private readonly RenderTarget2D renderTarget = new(
+            graphicsDevice,
+            width,
+            height,
+            false,
+            SurfaceFormat.Color,
+            DepthFormat.None
+        );
+
+        private Rectangle DestinationRectangle { get; set; } = GetDestinationRectangle(graphicsDevice, width, height);
+
+        public void OnWindowResize()
+        {
+            DestinationRectangle = GetDestinationRectangle(graphicsDevice, width, height);
+        }
+
+        private static Rectangle GetDestinationRectangle(GraphicsDevice graphicsDevice, int sceneWidth, int sceneHeight)
+        {
+            int backW = graphicsDevice.PresentationParameters.BackBufferWidth;
+            int backH = graphicsDevice.PresentationParameters.BackBufferHeight;
+
+            int nativeW = sceneWidth;
+            int nativeH = sceneHeight;
+
+            float widthRatio = backW / (float)nativeW;
+            float heightRatio = backH / (float)nativeH;
+
+            var scale = Math.Max(1, Math.Min(widthRatio, heightRatio));
+
+            int drawW = (int)(nativeW * scale);
+            int drawH = (int)(nativeH * scale);
+
+            int x = (backW - drawW) / 2;  // pillarbox if any
+            int y = (backH - drawH) / 2;  // letterbox if any
+
+            return new Rectangle(x, y, drawW, drawH);
+        }
+
         private readonly List<IComponent> components = [];
 
-        public IReadOnlyList<IComponent> Components => components.AsReadOnly();
+        public required Vector2 Size { get; init; } = new(width, height);
 
         public Color Clear { get; set; } = Color.Wheat;
-
-        public int Width { get; init; }
-
-        public int Height { get; init; }
 
         public void Dispose()
         {
             GC.SuppressFinalize(this);
-            foreach (var component in Components)
+            foreach (var component in components)
             {
                 if (component is IDisposable disposable)
                 {
@@ -28,22 +64,18 @@ namespace BeeCreak.Core
             }
         }
 
-        public void AddComponent(IComponent component)
+        public Action AddComponent(IComponent component)
         {
-            component.Initialize();
             components.Add(component);
+
+            return () => components.Remove(component);
         }
 
-        public void RemoveComponent(IComponent component)
-        {
-            components.Remove(component);
-        }
-
-        public abstract void LoadContent();
+        public virtual void LoadContent() { }
 
         public void Update(GameTime gameTime)
         {
-            foreach (var component in Components)
+            foreach (var component in components)
             {
                 if (component is Components.IUpdateable updateable)
                 {
@@ -52,20 +84,34 @@ namespace BeeCreak.Core
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
-            foreach (var component in Components)
+            graphicsDevice.SetRenderTarget(renderTarget);
+            graphicsDevice.Clear(Clear);
+
+            spriteBatch.Begin(
+                sortMode: SpriteSortMode.Deferred,
+                blendState: BlendState.AlphaBlend,
+                samplerState: SamplerState.PointClamp,
+                depthStencilState: DepthStencilState.None,
+                rasterizerState: RasterizerState.CullNone
+            );
+
+            foreach (var component in components)
             {
                 if (component is IRenderable renderable)
                 {
                     renderable.Draw(spriteBatch);
                 }
             }
-        }
 
-        public bool Validate()
-        {
-            return Width > 0 && Height > 0;
+            spriteBatch.End();
+
+            graphicsDevice.SetRenderTarget(null);
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque, SamplerState.PointClamp);
+            spriteBatch.Draw(renderTarget, DestinationRectangle, Color.White);
+            spriteBatch.End();
         }
     }
 }

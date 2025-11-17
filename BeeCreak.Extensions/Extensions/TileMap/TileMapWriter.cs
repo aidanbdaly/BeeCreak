@@ -23,11 +23,11 @@ public sealed class TileMapWriter : ContentTypeWriter<TileMapContent>
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.App.Game.Readers.TileMapRecordReader, BeeCreak";
+        return "BeeCreak.Game.Readers.TileMapRecordReader, BeeCreak";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.App.Game.Models.TileMapRecord, BeeCreak";
+        return "BeeCreak.Game.Models.TileMap, BeeCreak";
     }
 }
