@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.becreak.dev/content/assets",
+  "title": "BeeCreak Content Assets",
+  "description": "Schema definitions describing the JSON payload for each BeeCreak content asset type.",
+  "x-runtimeNamespace": "BeeCreak.Game",
+  "x-runtimeAssembly": "BeeCreak",
+  "type": "object",
+  "definitions": {
+    "Animation": {
+      "x-fileExtension": ".as",
+      "title": "Animation",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique animation identifier."
+        },
+        "spriteSheet": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Sprite sheet asset id that contains the animation frames."
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "description": "Ordered list of sprite ids that form the animation."
+        }
+      },
+      "required": ["id", "spriteSheet", "data"]
+    },
+    "BoundingBoxSheet": {
+      "x-fileExtension": ".bbs",
+      "title": "BoundingBoxSheet",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "boundingBoxes": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "integer" },
+              "y": { "type": "integer" },
+              "w": { "type": "integer" },
+              "h": { "type": "integer" },
+              "width": { "type": "integer" },
+              "height": { "type": "integer" }
+            },
+            "required": ["x", "y"],
+            "allOf": [
+              {
+                "anyOf": [
+                  { "required": ["w", "h"] },
+                  { "required": ["width", "height"] }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "required": ["id", "boundingBoxes"]
+    },
+    "CellRecord": {
+      "x-fileExtension": ".crec",
+      "title": "CellRecord",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["id"]
+    },
+    "CellReference": {
+      "x-fileExtension": ".cref",
+      "title": "CellReference",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "base": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Id of the CellRecord that defines the base layout."
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "description": "Entity reference ids to spawn within this cell."
+        },
+        "tileMap": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["id", "base", "tileMap"]
+    },
+    "EntityModel": {
+      "x-fileExtension": ".erec",
+      "title": "EntityModel",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "animations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "boundingBoxSheet": {
+          "type": "string",
+          "minLength": 1
+        },
+        "behaviours": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["id", "animations", "boundingBoxSheet"]
+    },
+    "EntityReference": {
+      "x-fileExtension": ".eref",
+      "title": "EntityReference",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "base": {
+          "type": "string",
+          "minLength": 1,
+          "description": "EntityModel id this reference instantiates."
+        },
+        "cell": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Owning CellReference id."
+        },
+        "variant": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Initial animation/behaviour variant."
+        },
+        "position": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" }
+          },
+          "required": ["x", "y"]
+        }
+      },
+      "required": ["id", "base", "cell", "variant", "position"]
+    },
+    "GameRecord": {
+      "x-fileExtension": ".game",
+      "title": "GameRecord",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "activeCell": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["activeCell"]
+    },
+    "Locale": {
+      "x-fileExtension": ".json",
+      "title": "Locale",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "translations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["id", "translations"]
+    },
+    "SpriteSheet": {
+      "x-fileExtension": ".spritesheet",
+      "title": "SpriteSheet",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "image": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sprites": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "integer" },
+              "y": { "type": "integer" },
+              "w": { "type": "integer" },
+              "h": { "type": "integer" },
+              "width": { "type": "integer" },
+              "height": { "type": "integer" }
+            },
+            "required": ["x", "y"],
+            "allOf": [
+              {
+                "anyOf": [
+                  { "required": ["w", "h"] },
+                  { "required": ["width", "height"] }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "required": ["id", "image", "sprites"]
+    },
+    "TextSet": {
+      "x-fileExtension": ".bts",
+      "title": "TextSet",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "font": {
+          "type": "string"
+        },
+        "text": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["id", "font", "text"]
+    },
+    "TileMap": {
+      "x-fileExtension": ".tref",
+      "title": "TileMap",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "spritesheet": {
+          "type": "string",
+          "minLength": 1
+        },
+        "boundingBoxSheet": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tiles": {
+          "type": "object",
+          "minProperties": 1,
+          "patternProperties": {
+            "^-?\\d+_-?\\d+$": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false,
+          "description": "Map of \"x_y\" coordinates to sprite ids."
+        }
+      },
+      "required": ["id", "spritesheet", "boundingBoxSheet", "tiles"]
+    }
+  }
+}

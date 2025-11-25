@@ -1,0 +1,18 @@
+namespace {{ namespace }};
+
+public static class {{ asset.name }}Config
+{
+    public const string FileExtension = "{{ asset.file_extension }}";
+
+    public const string ImporterDisplayName = "{{ asset.name }} Importer";
+
+    public const string ProcessorDisplayName = "{{ asset.name }} Processor";
+
+    public const string DefaultProcessor = "{{ asset.name }}Processor";
+
+    public const string RuntimeReader = "{{ runtime_reader_full_name }}";
+
+    public const string RuntimeType = "{{ runtime_type_full_name }}";
+
+    public const string ContentDirectory = "{{ asset.name }}";
+}

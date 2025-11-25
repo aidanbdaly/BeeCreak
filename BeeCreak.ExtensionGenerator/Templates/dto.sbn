@@ -1,0 +1,17 @@
+{{ has_collections = false -}}
+{{ for prop in asset.properties -}}
+{{ if prop.iscollection }}{{ has_collections = true }}{{ end -}}
+{{ end -}}
+{{ if has_collections -}}
+using System.Collections.Generic;
+
+{{ end -}}
+namespace {{ namespace }};
+
+public sealed class {{ asset.name }}Dto
+{
+{{ for prop in asset.properties -}}
+    public {{ prop.cstype }} {{ prop.name }} { get; set; }{{ if prop.iscollection }} = new();{{ end }}
+
+{{ end -}}
+}

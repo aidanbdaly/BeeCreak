@@ -1,0 +1,9 @@
+using BeeCreak.Extensions.Core;
+using Microsoft.Xna.Framework.Content.Pipeline;
+
+namespace {{ namespace }};
+
+[ContentImporter({{ asset.name }}Config.FileExtension, DisplayName = {{ asset.name }}Config.ImporterDisplayName, DefaultProcessor = {{ asset.name }}Config.DefaultProcessor)]
+public sealed class {{ asset.name }}Importer : JsonImporter<{{ asset.name }}Dto>
+{
+}

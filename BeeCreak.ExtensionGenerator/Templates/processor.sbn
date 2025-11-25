@@ -1,0 +1,118 @@
+{{ has_non_collection = false -}}
+{{ for prop in asset.properties -}}
+{{ if !prop.iscollection }}{{ has_non_collection = true }}{{ end -}}
+{{ end -}}
+using Microsoft.Xna.Framework.Content.Pipeline;
+
+namespace {{ namespace }};
+
+[ContentProcessor(DisplayName = {{ asset.name }}Config.ProcessorDisplayName)]
+public sealed class {{ asset.name }}Processor : ContentProcessor<{{ asset.name }}Dto, {{ asset.name }}Content>
+{
+    public override {{ asset.name }}Content Process({{ asset.name }}Dto input, ContentProcessorContext context)
+    {
+        AssertValid(input);
+
+{{ if has_non_collection -}}
+        var content = new {{ asset.name }}Content
+        {
+{{ for prop in asset.properties -}}
+{{ if !prop.iscollection -}}
+            {{ prop.name }} = {{ if prop.isreference }}string.IsNullOrWhiteSpace(input.{{ prop.name }}) ? null : {{ prop.referenceassetname }}Loader.Load(input.{{ prop.name }}, context){{ else }}input.{{ prop.name }}{{ end }},
+{{ end -}}
+{{ end -}}
+        };
+{{ else -}}
+        var content = new {{ asset.name }}Content();
+{{ end }}
+
+{{ for prop in asset.properties -}}
+{{ if prop.isarray -}}
+
+        if (input.{{ prop.name }} is not null)
+        {
+            foreach (var item in input.{{ prop.name }})
+            {
+{{ if prop.iselementreference -}}
+{{ if prop.elementisstring -}}
+                if (string.IsNullOrWhiteSpace(item))
+                {
+                    continue;
+                }
+{{ end -}}
+                content.{{ prop.name }}.Add({{ prop.elementreferenceassetname }}Loader.Load(item, context));
+{{ else -}}
+{{ if prop.elementisstring -}}
+                content.{{ prop.name }}.Add(item ?? string.Empty);
+{{ else -}}
+                content.{{ prop.name }}.Add(item);
+{{ end -}}
+{{ end -}}
+            }
+        }
+{{ else if prop.isdictionary -}}
+
+        if (input.{{ prop.name }} is not null)
+        {
+            foreach (var entry in input.{{ prop.name }})
+            {
+{{ if prop.iselementreference -}}
+{{ if prop.elementisstring -}}
+                if (string.IsNullOrWhiteSpace(entry.Value))
+                {
+                    continue;
+                }
+{{ end -}}
+                content.{{ prop.name }}[entry.Key] = {{ prop.elementreferenceassetname }}Loader.Load(entry.Value, context);
+{{ else -}}
+                content.{{ prop.name }}[entry.Key] = entry.Value;
+{{ end -}}
+            }
+        }
+{{ end -}}
+{{ end -}}
+
+        return content;
+    }
+
+    private static void AssertValid({{ asset.name }}Dto input)
+    {
+        if (input is null)
+        {
+            throw new InvalidContentException("{{ asset.name }} payload is empty.");
+        }
+
+{{ for prop in asset.properties -}}
+{{ if prop.isrequired -}}
+{{ if prop.isstring -}}
+        if (string.IsNullOrWhiteSpace(input.{{ prop.name }}))
+        {
+            throw new InvalidContentException("{{ asset.name }} requires '{{ prop.json_name }}'.");
+        }
+
+{{ else if prop.isarray -}}
+{{~ min_items = prop.minitems ?? 0 ~}}
+        if (input.{{ prop.name }} is null{{ if min_items > 0 }} || input.{{ prop.name }}.Count < {{ min_items }}{{ end }})
+        {
+{{ if min_items > 0 -}}
+            throw new InvalidContentException("{{ asset.name }} requires at least {{ min_items }} '{{ prop.json_name }}' entries.");
+{{ else -}}
+            throw new InvalidContentException("{{ asset.name }} requires '{{ prop.json_name }}'.");
+{{ end -}}
+        }
+
+{{ else if prop.isdictionary -}}
+{{~ min_properties = prop.minproperties ?? 0 ~}}
+        if (input.{{ prop.name }} is null{{ if min_properties > 0 }} || input.{{ prop.name }}.Count < {{ min_properties }}{{ end }})
+        {
+{{ if min_properties > 0 -}}
+            throw new InvalidContentException("{{ asset.name }} requires at least {{ min_properties }} '{{ prop.json_name }}' entries.");
+{{ else -}}
+            throw new InvalidContentException("{{ asset.name }} requires '{{ prop.json_name }}'.");
+{{ end -}}
+        }
+{{ end -}}
+{{ end -}}
+{{ end -}}
+    }
+}

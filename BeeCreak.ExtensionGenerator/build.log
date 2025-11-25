@@ -1,0 +1,17 @@
+  Determining projects to restore...
+CSSM_ModuleLoad(): One or more parameters passed to a function were not valid.
+  All projects are up-to-date for restore.
+/usr/local/share/dotnet/sdk/10.0.100-rc.2.25502.107/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.RuntimeIdentifierInference.targets(351,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/BeeCreak.ExtensionGenerator.csproj]
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/Output/AnimationLoader.cs(2,17): error CS0234: The type or namespace name 'Xna' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/BeeCreak.ExtensionGenerator.csproj]
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/Output/AnimationLoader.cs(8,57): error CS0246: The type or namespace name 'ContentProcessorContext' could not be found (are you missing a using directive or an assembly reference?) [/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/BeeCreak.ExtensionGenerator.csproj]
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/Output/AnimationContent.cs(9,8): error CS0246: The type or namespace name 'SpriteSheetContent' could not be found (are you missing a using directive or an assembly reference?) [/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/BeeCreak.ExtensionGenerator.csproj]
+
+Build FAILED.
+
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/Output/AnimationLoader.cs(2,17): error CS0234: The type or namespace name 'Xna' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/BeeCreak.ExtensionGenerator.csproj]
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/Output/AnimationLoader.cs(8,57): error CS0246: The type or namespace name 'ContentProcessorContext' could not be found (are you missing a using directive or an assembly reference?) [/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/BeeCreak.ExtensionGenerator.csproj]
+/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/Output/AnimationContent.cs(9,8): error CS0246: The type or namespace name 'SpriteSheetContent' could not be found (are you missing a using directive or an assembly reference?) [/Users/aidan/Repos/Github/BeeCreak/BeeCreak.ExtensionGenerator/BeeCreak.ExtensionGenerator.csproj]
+    0 Warning(s)
+    3 Error(s)
+
+Time Elapsed 00:00:01.00

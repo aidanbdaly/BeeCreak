@@ -1,0 +1,51 @@
+using Microsoft.Xna.Framework.Content.Pipeline;
+using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
+
+namespace {{ namespace }};
+
+[ContentTypeWriter]
+public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}Content>
+{
+    protected override void Write(ContentWriter output, {{ asset.name }}Content value)
+    {
+{{ for prop in asset.properties -}}
+{{ if prop.isarray -}}
+        output.Write(value.{{ prop.name }}.Count);
+        foreach (var item in value.{{ prop.name }})
+        {
+{{ if prop.iselementreference || !prop.elementisprimitive -}}
+            output.WriteObject(item);
+{{ else if prop.elementisstring -}}
+            output.Write(item ?? string.Empty);
+{{ else -}}
+            output.Write(item);
+{{ end -}}
+        }
+
+{{ else if prop.isdictionary -}}
+        output.WriteObject(value.{{ prop.name }});
+
+{{ else if prop.isprimitive -}}
+{{ if prop.isstring -}}
+        output.Write(value.{{ prop.name }} ?? string.Empty);
+{{ else -}}
+        output.Write(value.{{ prop.name }});
+{{ end -}}
+
+{{ else -}}
+        output.WriteObject(value.{{ prop.name }});
+
+{{ end -}}
+{{ end -}}
+    }
+
+    public override string GetRuntimeReader(TargetPlatform targetPlatform)
+    {
+        return {{ asset.name }}Config.RuntimeReader;
+    }
+
+    public override string GetRuntimeType(TargetPlatform targetPlatform)
+    {
+        return {{ asset.name }}Config.RuntimeType;
+    }
+}
