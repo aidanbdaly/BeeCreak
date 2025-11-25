@@ -1,0 +1,34 @@
+using Microsoft.Xna.Framework.Content.Pipeline;
+
+namespace BeeCreak.Extension.Generated;
+
+[ContentProcessor(DisplayName = GameRecordConfig.ProcessorDisplayName)]
+public sealed class GameRecordProcessor : ContentProcessor<GameRecordDto, GameRecordContent>
+{
+    public override GameRecordContent Process(GameRecordDto input, ContentProcessorContext context)
+    {
+        AssertValid(input);
+
+var content = new GameRecordContent
+        {
+ActiveCell = input.ActiveCell,
+};
+
+
+return content;
+    }
+
+    private static void AssertValid(GameRecordDto input)
+    {
+        if (input is null)
+        {
+            throw new InvalidContentException("GameRecord payload is empty.");
+        }
+
+if (string.IsNullOrWhiteSpace(input.ActiveCell))
+        {
+            throw new InvalidContentException("GameRecord requires ''.");
+        }
+
+}
+}

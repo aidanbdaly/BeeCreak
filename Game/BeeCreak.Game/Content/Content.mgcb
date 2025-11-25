@@ -1,0 +1,88 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+/reference:../../BeeCreak.Extension/bin/Debug/net8.0/BeeCreak.Extension.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin Font/lookout.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Color
+/build:Font/lookout.spritefont
+
+#begin Image/spritesheet_menu_button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=False
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Color
+/build:Image/spritesheet_menu_button.png
+
+#begin Spritesheet/menu_button.spritesheet
+/importer:SpriteSheetImporter
+/processor:SpriteSheetProcessor
+/build:Spritesheet/menu_button.spritesheet
+
+#begin Game/default.game
+/importer:GameRecordImporter
+/processor:GameRecordProcessor
+/build:Game/default.game
+
+#begin BoundingBoxSheet/entity_player.bbs
+/importer:BoundingBoxSheetImporter
+/processor:BoundingBoxSheetProcessor
+/build:BoundingBoxSheet/entity_player.bbs
+
+#begin BoundingBoxSheet/tilemap_sofias_storm_den.bbs
+/importer:BoundingBoxSheetImporter
+/processor:BoundingBoxSheetProcessor
+/build:BoundingBoxSheet/tilemap_sofias_storm_den.bbs
+
+#begin Audio/button-hover.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/button-hover.ogg
+
+#begin Audio/button-press.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/button-press.ogg
+
+#begin EntityModel/player.erec
+/importer:EntityModelImporter
+/processor:EntityModelProcessor
+/build:EntityModel/player.erec
+
+#begin EntityReference/player_sofias_storm_den.eref
+/importer:EntityReferenceImporter
+/processor:EntityReferenceProcessor
+/build:EntityReference/player_sofias_storm_den.eref
+
+#begin TileMap/sofias_storm_den.tref
+/importer:TileMapImporter
+/processor:TileMapProcessor
+/build:TileMap/sofias_storm_den.tref
+
+#begin CellRecord/interior.crec
+/importer:CellRecordImporter
+/processor:CellRecordProcessor
+/build:CellRecord/interior.crec
+
+#begin CellReference/sofias_storm_den.cref
+/importer:CellReferenceImporter
+/processor:CellReferenceProcessor
+/build:CellReference/sofias_storm_den.cref

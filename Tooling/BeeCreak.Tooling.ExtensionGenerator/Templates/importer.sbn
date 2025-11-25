@@ -1,0 +1,40 @@
+using System;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Microsoft.Xna.Framework.Content.Pipeline;
+
+namespace {{ namespace }};
+
+[ContentImporter({{ asset.name }}Config.FileExtension, DisplayName = {{ asset.name }}Config.ImporterDisplayName, DefaultProcessor = {{ asset.name }}Config.DefaultProcessor)]
+public sealed class {{ asset.name }}Importer : ContentImporter<{{ asset.name }}Dto>
+{
+    private static readonly JsonSerializerOptions SerializerOptions = new()
+    {
+        ReadCommentHandling = JsonCommentHandling.Skip,
+        AllowTrailingCommas = true,
+        PropertyNameCaseInsensitive = true,
+        NumberHandling = JsonNumberHandling.AllowReadingFromString
+    };
+
+    public override {{ asset.name }}Dto Import(string filename, ContentImporterContext context)
+    {
+        try
+        {
+            var json = File.ReadAllText(filename);
+            var result = JsonSerializer.Deserialize<{{ asset.name }}Dto>(json, SerializerOptions);
+
+            if (result is null)
+            {
+                throw new InvalidContentException($"Failed to deserialize '{{ asset.name }}' from '{filename}'.");
+            }
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            context.Logger.LogImportantMessage($"Error importing {filename}: {ex.Message}");
+            throw;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+using System;
+using Microsoft.Xna.Framework.Content.Pipeline;
+
+namespace {{ namespace }};
+
+public static class {{ asset.name }}Loader
+{
+    public static {{ asset.name }}Content Load(string assetId, ContentProcessorContext context)
+    {
+        var assetPath = string.Concat({{ asset.name }}Config.ContentDirectory, "/", assetId, {{ asset.name }}Config.FileExtension);
+        var reference = new ExternalReference<{{ asset.name }}Content>(assetPath);
+
+        try
+        {
+            return context.BuildAndLoadAsset<{{ asset.name }}Content, {{ asset.name }}Content>(reference, {{ asset.name }}Config.DefaultProcessor);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"{{ asset.name }} '{assetId}' failed to load: {ex.Message}", ex);
+        }
+    }
+}

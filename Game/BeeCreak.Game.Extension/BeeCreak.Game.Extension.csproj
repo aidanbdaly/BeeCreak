@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <MonoGamePipelineExtension>true</MonoGamePipelineExtension>
+    <ExtensionGeneratorProject>$(MSBuildProjectDirectory)/../BeeCreak.ExtensionGenerator/BeeCreak.ExtensionGenerator.csproj</ExtensionGeneratorProject>
+    <ExtensionGeneratorSchema>$(MSBuildProjectDirectory)/schema.json</ExtensionGeneratorSchema>
+    <ExtensionGeneratorOutput>$(MSBuildProjectDirectory)/Generated</ExtensionGeneratorOutput>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.Content.Pipeline" Version="3.8.2.1105">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.2.1105">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  
+  <Target Name="RunExtensionGenerator" BeforeTargets="Build">
+    <Message Importance="High" Text="Running ExtensionGenerator against $(ExtensionGeneratorSchema) -> $(ExtensionGeneratorOutput)" />
+    <Exec Command="dotnet run --project &quot;$(ExtensionGeneratorProject)&quot; --configuration Release -- &quot;$(ExtensionGeneratorSchema)&quot; &quot;$(ExtensionGeneratorOutput)&quot;" />
+  </Target>
+</Project>
