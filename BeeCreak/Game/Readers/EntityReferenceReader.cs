@@ -9,7 +9,7 @@ public sealed class EntityReferenceReader : ContentTypeReader<EntityReference>
     protected override EntityReference Read(ContentReader input, EntityReference existingInstance)
     {
         string id = input.ReadString();
-        var baseEntity = input.ReadObject<EntityRecord>();
+        var baseEntity = input.ReadObject<EntityModel>();
         string variant = input.ReadString();
         float x = input.ReadSingle();
         float y = input.ReadSingle();

@@ -6,10 +6,7 @@ namespace BeeCreak.Core
     {
         public IScene Scene { get; set; } = sceneCollection.GetFirst();
 
-        public void UnloadScene(CancellationToken ct = default)
-        {
-            Scene.Dispose();
-        }
+        public void UnloadScene(CancellationToken ct = default) => Scene.Dispose();
 
         public void SwitchScene(string sceneId)
         {
@@ -26,14 +23,8 @@ namespace BeeCreak.Core
             Scene.RecomputeScaleUp();
         }
 
-        public void Update(GameTime gameTime)
-        {
-            Scene.Update(gameTime);
-        }
+        public void Update(GameTime gameTime) => Scene.Update(gameTime);
 
-        public void Draw()
-        {
-            Scene.Draw();
-        }
+        public void Draw() => Scene.Draw();
     }
 }

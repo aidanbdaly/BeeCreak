@@ -17,7 +17,7 @@ namespace BeeCreak.Core
             DepthFormat.None
         );
 
-        private Rectangle DestinationRectangle { get; set; } = GetDestinationRectangle(graphicsDevice, width, height);
+        public Rectangle DestinationRectangle { get; private set; } = GetDestinationRectangle(graphicsDevice, width, height);
 
         public void OnWindowResize()
         {
@@ -48,7 +48,7 @@ namespace BeeCreak.Core
 
         private readonly List<IComponent> components = [];
 
-        public required Vector2 Size { get; init; } = new(width, height);
+        public required Point Size { get; init; } = new(width, height);
 
         public Color Clear { get; set; } = Color.Wheat;
 
@@ -67,7 +67,6 @@ namespace BeeCreak.Core
         public Action AddComponent(IComponent component)
         {
             components.Add(component);
-
             return () => components.Remove(component);
         }
 

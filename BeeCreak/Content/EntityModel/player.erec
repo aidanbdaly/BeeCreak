@@ -1,0 +1,11 @@
+{
+  "id": "player",
+  "animations": [
+      "entity_player_walkDown",
+      "entity_player_walkUp",
+      "entity_player_walkLeft",
+      "entity_player_walkRight"
+  ],
+  "boundingBoxSheet": "entity_player",
+  "behaviours": ["control"]
+}

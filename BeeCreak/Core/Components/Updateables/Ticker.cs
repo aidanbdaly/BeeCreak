@@ -1,14 +1,25 @@
-using BeeCreak.Core.State;
-
 namespace BeeCreak.Core.Components
 {
-    public class Ticker(float intervalInSeconds) : Updateable
+    public interface ITicker
     {
-        private readonly float intervalInSeconds = intervalInSeconds;
+        int Ticks { get; }
 
+        Action BindOnTick(Action<int> action);
+    }
+
+    public class Ticker(float intervalInSeconds) : Updateable, ITicker
+    {
         private float elapsed = 0f;
 
-        public State<int> ticks = new(0);
+        private event Action<int>? OnTick;
+
+        public int Ticks { get; private set; } = 0;
+
+        public Action BindOnTick(Action<int> action)
+        {
+            OnTick += action;
+            return () => OnTick -= action;
+        }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
@@ -17,7 +28,8 @@ namespace BeeCreak.Core.Components
             if (elapsed >= intervalInSeconds)
             {
                 elapsed -= intervalInSeconds;
-                ticks.Value += 1;
+                Ticks++;
+                OnTick?.Invoke(Ticks);
             }
         }
     }

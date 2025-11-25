@@ -2,24 +2,39 @@ namespace BeeCreak.Core.Components
 {
     public class Timer(float durationInSeconds) : Updateable
     {
-        private readonly float durationInSeconds = durationInSeconds;
+        private event Action? OnCompletion;
 
-        public event Action? OnCompletion;
-
-        public event Action<float>? OnUpdate;
+        private event Action<float>? OnUpdate;
 
         private float elapsedTime = 0f;
 
+        private bool enabled = true;
+
+        public Action BindOnCompletion(Action onCompletion)
+        {
+            OnCompletion += onCompletion;
+            return () => OnCompletion -= onCompletion;
+        }
+
+        public Action BindOnUpdate(Action<float> onUpdate)
+        {
+            OnUpdate += onUpdate;
+            return () => OnUpdate -= onUpdate;
+        }
+
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            OnUpdate?.Invoke(elapsedTime / durationInSeconds);
-
-            if (elapsedTime >= durationInSeconds)
+            if (enabled)
             {
-                OnCompletion?.Invoke();
-                IsEnabled = false;
+                elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                OnUpdate?.Invoke(elapsedTime / durationInSeconds);
+
+                if (elapsedTime >= durationInSeconds)
+                {
+                    OnCompletion?.Invoke();
+                    enabled = false;
+                }
             }
         }
     }

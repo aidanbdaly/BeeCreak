@@ -1,6 +1,0 @@
-{
-  "id": "player",
-  "animationsheet": "entity_player",
-  "boundingBoxSheet": "entity_player",
-  "behaviours": ["control"]
-}

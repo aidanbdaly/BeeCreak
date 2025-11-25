@@ -20,7 +20,7 @@
 /processorParam:TextureFormat=Color
 /build:Font/lookout.spritefont
 
-#begin Image/menu_button.png
+#begin Image/spritesheet_menu_button.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -28,7 +28,7 @@
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Color
-/build:Image/menu_button.png
+/build:Image/spritesheet_menu_button.png
 
 #begin Spritesheet/menu_button.spritesheet
 /importer:SpriteSheetImporter

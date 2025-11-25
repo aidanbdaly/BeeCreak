@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Content;
 
 namespace BeeCreak.Game.Readers;
 
-public sealed class EntityRecordReader : ContentTypeReader<EntityRecord>
+public sealed class EntityRecordReader : ContentTypeReader<EntityModel>
 {
-    protected override EntityRecord Read(ContentReader input, EntityRecord existingInstance)
+    protected override EntityModel Read(ContentReader input, EntityModel existingInstance)
     {
         string id = input.ReadString();
-        AnimationSheet animationSheet = input.ReadObject<AnimationSheet>();
+        Animation animation = input.ReadObject<Animation>();
         BoundingBoxSheet boundingBoxSheet = input.ReadObject<BoundingBoxSheet>();
 
         int behaviourCount = input.ReadInt32();
@@ -29,6 +29,6 @@ public sealed class EntityRecordReader : ContentTypeReader<EntityRecord>
             behaviours.Add(behaviour);
         }
 
-        return new EntityRecord(id, animationSheet, boundingBoxSheet, behaviours.ToImmutable());
+        return new EntityModel(id, animation, boundingBoxSheet, behaviours.ToImmutable());
     }
 }

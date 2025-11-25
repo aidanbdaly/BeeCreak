@@ -1,15 +1,9 @@
 using BeeCreak.Core.Models;
-using BeeCreak.Core.State;
 using Microsoft.Xna.Framework;
 
 namespace BeeCreak.Game.Models;
 
-public class TileState(string spriteName)
-{
-    public State<string> SpriteName { get; init; } = new(spriteName);
-}
-
-public record TileData(Point Position, TileState State);
+public record TileData(Point Position, string SpriteName);
 
 public class TileMap(
     string id,
@@ -24,12 +18,10 @@ public class TileMap(
 
     public BoundingBoxSheet BoundingBoxSheet { get; init; } = boundingBoxSheet;
 
-    private readonly Dictionary<Point, TileState> data = data.ToDictionary(
-        kvp => kvp.Key,
-        kvp => new TileState(kvp.Value)
-    );
+    private readonly Dictionary<Point, string> data = data;
 
-    public TileState? this[Point position] => data.TryGetValue(position, out TileState? value) ? value : null;
+
+    public string? this[Point position] => data.TryGetValue(position, out var value) ? value : null;
 
     public IEnumerable<TileData> Enumerate()
     {

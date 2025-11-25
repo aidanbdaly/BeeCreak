@@ -1,41 +1,49 @@
 using BeeCreak.Core.Components;
+using BeeCreak.Core.Components.Renderables;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Core.Services
 {
-    public class TransitionService(Scene scene, GraphicsDevice graphicsDevice)
+    public class TransitionFactory(Scene scene, GraphicsDevice graphicsDevice)
     {
-        public void FadeIn(int durationInSeconds)
+        public Component FadeIn(int durationInSeconds)
         {
-            var overlay = new Texture2D(graphicsDevice, 1, 1);
+            var component = new Component();
 
-            overlay.SetData([Color.White]);
+            var graphic = new Graphic(
+                graphicsDevice,
+                new(1, 1),
+                new(new(Point.Zero, scene.Size)));
 
-            var texture = new TextureComponent(overlay,
-                new Rectangle(
-                    0,
-                    0,
-                    (int)scene.Size.X,
-                    (int)scene.Size.Y
-            ));
+            graphic.SetData([Color.White]);
 
             var timer = new Components.Timer(durationInSeconds);
 
-            timer.OnUpdate += (completionFactor) =>
-            {
-                texture.Opacity = completionFactor;
-            };
+            var updateBinding = timer.BindOnUpdate(graphic.SetOpacity);
 
-            var textureHandle = scene.AddComponent(texture);
-            var timerHandle = scene.AddComponent(timer);
-
-            timer.OnCompletion += () =>
+            var completionBinding = timer.BindOnCompletion(() =>
             {
-                textureHandle.Dispose();
-                timerHandle.Dispose();
-                overlay.Dispose();
-            };
+
+            });
+
+            component.AddRenderable(graphic);
+            component.AddUpdateable(timer);
+            component.AddBinding(updateBinding);
+            component.AddBinding(completionBinding);
+
+            return component;
+        }
+    }
+
+    public class TransitionService(Scene scene, GraphicsDevice graphicsDevice)
+    {
+        private readonly TransitionFactory transitionFactory = new(scene, graphicsDevice);
+
+        public void FadeIn(int durationInSeconds)
+        {
+            var fadeInComponent = transitionFactory.FadeIn(durationInSeconds);
+            scene.AddComponent(fadeInComponent);
         }
     }
 }

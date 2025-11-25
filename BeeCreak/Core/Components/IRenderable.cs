@@ -4,23 +4,23 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Core.Components
 {
-    public interface IRenderable 
+    public interface IRenderable
     {
         State<Vector2> Position { get; set; }
 
-        float Rotation { get; set; }
+        State<float> Rotation { get; set; }
 
-        Vector2 Scale { get; set; }
+        State<Vector2> Scale { get; set; }
 
-        Color Color { get; set; }
+        State<Color> Color { get; set; }
 
-        Vector2 Origin { get; set; }
+        State<Vector2> Origin { get; set; }
 
-        SpriteEffects Effects { get; set; }
+        State<SpriteEffects> Effects { get; set; }
 
-        float LayerDepth { get; set; }
+        State<float> LayerDepth { get; set; }
 
-        Rectangle GetBounds();
+        Rectangle Bounds { get; }
 
         void Draw(SpriteBatch spriteBatch);
     }

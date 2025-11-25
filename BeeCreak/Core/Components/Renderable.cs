@@ -4,32 +4,137 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Core.Components
 {
+    public record RenderableState(
+        State<Vector2>? Position = null,
+        State<Color>? Color = null,
+        State<float>? Opacity = null,
+        State<float>? Rotation = null,
+        State<Vector2>? Origin = null,
+        State<Vector2>? Scale = null,
+        State<SpriteEffects>? Effects = null,
+        State<float>? LayerDepth = null
+    );
+
     public abstract class Renderable(
-        Vector2 position = default,
-        Color color = default,
-        float rotation = 0f,
-        Vector2 origin = default,
-        Vector2 scale = default,
-        SpriteEffects effects = default,
-        float layerDepth = 0f
+    State<Vector2>? position = null,
+    State<Color>? color = null,
+    State<float>? opacity = null,
+    State<float>? rotation = null,
+    State<Vector2>? origin = null,
+    State<Vector2>? scale = null,
+    State<SpriteEffects>? effects = null,
+    State<float>? layerDepth = null
     ) : IRenderable
     {
-        public State<Vector2> Position { get; set; } = new(position);
+        public Renderable(RenderableState state) : this(
+            state.Position,
+            state.Color,
+            state.Opacity,
+            state.Rotation,
+            state.Origin,
+            state.Scale,
+            state.Effects,
+            state.LayerDepth)
+        { }
 
-        public Color Color { get; set; } = color;
+        public State<Vector2> Position { get; set; } = position ?? new(Vector2.Zero);
 
-        public float Rotation { get; set; } = rotation;
+        public void SetPosition(Func<Vector2, Vector2> setStateDelegate)
+        {
+            Position.Value = setStateDelegate(Position.Value);
+        }
 
-        public Vector2 Origin { get; set; } = origin;
+        public void SetPosition(Vector2 newPosition)
+        {
+            Position.Value = newPosition;
+        }
 
-        public Vector2 Scale { get; set; } = scale;
+        public State<Color> Color { get; set; } = color ?? new(default);
 
-        public SpriteEffects Effects { get; set; } = effects;
+        public void SetColor(Func<Color, Color> setStateDelegate)
+        {
+            Color.Value = setStateDelegate(Color.Value);
+        }
 
-        public float LayerDepth { get; set; } = layerDepth;
+        public void SetColor(Color newColor)
+        {
+            Color.Value = newColor;
+        }
+
+        public State<float> Opacity { get; set; } = opacity ?? new(1f);
+
+        public void SetOpacity(Func<float, float> setStateDelegate)
+        {
+            Opacity.Value = setStateDelegate(Opacity.Value);
+        }
+
+        public void SetOpacity(float newOpacity)
+        {
+            Opacity.Value = newOpacity;
+        }
+
+        public State<float> Rotation { get; set; } = rotation ?? new(0f);
+
+        public void SetRotation(Func<float, float> setStateDelegate)
+        {
+            Rotation.Value = setStateDelegate(Rotation.Value);
+        }
+
+        public void SetRotation(float newRotation)
+        {
+            Rotation.Value = newRotation;
+        }
+
+        public State<Vector2> Origin { get; set; } = origin ?? new(default);
+
+        public void SetOrigin(Func<Vector2, Vector2> setStateDelegate)
+        {
+            Origin.Value = setStateDelegate(Origin.Value);
+        }
+
+        public void SetOrigin(Vector2 newOrigin)
+        {
+            Origin.Value = newOrigin;
+        }
+
+        public State<Vector2> Scale { get; set; } = scale ?? new(Vector2.One);
+
+        public void SetScale(Func<Vector2, Vector2> setStateDelegate)
+        {
+            Scale.Value = setStateDelegate(Scale.Value);
+        }
+
+        public void SetScale(Vector2 newScale)
+        {
+            Scale.Value = newScale;
+        }
+
+        public State<SpriteEffects> Effects { get; set; } = effects ?? new(default);
+
+        public void SetEffects(Func<SpriteEffects, SpriteEffects> setStateDelegate)
+        {
+            Effects.Value = setStateDelegate(Effects.Value);
+        }
+
+        public void SetEffects(SpriteEffects newEffects)
+        {
+            Effects.Value = newEffects;
+        }
+
+        public State<float> LayerDepth { get; set; } = layerDepth ?? new(0f);
+
+        public void SetLayerDepth(Func<float, float> setStateDelegate)
+        {
+            LayerDepth.Value = setStateDelegate(LayerDepth.Value);
+        }
+
+        public void SetLayerDepth(float newLayerDepth)
+        {
+            LayerDepth.Value = newLayerDepth;
+        }
 
         public abstract void Draw(SpriteBatch spriteBatch);
 
-        public abstract Rectangle GetBounds();
+        public abstract Rectangle Bounds { get; }
     }
 }

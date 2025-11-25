@@ -7,9 +7,13 @@ namespace BeeCreak.Core
     {
         Color Clear { get; set; }
 
+        Point Size { get; }
+
+        Rectangle DestinationRectangle { get; }
+
         void LoadContent();
 
-        ComponentHandle AddComponent(IComponent component);
+        Action AddComponent(IComponent component);
 
         void Update(GameTime gameTime);
 

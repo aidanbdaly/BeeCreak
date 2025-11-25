@@ -5,7 +5,7 @@ namespace BeeCreak.Game.Models
 {
     public record EntityReference(
         string Id,
-        EntityRecord Base,
+        EntityModel Base,
         CellReference Cell,
         EntityState State
     );

@@ -33,7 +33,7 @@ namespace BeeCreak.Core.Input
 
             return false;
         }
-    
+
         public bool ButtonCycled(ButtonMap button)
         {
             var currentState = Keyboard.GetState();
@@ -59,7 +59,7 @@ namespace BeeCreak.Core.Input
             return false;
         }
 
-        public bool PointerButtonDown(PointerButtonMap button )
+        public bool PointerButtonDown(PointerButtonMap button)
         {
             var currentState = Mouse.GetState();
 
@@ -87,15 +87,11 @@ namespace BeeCreak.Core.Input
         {
             var currentState = Mouse.GetState();
 
-            Console.WriteLine("Checking pointer button cycled", button.Button.ToString());
-            Console.WriteLine(currentState.LeftButton.ToString());
-
             if (
                 button.Button == PointerButton.Left
                 && currentState.LeftButton == ButtonState.Released
                 && previousMouseState.LeftButton == ButtonState.Pressed)
             {
-                Console.WriteLine("Left button cycled");
                 return true;
             }
 
@@ -122,21 +118,10 @@ namespace BeeCreak.Core.Input
 
         public Point GetMousePosition()
         {
-            var sceneWidth = sceneManager.Scene.Width;
-            var sceneHeight = sceneManager.Scene.Height;
+            var scale = sceneManager.Scene.DestinationRectangle.Size / sceneManager.Scene.Size;
+            var offset = sceneManager.Scene.DestinationRectangle.Location;
 
-            var screen = sceneManager.DestinationRectangle;
-
-            var mousePosition = Mouse.GetState().Position;
-
-            float scaleX = screen.Width / (float)sceneWidth;
-            float scaleY = screen.Height / (float)sceneHeight;
-            int offX = screen.X;
-            int offY = screen.Y;
-
-            return new Point(
-                (int)((mousePosition.X - offX) / scaleX),
-                (int)((mousePosition.Y - offY) / scaleY));
+            return (Mouse.GetState().Position - offset) / scale;
         }
     }
 }

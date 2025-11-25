@@ -8,8 +8,6 @@ namespace BeeCreak.Intro
 
         private const int height = 360;
 
-        private readonly App app = app;
-
         public override void LoadContent()
         {
             var context = app.Services.GetService<Core.AppContext>();

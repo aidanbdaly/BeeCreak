@@ -4,20 +4,30 @@ using BeeCreak.Core.Input;
 namespace BeeCreak.Core.Components
 {
     public class MouseInteraction(
-        Renderable Ref,
-        Action OnClick,
-        Action OnHover,
+        Func<Rectangle> GetDomain,
         Func<Point> GetMousePosition,
         Func<PointerButtonMap, bool> IsMouseClicked
         ) : Updateable
     {
-        private readonly Action OnClick = OnClick;
+        private event Action? OnClick;
 
-        private readonly Action OnHover = OnHover;
+        private event Action? OnHover;
 
         private readonly Func<Point> GetMousePosition = GetMousePosition;
 
         private readonly Func<PointerButtonMap, bool> IsMouseClicked = IsMouseClicked;
+
+        public Action BindOnClick(Action onClick)
+        {
+            OnClick += onClick;
+            return () => OnClick -= onClick;
+        }
+
+        public Action BindOnHover(Action onHover)
+        {
+            OnHover += onHover;
+            return () => OnHover -= onHover;
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -33,6 +43,6 @@ namespace BeeCreak.Core.Components
                 }
             }
         }
-        private bool IsHovered => Ref.GetBounds().Contains(GetMousePosition());
+        private bool IsHovered => GetDomain().Contains(GetMousePosition());
     }
 }

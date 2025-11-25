@@ -9,24 +9,18 @@ namespace BeeCreak.Game.Domain.Entity
         Control
     }
 
-    public record EntityBehaviourContext
-    (
-        TileMap TileMap,
-        EntityReference Entity
-    );
-
     public class EntityBehaviourFactory(InputManager inputManager)
     {
-        private readonly Dictionary<EntityBehaviour, Func<EntityBehaviourContext, Updateable>> factories = new()
+        private readonly Dictionary<EntityBehaviour, Func<EntityReference, Updateable>> factories = new()
         {
-            { EntityBehaviour.Control, ctx => new ControlBehaviour(inputManager, ctx.TileMap, ctx.Entity) }
+            { EntityBehaviour.Control, entity => new ControlBehaviour(inputManager, entity) }
         };
 
-        public Updateable Create(EntityBehaviour behaviour, EntityBehaviourContext context)
+        public Updateable Create(EntityBehaviour behaviour, EntityReference entity)
         {
             if (factories.TryGetValue(behaviour, out var factory))
             {
-                return factory(context);
+                return factory(entity);
             }
 
             throw new ArgumentException($"No factory registered for behaviour {behaviour}");
