@@ -6,7 +6,7 @@ public sealed class CellReferenceContent
 {
 public string Id { get; set; }
 
-public string Base { get; set; }
+public CellRecordContent CellRecord { get; set; }
 
 public List<string> Entities { get; } = new();
 

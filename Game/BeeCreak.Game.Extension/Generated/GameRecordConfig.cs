@@ -10,9 +10,9 @@ public static class GameRecordConfig
 
     public const string DefaultProcessor = "GameRecordProcessor";
 
-    public const string RuntimeReader = "BeeCreak.Game.Readers.GameRecordReader, BeeCreak";
+    public const string RuntimeReader = "BeeCreak.Game.Readers.GameRecordReader, BeeCreak.Game";
 
-    public const string RuntimeType = "BeeCreak.Game.Models.GameRecord, BeeCreak";
+    public const string RuntimeType = "BeeCreak.Game.Models.GameRecord, BeeCreak.Game";
 
     public const string ContentDirectory = "GameRecord";
 }

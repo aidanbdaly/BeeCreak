@@ -9,10 +9,8 @@ public sealed class TileMapWriter : ContentTypeWriter<TileMapContent>
     protected override void Write(ContentWriter output, TileMapContent value)
     {
 output.Write(value.Id ?? string.Empty);
-output.WriteObject(value.Spritesheet);
-
-output.WriteObject(value.BoundingBoxSheet);
-
+output.Write(value.Spritesheet ?? string.Empty);
+output.Write(value.BoundingBoxSheet ?? string.Empty);
 output.WriteObject(value.Tiles);
 
 }

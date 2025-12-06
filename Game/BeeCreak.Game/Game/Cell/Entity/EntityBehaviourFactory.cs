@@ -1,6 +1,6 @@
-using BeeCreak.Core.Components;
-using BeeCreak.Core.Input;
+using BeeCreak.Engine;
 using BeeCreak.Game.Models;
+using Microsoft.Xna.Framework;
 
 namespace BeeCreak.Game.Domain.Entity
 {
@@ -9,14 +9,14 @@ namespace BeeCreak.Game.Domain.Entity
         Control
     }
 
-    public class EntityBehaviourFactory(InputManager inputManager)
+    public class EntityBehaviourFactory(App app)
     {
-        private readonly Dictionary<EntityBehaviour, Func<EntityReference, Updateable>> factories = new()
+        private readonly Dictionary<EntityBehaviour, Func<EntityReference, IGameComponent>> factories = new()
         {
-            { EntityBehaviour.Control, entity => new ControlBehaviour(inputManager, entity) }
+            { EntityBehaviour.Control, entity => new UserMoveable(app, entity) }
         };
 
-        public Updateable Create(EntityBehaviour behaviour, EntityReference entity)
+        public IGameComponent Create(EntityBehaviour behaviour, EntityReference entity)
         {
             if (factories.TryGetValue(behaviour, out var factory))
             {

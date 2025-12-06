@@ -12,7 +12,7 @@ public sealed class EntityModelProcessor : ContentProcessor<EntityModelDto, Enti
 var content = new EntityModelContent
         {
 Id = input.Id,
-BoundingBoxSheet = string.IsNullOrWhiteSpace(input.BoundingBoxSheet) ? null : BoundingBoxSheetLoader.Load(input.BoundingBoxSheet, context),
+BoundingBoxSheet = input.BoundingBoxSheet,
 };
 
 
@@ -20,11 +20,7 @@ if (input.Animations is not null)
         {
             foreach (var item in input.Animations)
             {
-if (string.IsNullOrWhiteSpace(item))
-                {
-                    continue;
-                }
-content.Animations.Add(AnimationLoader.Load(item, context));
+content.Animations.Add(item ?? string.Empty);
 }
         }
 if (input.Behaviours is not null)

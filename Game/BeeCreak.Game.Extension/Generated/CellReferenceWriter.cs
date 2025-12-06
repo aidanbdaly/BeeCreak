@@ -9,7 +9,8 @@ public sealed class CellReferenceWriter : ContentTypeWriter<CellReferenceContent
     protected override void Write(ContentWriter output, CellReferenceContent value)
     {
 output.Write(value.Id ?? string.Empty);
-output.Write(value.Base ?? string.Empty);
+output.WriteObject(value.CellRecord);
+
 output.Write(value.Entities.Count);
         foreach (var item in value.Entities)
         {

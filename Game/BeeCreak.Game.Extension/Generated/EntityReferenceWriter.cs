@@ -10,7 +10,6 @@ public sealed class EntityReferenceWriter : ContentTypeWriter<EntityReferenceCon
     {
 output.Write(value.Id ?? string.Empty);
 output.Write(value.Base ?? string.Empty);
-output.Write(value.Cell ?? string.Empty);
 output.Write(value.Variant ?? string.Empty);
 output.WriteObject(value.Position);
 

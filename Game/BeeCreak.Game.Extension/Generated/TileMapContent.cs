@@ -4,9 +4,9 @@ public sealed class TileMapContent
 {
 public string Id { get; set; }
 
-public SpriteSheetContent Spritesheet { get; set; }
+public string Spritesheet { get; set; }
 
-public BoundingBoxSheetContent BoundingBoxSheet { get; set; }
+public string BoundingBoxSheet { get; set; }
 
 public object Tiles { get; set; }
 

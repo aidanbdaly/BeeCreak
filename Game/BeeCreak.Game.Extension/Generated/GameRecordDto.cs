@@ -2,6 +2,6 @@ namespace BeeCreak.Extension.Generated;
 
 public sealed class GameRecordDto
 {
-public string ActiveCell { get; set; }
+public string CellReference { get; set; }
 
 }

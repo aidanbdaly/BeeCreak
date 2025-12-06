@@ -10,9 +10,9 @@ public static class EntityReferenceConfig
 
     public const string DefaultProcessor = "EntityReferenceProcessor";
 
-    public const string RuntimeReader = "BeeCreak.Game.Readers.EntityReferenceReader, BeeCreak";
+    public const string RuntimeReader = "BeeCreak.Game.Readers.EntityReferenceReader, BeeCreak.Game";
 
-    public const string RuntimeType = "BeeCreak.Game.Models.EntityReference, BeeCreak";
+    public const string RuntimeType = "BeeCreak.Game.Models.EntityReference, BeeCreak.Game";
 
     public const string ContentDirectory = "EntityReference";
 }

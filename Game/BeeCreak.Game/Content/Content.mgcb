@@ -10,7 +10,8 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:../../BeeCreak.Extension/bin/Debug/net8.0/BeeCreak.Extension.dll
+/reference:Extensions/BeeCreak.Game.Extension.dll
+/reference:Extensions/BeeCreak.Engine.Extension.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -19,6 +20,11 @@
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Color
 /build:Font/lookout.spritefont
+
+#begin Locale/en-US.json
+/importer:LocaleImporter
+/processor:LocaleProcessor
+/build:Locale/en-US.json
 
 #begin Image/spritesheet_menu_button.png
 /importer:TextureImporter

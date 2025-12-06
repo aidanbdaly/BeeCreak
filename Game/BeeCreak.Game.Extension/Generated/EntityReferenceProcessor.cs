@@ -13,7 +13,6 @@ var content = new EntityReferenceContent
         {
 Id = input.Id,
 Base = input.Base,
-Cell = input.Cell,
 Variant = input.Variant,
 Position = input.Position,
 };
@@ -35,11 +34,6 @@ if (string.IsNullOrWhiteSpace(input.Id))
         }
 
 if (string.IsNullOrWhiteSpace(input.Base))
-        {
-            throw new InvalidContentException("EntityReference requires ''.");
-        }
-
-if (string.IsNullOrWhiteSpace(input.Cell))
         {
             throw new InvalidContentException("EntityReference requires ''.");
         }

@@ -10,9 +10,9 @@ public static class CellRecordConfig
 
     public const string DefaultProcessor = "CellRecordProcessor";
 
-    public const string RuntimeReader = "BeeCreak.Game.Readers.CellRecordReader, BeeCreak";
+    public const string RuntimeReader = "BeeCreak.Game.Readers.CellRecordReader, BeeCreak.Game";
 
-    public const string RuntimeType = "BeeCreak.Game.Models.CellRecord, BeeCreak";
+    public const string RuntimeType = "BeeCreak.Game.Models.CellRecord, BeeCreak.Game";
 
     public const string ContentDirectory = "CellRecord";
 }

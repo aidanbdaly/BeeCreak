@@ -12,7 +12,7 @@ public sealed class CellReferenceProcessor : ContentProcessor<CellReferenceDto, 
 var content = new CellReferenceContent
         {
 Id = input.Id,
-Base = input.Base,
+CellRecord = string.IsNullOrWhiteSpace(input.CellRecord) ? null : CellRecordLoader.Load(input.CellRecord, context),
 TileMap = string.IsNullOrWhiteSpace(input.TileMap) ? null : TileMapLoader.Load(input.TileMap, context),
 };
 
@@ -35,11 +35,6 @@ return content;
         }
 
 if (string.IsNullOrWhiteSpace(input.Id))
-        {
-            throw new InvalidContentException("CellReference requires ''.");
-        }
-
-if (string.IsNullOrWhiteSpace(input.Base))
         {
             throw new InvalidContentException("CellReference requires ''.");
         }

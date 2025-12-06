@@ -1,0 +1,23 @@
+using BeeCreak.Engine;
+using BeeCreak.Engine.Graphics;
+using BeeCreak.Game.Domain.Entity;
+using BeeCreak.Game.Models;
+
+namespace BeeCreak.Game.Cell
+{
+    public class EntityService(App app)
+    {
+        private readonly EntityBehaviourFactory behaviourFactory = new(app);
+
+        public void Spawn(EntityReference entity)
+        {
+            var animation = new AnimationComponent(app, entity.Base.Animation);
+
+            animation.Sprite.Position = entity.State.Position;
+
+            app.Components.Add(animation);
+
+            entity.Base.Behaviours.ForEach(b => app.Components.Add(behaviourFactory.Create(b, entity)));
+        }
+    }
+}

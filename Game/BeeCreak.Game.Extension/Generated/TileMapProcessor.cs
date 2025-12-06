@@ -12,8 +12,8 @@ public sealed class TileMapProcessor : ContentProcessor<TileMapDto, TileMapConte
 var content = new TileMapContent
         {
 Id = input.Id,
-Spritesheet = string.IsNullOrWhiteSpace(input.Spritesheet) ? null : SpriteSheetLoader.Load(input.Spritesheet, context),
-BoundingBoxSheet = string.IsNullOrWhiteSpace(input.BoundingBoxSheet) ? null : BoundingBoxSheetLoader.Load(input.BoundingBoxSheet, context),
+Spritesheet = input.Spritesheet,
+BoundingBoxSheet = input.BoundingBoxSheet,
 Tiles = input.Tiles,
 };
 

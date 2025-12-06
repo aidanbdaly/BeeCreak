@@ -1,5 +1,5 @@
 using System.Collections.Immutable;
-using BeeCreak.Core.Models;
+using BeeCreak.Engine.Data.Models;
 using BeeCreak.Game.Domain.Entity;
 
 namespace BeeCreak.Game.Models

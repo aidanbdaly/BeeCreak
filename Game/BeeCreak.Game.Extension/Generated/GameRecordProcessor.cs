@@ -11,7 +11,7 @@ public sealed class GameRecordProcessor : ContentProcessor<GameRecordDto, GameRe
 
 var content = new GameRecordContent
         {
-ActiveCell = input.ActiveCell,
+CellReference = string.IsNullOrWhiteSpace(input.CellReference) ? null : CellReferenceLoader.Load(input.CellReference, context),
 };
 
 
@@ -23,11 +23,6 @@ return content;
         if (input is null)
         {
             throw new InvalidContentException("GameRecord payload is empty.");
-        }
-
-if (string.IsNullOrWhiteSpace(input.ActiveCell))
-        {
-            throw new InvalidContentException("GameRecord requires ''.");
         }
 
 }

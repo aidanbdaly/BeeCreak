@@ -12,11 +12,10 @@ output.Write(value.Id ?? string.Empty);
 output.Write(value.Animations.Count);
         foreach (var item in value.Animations)
         {
-output.WriteObject(item);
+output.Write(item ?? string.Empty);
 }
 
-output.WriteObject(value.BoundingBoxSheet);
-
+output.Write(value.BoundingBoxSheet ?? string.Empty);
 output.Write(value.Behaviours.Count);
         foreach (var item in value.Behaviours)
         {

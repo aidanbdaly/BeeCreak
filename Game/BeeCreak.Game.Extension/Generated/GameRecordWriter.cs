@@ -8,7 +8,8 @@ public sealed class GameRecordWriter : ContentTypeWriter<GameRecordContent>
 {
     protected override void Write(ContentWriter output, GameRecordContent value)
     {
-output.Write(value.ActiveCell ?? string.Empty);
+output.WriteObject(value.CellReference);
+
 }
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)

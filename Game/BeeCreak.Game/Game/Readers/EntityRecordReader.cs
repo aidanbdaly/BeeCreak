@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Immutable;
 using BeeCreak.Game.Domain.Entity;
 using BeeCreak.Game.Models;
-using BeeCreak.Core.Models;
 using Microsoft.Xna.Framework.Content;
+using BeeCreak.Engine.Data.Models;
 
 namespace BeeCreak.Game.Readers;
 

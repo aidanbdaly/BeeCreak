@@ -10,9 +10,9 @@ public static class CellReferenceConfig
 
     public const string DefaultProcessor = "CellReferenceProcessor";
 
-    public const string RuntimeReader = "BeeCreak.Game.Readers.CellReferenceReader, BeeCreak";
+    public const string RuntimeReader = "BeeCreak.Game.Readers.CellReferenceReader, BeeCreak.Game";
 
-    public const string RuntimeType = "BeeCreak.Game.Models.CellReference, BeeCreak";
+    public const string RuntimeType = "BeeCreak.Game.Models.CellReference, BeeCreak.Game";
 
     public const string ContentDirectory = "CellReference";
 }

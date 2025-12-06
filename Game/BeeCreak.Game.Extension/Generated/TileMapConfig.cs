@@ -10,9 +10,9 @@ public static class TileMapConfig
 
     public const string DefaultProcessor = "TileMapProcessor";
 
-    public const string RuntimeReader = "BeeCreak.Game.Readers.TileMapReader, BeeCreak";
+    public const string RuntimeReader = "BeeCreak.Game.Readers.TileMapReader, BeeCreak.Game";
 
-    public const string RuntimeType = "BeeCreak.Game.Models.TileMap, BeeCreak";
+    public const string RuntimeType = "BeeCreak.Game.Models.TileMap, BeeCreak.Game";
 
     public const string ContentDirectory = "TileMap";
 }
