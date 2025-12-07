@@ -1,10 +1,9 @@
-using BeeCreak.Engine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak.Engine.Services
 {
-    public class InputService(IVirtualScreenService virtualScreenService)
+    public class InputService(App app)
     {
         private KeyboardState previousState;
 
@@ -117,7 +116,7 @@ namespace BeeCreak.Engine.Services
 
         public Point GetMousePosition()
         {
-            return virtualScreenService.ToVirtualScreenCoordinates(Mouse.GetState().Position);
+            return app.VirtualScreenService.ToVirtualScreenCoordinates(Mouse.GetState().Position);
         }
     }
 }

@@ -1,10 +1,9 @@
 {
     "id" : "player_sofias_storm_den",
-    "base": "player",
-    "cell": "sofias_storm_den",
-    "variant" : "south",
+    "entity": "player",
+    "variant" : "entity_player_walkDown",
     "position" : {
-        "x" : 5,
-        "y" : 5
+        "x" : 50,
+        "y" : 50
     }
 }

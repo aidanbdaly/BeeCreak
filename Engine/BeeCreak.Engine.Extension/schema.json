@@ -35,6 +35,26 @@
       },
       "required": ["id", "spriteSheet", "data"]
     },
+    "AnimationCollection": {
+      "x-fileExension": ".asc",
+      "title": "AnimationCollection",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
     "BoundingBoxSheet": {
       "x-fileExtension": ".bbs",
       "title": "BoundingBoxSheet",
@@ -55,19 +75,9 @@
               "x": { "type": "integer" },
               "y": { "type": "integer" },
               "w": { "type": "integer" },
-              "h": { "type": "integer" },
-              "width": { "type": "integer" },
-              "height": { "type": "integer" }
+              "h": { "type": "integer" }
             },
-            "required": ["x", "y"],
-            "allOf": [
-              {
-                "anyOf": [
-                  { "required": ["w", "h"] },
-                  { "required": ["width", "height"] }
-                ]
-              }
-            ]
+            "required": ["x", "y", "w", "h"]
           }
         }
       },

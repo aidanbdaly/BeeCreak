@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
 namespace BeeCreak.Extension.Generated;
+
 [ContentTypeWriter]
 public sealed class GameRecordWriter : ContentTypeWriter<GameRecordContent>
 {
@@ -10,7 +11,7 @@ public sealed class GameRecordWriter : ContentTypeWriter<GameRecordContent>
 output.WriteObject(value.CellReference);
 }
 
-    public override string GetRuntimeReader(TargetPlatform targetPlatform)
+public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
         return "BeeCreak.Game.Readers.GameRecordReader, BeeCreak.Game";
     }

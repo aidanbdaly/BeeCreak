@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using BeeCreak.Engine.Data.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -13,23 +12,25 @@ namespace BeeCreak.Engine.Data.Readers
             string id = input.ReadString();
             var texture = input.ReadObject<Texture2D>();
 
-            int frameCount = input.ReadInt32();
-            var frames = ImmutableDictionary.CreateBuilder<string, Rectangle>();
-
-            for (int i = 0; i < frameCount; i++)
+            var dataCount = input.ReadInt32();
+            var data = new Dictionary<string, Rectangle>(dataCount);
+            for (int i = 0; i < dataCount; i++)
             {
-                string name = input.ReadString();
-                int x = input.ReadInt32();
-                int y = input.ReadInt32();
-                int w = input.ReadInt32();
-                int h = input.ReadInt32();
-                frames[name] = new Rectangle(x, y, w, h);
+                string key = input.ReadString();
+                var value = new Rectangle
+                {
+                    X = input.ReadInt32(),
+                    Y = input.ReadInt32(),
+                    Width = input.ReadInt32(),
+                    Height = input.ReadInt32(),
+                };
+                data[key] = value;
             }
 
             return new SpriteSheet(
                 id,
                 texture,
-                frames.ToImmutable()
+                data
             );
         }
     }

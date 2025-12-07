@@ -27,5 +27,15 @@ public sealed class {{ asset.name }}Dto
 
 {{ end -}}
 
+{{ if prop.iscollection && prop.elementiscomplex -}}
+    public sealed class {{ prop.elementcomplexclassname }}Dto
+    {
+{{ for nested in prop.elementcomplexproperties -}}
+        public {{ nested.cstype }} {{ nested.name }} { get; set; }{{ if nested.iscollection }} = new();{{ end }}
+
+{{ end -}}
+    }
+
+{{ end -}}
 {{ end -}}
 }

@@ -28,6 +28,15 @@ namespace BeeCreak.Engine
             }
         }
 
+        public IVirtualScreenService VirtualScreenService
+        {
+            get
+            {
+                return Services.GetService<IVirtualScreenService>()
+                ?? throw new InvalidOperationException("No virtual screen service");
+            }
+        }
+
         public SpriteBatch SpriteBatch
         {
             get
@@ -62,13 +71,9 @@ namespace BeeCreak.Engine
 
             Exiting += (_, __) => { };
 
-            Services.AddService(
-              new SceneManager(this)
-            );
-
-            Services.AddService(
-                new TranslationService(this)
-            );
+            Services.AddService(new SceneManager(this));
+            Services.AddService(new TranslationService(this));
+            Services.AddService(new InputService(this));
 
             base.Initialize();
         }

@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using BeeCreak.Game.Domain.Entity;
 using BeeCreak.Game.Models;
 using Microsoft.Xna.Framework.Content;
@@ -6,16 +5,26 @@ using BeeCreak.Engine.Data.Models;
 
 namespace BeeCreak.Game.Readers;
 
-public sealed class EntityRecordReader : ContentTypeReader<EntityModel>
+public sealed class EntityReader : ContentTypeReader<Entity>
 {
-    protected override EntityModel Read(ContentReader input, EntityModel existingInstance)
+    protected override Entity Read(ContentReader input, Entity existingInstance)
     {
         string id = input.ReadString();
-        Animation animation = input.ReadObject<Animation>();
+
+        var animationCount = input.ReadInt32();
+        var animationArray = new List<Animation>(animationCount);
+
+        for (int i = 0; i < animationCount; i++)
+        {
+            animationArray.Add(input.ReadObject<Animation>());
+        }
+
         BoundingBoxSheet boundingBoxSheet = input.ReadObject<BoundingBoxSheet>();
 
         int behaviourCount = input.ReadInt32();
-        var behaviours = ImmutableList.CreateBuilder<EntityBehaviour>();
+        var behaviourArray = new List<EntityBehaviour>(behaviourCount);
+
+        Console.WriteLine(behaviourCount);
 
         for (int i = 0; i < behaviourCount; i++)
         {
@@ -25,9 +34,9 @@ public sealed class EntityRecordReader : ContentTypeReader<EntityModel>
                 throw new InvalidOperationException($"Entity '{id}' references unknown behaviour '{behaviourId}'.");
             }
 
-            behaviours.Add(behaviour);
+            behaviourArray.Add(behaviour);
         }
 
-        return new EntityModel(id, animation, boundingBoxSheet, behaviours.ToImmutable());
+        return new Entity(id, animationArray, boundingBoxSheet, behaviourArray);
     }
 }

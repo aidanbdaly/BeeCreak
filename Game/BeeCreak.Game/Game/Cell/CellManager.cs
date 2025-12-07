@@ -25,6 +25,7 @@ namespace BeeCreak.Game.Cell
         public void ChangeCell(CellReference cell)
         {
             Cell = cell;
+
             cell.Entities.ForEach(entityService.Spawn);
         }
     }

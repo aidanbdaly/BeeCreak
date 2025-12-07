@@ -48,9 +48,7 @@ namespace BeeCreak.Engine.Services
             spriteBatch.Begin(
                 sortMode: SpriteSortMode.Deferred,
                 blendState: BlendState.AlphaBlend,
-                samplerState: SamplerState.PointClamp,
-                depthStencilState: DepthStencilState.None,
-                rasterizerState: RasterizerState.CullNone
+                samplerState: SamplerState.PointClamp
             );
         }
 

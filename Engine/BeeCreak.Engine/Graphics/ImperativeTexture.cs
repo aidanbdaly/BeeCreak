@@ -21,7 +21,7 @@ namespace BeeCreak.Engine.Graphics
 
         public State<Rectangle> SourceRectangle { get; set; } = sourceRectangle ?? new(Rectangle.Empty);
 
-        public State<Color> Color { get; set; } = color ?? new(default);
+        public State<Color> ColorState { get; set; } = color ?? new(Color.White);
 
         public State<float> Opacity { get; set; } = opacity ?? new(1f);
 
@@ -44,7 +44,7 @@ namespace BeeCreak.Engine.Graphics
                 texture,
                 Position.Value,
                 SourceRectangle.Value,
-                Color.Value,
+                ColorState.Value,
                 Rotation.Value,
                 Origin.Value,
                 Scale.Value,

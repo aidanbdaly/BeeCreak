@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Input;
 
-namespace BeeCreak.Engine.Input
+namespace BeeCreak.Engine.Services
 {
     public struct ButtonMap(Buttons button, Keys key)
     {

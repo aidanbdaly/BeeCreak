@@ -9,7 +9,7 @@ namespace BeeCreak.ExtensionGenerator
 
         public string JsonName { get; init; } = "";
 
-        public string CsType { get; init; } = "";
+        public string CsType { get; set; } = "";
 
         public bool IsRequired { get; init; }
 
@@ -85,6 +85,20 @@ namespace BeeCreak.ExtensionGenerator
 
         public IReadOnlyList<AssetProperty>? ComplexProperties { get; set; }
 
+        public bool ElementIsComplex { get; set; }
+
+        public IReadOnlyList<AssetProperty>? ElementComplexProperties { get; set; }
+
         public bool IsComplex => ComplexProperties is not null && ComplexProperties.Count > 0;
+
+        public string ComplexDtoTypeName => $"{Name}Dto";
+
+        public string ComplexContentTypeName => $"{Name}Content";
+
+        public string ElementComplexClassName => $"{Name}Entry";
+
+        public string ElementComplexDtoTypeName => $"{ElementComplexClassName}Dto";
+
+        public string ElementComplexContentTypeName => $"{ElementComplexClassName}Content";
     }
 }

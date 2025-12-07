@@ -19,10 +19,10 @@ namespace BeeCreak.Engine.Data.Readers
                 string name = input.ReadString();
                 int x = input.ReadInt32();
                 int y = input.ReadInt32();
-                int width = input.ReadInt32();
-                int height = input.ReadInt32();
+                int w = input.ReadInt32();
+                int h = input.ReadInt32();
 
-                boundingBoxes[name] = new Rectangle(x, y, width, height);
+                boundingBoxes[name] = new Rectangle(x, y, w, h);
             }
 
             return new BoundingBoxSheet(id, boundingBoxes.ToImmutable());

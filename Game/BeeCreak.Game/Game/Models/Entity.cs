@@ -1,13 +1,12 @@
-using System.Collections.Immutable;
 using BeeCreak.Engine.Data.Models;
 using BeeCreak.Game.Domain.Entity;
 
 namespace BeeCreak.Game.Models
 {
-    public record EntityModel
+    public record Entity
     (   string Id,
-        Animation Animation,
+        List<Animation> Animation,
         BoundingBoxSheet BoundingBoxSheet,
-        ImmutableList<EntityBehaviour> Behaviours
+        List<EntityBehaviour> Behaviours
     );
 }

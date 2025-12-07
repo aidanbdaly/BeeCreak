@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
 namespace BeeCreak.Extension.Generated;
+
 [ContentTypeWriter]
 public sealed class TextSetWriter : ContentTypeWriter<TextSetContent>
 {
@@ -9,11 +10,16 @@ public sealed class TextSetWriter : ContentTypeWriter<TextSetContent>
     {
 output.Write(value.Id ?? string.Empty);
 output.Write(value.Font ?? string.Empty);
-output.WriteObject(value.Text);
+output.Write(value.Text.Count);
+        foreach (var entry in value.Text)
+        {
+            output.Write(entry.Key ?? string.Empty);
+output.Write(entry.Value ?? string.Empty);
+}
 
 }
 
-    public override string GetRuntimeReader(TargetPlatform targetPlatform)
+public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
         return "BeeCreak.Engine.Data.Readers.TextSetReader, BeeCreak.Engine";
     }

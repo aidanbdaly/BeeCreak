@@ -10,6 +10,18 @@ public string Id { get; set; }
 
 public TextureContent Texture { get; set; }
 
-public Dictionary<string, object> Data { get; } = new();
+public Dictionary<string, DataEntryContent> Data { get; } = new();
+
+public sealed class DataEntryContent
+    {
+public int X { get; set; }
+
+public int Y { get; set; }
+
+public int W { get; set; }
+
+public int H { get; set; }
+
+}
 
 }

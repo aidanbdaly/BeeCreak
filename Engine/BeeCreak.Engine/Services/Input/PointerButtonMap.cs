@@ -1,4 +1,4 @@
-namespace BeeCreak.Engine.Input
+namespace BeeCreak.Engine.Services
 {
     public enum PointerButton
     {

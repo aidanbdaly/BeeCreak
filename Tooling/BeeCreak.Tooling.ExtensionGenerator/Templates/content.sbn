@@ -18,6 +18,16 @@ public sealed class {{ asset.name }}Content
 {{ if prop.iscollection -}}
     public {{ prop.contentcstype }} {{ prop.name }} { get; } = new();
 
+{{ if prop.elementiscomplex -}}
+    public sealed class {{ prop.elementcomplexclassname }}Content
+    {
+{{ for nested in prop.elementcomplexproperties -}}
+        public {{ nested.contentcstype }} {{ nested.name }} { get; set; }
+
+{{ end -}}
+    }
+
+{{ end -}}
 {{ else -}}
 {{ if prop.iscomplex -}}
     public {{ prop.name }}Content {{ prop.name }} { get; set; } = new();

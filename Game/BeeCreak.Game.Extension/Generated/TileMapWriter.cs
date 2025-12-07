@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
 namespace BeeCreak.Extension.Generated;
+
 [ContentTypeWriter]
 public sealed class TileMapWriter : ContentTypeWriter<TileMapContent>
 {
@@ -28,7 +29,7 @@ output.Write(element ?? string.Empty);
 
 }
 
-    public override string GetRuntimeReader(TargetPlatform targetPlatform)
+public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
         return "BeeCreak.Game.Readers.TileMapReader, BeeCreak.Game";
     }

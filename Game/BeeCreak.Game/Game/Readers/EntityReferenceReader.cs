@@ -11,17 +11,18 @@ public sealed class EntityReferenceReader : ContentTypeReader<EntityReference>
     {
         string id = input.ReadString();
 
-        var baseEntity = input.ReadObject<EntityModel>();
+        var entity = input.ReadObject<Entity>();
 
         string variant = input.ReadString();
-        Vector2 position = input.ReadObject<Vector2>();
+
+        var position = new Vector2(input.ReadSingle(), input.ReadSingle());
 
         var state = new EntityState
         {
             AnimationName = new(variant),
-            Position = new(position)
+            Position = new(position),
         };
 
-        return new EntityReference(id, baseEntity, state);
+        return new EntityReference(id, entity, state);
     }
 }

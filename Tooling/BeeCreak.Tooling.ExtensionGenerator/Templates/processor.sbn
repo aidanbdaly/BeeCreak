@@ -38,7 +38,9 @@ public sealed class {{ asset.name }}Processor : ContentProcessor<{{ asset.name }
         {
             foreach (var item in input.{{ prop.name }})
             {
-{{ if prop.iselementreference -}}
+{{ if prop.elementiscomplex -}}
+                content.{{ prop.name }}.Add(Map{{ prop.name }}Entry(item, context));
+{{ else if prop.iselementreference -}}
 {{ if prop.elementisstring -}}
                 if (string.IsNullOrWhiteSpace(item))
                 {
@@ -61,7 +63,9 @@ public sealed class {{ asset.name }}Processor : ContentProcessor<{{ asset.name }
         {
             foreach (var entry in input.{{ prop.name }})
             {
-{{ if prop.iselementreference -}}
+{{ if prop.elementiscomplex -}}
+                content.{{ prop.name }}[entry.Key] = Map{{ prop.name }}Entry(entry.Value, context);
+{{ else if prop.iselementreference -}}
 {{ if prop.elementisstring -}}
                 if (string.IsNullOrWhiteSpace(entry.Value))
                 {
@@ -134,6 +138,29 @@ public sealed class {{ asset.name }}Processor : ContentProcessor<{{ asset.name }
 {{ for nested in prop.complexproperties -}}
 {{ if nested.iscomplex -}}
         content.{{ nested.name }} = Map{{ prop.name }}{{ nested.name }}(input.{{ nested.name }}, context);
+{{ else if nested.isreference -}}
+        content.{{ nested.name }} = string.IsNullOrWhiteSpace(input.{{ nested.name }}) ? null : LoadAsset<{{ nested.referenceassetname }}Content>(input.{{ nested.name }}, "{{ nested.referenceassetname }}", "{{ nested.referencecontentdirectory }}", "{{ nested.referencefileextension }}", "{{ nested.referenceprocessorname }}", context);
+{{ else -}}
+        content.{{ nested.name }} = input.{{ nested.name }};
+{{ end -}}
+
+{{ end -}}
+        return content;
+    }
+
+{{ end -}}
+{{ if prop.iscollection && prop.elementiscomplex -}}
+    private static {{ asset.name }}Content.{{ prop.elementcomplexclassname }}Content Map{{ prop.name }}Entry({{ asset.name }}Dto.{{ prop.elementcomplexclassname }}Dto? input, ContentProcessorContext context)
+    {
+        if (input is null)
+        {
+            return new {{ asset.name }}Content.{{ prop.elementcomplexclassname }}Content();
+        }
+
+        var content = new {{ asset.name }}Content.{{ prop.elementcomplexclassname }}Content();
+{{ for nested in prop.elementcomplexproperties -}}
+{{ if nested.iscomplex -}}
+        content.{{ nested.name }} = Map{{ prop.name }}{{ nested.name }}Entry(input.{{ nested.name }}, context);
 {{ else if nested.isreference -}}
         content.{{ nested.name }} = string.IsNullOrWhiteSpace(input.{{ nested.name }}) ? null : LoadAsset<{{ nested.referenceassetname }}Content>(input.{{ nested.name }}, "{{ nested.referenceassetname }}", "{{ nested.referencecontentdirectory }}", "{{ nested.referencefileextension }}", "{{ nested.referenceprocessorname }}", context);
 {{ else -}}

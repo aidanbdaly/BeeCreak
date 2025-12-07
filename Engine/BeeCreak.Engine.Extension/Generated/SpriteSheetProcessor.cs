@@ -22,7 +22,7 @@ if (input.Data is not null)
         {
             foreach (var entry in input.Data)
             {
-content.Data[entry.Key] = entry.Value;
+content.Data[entry.Key] = MapDataEntry(entry.Value, context);
 }
         }
 return content;
@@ -45,6 +45,21 @@ if (string.IsNullOrWhiteSpace(input.Id))
 throw new InvalidContentException("SpriteSheet requires at least 1 '' entries.");
 }
 }
+
+private static SpriteSheetContent.DataEntryContent MapDataEntry(SpriteSheetDto.DataEntryDto? input, ContentProcessorContext context)
+    {
+        if (input is null)
+        {
+            return new SpriteSheetContent.DataEntryContent();
+        }
+
+        var content = new SpriteSheetContent.DataEntryContent();
+content.X = input.X;
+content.Y = input.Y;
+content.W = input.W;
+content.H = input.H;
+return content;
+    }
 
 private static TContent LoadAsset<TContent>(
         string assetId,

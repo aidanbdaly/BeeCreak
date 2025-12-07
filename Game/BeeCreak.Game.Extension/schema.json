@@ -51,9 +51,9 @@
       },
       "required": ["id", "base", "tileMap"]
     },
-    "EntityModel": {
+    "Entity": {
       "x-fileExtension": ".erec",
-      "title": "EntityModel",
+      "title": "Entity",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -82,7 +82,7 @@
           "uniqueItems": true
         }
       },
-      "required": ["id", "animations", "boundingBoxSheet"]
+      "required": ["id", "animations", "boundingBoxSheet", "behaviours"]
     },
     "EntityReference": {
       "x-fileExtension": ".eref",
@@ -94,7 +94,7 @@
           "type": "string",
           "minLength": 1
         },
-        "entityModel": {
+        "entity": {
           "type": "string",
           "minLength": 1
         },

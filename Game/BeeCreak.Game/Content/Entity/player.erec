@@ -7,5 +7,5 @@
       "entity_player_walkRight"
   ],
   "boundingBoxSheet": "entity_player",
-  "behaviours": ["control"]
+  "behaviours": ["Control"]
 }

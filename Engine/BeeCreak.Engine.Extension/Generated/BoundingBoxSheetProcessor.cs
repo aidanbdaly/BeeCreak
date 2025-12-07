@@ -19,7 +19,7 @@ if (input.BoundingBoxes is not null)
         {
             foreach (var entry in input.BoundingBoxes)
             {
-content.BoundingBoxes[entry.Key] = entry.Value;
+content.BoundingBoxes[entry.Key] = MapBoundingBoxesEntry(entry.Value, context);
 }
         }
 return content;
@@ -42,6 +42,21 @@ if (string.IsNullOrWhiteSpace(input.Id))
 throw new InvalidContentException("BoundingBoxSheet requires at least 1 '' entries.");
 }
 }
+
+private static BoundingBoxSheetContent.BoundingBoxesEntryContent MapBoundingBoxesEntry(BoundingBoxSheetDto.BoundingBoxesEntryDto? input, ContentProcessorContext context)
+    {
+        if (input is null)
+        {
+            return new BoundingBoxSheetContent.BoundingBoxesEntryContent();
+        }
+
+        var content = new BoundingBoxSheetContent.BoundingBoxesEntryContent();
+content.X = input.X;
+content.Y = input.Y;
+content.W = input.W;
+content.H = input.H;
+return content;
+    }
 
 private static TContent LoadAsset<TContent>(
         string assetId,

@@ -1,11 +1,11 @@
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
-namespace {{ namespace }};
 {{ for ns in required_namespaces -}}
 using {{ ns }};
 
 {{ end -}}
+namespace {{ namespace }};
 
 [ContentTypeWriter]
 public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}Content>
@@ -17,7 +17,9 @@ public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}C
         output.Write(value.{{ prop.name }}.Count);
         foreach (var item in value.{{ prop.name }})
         {
-{{ if prop.elementiscollection -}}
+{{ if prop.elementiscomplex -}}
+                Write{{ prop.name }}Entry(output, item ?? new {{ asset.name }}Content.{{ prop.elementcomplexclassname }}Content());
+{{ else if prop.elementiscollection -}}
             if (item is null)
             {
                 output.Write(0);
@@ -66,7 +68,59 @@ public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}C
         }
 
 {{ else if prop.isdictionary -}}
-        output.WriteObject(value.{{ prop.name }});
+        output.Write(value.{{ prop.name }}.Count);
+        foreach (var entry in value.{{ prop.name }})
+        {
+            output.Write(entry.Key ?? string.Empty);
+{{ if prop.elementiscomplex -}}
+                Write{{ prop.name }}Entry(output, entry.Value ?? new {{ asset.name }}Content.{{ prop.elementcomplexclassname }}Content());
+{{ else if prop.elementiscollection -}}
+            if (entry.Value is null)
+            {
+                output.Write(0);
+                continue;
+            }
+
+{{ if prop.elementcollectionisarray -}}
+            output.Write(entry.Value.Count);
+            foreach (var element in entry.Value)
+            {
+{{ if prop.elementcollectionelementisprimitive -}}
+{{ if prop.elementcollectionelementisstring -}}
+                output.Write(element ?? string.Empty);
+{{ else -}}
+                output.Write(element);
+{{ end -}}
+{{ else -}}
+                output.WriteObject(element);
+{{ end -}}
+            }
+{{ else if prop.elementcollectionisdictionary -}}
+            output.Write(entry.Value.Count);
+            foreach (var child in entry.Value)
+            {
+                output.Write(child.Key ?? string.Empty);
+{{ if prop.elementcollectionelementisprimitive -}}
+{{ if prop.elementcollectionelementisstring -}}
+                output.Write(child.Value ?? string.Empty);
+{{ else -}}
+                output.Write(child.Value);
+{{ end -}}
+{{ else -}}
+                output.WriteObject(child.Value);
+{{ end -}}
+            }
+{{ else -}}
+            output.WriteObject(entry.Value);
+{{ end -}}
+{{ else if prop.iselementreference || !prop.elementisprimitive -}}
+            output.WriteObject(entry.Value);
+{{ else if prop.elementisstring -}}
+            output.Write(entry.Value ?? string.Empty);
+{{ else -}}
+            output.Write(entry.Value);
+{{ end -}}
+        }
 
 {{ else if prop.isprimitive && !prop.isreference -}}
 {{ if prop.isstring -}}
@@ -77,9 +131,7 @@ public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}C
 
 {{ else -}}
 {{ if prop.iscomplex -}}
-{{ for nested in prop.complexproperties -}}
-        output.Write(value.{{ prop.name }}.{{ nested.name }});
-{{ end -}}
+        Write{{ prop.name }}(output, value.{{ prop.name }} ?? new {{ asset.name }}Content.{{ prop.name }}Content());
 {{ else -}}
         output.WriteObject(value.{{ prop.name }});
 {{ end -}}
@@ -87,6 +139,57 @@ public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}C
 {{ end -}}
 {{ end -}}
     }
+
+{{ for prop in asset.properties -}}
+{{ if prop.iscomplex -}}
+    private static void Write{{ prop.name }}(ContentWriter output, {{ asset.name }}Content.{{ prop.name }}Content value)
+    {
+        if (value is null)
+        {
+            value = new {{ asset.name }}Content.{{ prop.name }}Content();
+        }
+{{ for nested in prop.complexproperties -}}
+{{ if nested.iscollection -}}
+        output.WriteObject(value.{{ nested.name }});
+{{ else if nested.iscomplex -}}
+        output.WriteObject(value.{{ nested.name }});
+{{ else if nested.isreference -}}
+        output.WriteObject(value.{{ nested.name }});
+{{ else if nested.isstring -}}
+        output.Write(value.{{ nested.name }} ?? string.Empty);
+{{ else -}}
+        output.Write(value.{{ nested.name }});
+{{ end -}}
+
+{{ end -}}
+    }
+
+{{ end -}}
+{{ if prop.iscollection && prop.elementiscomplex -}}
+    private static void Write{{ prop.name }}Entry(ContentWriter output, {{ asset.name }}Content.{{ prop.elementcomplexclassname }}Content value)
+    {
+        if (value is null)
+        {
+            value = new {{ asset.name }}Content.{{ prop.elementcomplexclassname }}Content();
+        }
+{{ for nested in prop.elementcomplexproperties -}}
+{{ if nested.iscollection -}}
+        output.WriteObject(value.{{ nested.name }});
+{{ else if nested.iscomplex -}}
+        output.WriteObject(value.{{ nested.name }});
+{{ else if nested.isreference -}}
+        output.WriteObject(value.{{ nested.name }});
+{{ else if nested.isstring -}}
+        output.Write(value.{{ nested.name }} ?? string.Empty);
+{{ else -}}
+        output.Write(value.{{ nested.name }});
+{{ end -}}
+
+{{ end -}}
+    }
+
+{{ end -}}
+{{ end -}}
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {

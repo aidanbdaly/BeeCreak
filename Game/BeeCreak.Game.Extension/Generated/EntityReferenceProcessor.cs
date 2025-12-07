@@ -12,7 +12,7 @@ public sealed class EntityReferenceProcessor : ContentProcessor<EntityReferenceD
 var content = new EntityReferenceContent
         {
 Id = input.Id,
-EntityModel = string.IsNullOrWhiteSpace(input.EntityModel) ? null : LoadAsset<EntityModelContent>(input.EntityModel, "EntityModel", "EntityModel", ".erec", "EntityModelProcessor", context),
+Entity = string.IsNullOrWhiteSpace(input.Entity) ? null : LoadAsset<EntityContent>(input.Entity, "Entity", "Entity", ".erec", "EntityProcessor", context),
 Variant = input.Variant,
 Position = MapPosition(input.Position, context),
 };

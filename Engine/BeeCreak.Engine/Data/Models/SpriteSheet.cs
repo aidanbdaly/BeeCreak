@@ -8,6 +8,6 @@ namespace BeeCreak.Engine.Data.Models
     (
         string Id,
         Texture2D Texture,
-        ImmutableDictionary<string, Rectangle> Frames
+        Dictionary<string, Rectangle> Data
     );
 }

@@ -4,7 +4,7 @@ public sealed class EntityReferenceContent
 {
 public string Id { get; set; }
 
-public EntityModelContent EntityModel { get; set; }
+public EntityContent Entity { get; set; }
 
 public string Variant { get; set; }
 

@@ -33,6 +33,7 @@ namespace BeeCreak
                 app.SceneFactory.RegisterScene(
                     "PlayScene",
                     new SceneBuilder()
+                        .AddComponent(app => new DirectionalInputComponent(app))
                         .AddComponent(app => new CellComponent(app))
                         .UseResolution(800, 600)
                         .Build()

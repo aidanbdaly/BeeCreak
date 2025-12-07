@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 namespace BeeCreak.Extension.Generated;
 
 [ContentTypeWriter]
-public sealed class EntityModelWriter : ContentTypeWriter<EntityModelContent>
+public sealed class EntityWriter : ContentTypeWriter<EntityContent>
 {
-    protected override void Write(ContentWriter output, EntityModelContent value)
+    protected override void Write(ContentWriter output, EntityContent value)
     {
 output.Write(value.Id ?? string.Empty);
 output.Write(value.Animations.Count);
@@ -26,11 +26,11 @@ output.Write(item ?? string.Empty);
 
 public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.Game.Readers.EntityModelReader, BeeCreak.Game";
+        return "BeeCreak.Game.Readers.EntityReader, BeeCreak.Game";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return "BeeCreak.Game.Models.EntityModel, BeeCreak.Game";
+        return "BeeCreak.Game.Models.Entity, BeeCreak.Game";
     }
 }

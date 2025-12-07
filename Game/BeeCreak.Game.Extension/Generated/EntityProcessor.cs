@@ -2,14 +2,14 @@ using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
 namespace BeeCreak.Extension.Generated;
 
-[ContentProcessor(DisplayName = "EntityModel Processor")]
-public sealed class EntityModelProcessor : ContentProcessor<EntityModelDto, EntityModelContent>
+[ContentProcessor(DisplayName = "Entity Processor")]
+public sealed class EntityProcessor : ContentProcessor<EntityDto, EntityContent>
 {
-    public override EntityModelContent Process(EntityModelDto input, ContentProcessorContext context)
+    public override EntityContent Process(EntityDto input, ContentProcessorContext context)
     {
         AssertValid(input);
 
-var content = new EntityModelContent
+var content = new EntityContent
         {
 Id = input.Id,
 BoundingBoxSheet = string.IsNullOrWhiteSpace(input.BoundingBoxSheet) ? null : LoadAsset<BoundingBoxSheetContent>(input.BoundingBoxSheet, "BoundingBoxSheet", "BoundingBoxSheet", ".bbs", "BoundingBoxSheetProcessor", context),
@@ -37,31 +37,31 @@ content.Behaviours.Add(item ?? string.Empty);
 return content;
     }
 
-    private static void AssertValid(EntityModelDto input)
+    private static void AssertValid(EntityDto input)
     {
         if (input is null)
         {
-            throw new InvalidContentException("EntityModel payload is empty.");
+            throw new InvalidContentException("Entity payload is empty.");
         }
 
 if (string.IsNullOrWhiteSpace(input.Id))
         {
-            throw new InvalidContentException("EntityModel requires ''.");
+            throw new InvalidContentException("Entity requires ''.");
         }
 
         if (input.Animations is null || input.Animations.Count < 1)
         {
-throw new InvalidContentException("EntityModel requires at least 1 '' entries.");
+throw new InvalidContentException("Entity requires at least 1 '' entries.");
 }
 
 if (string.IsNullOrWhiteSpace(input.BoundingBoxSheet))
         {
-            throw new InvalidContentException("EntityModel requires ''.");
+            throw new InvalidContentException("Entity requires ''.");
         }
 
         if (input.Behaviours is null)
         {
-throw new InvalidContentException("EntityModel requires ''.");
+throw new InvalidContentException("Entity requires ''.");
 }
 
 }

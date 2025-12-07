@@ -15,7 +15,7 @@ namespace BeeCreak.Engine.Graphics
             Ticker.OnTick += (tickCount) =>
             {
                 var spriteName = animation.Data[tickCount % animation.Data.Count];
-                var frame = animation.SpriteSheet.Frames[spriteName];
+                var frame = animation.SpriteSheet.Data[spriteName];
                 Sprite.SourceRectangle.Set(frame);
             };
         }

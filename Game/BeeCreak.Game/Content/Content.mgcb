@@ -68,10 +68,10 @@
 /processorParam:Quality=Best
 /build:Audio/button-press.ogg
 
-#begin EntityModel/player.erec
-/importer:EntityModelImporter
-/processor:EntityModelProcessor
-/build:EntityModel/player.erec
+#begin Entity/player.erec
+/importer:EntityImporter
+/processor:EntityProcessor
+/build:Entity/player.erec
 
 #begin EntityReference/player_sofias_storm_den.eref
 /importer:EntityReferenceImporter

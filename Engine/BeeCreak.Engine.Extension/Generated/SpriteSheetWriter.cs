@@ -1,8 +1,9 @@
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
-namespace BeeCreak.Extension.Generated;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
+
+namespace BeeCreak.Extension.Generated;
 
 [ContentTypeWriter]
 public sealed class SpriteSheetWriter : ContentTypeWriter<SpriteSheetContent>
@@ -11,11 +12,28 @@ public sealed class SpriteSheetWriter : ContentTypeWriter<SpriteSheetContent>
     {
 output.Write(value.Id ?? string.Empty);
 output.WriteObject(value.Texture);
-output.WriteObject(value.Data);
+output.Write(value.Data.Count);
+        foreach (var entry in value.Data)
+        {
+            output.Write(entry.Key ?? string.Empty);
+WriteDataEntry(output, entry.Value ?? new SpriteSheetContent.DataEntryContent());
+}
 
 }
 
-    public override string GetRuntimeReader(TargetPlatform targetPlatform)
+private static void WriteDataEntry(ContentWriter output, SpriteSheetContent.DataEntryContent value)
+    {
+        if (value is null)
+        {
+            value = new SpriteSheetContent.DataEntryContent();
+        }
+output.Write(value.X);
+output.Write(value.Y);
+output.Write(value.W);
+output.Write(value.H);
+}
+
+public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
         return "BeeCreak.Engine.Data.Readers.SpriteSheetReader, BeeCreak.Engine";
     }

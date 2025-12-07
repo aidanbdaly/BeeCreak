@@ -115,6 +115,7 @@ namespace BeeCreak.ExtensionGenerator
             IReadOnlyDictionary<string, AssetReferenceMetadata> assetMetadata)
         {
             var typeInfo = DescribeSchema(propSchema);
+            var elementComplexProperties = BuildElementProperties(propSchema, assetNames, assetSchemas, assetMetadata);
             var property = new AssetProperty
             {
                 Name = ToPascalCase(propName),
@@ -139,7 +140,9 @@ namespace BeeCreak.ExtensionGenerator
                 ElementCollectionElementIsNumber = typeInfo.ElementInfo?.ElementIsNumber ?? false,
                 MinItems = propSchema.MinItems,
                 MinProperties = propSchema.MinProperties,
-                ComplexProperties = BuildNestedProperties(propSchema, assetNames, assetSchemas, assetMetadata)
+                ComplexProperties = BuildNestedProperties(propSchema, assetNames, assetSchemas, assetMetadata),
+                ElementComplexProperties = elementComplexProperties,
+                ElementIsComplex = elementComplexProperties is { Count: > 0 }
             };
 
             var referenceMatch = FindAssetMatch(property.Name, assetNames);
@@ -168,6 +171,19 @@ namespace BeeCreak.ExtensionGenerator
                 property.ElementReferenceFileExtension = metadata.FileExtension;
                 property.ElementReferenceProcessorName = metadata.ProcessorName;
                 property.ElementReferenceNamespaces = metadata.Namespaces;
+            }
+
+            if (property.ElementIsComplex)
+            {
+                var elementDtoTypeName = property.ElementComplexDtoTypeName;
+                if (property.IsArray)
+                {
+                    property.CsType = $"List<{elementDtoTypeName}>";
+                }
+                else if (property.IsDictionary)
+                {
+                    property.CsType = $"Dictionary<string, {elementDtoTypeName}>";
+                }
             }
 
             property.ContentCsType = BuildContentType(property);
@@ -200,6 +216,31 @@ namespace BeeCreak.ExtensionGenerator
             }
 
             return result;
+        }
+
+        private static IReadOnlyList<AssetProperty>? BuildElementProperties(
+            JsonSchema schema,
+            ISet<string> assetNames,
+            IReadOnlyDictionary<string, JsonSchema?> assetSchemas,
+            IReadOnlyDictionary<string, AssetReferenceMetadata> assetMetadata)
+        {
+            JsonSchema? elementSchema = null;
+
+            if (schema.Type.HasFlag(JsonObjectType.Array))
+            {
+                elementSchema = GetArrayItemSchema(schema);
+            }
+            else if (schema.AdditionalPropertiesSchema is { } additional)
+            {
+                elementSchema = additional;
+            }
+
+            if (elementSchema is null)
+            {
+                return null;
+            }
+
+            return BuildNestedProperties(elementSchema, assetNames, assetSchemas, assetMetadata);
         }
 
         private static TypeInfo DescribeSchema(JsonSchema schema)
@@ -267,6 +308,8 @@ namespace BeeCreak.ExtensionGenerator
             {
                 var elementType = property.IsElementReference
                     ? $"{property.ElementReferenceAssetName}Content"
+                    : property.ElementIsComplex
+                        ? property.ElementComplexContentTypeName
                     : property.ElementType ?? "object";
 
                 return $"List<{elementType}>";
@@ -276,6 +319,8 @@ namespace BeeCreak.ExtensionGenerator
             {
                 var valueType = property.IsElementReference
                     ? $"{property.ElementReferenceAssetName}Content"
+                    : property.ElementIsComplex
+                        ? property.ElementComplexContentTypeName
                     : property.ElementType ?? "object";
 
                 return $"Dictionary<string, {valueType}>";
