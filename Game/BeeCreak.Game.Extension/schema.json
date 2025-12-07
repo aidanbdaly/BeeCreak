@@ -94,10 +94,9 @@
           "type": "string",
           "minLength": 1
         },
-        "base": {
+        "entityModel": {
           "type": "string",
-          "minLength": 1,
-          "description": "EntityModel id this reference instantiates."
+          "minLength": 1
         },
         "variant": {
           "type": "string",
@@ -139,7 +138,7 @@
           "type": "string",
           "minLength": 1
         },
-        "spritesheet": {
+        "spriteSheet": {
           "type": "string",
           "minLength": 1
         },
@@ -147,20 +146,21 @@
           "type": "string",
           "minLength": 1
         },
-        "tiles": {
-          "type": "object",
-          "minProperties": 1,
-          "patternProperties": {
-            "^-?\\d+_-?\\d+$": {
+        "data": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
               "type": "string",
               "minLength": 1
             }
           },
-          "additionalProperties": false,
-          "description": "Map of \"x_y\" coordinates to sprite ids."
+          "description": "2D array of sprite ids representing rows and columns."
         }
       },
-      "required": ["id", "spritesheet", "boundingBoxSheet", "tiles"]
+      "required": ["id", "spritesheet", "boundingBoxSheet", "data"]
     }
   }
 }

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(SpriteSheetConfig.FileExtension, DisplayName = SpriteSheetConfig.ImporterDisplayName, DefaultProcessor = SpriteSheetConfig.DefaultProcessor)]
+[ContentImporter(".spritesheet", DisplayName = "SpriteSheet Importer", DefaultProcessor = "SpriteSheetProcessor")]
 public sealed class SpriteSheetImporter : ContentImporter<SpriteSheetDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

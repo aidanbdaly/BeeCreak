@@ -102,11 +102,11 @@
           "type": "string",
           "minLength": 1
         },
-        "image": {
+        "texture": {
           "type": "string",
           "minLength": 1
         },
-        "sprites": {
+        "data": {
           "type": "object",
           "minProperties": 1,
           "additionalProperties": {
@@ -116,23 +116,13 @@
               "x": { "type": "integer" },
               "y": { "type": "integer" },
               "w": { "type": "integer" },
-              "h": { "type": "integer" },
-              "width": { "type": "integer" },
-              "height": { "type": "integer" }
+              "h": { "type": "integer" }
             },
-            "required": ["x", "y"],
-            "allOf": [
-              {
-                "anyOf": [
-                  { "required": ["w", "h"] },
-                  { "required": ["width", "height"] }
-                ]
-              }
-            ]
+            "required": ["x", "y", "w", "h"]
           }
         }
       },
-      "required": ["id", "image", "sprites"]
+      "required": ["id", "image", "data"]
     },
     "TextSet": {
       "x-fileExtension": ".bts",

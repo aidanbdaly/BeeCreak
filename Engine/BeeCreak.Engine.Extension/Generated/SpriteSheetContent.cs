@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 
+using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
+
 namespace BeeCreak.Extension.Generated;
 
 public sealed class SpriteSheetContent
 {
 public string Id { get; set; }
 
-public string Image { get; set; }
+public TextureContent Texture { get; set; }
 
-public Dictionary<string, object> Sprites { get; } = new();
+public Dictionary<string, object> Data { get; } = new();
 
 }

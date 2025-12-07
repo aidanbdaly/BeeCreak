@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(EntityReferenceConfig.FileExtension, DisplayName = EntityReferenceConfig.ImporterDisplayName, DefaultProcessor = EntityReferenceConfig.DefaultProcessor)]
+[ContentImporter(".eref", DisplayName = "EntityReference Importer", DefaultProcessor = "EntityReferenceProcessor")]
 public sealed class EntityReferenceImporter : ContentImporter<EntityReferenceDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

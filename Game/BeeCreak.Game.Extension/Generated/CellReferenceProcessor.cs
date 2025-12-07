@@ -1,8 +1,8 @@
+using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
-
 namespace BeeCreak.Extension.Generated;
 
-[ContentProcessor(DisplayName = CellReferenceConfig.ProcessorDisplayName)]
+[ContentProcessor(DisplayName = "CellReference Processor")]
 public sealed class CellReferenceProcessor : ContentProcessor<CellReferenceDto, CellReferenceContent>
 {
     public override CellReferenceContent Process(CellReferenceDto input, ContentProcessorContext context)
@@ -12,16 +12,20 @@ public sealed class CellReferenceProcessor : ContentProcessor<CellReferenceDto, 
 var content = new CellReferenceContent
         {
 Id = input.Id,
-CellRecord = string.IsNullOrWhiteSpace(input.CellRecord) ? null : CellRecordLoader.Load(input.CellRecord, context),
-TileMap = string.IsNullOrWhiteSpace(input.TileMap) ? null : TileMapLoader.Load(input.TileMap, context),
+CellRecord = string.IsNullOrWhiteSpace(input.CellRecord) ? null : LoadAsset<CellRecordContent>(input.CellRecord, "CellRecord", "CellRecord", ".crec", "CellRecordProcessor", context),
+TileMap = string.IsNullOrWhiteSpace(input.TileMap) ? null : LoadAsset<TileMapContent>(input.TileMap, "TileMap", "TileMap", ".tref", "TileMapProcessor", context),
 };
 
 
-if (input.Entities is not null)
+if (input.EntityReferenceArray is not null)
         {
-            foreach (var item in input.Entities)
+            foreach (var item in input.EntityReferenceArray)
             {
-content.Entities.Add(item ?? string.Empty);
+if (string.IsNullOrWhiteSpace(item))
+                {
+                    continue;
+                }
+content.EntityReferenceArray.Add(LoadAsset<EntityReferenceContent>(item, "EntityReference", "EntityReference", ".eref", "EntityReferenceProcessor", context));
 }
         }
 return content;
@@ -45,4 +49,30 @@ if (string.IsNullOrWhiteSpace(input.TileMap))
         }
 
 }
+
+private static TContent LoadAsset<TContent>(
+        string assetId,
+        string assetName,
+        string directory,
+        string extension,
+        string processor,
+        ContentProcessorContext context)
+    {
+        if (string.IsNullOrWhiteSpace(assetId))
+        {
+            throw new InvalidContentException($"{assetName} reference is empty.");
+        }
+
+        var assetPath = string.Concat(directory, "/", assetId, extension);
+        var reference = new ExternalReference<TContent>(assetPath);
+
+        try
+        {
+            return context.BuildAndLoadAsset<TContent, TContent>(reference, processor);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"{assetName} '{assetId}' failed to load: {ex.Message}", ex);
+        }
+    }
 }

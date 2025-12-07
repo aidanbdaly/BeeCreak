@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using BeeCreak.ExtensionGenerator;
+﻿using BeeCreak.ExtensionGenerator;
 using NJsonSchema;
 
 class Program
@@ -17,7 +15,41 @@ class Program
         var templatesDir = LocateTemplatesDirectory();
 
         var schema = await JsonSchema.FromFileAsync(schemaPath);
-        var assets = AssetModelBuilder.Build(schema);
+        var referenceDefinitions = new Dictionary<string, JsonSchema?>(StringComparer.OrdinalIgnoreCase);
+        var builtinMetadata = new Dictionary<string, AssetReferenceMetadata>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["Texture"] = new AssetReferenceMetadata(
+                "Image",
+                ".png",
+                "TextureProcessor",
+                new[] { "Microsoft.Xna.Framework.Content.Pipeline.Graphics" })
+        };
+
+        if (args.Length > 3)
+        {
+            foreach (var referenceArg in args[3..])
+            {
+                if (string.IsNullOrWhiteSpace(referenceArg))
+                {
+                    continue;
+                }
+
+                var referencePath = ResolvePath(new[] { referenceArg }, 0, hostDirectory, "");
+                if (!File.Exists(referencePath))
+                {
+                    Console.WriteLine($"Reference schema '{referencePath}' not found; skipping.");
+                    continue;
+                }
+
+                var referenceSchema = await JsonSchema.FromFileAsync(referencePath);
+                foreach (var (referenceName, defSchema) in referenceSchema.Definitions)
+                {
+                    referenceDefinitions[referenceName] = defSchema;
+                }
+            }
+        }
+
+        var assets = AssetModelBuilder.Build(schema, referenceDefinitions, builtinMetadata);
 
         await CodeGenerator.GenerateAsync(assets, templatesDir, outputDir, ns);
     }

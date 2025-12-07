@@ -1,7 +1,7 @@
 {
   "id": "animation_entity_player",
-  "image": "spritesheet_animation_entity_player",
-  "sprites": {
+  "texture": "spritesheet_animation_entity_player",
+  "data": {
     "walk_right_0": {
       "x": 0,
       "y": 0,

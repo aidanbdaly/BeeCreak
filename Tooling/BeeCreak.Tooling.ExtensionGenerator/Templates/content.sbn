@@ -6,6 +6,10 @@
 using System.Collections.Generic;
 
 {{ end -}}
+{{ for ns in required_namespaces -}}
+using {{ ns }};
+
+{{ end -}}
 namespace {{ namespace }};
 
 public sealed class {{ asset.name }}Content
@@ -15,7 +19,21 @@ public sealed class {{ asset.name }}Content
     public {{ prop.contentcstype }} {{ prop.name }} { get; } = new();
 
 {{ else -}}
+{{ if prop.iscomplex -}}
+    public {{ prop.name }}Content {{ prop.name }} { get; set; } = new();
+
+    public sealed class {{ prop.name }}Content
+    {
+{{ for nested in prop.complexproperties -}}
+        public {{ nested.contentcstype }} {{ nested.name }} { get; set; }
+
+{{ end -}}
+    }
+
+{{ else -}}
     public {{ prop.contentcstype }} {{ prop.name }} { get; set; }
+
+{{ end -}}
 
 {{ end -}}
 {{ end -}}

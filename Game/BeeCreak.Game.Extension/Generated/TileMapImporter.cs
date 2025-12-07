@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(TileMapConfig.FileExtension, DisplayName = TileMapConfig.ImporterDisplayName, DefaultProcessor = TileMapConfig.DefaultProcessor)]
+[ContentImporter(".tref", DisplayName = "TileMap Importer", DefaultProcessor = "TileMapProcessor")]
 public sealed class TileMapImporter : ContentImporter<TileMapDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

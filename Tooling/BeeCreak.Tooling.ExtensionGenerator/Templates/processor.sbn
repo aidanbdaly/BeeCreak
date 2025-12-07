@@ -2,11 +2,16 @@
 {{ for prop in asset.properties -}}
 {{ if !prop.iscollection }}{{ has_non_collection = true }}{{ end -}}
 {{ end -}}
+using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
+{{ for ns in required_namespaces -}}
+using {{ ns }};
+
+{{ end -}}
 
 namespace {{ namespace }};
 
-[ContentProcessor(DisplayName = {{ asset.name }}Config.ProcessorDisplayName)]
+[ContentProcessor(DisplayName = "{{ asset.name }} Processor")]
 public sealed class {{ asset.name }}Processor : ContentProcessor<{{ asset.name }}Dto, {{ asset.name }}Content>
 {
     public override {{ asset.name }}Content Process({{ asset.name }}Dto input, ContentProcessorContext context)
@@ -18,7 +23,7 @@ public sealed class {{ asset.name }}Processor : ContentProcessor<{{ asset.name }
         {
 {{ for prop in asset.properties -}}
 {{ if !prop.iscollection -}}
-            {{ prop.name }} = {{ if prop.isreference }}string.IsNullOrWhiteSpace(input.{{ prop.name }}) ? null : {{ prop.referenceassetname }}Loader.Load(input.{{ prop.name }}, context){{ else }}input.{{ prop.name }}{{ end }},
+            {{ prop.name }} = {{ if prop.isreference }}string.IsNullOrWhiteSpace(input.{{ prop.name }}) ? null : LoadAsset<{{ prop.referenceassetname }}Content>(input.{{ prop.name }}, "{{ prop.referenceassetname }}", "{{ prop.referencecontentdirectory }}", "{{ prop.referencefileextension }}", "{{ prop.referenceprocessorname }}", context){{ else if prop.iscomplex }}Map{{ prop.name }}(input.{{ prop.name }}, context){{ else }}input.{{ prop.name }}{{ end }},
 {{ end -}}
 {{ end -}}
         };
@@ -40,7 +45,7 @@ public sealed class {{ asset.name }}Processor : ContentProcessor<{{ asset.name }
                     continue;
                 }
 {{ end -}}
-                content.{{ prop.name }}.Add({{ prop.elementreferenceassetname }}Loader.Load(item, context));
+                content.{{ prop.name }}.Add(LoadAsset<{{ prop.elementreferenceassetname }}Content>(item, "{{ prop.elementreferenceassetname }}", "{{ prop.elementreferencecontentdirectory }}", "{{ prop.elementreferencefileextension }}", "{{ prop.elementreferenceprocessorname }}", context));
 {{ else -}}
 {{ if prop.elementisstring -}}
                 content.{{ prop.name }}.Add(item ?? string.Empty);
@@ -63,7 +68,7 @@ public sealed class {{ asset.name }}Processor : ContentProcessor<{{ asset.name }
                     continue;
                 }
 {{ end -}}
-                content.{{ prop.name }}[entry.Key] = {{ prop.elementreferenceassetname }}Loader.Load(entry.Value, context);
+                content.{{ prop.name }}[entry.Key] = LoadAsset<{{ prop.elementreferenceassetname }}Content>(entry.Value, "{{ prop.elementreferenceassetname }}", "{{ prop.elementreferencecontentdirectory }}", "{{ prop.elementreferencefileextension }}", "{{ prop.elementreferenceprocessorname }}", context);
 {{ else -}}
                 content.{{ prop.name }}[entry.Key] = entry.Value;
 {{ end -}}
@@ -114,5 +119,56 @@ public sealed class {{ asset.name }}Processor : ContentProcessor<{{ asset.name }
 {{ end -}}
 {{ end -}}
 {{ end -}}
+    }
+
+{{ for prop in asset.properties -}}
+{{ if prop.iscomplex -}}
+    private static {{ asset.name }}Content.{{ prop.name }}Content Map{{ prop.name }}({{ asset.name }}Dto.{{ prop.name }}Dto? input, ContentProcessorContext context)
+    {
+        if (input is null)
+        {
+            return new {{ asset.name }}Content.{{ prop.name }}Content();
+        }
+
+        var content = new {{ asset.name }}Content.{{ prop.name }}Content();
+{{ for nested in prop.complexproperties -}}
+{{ if nested.iscomplex -}}
+        content.{{ nested.name }} = Map{{ prop.name }}{{ nested.name }}(input.{{ nested.name }}, context);
+{{ else if nested.isreference -}}
+        content.{{ nested.name }} = string.IsNullOrWhiteSpace(input.{{ nested.name }}) ? null : LoadAsset<{{ nested.referenceassetname }}Content>(input.{{ nested.name }}, "{{ nested.referenceassetname }}", "{{ nested.referencecontentdirectory }}", "{{ nested.referencefileextension }}", "{{ nested.referenceprocessorname }}", context);
+{{ else -}}
+        content.{{ nested.name }} = input.{{ nested.name }};
+{{ end -}}
+
+{{ end -}}
+        return content;
+    }
+
+{{ end -}}
+{{ end -}}
+    private static TContent LoadAsset<TContent>(
+        string assetId,
+        string assetName,
+        string directory,
+        string extension,
+        string processor,
+        ContentProcessorContext context)
+    {
+        if (string.IsNullOrWhiteSpace(assetId))
+        {
+            throw new InvalidContentException($"{assetName} reference is empty.");
+        }
+
+        var assetPath = string.Concat(directory, "/", assetId, extension);
+        var reference = new ExternalReference<TContent>(assetPath);
+
+        try
+        {
+            return context.BuildAndLoadAsset<TContent, TContent>(reference, processor);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"{assetName} '{assetId}' failed to load: {ex.Message}", ex);
+        }
     }
 }

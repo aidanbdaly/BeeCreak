@@ -1,8 +1,8 @@
+using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
-
 namespace BeeCreak.Extension.Generated;
 
-[ContentProcessor(DisplayName = TextSetConfig.ProcessorDisplayName)]
+[ContentProcessor(DisplayName = "TextSet Processor")]
 public sealed class TextSetProcessor : ContentProcessor<TextSetDto, TextSetContent>
 {
     public override TextSetContent Process(TextSetDto input, ContentProcessorContext context)
@@ -48,4 +48,30 @@ if (string.IsNullOrWhiteSpace(input.Font))
 throw new InvalidContentException("TextSet requires ''.");
 }
 }
+
+private static TContent LoadAsset<TContent>(
+        string assetId,
+        string assetName,
+        string directory,
+        string extension,
+        string processor,
+        ContentProcessorContext context)
+    {
+        if (string.IsNullOrWhiteSpace(assetId))
+        {
+            throw new InvalidContentException($"{assetName} reference is empty.");
+        }
+
+        var assetPath = string.Concat(directory, "/", assetId, extension);
+        var reference = new ExternalReference<TContent>(assetPath);
+
+        try
+        {
+            return context.BuildAndLoadAsset<TContent, TContent>(reference, processor);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"{assetName} '{assetId}' failed to load: {ex.Message}", ex);
+        }
+    }
 }

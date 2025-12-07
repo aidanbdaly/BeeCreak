@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
 namespace BeeCreak.Extension.Generated;
-
 [ContentTypeWriter]
 public sealed class LocaleWriter : ContentTypeWriter<LocaleContent>
 {
@@ -15,11 +14,11 @@ output.WriteObject(value.Translations);
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return LocaleConfig.RuntimeReader;
+        return "BeeCreak.Engine.Data.Readers.LocaleReader, BeeCreak.Engine";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return LocaleConfig.RuntimeType;
+        return "BeeCreak.Engine.Data.Models.Locale, BeeCreak.Engine";
     }
 }

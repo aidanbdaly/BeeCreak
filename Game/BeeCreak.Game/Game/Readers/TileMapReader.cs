@@ -13,16 +13,22 @@ public sealed class TileMapReader : ContentTypeReader<TileMap>
         SpriteSheet spriteSheet = input.ReadObject<SpriteSheet>();
         BoundingBoxSheet boundingBoxSheet = input.ReadObject<BoundingBoxSheet>();
 
-        int tileCount = input.ReadInt32();
-
         var tiles = new Dictionary<Point, string>();
 
-        for (int i = 0; i < tileCount; i++)
+        int rowCount = input.ReadInt32();
+        for (int y = 0; y < rowCount; y++)
         {
-            int x = input.ReadInt32();
-            int y = input.ReadInt32();
-            string spriteId = input.ReadString();
-            tiles[new Point(x, y)] = spriteId;
+            int columnCount = input.ReadInt32();
+            for (int x = 0; x < columnCount; x++)
+            {
+                var spriteId = input.ReadString();
+                if (string.IsNullOrWhiteSpace(spriteId))
+                {
+                    continue;
+                }
+
+                tiles[new Point(x, y)] = spriteId;
+            }
         }
 
         return new TileMap(id, spriteSheet, boundingBoxSheet, tiles);

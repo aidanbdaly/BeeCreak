@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(BoundingBoxSheetConfig.FileExtension, DisplayName = BoundingBoxSheetConfig.ImporterDisplayName, DefaultProcessor = BoundingBoxSheetConfig.DefaultProcessor)]
+[ContentImporter(".bbs", DisplayName = "BoundingBoxSheet Importer", DefaultProcessor = "BoundingBoxSheetProcessor")]
 public sealed class BoundingBoxSheetImporter : ContentImporter<BoundingBoxSheetDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

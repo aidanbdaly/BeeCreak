@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(EntityModelConfig.FileExtension, DisplayName = EntityModelConfig.ImporterDisplayName, DefaultProcessor = EntityModelConfig.DefaultProcessor)]
+[ContentImporter(".erec", DisplayName = "EntityModel Importer", DefaultProcessor = "EntityModelProcessor")]
 public sealed class EntityModelImporter : ContentImporter<EntityModelDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

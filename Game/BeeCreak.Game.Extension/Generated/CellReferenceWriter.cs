@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
 namespace BeeCreak.Extension.Generated;
-
 [ContentTypeWriter]
 public sealed class CellReferenceWriter : ContentTypeWriter<CellReferenceContent>
 {
@@ -10,24 +9,22 @@ public sealed class CellReferenceWriter : ContentTypeWriter<CellReferenceContent
     {
 output.Write(value.Id ?? string.Empty);
 output.WriteObject(value.CellRecord);
-
-output.Write(value.Entities.Count);
-        foreach (var item in value.Entities)
+output.Write(value.EntityReferenceArray.Count);
+        foreach (var item in value.EntityReferenceArray)
         {
-output.Write(item ?? string.Empty);
+output.WriteObject(item);
 }
 
 output.WriteObject(value.TileMap);
-
 }
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return CellReferenceConfig.RuntimeReader;
+        return "BeeCreak.Game.Readers.CellReferenceReader, BeeCreak.Game";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return CellReferenceConfig.RuntimeType;
+        return "BeeCreak.Game.Models.CellReference, BeeCreak.Game";
     }
 }

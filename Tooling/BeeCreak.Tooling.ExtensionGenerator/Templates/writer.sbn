@@ -2,6 +2,10 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
 namespace {{ namespace }};
+{{ for ns in required_namespaces -}}
+using {{ ns }};
+
+{{ end -}}
 
 [ContentTypeWriter]
 public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}Content>
@@ -13,7 +17,46 @@ public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}C
         output.Write(value.{{ prop.name }}.Count);
         foreach (var item in value.{{ prop.name }})
         {
-{{ if prop.iselementreference || !prop.elementisprimitive -}}
+{{ if prop.elementiscollection -}}
+            if (item is null)
+            {
+                output.Write(0);
+                continue;
+            }
+
+{{ if prop.elementcollectionisarray -}}
+            output.Write(item.Count);
+            foreach (var element in item)
+            {
+{{ if prop.elementcollectionelementisprimitive -}}
+{{ if prop.elementcollectionelementisstring -}}
+                output.Write(element ?? string.Empty);
+{{ else -}}
+                output.Write(element);
+{{ end -}}
+{{ else -}}
+                output.WriteObject(element);
+{{ end -}}
+            }
+{{ else if prop.elementcollectionisdictionary -}}
+            output.Write(item.Count);
+            foreach (var entry in item)
+            {
+                output.Write(entry.Key ?? string.Empty);
+{{ if prop.elementcollectionelementisprimitive -}}
+{{ if prop.elementcollectionelementisstring -}}
+                output.Write(entry.Value ?? string.Empty);
+{{ else -}}
+                output.Write(entry.Value);
+{{ end -}}
+{{ else -}}
+                output.WriteObject(entry.Value);
+{{ end -}}
+            }
+{{ else -}}
+            output.WriteObject(item);
+{{ end -}}
+{{ else if prop.iselementreference || !prop.elementisprimitive -}}
             output.WriteObject(item);
 {{ else if prop.elementisstring -}}
             output.Write(item ?? string.Empty);
@@ -33,7 +76,13 @@ public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}C
 {{ end -}}
 
 {{ else -}}
+{{ if prop.iscomplex -}}
+{{ for nested in prop.complexproperties -}}
+        output.Write(value.{{ prop.name }}.{{ nested.name }});
+{{ end -}}
+{{ else -}}
         output.WriteObject(value.{{ prop.name }});
+{{ end -}}
 
 {{ end -}}
 {{ end -}}
@@ -41,11 +90,11 @@ public sealed class {{ asset.name }}Writer : ContentTypeWriter<{{ asset.name }}C
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return {{ asset.name }}Config.RuntimeReader;
+        return "{{ runtime_reader_full_name }}";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return {{ asset.name }}Config.RuntimeType;
+        return "{{ runtime_type_full_name }}";
     }
 }

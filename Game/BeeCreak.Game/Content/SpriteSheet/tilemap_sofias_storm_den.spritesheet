@@ -1,18 +1,18 @@
 {
   "id": "tilemap_sofias_storm_den",
-  "image": "spritesheet_menu_button",
-  "sprites": {
+  "texture": "spritesheet_menu_button",
+  "data": {
     "normal": {
       "x": 0,
       "y": 0,
-      "width": 64,
-      "height": 36
+      "w": 64,
+      "h": 36
     },
     "hovered": {
       "x": 64,
       "y": 0,
-      "width": 64,
-      "height": 36
+      "w": 64,
+      "h": 36
     }
   }
 }

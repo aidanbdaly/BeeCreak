@@ -11,7 +11,21 @@ namespace {{ namespace }};
 public sealed class {{ asset.name }}Dto
 {
 {{ for prop in asset.properties -}}
+{{ if prop.iscomplex -}}
+    public {{ prop.name }}Dto {{ prop.name }} { get; set; }
+
+    public sealed class {{ prop.name }}Dto
+    {
+{{ for nested in prop.complexproperties -}}
+        public {{ nested.cstype }} {{ nested.name }} { get; set; }{{ if nested.iscollection }} = new();{{ end }}
+
+{{ end -}}
+    }
+
+{{ else -}}
     public {{ prop.cstype }} {{ prop.name }} { get; set; }{{ if prop.iscollection }} = new();{{ end }}
+
+{{ end -}}
 
 {{ end -}}
 }

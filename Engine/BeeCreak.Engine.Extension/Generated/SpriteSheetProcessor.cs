@@ -1,8 +1,10 @@
+using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
+using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentProcessor(DisplayName = SpriteSheetConfig.ProcessorDisplayName)]
+[ContentProcessor(DisplayName = "SpriteSheet Processor")]
 public sealed class SpriteSheetProcessor : ContentProcessor<SpriteSheetDto, SpriteSheetContent>
 {
     public override SpriteSheetContent Process(SpriteSheetDto input, ContentProcessorContext context)
@@ -12,15 +14,15 @@ public sealed class SpriteSheetProcessor : ContentProcessor<SpriteSheetDto, Spri
 var content = new SpriteSheetContent
         {
 Id = input.Id,
-Image = input.Image,
+Texture = string.IsNullOrWhiteSpace(input.Texture) ? null : LoadAsset<TextureContent>(input.Texture, "Texture", "Image", ".png", "TextureProcessor", context),
 };
 
 
-if (input.Sprites is not null)
+if (input.Data is not null)
         {
-            foreach (var entry in input.Sprites)
+            foreach (var entry in input.Data)
             {
-content.Sprites[entry.Key] = entry.Value;
+content.Data[entry.Key] = entry.Value;
 }
         }
 return content;
@@ -38,14 +40,35 @@ if (string.IsNullOrWhiteSpace(input.Id))
             throw new InvalidContentException("SpriteSheet requires ''.");
         }
 
-if (string.IsNullOrWhiteSpace(input.Image))
-        {
-            throw new InvalidContentException("SpriteSheet requires ''.");
-        }
-
-        if (input.Sprites is null || input.Sprites.Count < 1)
+        if (input.Data is null || input.Data.Count < 1)
         {
 throw new InvalidContentException("SpriteSheet requires at least 1 '' entries.");
 }
 }
+
+private static TContent LoadAsset<TContent>(
+        string assetId,
+        string assetName,
+        string directory,
+        string extension,
+        string processor,
+        ContentProcessorContext context)
+    {
+        if (string.IsNullOrWhiteSpace(assetId))
+        {
+            throw new InvalidContentException($"{assetName} reference is empty.");
+        }
+
+        var assetPath = string.Concat(directory, "/", assetId, extension);
+        var reference = new ExternalReference<TContent>(assetPath);
+
+        try
+        {
+            return context.BuildAndLoadAsset<TContent, TContent>(reference, processor);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"{assetName} '{assetId}' failed to load: {ex.Message}", ex);
+        }
+    }
 }

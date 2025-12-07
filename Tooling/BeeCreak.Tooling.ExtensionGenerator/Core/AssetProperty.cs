@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace BeeCreak.ExtensionGenerator
 {
     public class AssetProperty
@@ -32,7 +35,24 @@ namespace BeeCreak.ExtensionGenerator
 
         public bool IsCollection => IsArray || IsDictionary;
 
+        public bool ElementIsCollection { get; init; }
+
+        public bool ElementCollectionIsArray { get; init; }
+
+        public bool ElementCollectionIsDictionary { get; init; }
+
+        public string? ElementCollectionElementType { get; init; }
+
+        public bool ElementCollectionElementIsString { get; init; }
+
+        public bool ElementCollectionElementIsBoolean { get; init; }
+
+        public bool ElementCollectionElementIsNumber { get; init; }
+
         public bool ElementIsPrimitive => ElementIsString || ElementIsBoolean || ElementIsNumber;
+
+        public bool ElementCollectionElementIsPrimitive =>
+            ElementCollectionElementIsString || ElementCollectionElementIsBoolean || ElementCollectionElementIsNumber;
 
         public string? ReferenceAssetName { get; set; }
 
@@ -41,6 +61,21 @@ namespace BeeCreak.ExtensionGenerator
         public bool IsReference => !string.IsNullOrWhiteSpace(ReferenceAssetName);
 
         public bool IsElementReference => !string.IsNullOrWhiteSpace(ElementReferenceAssetName);
+        public string ReferenceContentDirectory { get; set; } = "";
+
+        public string ReferenceFileExtension { get; set; } = ".json";
+
+        public string ReferenceProcessorName { get; set; } = "";
+
+        public IReadOnlyCollection<string> ReferenceNamespaces { get; set; } = Array.Empty<string>();
+
+        public string ElementReferenceContentDirectory { get; set; } = "";
+
+        public string ElementReferenceFileExtension { get; set; } = ".json";
+
+        public string ElementReferenceProcessorName { get; set; } = "";
+
+        public IReadOnlyCollection<string> ElementReferenceNamespaces { get; set; } = Array.Empty<string>();
 
         public string ContentCsType { get; set; } = "";
 
@@ -48,6 +83,8 @@ namespace BeeCreak.ExtensionGenerator
 
         public int? MinProperties { get; init; }
 
-        public bool IsComplex => !IsPrimitive && !IsCollection;
+        public IReadOnlyList<AssetProperty>? ComplexProperties { get; set; }
+
+        public bool IsComplex => ComplexProperties is not null && ComplexProperties.Count > 0;
     }
 }

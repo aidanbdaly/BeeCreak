@@ -1,8 +1,8 @@
+using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
-
 namespace BeeCreak.Extension.Generated;
 
-[ContentProcessor(DisplayName = EntityModelConfig.ProcessorDisplayName)]
+[ContentProcessor(DisplayName = "EntityModel Processor")]
 public sealed class EntityModelProcessor : ContentProcessor<EntityModelDto, EntityModelContent>
 {
     public override EntityModelContent Process(EntityModelDto input, ContentProcessorContext context)
@@ -12,7 +12,7 @@ public sealed class EntityModelProcessor : ContentProcessor<EntityModelDto, Enti
 var content = new EntityModelContent
         {
 Id = input.Id,
-BoundingBoxSheet = input.BoundingBoxSheet,
+BoundingBoxSheet = string.IsNullOrWhiteSpace(input.BoundingBoxSheet) ? null : LoadAsset<BoundingBoxSheetContent>(input.BoundingBoxSheet, "BoundingBoxSheet", "BoundingBoxSheet", ".bbs", "BoundingBoxSheetProcessor", context),
 };
 
 
@@ -20,7 +20,11 @@ if (input.Animations is not null)
         {
             foreach (var item in input.Animations)
             {
-content.Animations.Add(item ?? string.Empty);
+if (string.IsNullOrWhiteSpace(item))
+                {
+                    continue;
+                }
+content.Animations.Add(LoadAsset<AnimationContent>(item, "Animation", "Animation", ".as", "AnimationProcessor", context));
 }
         }
 if (input.Behaviours is not null)
@@ -56,4 +60,30 @@ if (string.IsNullOrWhiteSpace(input.BoundingBoxSheet))
         }
 
 }
+
+private static TContent LoadAsset<TContent>(
+        string assetId,
+        string assetName,
+        string directory,
+        string extension,
+        string processor,
+        ContentProcessorContext context)
+    {
+        if (string.IsNullOrWhiteSpace(assetId))
+        {
+            throw new InvalidContentException($"{assetName} reference is empty.");
+        }
+
+        var assetPath = string.Concat(directory, "/", assetId, extension);
+        var reference = new ExternalReference<TContent>(assetPath);
+
+        try
+        {
+            return context.BuildAndLoadAsset<TContent, TContent>(reference, processor);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"{assetName} '{assetId}' failed to load: {ex.Message}", ex);
+        }
+    }
 }

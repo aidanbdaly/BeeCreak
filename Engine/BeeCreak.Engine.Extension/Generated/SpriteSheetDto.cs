@@ -6,8 +6,8 @@ public sealed class SpriteSheetDto
 {
 public string Id { get; set; }
 
-public string Image { get; set; }
+public string Texture { get; set; }
 
-public Dictionary<string, object> Sprites { get; set; } = new();
+public Dictionary<string, object> Data { get; set; } = new();
 
 }

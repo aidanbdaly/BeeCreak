@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(GameRecordConfig.FileExtension, DisplayName = GameRecordConfig.ImporterDisplayName, DefaultProcessor = GameRecordConfig.DefaultProcessor)]
+[ContentImporter(".game", DisplayName = "GameRecord Importer", DefaultProcessor = "GameRecordProcessor")]
 public sealed class GameRecordImporter : ContentImporter<GameRecordDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

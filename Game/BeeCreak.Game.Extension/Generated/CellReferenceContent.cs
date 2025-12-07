@@ -8,7 +8,7 @@ public string Id { get; set; }
 
 public CellRecordContent CellRecord { get; set; }
 
-public List<string> Entities { get; } = new();
+public List<EntityReferenceContent> EntityReferenceArray { get; } = new();
 
 public TileMapContent TileMap { get; set; }
 

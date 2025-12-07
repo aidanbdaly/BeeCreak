@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(LocaleConfig.FileExtension, DisplayName = LocaleConfig.ImporterDisplayName, DefaultProcessor = LocaleConfig.DefaultProcessor)]
+[ContentImporter(".json", DisplayName = "Locale Importer", DefaultProcessor = "LocaleProcessor")]
 public sealed class LocaleImporter : ContentImporter<LocaleDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

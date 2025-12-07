@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
 namespace BeeCreak.Extension.Generated;
-
 [ContentTypeWriter]
 public sealed class AnimationWriter : ContentTypeWriter<AnimationContent>
 {
@@ -10,7 +9,6 @@ public sealed class AnimationWriter : ContentTypeWriter<AnimationContent>
     {
 output.Write(value.Id ?? string.Empty);
 output.WriteObject(value.SpriteSheet);
-
 output.Write(value.Data.Count);
         foreach (var item in value.Data)
         {
@@ -21,11 +19,11 @@ output.Write(item ?? string.Empty);
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return AnimationConfig.RuntimeReader;
+        return "BeeCreak.Engine.Data.Readers.AnimationReader, BeeCreak.Engine";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return AnimationConfig.RuntimeType;
+        return "BeeCreak.Engine.Data.Models.Animation, BeeCreak.Engine";
     }
 }

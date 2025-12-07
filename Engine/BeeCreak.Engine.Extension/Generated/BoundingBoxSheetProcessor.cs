@@ -1,8 +1,8 @@
+using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
-
 namespace BeeCreak.Extension.Generated;
 
-[ContentProcessor(DisplayName = BoundingBoxSheetConfig.ProcessorDisplayName)]
+[ContentProcessor(DisplayName = "BoundingBoxSheet Processor")]
 public sealed class BoundingBoxSheetProcessor : ContentProcessor<BoundingBoxSheetDto, BoundingBoxSheetContent>
 {
     public override BoundingBoxSheetContent Process(BoundingBoxSheetDto input, ContentProcessorContext context)
@@ -42,4 +42,30 @@ if (string.IsNullOrWhiteSpace(input.Id))
 throw new InvalidContentException("BoundingBoxSheet requires at least 1 '' entries.");
 }
 }
+
+private static TContent LoadAsset<TContent>(
+        string assetId,
+        string assetName,
+        string directory,
+        string extension,
+        string processor,
+        ContentProcessorContext context)
+    {
+        if (string.IsNullOrWhiteSpace(assetId))
+        {
+            throw new InvalidContentException($"{assetName} reference is empty.");
+        }
+
+        var assetPath = string.Concat(directory, "/", assetId, extension);
+        var reference = new ExternalReference<TContent>(assetPath);
+
+        try
+        {
+            return context.BuildAndLoadAsset<TContent, TContent>(reference, processor);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"{assetName} '{assetId}' failed to load: {ex.Message}", ex);
+        }
+    }
 }

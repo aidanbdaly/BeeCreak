@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(TextSetConfig.FileExtension, DisplayName = TextSetConfig.ImporterDisplayName, DefaultProcessor = TextSetConfig.DefaultProcessor)]
+[ContentImporter(".bts", DisplayName = "TextSet Importer", DefaultProcessor = "TextSetProcessor")]
 public sealed class TextSetImporter : ContentImporter<TextSetDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

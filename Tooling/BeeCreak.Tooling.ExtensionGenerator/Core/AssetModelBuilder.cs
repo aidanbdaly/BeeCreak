@@ -11,11 +11,43 @@ namespace BeeCreak.ExtensionGenerator
         private const string RuntimeAssemblyKey = "x-runtimeAssembly";
         private const string FileExtensionKey = "x-fileExtension";
 
-        public static IReadOnlyList<AssetType> Build(JsonSchema schema)
+        public static IReadOnlyList<AssetType> Build(
+            JsonSchema schema,
+            IReadOnlyDictionary<string, JsonSchema?>? referenceSchemas = null,
+            IReadOnlyDictionary<string, AssetReferenceMetadata>? additionalMetadata = null)
         {
             var runtimeNamespace = GetExtensionDataString(schema.ExtensionData, RuntimeNamespaceKey) ?? "BeeCreak.Game";
             var runtimeAssembly = GetExtensionDataString(schema.ExtensionData, RuntimeAssemblyKey) ?? "BeeCreak";
             var assetNames = new HashSet<string>(schema.Definitions.Keys, StringComparer.OrdinalIgnoreCase);
+            var assetSchemas = new Dictionary<string, JsonSchema?>(StringComparer.OrdinalIgnoreCase);
+            var assetMetadata = new Dictionary<string, AssetReferenceMetadata>(StringComparer.OrdinalIgnoreCase);
+            foreach (var (name, defSchema) in schema.Definitions)
+            {
+                assetSchemas[name] = defSchema;
+            }
+
+            if (referenceSchemas is not null)
+            {
+                foreach (var (name, defSchema) in referenceSchemas)
+                {
+                    assetNames.Add(name);
+                    assetSchemas[name] = defSchema;
+                    if (defSchema is not null)
+                    {
+                        var ext = GetExtensionDataString(defSchema.ExtensionData, FileExtensionKey) ?? ".json";
+                        assetMetadata[name] = new AssetReferenceMetadata(name, ext, $"{name}Processor", Array.Empty<string>());
+                }
+            }
+            }
+
+            if (additionalMetadata is not null)
+            {
+                foreach (var (name, metadata) in additionalMetadata)
+                {
+                    assetNames.Add(name);
+                    assetMetadata[name] = metadata;
+                }
+            }
 
             var list = new List<AssetType>();
 
@@ -24,7 +56,10 @@ namespace BeeCreak.ExtensionGenerator
                 if (!IsObjectDefinition(defSchema))
                     continue;
 
-                var properties = BuildProperties(defSchema, assetNames);
+                var fileExtension = GetExtensionDataString(defSchema.ExtensionData, FileExtensionKey) ?? ".json";
+                assetMetadata[name] = new AssetReferenceMetadata(name, fileExtension, $"{name}Processor", Array.Empty<string>());
+
+                var properties = BuildProperties(defSchema, assetNames, assetSchemas, assetMetadata);
                 var dependencies = properties
                     .SelectMany(p => new[] { p.ReferenceAssetName, p.ElementReferenceAssetName })
                     .Where(x => !string.IsNullOrWhiteSpace(x))
@@ -35,7 +70,7 @@ namespace BeeCreak.ExtensionGenerator
                 var asset = new AssetType
                 {
                     Name = name,
-                    FileExtension = GetExtensionDataString(defSchema.ExtensionData, FileExtensionKey) ?? ".json",
+                    FileExtension = fileExtension,
                     RuntimeNamespace = runtimeNamespace,
                     RuntimeAssembly = runtimeAssembly,
                     Properties = properties,
@@ -48,13 +83,23 @@ namespace BeeCreak.ExtensionGenerator
             return list;
         }
 
-        private static List<AssetProperty> BuildProperties(JsonSchema defSchema, ISet<string> assetNames)
+        private static List<AssetProperty> BuildProperties(
+            JsonSchema defSchema,
+            ISet<string> assetNames,
+            IReadOnlyDictionary<string, JsonSchema?> assetSchemas,
+            IReadOnlyDictionary<string, AssetReferenceMetadata> assetMetadata)
         {
             var props = new List<AssetProperty>();
 
             foreach (var (propName, propSchema) in defSchema.ActualProperties)
             {
-                var property = CreateProperty(propName, propSchema, defSchema.RequiredProperties.Contains(propName), assetNames);
+                var property = CreateProperty(
+                    propName,
+                    propSchema,
+                    defSchema.RequiredProperties.Contains(propName),
+                    assetNames,
+                    assetSchemas,
+                    assetMetadata);
                 props.Add(property);
             }
 
@@ -65,7 +110,9 @@ namespace BeeCreak.ExtensionGenerator
             string propName,
             JsonSchema propSchema,
             bool isRequired,
-            ISet<string> assetNames)
+            ISet<string> assetNames,
+            IReadOnlyDictionary<string, JsonSchema?> assetSchemas,
+            IReadOnlyDictionary<string, AssetReferenceMetadata> assetMetadata)
         {
             var typeInfo = DescribeSchema(propSchema);
             var property = new AssetProperty
@@ -83,8 +130,16 @@ namespace BeeCreak.ExtensionGenerator
                 ElementIsString = typeInfo.ElementIsString,
                 ElementIsBoolean = typeInfo.ElementIsBoolean,
                 ElementIsNumber = typeInfo.ElementIsNumber,
+                ElementIsCollection = typeInfo.ElementInfo is not null && (typeInfo.ElementInfo.IsArray || typeInfo.ElementInfo.IsDictionary),
+                ElementCollectionIsArray = typeInfo.ElementInfo?.IsArray ?? false,
+                ElementCollectionIsDictionary = typeInfo.ElementInfo?.IsDictionary ?? false,
+                ElementCollectionElementType = typeInfo.ElementInfo?.ElementTypeName,
+                ElementCollectionElementIsString = typeInfo.ElementInfo?.ElementIsString ?? false,
+                ElementCollectionElementIsBoolean = typeInfo.ElementInfo?.ElementIsBoolean ?? false,
+                ElementCollectionElementIsNumber = typeInfo.ElementInfo?.ElementIsNumber ?? false,
                 MinItems = propSchema.MinItems,
-                MinProperties = propSchema.MinProperties
+                MinProperties = propSchema.MinProperties,
+                ComplexProperties = BuildNestedProperties(propSchema, assetNames, assetSchemas, assetMetadata)
             };
 
             var referenceMatch = FindAssetMatch(property.Name, assetNames);
@@ -97,9 +152,54 @@ namespace BeeCreak.ExtensionGenerator
                 property.ReferenceAssetName = referenceMatch;
             }
 
+            if (!string.IsNullOrWhiteSpace(property.ReferenceAssetName))
+            {
+                var metadata = ResolveReferenceMetadata(property.ReferenceAssetName, assetMetadata, assetSchemas);
+                property.ReferenceContentDirectory = metadata.ContentDirectory;
+                property.ReferenceFileExtension = metadata.FileExtension;
+                property.ReferenceProcessorName = metadata.ProcessorName;
+                property.ReferenceNamespaces = metadata.Namespaces;
+            }
+
+            if (!string.IsNullOrWhiteSpace(property.ElementReferenceAssetName))
+            {
+                var metadata = ResolveReferenceMetadata(property.ElementReferenceAssetName, assetMetadata, assetSchemas);
+                property.ElementReferenceContentDirectory = metadata.ContentDirectory;
+                property.ElementReferenceFileExtension = metadata.FileExtension;
+                property.ElementReferenceProcessorName = metadata.ProcessorName;
+                property.ElementReferenceNamespaces = metadata.Namespaces;
+            }
+
             property.ContentCsType = BuildContentType(property);
 
             return property;
+        }
+
+        private static IReadOnlyList<AssetProperty>? BuildNestedProperties(
+            JsonSchema schema,
+            ISet<string> assetNames,
+            IReadOnlyDictionary<string, JsonSchema?> assetSchemas,
+            IReadOnlyDictionary<string, AssetReferenceMetadata> assetMetadata)
+        {
+            if (schema.ActualProperties.Count == 0)
+            {
+                return null;
+            }
+
+            var result = new List<AssetProperty>();
+            foreach (var (name, nestedSchema) in schema.ActualProperties)
+            {
+                var nestedProperty = CreateProperty(
+                    name,
+                    nestedSchema,
+                    schema.RequiredProperties.Contains(name),
+                    assetNames,
+                    assetSchemas,
+                    assetMetadata);
+                result.Add(nestedProperty);
+            }
+
+            return result;
         }
 
         private static TypeInfo DescribeSchema(JsonSchema schema)
@@ -212,6 +312,52 @@ namespace BeeCreak.ExtensionGenerator
                 yield break;
             }
 
+            var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var baseName in EnumerateBaseNameCandidates(name))
+            {
+                foreach (var candidate in EnumeratePluralCandidates(baseName))
+                {
+                    if (seen.Add(candidate))
+                    {
+                        yield return candidate;
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<string> EnumerateBaseNameCandidates(string name)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                yield return name;
+            }
+
+            if (name.EndsWith("Array", StringComparison.OrdinalIgnoreCase))
+            {
+                var trimmed = name[..^"Array".Length];
+                if (!string.IsNullOrWhiteSpace(trimmed))
+                {
+                    yield return trimmed;
+                }
+            }
+
+            if (name.EndsWith("Dictionary", StringComparison.OrdinalIgnoreCase))
+            {
+                var trimmed = name[..^"Dictionary".Length];
+                if (!string.IsNullOrWhiteSpace(trimmed))
+                {
+                    yield return trimmed;
+                }
+            }
+        }
+
+        private static IEnumerable<string> EnumeratePluralCandidates(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                yield break;
+            }
+
             yield return name;
 
             if (name.EndsWith("ies", StringComparison.OrdinalIgnoreCase))
@@ -239,6 +385,29 @@ namespace BeeCreak.ExtensionGenerator
                 return name.ToUpperInvariant();
 
             return char.ToUpperInvariant(name[0]) + name[1..];
+        }
+
+        private static AssetReferenceMetadata ResolveReferenceMetadata(
+            string? assetName,
+            IReadOnlyDictionary<string, AssetReferenceMetadata> assetMetadata,
+            IReadOnlyDictionary<string, JsonSchema?> assetSchemas)
+        {
+            if (!string.IsNullOrWhiteSpace(assetName) &&
+                assetMetadata.TryGetValue(assetName, out var metadata))
+            {
+                return metadata;
+            }
+
+            if (!string.IsNullOrWhiteSpace(assetName) &&
+                assetSchemas.TryGetValue(assetName, out var schema) &&
+                schema is not null)
+            {
+                var fileExtension = GetExtensionDataString(schema.ExtensionData, FileExtensionKey) ?? ".json";
+                return new AssetReferenceMetadata(assetName!, fileExtension, $"{assetName}Processor", Array.Empty<string>());
+            }
+
+            var fallbackName = assetName ?? "Asset";
+            return new AssetReferenceMetadata(fallbackName, ".json", $"{fallbackName}Processor", Array.Empty<string>());
         }
 
         private static string? GetExtensionDataString(
@@ -295,6 +464,8 @@ namespace BeeCreak.ExtensionGenerator
 
             public bool ElementIsNumber { get; init; }
 
+            public TypeInfo? ElementInfo { get; init; }
+
             public static TypeInfo ForPrimitive(string typeName, bool isString = false, bool isBoolean = false, bool isNumber = false)
             {
                 return new TypeInfo
@@ -315,7 +486,8 @@ namespace BeeCreak.ExtensionGenerator
                     ElementTypeName = element.TypeName,
                     ElementIsString = element.IsString,
                     ElementIsBoolean = element.IsBoolean,
-                    ElementIsNumber = element.IsNumber
+                    ElementIsNumber = element.IsNumber,
+                    ElementInfo = element
                 };
             }
 
@@ -328,7 +500,8 @@ namespace BeeCreak.ExtensionGenerator
                     ElementTypeName = element.TypeName,
                     ElementIsString = element.IsString,
                     ElementIsBoolean = element.IsBoolean,
-                    ElementIsNumber = element.IsNumber
+                    ElementIsNumber = element.IsNumber,
+                    ElementInfo = element
                 };
             }
 

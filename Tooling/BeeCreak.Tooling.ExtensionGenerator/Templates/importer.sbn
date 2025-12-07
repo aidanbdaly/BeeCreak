@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace {{ namespace }};
 
-[ContentImporter({{ asset.name }}Config.FileExtension, DisplayName = {{ asset.name }}Config.ImporterDisplayName, DefaultProcessor = {{ asset.name }}Config.DefaultProcessor)]
+[ContentImporter("{{ asset.fileextension }}", DisplayName = "{{ asset.name }} Importer", DefaultProcessor = "{{ asset.name }}Processor")]
 public sealed class {{ asset.name }}Importer : ContentImporter<{{ asset.name }}Dto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

@@ -14,13 +14,12 @@ public sealed class EntityReferenceReader : ContentTypeReader<EntityReference>
         var baseEntity = input.ReadObject<EntityModel>();
 
         string variant = input.ReadString();
-        float x = input.ReadSingle();
-        float y = input.ReadSingle();
+        Vector2 position = input.ReadObject<Vector2>();
 
         var state = new EntityState
         {
             AnimationName = new(variant),
-            Position = new(new Vector2(x, y))
+            Position = new(position)
         };
 
         return new EntityReference(id, baseEntity, state);

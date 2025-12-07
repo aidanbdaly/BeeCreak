@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(CellReferenceConfig.FileExtension, DisplayName = CellReferenceConfig.ImporterDisplayName, DefaultProcessor = CellReferenceConfig.DefaultProcessor)]
+[ContentImporter(".cref", DisplayName = "CellReference Importer", DefaultProcessor = "CellReferenceProcessor")]
 public sealed class CellReferenceImporter : ContentImporter<CellReferenceDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
 namespace BeeCreak.Extension.Generated;
-
 [ContentTypeWriter]
 public sealed class BoundingBoxSheetWriter : ContentTypeWriter<BoundingBoxSheetContent>
 {
@@ -15,11 +14,11 @@ output.WriteObject(value.BoundingBoxes);
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return BoundingBoxSheetConfig.RuntimeReader;
+        return "BeeCreak.Engine.Data.Readers.BoundingBoxSheetReader, BeeCreak.Engine";
     }
 
     public override string GetRuntimeType(TargetPlatform targetPlatform)
     {
-        return BoundingBoxSheetConfig.RuntimeType;
+        return "BeeCreak.Engine.Data.Models.BoundingBoxSheet, BeeCreak.Engine";
     }
 }

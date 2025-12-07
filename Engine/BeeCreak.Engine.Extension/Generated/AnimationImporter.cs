@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace BeeCreak.Extension.Generated;
 
-[ContentImporter(AnimationConfig.FileExtension, DisplayName = AnimationConfig.ImporterDisplayName, DefaultProcessor = AnimationConfig.DefaultProcessor)]
+[ContentImporter(".as", DisplayName = "Animation Importer", DefaultProcessor = "AnimationProcessor")]
 public sealed class AnimationImporter : ContentImporter<AnimationDto>
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()

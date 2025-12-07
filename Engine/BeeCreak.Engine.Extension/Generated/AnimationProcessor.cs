@@ -1,8 +1,8 @@
+using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
-
 namespace BeeCreak.Extension.Generated;
 
-[ContentProcessor(DisplayName = AnimationConfig.ProcessorDisplayName)]
+[ContentProcessor(DisplayName = "Animation Processor")]
 public sealed class AnimationProcessor : ContentProcessor<AnimationDto, AnimationContent>
 {
     public override AnimationContent Process(AnimationDto input, ContentProcessorContext context)
@@ -12,7 +12,7 @@ public sealed class AnimationProcessor : ContentProcessor<AnimationDto, Animatio
 var content = new AnimationContent
         {
 Id = input.Id,
-SpriteSheet = string.IsNullOrWhiteSpace(input.SpriteSheet) ? null : SpriteSheetLoader.Load(input.SpriteSheet, context),
+SpriteSheet = string.IsNullOrWhiteSpace(input.SpriteSheet) ? null : LoadAsset<SpriteSheetContent>(input.SpriteSheet, "SpriteSheet", "SpriteSheet", ".spritesheet", "SpriteSheetProcessor", context),
 };
 
 
@@ -49,4 +49,30 @@ throw new InvalidContentException("Animation requires at least 1 '' entries.");
 }
 
 }
+
+private static TContent LoadAsset<TContent>(
+        string assetId,
+        string assetName,
+        string directory,
+        string extension,
+        string processor,
+        ContentProcessorContext context)
+    {
+        if (string.IsNullOrWhiteSpace(assetId))
+        {
+            throw new InvalidContentException($"{assetName} reference is empty.");
+        }
+
+        var assetPath = string.Concat(directory, "/", assetId, extension);
+        var reference = new ExternalReference<TContent>(assetPath);
+
+        try
+        {
+            return context.BuildAndLoadAsset<TContent, TContent>(reference, processor);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidContentException($"{assetName} '{assetId}' failed to load: {ex.Message}", ex);
+        }
+    }
 }
