@@ -1,0 +1,199 @@
+:root {
+  color-scheme: dark;
+  --bg: #0f1116;
+  --panel: #181b24;
+  --panel-border: #262a36;
+  --accent: #59c1a5;
+  --text: #f2f4f8;
+  --text-dim: #a0a8bf;
+  --danger: #f06c6c;
+  --warning: #f0b45a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+.app-header {
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid var(--panel-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.app-header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+}
+
+.app-header p {
+  margin: 0;
+  color: var(--text-dim);
+}
+
+.path-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: var(--text-dim);
+  max-width: 100%;
+}
+
+.path-value {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  color: var(--text);
+  word-break: break-all;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1px;
+  background: var(--panel-border);
+  flex: 1;
+  min-height: 0;
+}
+
+.tree-panel,
+.editor-panel {
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.panel-header {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--panel-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.panel-title {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+button {
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: border 0.15s ease, background 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.tree-container {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 0.95rem;
+}
+
+.panel-placeholder {
+  padding: 1rem;
+  color: var(--text-dim);
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tree-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tree-row.selected {
+  background: rgba(89, 193, 165, 0.18);
+  color: var(--accent);
+}
+
+.tree-row .chevron {
+  width: 1rem;
+  text-align: center;
+  color: var(--text-dim);
+}
+
+.tree-row .file-icon {
+  width: 1rem;
+  text-align: center;
+  color: var(--text-dim);
+}
+
+.tree-row.non-editable {
+  opacity: 0.6;
+}
+
+.editor-panel textarea {
+  flex: 1;
+  background: #0b0d12;
+  color: var(--text);
+  border: none;
+  resize: none;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 0.95rem;
+  padding: 1rem;
+  outline: none;
+}
+
+.editor-footer {
+  padding: 0.6rem 1rem;
+  border-top: 1px solid var(--panel-border);
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.status-error {
+  color: var(--danger);
+}
+
+.status-warning {
+  color: var(--warning);
+}
+
+.dirty-indicator::after {
+  content: '*';
+  color: var(--accent);
+  margin-left: 0.25rem;
+}
