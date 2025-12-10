@@ -1,10 +1,30 @@
 {
     "id": "entity_player_walkUp",
-    "spriteSheet": "animation_entity_player",
+    "texture": "animation_entity_player",
     "data" : [
-        "walk_up_0",
-        "walk_up_1",
-        "walk_up_2",
-        "walk_up_3"
+    {
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 64
+    },
+    {
+      "x": 96,
+      "y": 64,
+      "w": 32,
+      "h": 64
+    },
+    {
+      "x": 96,
+      "y": 128,
+      "w": 32,
+      "h": 64
+    },
+    {
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 64
+    }
     ],
 }

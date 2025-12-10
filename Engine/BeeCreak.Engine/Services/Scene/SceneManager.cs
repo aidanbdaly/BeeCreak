@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework;
+
 namespace BeeCreak.Engine.Services
 {
     public interface ISceneService
@@ -27,10 +29,25 @@ namespace BeeCreak.Engine.Services
         {
             app.Components.Clear();
 
+            foreach (var service in Scene.Services)
+            {
+                app.Services.AddService(
+                    service.Key,
+                    service.Value(app)
+                );
+            }
+
             foreach (var component in Scene.Components)
             {
                 app.Components.Add(component(app));
             }
+
+            if (Scene.Resolution != Point.Zero)
+            {
+                app.Services.GetService<VirtualScreenManager>().CreateScreen(Scene.Resolution);
+            }
+
+            Scene.OnBeginRun(app);
         }
     }
 }

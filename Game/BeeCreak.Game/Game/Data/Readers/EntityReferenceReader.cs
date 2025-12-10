@@ -17,11 +17,7 @@ public sealed class EntityReferenceReader : ContentTypeReader<EntityReference>
 
         var position = new Vector2(input.ReadSingle(), input.ReadSingle());
 
-        var state = new EntityState
-        {
-            AnimationName = new(variant),
-            Position = new(position),
-        };
+        var state = new EntityState(entity.AnimationCollection.Data[variant], position);
 
         return new EntityReference(id, entity, state);
     }

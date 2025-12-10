@@ -6,7 +6,7 @@ public sealed class EntityContent
 {
 public string Id { get; set; }
 
-public List<AnimationContent> Animations { get; } = new();
+public AnimationCollectionContent AnimationCollection { get; set; }
 
 public BoundingBoxSheetContent BoundingBoxSheet { get; set; }
 

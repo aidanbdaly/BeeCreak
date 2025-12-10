@@ -11,20 +11,11 @@ public sealed class EntityReader : ContentTypeReader<Entity>
     {
         string id = input.ReadString();
 
-        var animationCount = input.ReadInt32();
-        var animationArray = new List<Animation>(animationCount);
-
-        for (int i = 0; i < animationCount; i++)
-        {
-            animationArray.Add(input.ReadObject<Animation>());
-        }
-
+        AnimationCollection animationCollection = input.ReadObject<AnimationCollection>();
         BoundingBoxSheet boundingBoxSheet = input.ReadObject<BoundingBoxSheet>();
 
         int behaviourCount = input.ReadInt32();
         var behaviourArray = new List<EntityBehaviour>(behaviourCount);
-
-        Console.WriteLine(behaviourCount);
 
         for (int i = 0; i < behaviourCount; i++)
         {
@@ -37,6 +28,6 @@ public sealed class EntityReader : ContentTypeReader<Entity>
             behaviourArray.Add(behaviour);
         }
 
-        return new Entity(id, animationArray, boundingBoxSheet, behaviourArray);
+        return new Entity(id, animationCollection, boundingBoxSheet, behaviourArray);
     }
 }

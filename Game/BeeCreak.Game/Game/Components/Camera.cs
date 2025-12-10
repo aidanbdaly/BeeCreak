@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace BeeCreak.Game.Domain.Camera;
 
-public class Camera(App app) : GameComponent(app)
+public class CameraComponent(App app) : GameComponent(app)
 {
     public Matrix Transform { get; private set; } = Matrix.Identity;
 

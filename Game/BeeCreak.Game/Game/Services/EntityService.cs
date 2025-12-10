@@ -11,9 +11,10 @@ namespace BeeCreak.Game.Cell
 
         public void Spawn(EntityReference entity)
         {
-            var animation = new AnimationComponent(app, entity.Base.Animation[0]);
-
-            animation.Sprite.Position = entity.State.Position;
+            var animation = new AnimationComponent(app, entity.State.Animation, entity.State.CrackLevel)
+            {
+                Position = entity.State.Position
+            };
 
             app.Components.Add(animation);
 

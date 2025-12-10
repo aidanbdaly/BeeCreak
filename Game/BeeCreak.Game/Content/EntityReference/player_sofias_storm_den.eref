@@ -1,7 +1,7 @@
 {
     "id" : "player_sofias_storm_den",
     "entity": "player",
-    "variant" : "entity_player_walkDown",
+    "variant" : "walkDown",
     "position" : {
         "x" : 50,
         "y" : 50

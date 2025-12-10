@@ -10,6 +10,7 @@ namespace BeeCreak.ExtensionGenerator
         private const string RuntimeNamespaceKey = "x-runtimeNamespace";
         private const string RuntimeAssemblyKey = "x-runtimeAssembly";
         private const string FileExtensionKey = "x-fileExtension";
+        private const string ReferenceAssetKey = "x-referenceAsset";
 
         public static IReadOnlyList<AssetType> Build(
             JsonSchema schema,
@@ -145,10 +146,13 @@ namespace BeeCreak.ExtensionGenerator
                 ElementIsComplex = elementComplexProperties is { Count: > 0 }
             };
 
-            var referenceMatch = FindAssetMatch(property.Name, assetNames);
+            var referenceOverride = GetReferenceAssetHint(propSchema);
+            var elementSchema = GetCollectionElementSchema(propSchema);
+            var elementReferenceOverride = GetReferenceAssetHint(elementSchema);
+            var referenceMatch = referenceOverride ?? FindAssetMatch(property.Name, assetNames);
             if (property.IsArray || property.IsDictionary)
             {
-                property.ElementReferenceAssetName = referenceMatch;
+                property.ElementReferenceAssetName = elementReferenceOverride ?? referenceMatch;
             }
             else
             {
@@ -224,16 +228,7 @@ namespace BeeCreak.ExtensionGenerator
             IReadOnlyDictionary<string, JsonSchema?> assetSchemas,
             IReadOnlyDictionary<string, AssetReferenceMetadata> assetMetadata)
         {
-            JsonSchema? elementSchema = null;
-
-            if (schema.Type.HasFlag(JsonObjectType.Array))
-            {
-                elementSchema = GetArrayItemSchema(schema);
-            }
-            else if (schema.AdditionalPropertiesSchema is { } additional)
-            {
-                elementSchema = additional;
-            }
+            var elementSchema = GetCollectionElementSchema(schema);
 
             if (elementSchema is null)
             {
@@ -485,6 +480,31 @@ namespace BeeCreak.ExtensionGenerator
             }
 
             return schema.ActualProperties.Values.FirstOrDefault();
+        }
+
+        private static JsonSchema? GetCollectionElementSchema(JsonSchema schema)
+        {
+            if (schema.Type.HasFlag(JsonObjectType.Array))
+            {
+                return GetArrayItemSchema(schema);
+            }
+
+            if (schema.AdditionalPropertiesSchema is { } additional)
+            {
+                return additional;
+            }
+
+            return null;
+        }
+
+        private static string? GetReferenceAssetHint(JsonSchema? schema)
+        {
+            if (schema is null)
+            {
+                return null;
+            }
+
+            return GetExtensionDataString(schema.ExtensionData, ReferenceAssetKey);
         }
 
         private sealed class TypeInfo

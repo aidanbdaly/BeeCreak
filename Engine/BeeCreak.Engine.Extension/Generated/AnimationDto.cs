@@ -6,8 +6,20 @@ public sealed class AnimationDto
 {
 public string Id { get; set; }
 
-public string SpriteSheet { get; set; }
+public string Texture { get; set; }
 
-public List<string> Data { get; set; } = new();
+public List<DataEntryDto> Data { get; set; } = new();
+
+public sealed class DataEntryDto
+    {
+public int X { get; set; }
+
+public int Y { get; set; }
+
+public int W { get; set; }
+
+public int H { get; set; }
+
+}
 
 }

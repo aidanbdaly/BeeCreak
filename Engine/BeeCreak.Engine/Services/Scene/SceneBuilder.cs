@@ -6,7 +6,11 @@ namespace BeeCreak.Engine.Services
     {
         private readonly List<Func<App, IGameComponent>> components = [];
 
+        private readonly Dictionary<Type, Func<App, object>> services = [];
+
         private Point resolution;
+
+        private Action<App> onBeginRun = _ => { };
 
         public SceneBuilder AddComponent(Func<App, IGameComponent> component)
         {
@@ -14,17 +18,41 @@ namespace BeeCreak.Engine.Services
             return this;
         }
 
-        public SceneBuilder UseResolution(int width, int height)
+        public SceneBuilder RegisterService<TIService, TService>(Func<App, TService> service)
+            where TIService : class
+            where TService : class, TIService
+        {
+            services[typeof(TIService)] = service;
+            services[typeof(TService)] = service;
+            return this;
+        }
+
+        public SceneBuilder RegisterService<TService>(Func<App, TService> service)
+            where TService : class
+        {
+            services[typeof(TService)] = service;
+            return this;
+        }
+
+        public SceneBuilder SetResolution(int width, int height)
         {
             resolution = new Point(width, height);
+            return this;
+        }
+
+        public SceneBuilder SetOnBeginRun(Action<App> onBeginRun)
+        {
+            this.onBeginRun = onBeginRun;
             return this;
         }
 
         public Scene Build()
         {
             return new Scene(
+                services,
                 components,
-                resolution
+                resolution,
+                onBeginRun
             );
         }
     }

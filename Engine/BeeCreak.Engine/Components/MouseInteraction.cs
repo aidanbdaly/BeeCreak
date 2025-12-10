@@ -15,7 +15,7 @@ namespace BeeCreak.Engine.Behaviours
         {
             if (IsHovered)
             {
-                if (InputService.PointerButtonCycled(PointerButtonMap.Left))
+                if (true)
                 {
                     OnClick?.Invoke();
                 }

@@ -46,15 +46,4 @@ namespace BeeCreak.Engine.Types
                 };
         }
     }
-
-    public class ComponentBindings : Queue<Action>
-    {
-        public void Flush()
-        {
-            while (Count > 0)
-            {
-                Dequeue().Invoke();
-            }
-        }
-    }
 }

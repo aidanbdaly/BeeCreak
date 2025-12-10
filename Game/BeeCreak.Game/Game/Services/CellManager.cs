@@ -1,4 +1,3 @@
-using System.Text.Json;
 using BeeCreak.Engine;
 using BeeCreak.Game.Models;
 
@@ -6,21 +5,14 @@ namespace BeeCreak.Game.Cell
 {
     public interface ICellService
     {
-        void ChangeCell(CellReference cell);
+        CellReference? Cell { get; }
     }
 
-    public class CellManager : ICellService
+    public class CellManager(App app) : ICellService
     {
-        private readonly EntityService entityService;
+        private readonly EntityService entityService = new(app);
 
         public CellReference? Cell { get; private set; }
-
-        public CellManager(App app)
-        {
-            entityService = new EntityService(app);
-
-            app.Services.AddService<ICellService>(this);
-        }
 
         public void ChangeCell(CellReference cell)
         {

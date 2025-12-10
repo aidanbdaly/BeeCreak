@@ -6,7 +6,7 @@ namespace BeeCreak.Engine.Graphics
 {
     public class ImperativeTexture(
         App app,
-        Texture2D texture,
+        State<Texture2D> texture,
         State<Vector2>? position = default,
         State<Rectangle>? sourceRectangle = default,
         State<Color>? color = default,
@@ -17,6 +17,8 @@ namespace BeeCreak.Engine.Graphics
         State<SpriteEffects>? effects = default,
         State<float>? layerDepth = default) : Sprite(app)
     {
+        public State<Texture2D> Texture => texture;
+
         public State<Vector2> Position { get; set; } = position ?? new(Vector2.Zero);
 
         public State<Rectangle> SourceRectangle { get; set; } = sourceRectangle ?? new(Rectangle.Empty);
@@ -41,7 +43,7 @@ namespace BeeCreak.Engine.Graphics
         public override void Draw(GameTime gameTime)
         {
             app.SpriteBatch.Draw(
-                texture,
+                Texture.Value,
                 Position.Value,
                 SourceRectangle.Value,
                 ColorState.Value,

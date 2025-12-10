@@ -6,7 +6,7 @@ public sealed class EntityDto
 {
 public string Id { get; set; }
 
-public List<string> Animations { get; set; } = new();
+public string AnimationCollection { get; set; }
 
 public string BoundingBoxSheet { get; set; }
 

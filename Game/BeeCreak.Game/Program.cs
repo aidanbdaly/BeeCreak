@@ -1,6 +1,7 @@
 ﻿using BeeCreak.Engine;
 using BeeCreak.Engine.Services;
 using BeeCreak.Game;
+using BeeCreak.Game.Cell;
 using BeeCreak.Game.Intro;
 
 namespace BeeCreak
@@ -13,29 +14,39 @@ namespace BeeCreak
             {
                 using var app = new App();
 
-                app.SceneFactory.RegisterService(app => new GameContext(app));
+                app.SceneFactory.RegisterGlobalService(app => new GameContext(app));
 
                 app.SceneFactory.RegisterScene(
                     "IntroScene",
                     new SceneBuilder()
                         .AddComponent(app => new CarouselComponent(app))
-                        .UseResolution(640, 360)
+                        .SetResolution(640, 360)
                         .Build()
                 );
 
                 app.SceneFactory.RegisterScene(
                     "MenuScene",
                     new SceneBuilder()
-                        .UseResolution(640, 360)
+                        .SetResolution(640, 360)
                         .Build()
                 );
 
                 app.SceneFactory.RegisterScene(
                     "PlayScene",
                     new SceneBuilder()
-                        .AddComponent(app => new DirectionalInputComponent(app))
-                        .AddComponent(app => new CellComponent(app))
-                        .UseResolution(800, 600)
+                        .RegisterService<ICellService, CellManager>(app => new(app))
+                        .SetResolution(800, 600)
+                        .SetOnBeginRun(app =>
+                        {
+                            var context = app.Services.GetService<GameContext>()
+                                ?? throw new InvalidOperationException("GameContext service not found");
+
+                            var game = context.Game;
+
+                            var cellManager = app.Services.GetService<CellManager>();
+
+                            cellManager.ChangeCell(game.CellReference);
+                        })
                         .Build()
                 );
 

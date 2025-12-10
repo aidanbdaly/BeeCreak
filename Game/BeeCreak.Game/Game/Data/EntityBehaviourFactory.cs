@@ -13,7 +13,7 @@ namespace BeeCreak.Game.Domain.Entity
     {
         private readonly Dictionary<EntityBehaviour, Func<EntityReference, IGameComponent>> factories = new()
         {
-            { EntityBehaviour.Control, entity => new UserMoveable(app, entity) }
+            { EntityBehaviour.Control, entity => new EntityControlComponent(app, entity) }
         };
 
         public IGameComponent Create(EntityBehaviour behaviour, EntityReference entity)

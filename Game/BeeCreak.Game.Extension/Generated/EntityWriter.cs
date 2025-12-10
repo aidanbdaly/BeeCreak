@@ -9,12 +9,7 @@ public sealed class EntityWriter : ContentTypeWriter<EntityContent>
     protected override void Write(ContentWriter output, EntityContent value)
     {
 output.Write(value.Id ?? string.Empty);
-output.Write(value.Animations.Count);
-        foreach (var item in value.Animations)
-        {
-output.WriteObject(item);
-}
-
+output.WriteObject(value.AnimationCollection);
 output.WriteObject(value.BoundingBoxSheet);
 output.Write(value.Behaviours.Count);
         foreach (var item in value.Behaviours)

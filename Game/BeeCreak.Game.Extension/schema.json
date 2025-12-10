@@ -33,20 +33,23 @@
         "cellRecord": {
           "type": "string",
           "minLength": 1,
-          "description": "Id of the CellRecord that defines the base layout."
+          "description": "Id of the CellRecord that defines the base layout.",
+          "x-referenceAsset": "CellRecord"
         },
         "entityReferenceArray": {
           "type": "array",
           "items": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "x-referenceAsset": "EntityReference"
           },
           "uniqueItems": true,
           "description": "Entity reference ids to spawn within this cell."
         },
         "tileMap": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "x-referenceAsset": "TileMap"
         }
       },
       "required": ["id", "base", "tileMap"]
@@ -61,17 +64,15 @@
           "type": "string",
           "minLength": 1
         },
-        "animations": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
-          },
-          "minItems": 1
+        "animationCollection": {
+          "type": "string",
+          "minLength": 1,
+          "x-referenceAsset": "AnimationCollection"
         },
         "boundingBoxSheet": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "x-referenceAsset": "BoundingBoxSheet"
         },
         "behaviours": {
           "type": "array",
@@ -96,12 +97,12 @@
         },
         "entity": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "x-referenceAsset": "Entity"
         },
         "variant": {
           "type": "string",
-          "minLength": 1,
-          "description": "Initial animation/behaviour variant."
+          "minLength": 1
         },
         "position": {
           "type": "object",
@@ -123,7 +124,8 @@
       "properties": {
         "cellReference": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "x-referenceAsset": "CellReference"
         }
       },
       "required": ["activeCell"]
@@ -140,11 +142,13 @@
         },
         "spriteSheet": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "x-referenceAsset": "SpriteSheet"
         },
         "boundingBoxSheet": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "x-referenceAsset": "BoundingBoxSheet"
         },
         "data": {
           "type": "array",

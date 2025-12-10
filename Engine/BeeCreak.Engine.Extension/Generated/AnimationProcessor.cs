@@ -1,5 +1,7 @@
 using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
+using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
+
 namespace BeeCreak.Extension.Generated;
 
 [ContentProcessor(DisplayName = "Animation Processor")]
@@ -12,7 +14,7 @@ public sealed class AnimationProcessor : ContentProcessor<AnimationDto, Animatio
 var content = new AnimationContent
         {
 Id = input.Id,
-SpriteSheet = string.IsNullOrWhiteSpace(input.SpriteSheet) ? null : LoadAsset<SpriteSheetContent>(input.SpriteSheet, "SpriteSheet", "SpriteSheet", ".spritesheet", "SpriteSheetProcessor", context),
+Texture = string.IsNullOrWhiteSpace(input.Texture) ? null : LoadAsset<TextureContent>(input.Texture, "Texture", "Image", ".png", "TextureProcessor", context),
 };
 
 
@@ -20,7 +22,7 @@ if (input.Data is not null)
         {
             foreach (var item in input.Data)
             {
-content.Data.Add(item ?? string.Empty);
+content.Data.Add(MapDataEntry(item, context));
 }
         }
 return content;
@@ -38,17 +40,27 @@ if (string.IsNullOrWhiteSpace(input.Id))
             throw new InvalidContentException("Animation requires ''.");
         }
 
-if (string.IsNullOrWhiteSpace(input.SpriteSheet))
-        {
-            throw new InvalidContentException("Animation requires ''.");
-        }
-
         if (input.Data is null || input.Data.Count < 1)
         {
 throw new InvalidContentException("Animation requires at least 1 '' entries.");
 }
 
 }
+
+private static AnimationContent.DataEntryContent MapDataEntry(AnimationDto.DataEntryDto? input, ContentProcessorContext context)
+    {
+        if (input is null)
+        {
+            return new AnimationContent.DataEntryContent();
+        }
+
+        var content = new AnimationContent.DataEntryContent();
+content.X = input.X;
+content.Y = input.Y;
+content.W = input.W;
+content.H = input.H;
+return content;
+    }
 
 private static TContent LoadAsset<TContent>(
         string assetId,

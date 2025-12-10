@@ -12,21 +12,11 @@ public sealed class EntityProcessor : ContentProcessor<EntityDto, EntityContent>
 var content = new EntityContent
         {
 Id = input.Id,
+AnimationCollection = string.IsNullOrWhiteSpace(input.AnimationCollection) ? null : LoadAsset<AnimationCollectionContent>(input.AnimationCollection, "AnimationCollection", "AnimationCollection", ".asc", "AnimationCollectionProcessor", context),
 BoundingBoxSheet = string.IsNullOrWhiteSpace(input.BoundingBoxSheet) ? null : LoadAsset<BoundingBoxSheetContent>(input.BoundingBoxSheet, "BoundingBoxSheet", "BoundingBoxSheet", ".bbs", "BoundingBoxSheetProcessor", context),
 };
 
 
-if (input.Animations is not null)
-        {
-            foreach (var item in input.Animations)
-            {
-if (string.IsNullOrWhiteSpace(item))
-                {
-                    continue;
-                }
-content.Animations.Add(LoadAsset<AnimationContent>(item, "Animation", "Animation", ".as", "AnimationProcessor", context));
-}
-        }
 if (input.Behaviours is not null)
         {
             foreach (var item in input.Behaviours)
@@ -48,11 +38,6 @@ if (string.IsNullOrWhiteSpace(input.Id))
         {
             throw new InvalidContentException("Entity requires ''.");
         }
-
-        if (input.Animations is null || input.Animations.Count < 1)
-        {
-throw new InvalidContentException("Entity requires at least 1 '' entries.");
-}
 
 if (string.IsNullOrWhiteSpace(input.BoundingBoxSheet))
         {

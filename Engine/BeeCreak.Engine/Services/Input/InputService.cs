@@ -5,113 +5,24 @@ namespace BeeCreak.Engine.Services
 {
     public class InputService(App app)
     {
-        private KeyboardState previousState;
+        private KeyboardState previous = Keyboard.GetState();
 
-        private GamePadState previousGamePadState;
+        private KeyboardState current = Keyboard.GetState();
 
-        private MouseState previousMouseState;
-
-        public bool IsButtonDown(ButtonMap button)
+        public bool IsKeyDown(Keys key)
         {
-            var currentState = Keyboard.GetState();
-            var currentGamePadState = GamePad.GetState(PlayerIndex.One);
-
-            if (currentState.IsKeyDown(button.Key))
-            {
-                return true;
-            }
-
-            if (currentGamePadState.IsButtonDown(button.Button))
-            {
-                return true;
-            }
-
-            previousState = currentState;
-            previousGamePadState = currentGamePadState;
-
-            return false;
+            return current.IsKeyDown(key);
         }
 
-        public bool DidButtonCycle(ButtonMap button)
+        public bool DidKeyCycle(Keys key)
         {
-            var currentState = Keyboard.GetState();
-            var currentGamePadState = GamePad.GetState(PlayerIndex.One);
-
-            if (
-                currentState.IsKeyUp(button.Key)
-                && previousState.IsKeyDown(button.Key))
-            {
-                return true;
-            }
-
-            if (
-                currentGamePadState.IsButtonUp(button.Button)
-                && previousGamePadState.IsButtonDown(button.Button))
-            {
-                return true;
-            }
-
-            previousState = currentState;
-            previousGamePadState = currentGamePadState;
-
-            return false;
+            return current.IsKeyUp(key) && previous.IsKeyDown(key);
         }
 
-        public bool PointerButtonDown(PointerButtonMap button)
+        public void Update()
         {
-            var currentState = Mouse.GetState();
-
-            if (button.Button == PointerButton.Left && currentState.LeftButton == ButtonState.Pressed)
-            {
-                return true;
-            }
-
-            if (button.Button == PointerButton.Right && currentState.RightButton == ButtonState.Pressed)
-            {
-                return true;
-            }
-
-            if (button.Button == PointerButton.Middle && currentState.MiddleButton == ButtonState.Pressed)
-            {
-                return true;
-            }
-
-            previousMouseState = currentState;
-
-            return false;
-        }
-
-        public bool PointerButtonCycled(PointerButtonMap button)
-        {
-            var currentState = Mouse.GetState();
-
-            if (
-                button.Button == PointerButton.Left
-                && currentState.LeftButton == ButtonState.Released
-                && previousMouseState.LeftButton == ButtonState.Pressed)
-            {
-                return true;
-            }
-
-            if (
-                button.Button == PointerButton.Right
-                && currentState.RightButton == ButtonState.Released
-                && previousMouseState.RightButton == ButtonState.Pressed)
-            {
-                return true;
-            }
-
-            if (
-                button.Button == PointerButton.Middle
-                && currentState.MiddleButton == ButtonState.Released
-                && previousMouseState.MiddleButton == ButtonState.Pressed)
-            {
-                return true;
-            }
-
-            previousMouseState = currentState;
-
-            return false;
+            previous = current;
+            current = Keyboard.GetState();
         }
 
         public Point GetMousePosition()

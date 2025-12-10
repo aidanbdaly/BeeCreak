@@ -6,6 +6,7 @@ namespace BeeCreak.Engine
 {
     public class App : Game
     {
+        // You made it private readonly, there's not much point since this can be fetched anywhere
         private readonly GraphicsDeviceManager graphicsDeviceManager;
 
         private readonly VirtualScreenManager virtualScreenManager;
@@ -46,6 +47,8 @@ namespace BeeCreak.Engine
             }
         }
 
+        private readonly InputService inputService;
+
         public App()
         {
             IsFixedTimeStep = false;
@@ -58,6 +61,9 @@ namespace BeeCreak.Engine
 
             virtualScreenManager = new VirtualScreenManager(this);
             graphicsDeviceManager = new GraphicsDeviceManager(this);
+            inputService = new InputService(this);
+
+            Services.AddService(inputService);
         }
 
         protected override void Initialize()
@@ -73,7 +79,6 @@ namespace BeeCreak.Engine
 
             Services.AddService(new SceneManager(this));
             Services.AddService(new TranslationService(this));
-            Services.AddService(new InputService(this));
 
             base.Initialize();
         }
@@ -85,7 +90,7 @@ namespace BeeCreak.Engine
 
         protected override void BeginRun()
         {
-            var services = SceneFactory.GetRegisteredServices();
+            var services = SceneFactory.GetRegisteredGlobalServices();
 
             foreach (var service in services)
             {
@@ -94,11 +99,12 @@ namespace BeeCreak.Engine
 
             SceneManager.StageFirst();
             SceneManager.Reveal();
+        }
 
-            if (SceneManager.Scene.Resolution != Point.Zero)
-            {
-                virtualScreenManager.CreateScreen(SceneManager.Scene.Resolution);
-            }
+        protected override void Update(GameTime gameTime)
+        {
+            inputService.Update();
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)

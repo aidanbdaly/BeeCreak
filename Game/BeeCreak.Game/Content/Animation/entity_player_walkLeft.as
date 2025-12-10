@@ -1,10 +1,30 @@
 {
     "id": "entity_player_walkLeft",
-    "spriteSheet": "animation_entity_player",
+    "texture": "animation_entity_player",
     "data" : [
-        "walk_left_0",
-        "walk_left_1",
-        "walk_left_2",
-        "walk_left_3"
+    {
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 64
+    },
+    {
+      "x": 32,
+      "y": 64,
+      "w": 32,
+      "h": 64
+    },
+    {
+      "x": 32,
+      "y": 128,
+      "w": 32,
+      "h": 64
+    },
+    {
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 64
+    },
     ],
 }
