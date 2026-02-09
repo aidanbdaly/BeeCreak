@@ -2,13 +2,13 @@
   "id": "menu_button",
   "texture": "spritesheet_menu_button",
   "data": {
-    "normal": {
+    "hovered": {
       "x": 0,
       "y": 0,
       "w": 64,
       "h": 36
     },
-    "hovered": {
+    "default": {
       "x": 64,
       "y": 0,
       "w": 64,

@@ -47,7 +47,9 @@ namespace BeeCreak.Engine
             }
         }
 
-        private readonly InputService inputService;
+        private readonly MouseInputService mouse;
+
+        private readonly KeyboardInputService keyboard;
 
         public App()
         {
@@ -61,9 +63,11 @@ namespace BeeCreak.Engine
 
             virtualScreenManager = new VirtualScreenManager(this);
             graphicsDeviceManager = new GraphicsDeviceManager(this);
-            inputService = new InputService(this);
+            mouse = new MouseInputService(this);
+            keyboard = new KeyboardInputService(this);
 
-            Services.AddService(inputService);
+            Services.AddService(mouse);
+            Services.AddService(keyboard);
         }
 
         protected override void Initialize()
@@ -90,20 +94,14 @@ namespace BeeCreak.Engine
 
         protected override void BeginRun()
         {
-            var services = SceneFactory.GetRegisteredGlobalServices();
-
-            foreach (var service in services)
-            {
-                Services.AddService(service.Key, service.Value(this));
-            }
-
             SceneManager.StageFirst();
             SceneManager.Reveal();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            inputService.Update();
+            mouse.Update();
+            keyboard.Update();
             base.Update(gameTime);
         }
 

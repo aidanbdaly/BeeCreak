@@ -14,7 +14,7 @@ namespace BeeCreak.Engine.Graphics
         State<float>? rotation = default,
         State<Vector2>? origin = default,
         State<SpriteEffects>? effects = default,
-        State<float>? layerDepth = default) : Sprite(app)
+        State<float>? layerDepth = default) : DrawableGameComponent(app)
     {
         public State<Rectangle> DestinationRectangle { get; set; } = destinationRectangle ?? new(Rectangle.Empty);
 
@@ -32,7 +32,7 @@ namespace BeeCreak.Engine.Graphics
 
         public State<float> LayerDepth { get; set; } = layerDepth ?? new(0f);
 
-        public override Rectangle BoundingBox => DestinationRectangle.Value;
+        public Rectangle BoundingBox => DestinationRectangle.Value;
 
         public override void Draw(GameTime gameTime)
         {

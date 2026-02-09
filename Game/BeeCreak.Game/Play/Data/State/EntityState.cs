@@ -10,6 +10,6 @@ namespace BeeCreak.Game.Domain.Entity
 
         public State<Vector2> Position { get; set; } = new(position);
 
-        public State<float> CrackLevel { get; set; } = new(1f);
+        public State<float> CrackLevel { get; set; } = new(0.25f);
     }
 }

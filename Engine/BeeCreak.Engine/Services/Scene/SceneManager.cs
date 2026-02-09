@@ -29,6 +29,11 @@ namespace BeeCreak.Engine.Services
         {
             app.Components.Clear();
 
+            if (Scene.CanvasSize != Point.Zero)
+            {
+                app.Services.GetService<VirtualScreenManager>().CreateScreen(Scene.CanvasSize);
+            }
+
             foreach (var service in Scene.Services)
             {
                 app.Services.AddService(
@@ -41,12 +46,7 @@ namespace BeeCreak.Engine.Services
             {
                 app.Components.Add(component(app));
             }
-
-            if (Scene.Resolution != Point.Zero)
-            {
-                app.Services.GetService<VirtualScreenManager>().CreateScreen(Scene.Resolution);
-            }
-
+            
             Scene.OnBeginRun(app);
         }
     }

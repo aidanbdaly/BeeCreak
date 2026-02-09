@@ -5,7 +5,12 @@ using BeeCreak.Game.Models;
 
 namespace BeeCreak.Game.Cell
 {
-    public class EntityService(App app)
+    public interface IEntityService
+    {
+        void Spawn(EntityReference entity);
+    }
+
+    public class EntityService(App app) : IEntityService
     {
         private readonly EntityBehaviourFactory behaviourFactory = new(app);
 

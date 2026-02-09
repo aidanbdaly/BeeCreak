@@ -2,7 +2,11 @@
 using BeeCreak.Engine.Services;
 using BeeCreak.Game;
 using BeeCreak.Game.Cell;
+using BeeCreak.Game.Home;
+using BeeCreak.Game.Home.Services;
 using BeeCreak.Game.Intro;
+using BeeCreak.Game.Play;
+using BeeCreak.Game.Services;
 
 namespace BeeCreak
 {
@@ -14,43 +18,40 @@ namespace BeeCreak
             {
                 using var app = new App();
 
-                app.SceneFactory.RegisterGlobalService(app => new GameContext(app));
+                app.Services.AddService(new GameContext(app));
 
                 app.SceneFactory.RegisterScene(
-                    "IntroScene",
+                    "Intro",
                     new SceneBuilder()
                         .AddComponent(app => new CarouselComponent(app))
-                        .SetResolution(640, 360)
+                        .ConfigureCanvas(640, 360)
+                        .Build()
+                );
+
+                // probably set controller / context
+                app.SceneFactory.RegisterScene(
+                    "Home",
+                    new SceneBuilder()
+                        .RegisterService<HomeContext>(app => new(app))
+                        .RegisterService<MenuFactory>(app => new(app))
+                        .ConfigureCanvas(640, 360)
+                        .SetRunAction((app) =>
+                            app.Services.GetService<HomeContext>().Initialize())
                         .Build()
                 );
 
                 app.SceneFactory.RegisterScene(
-                    "MenuScene",
+                    "Play",
                     new SceneBuilder()
-                        .SetResolution(640, 360)
-                        .Build()
-                );
-
-                app.SceneFactory.RegisterScene(
-                    "PlayScene",
-                    new SceneBuilder()
+                        .RegisterService<ISaveService, SaveService>(app => new(app))
+                        .RegisterService<IEntityService, EntityService>(app => new(app))
                         .RegisterService<ICellService, CellManager>(app => new(app))
-                        .SetResolution(800, 600)
-                        .SetOnBeginRun(app =>
-                        {
-                            var context = app.Services.GetService<GameContext>()
-                                ?? throw new InvalidOperationException("GameContext service not found");
-
-                            var game = context.Game;
-
-                            var cellManager = app.Services.GetService<CellManager>();
-
-                            cellManager.ChangeCell(game.CellReference);
-                        })
+                        .ConfigureCanvas(640, 360)
+                        .SetRunAction(PlayContext.Initialize)
                         .Build()
                 );
 
-                app.SceneFactory.SetStartScene("PlayScene");
+                app.SceneFactory.SetStartScene("Play");
 
                 app.Run();
             }

@@ -1,0 +1,85 @@
+using BeeCreak.Engine.Core;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+
+namespace BeeCreak.Engine.Services
+{
+    public class ComponentContext
+    {
+        public Style Style { get; set; }
+
+        public Point Size { get; set; } = new();
+
+        public Point Position { get; set; } = new();
+
+        public ComponentContext? Constraint { get; set; }
+
+        // PositionConstraint
+
+        // SizeConstraints
+    }
+
+    public class LayoutService
+    {
+        private readonly List<ComponentContext> Document = [];
+
+
+        public void LoadDocument(IUIComponent rootComponent)
+        {
+            ExtractContextRecursive(rootComponent);
+        }
+
+        private void ExtractContextRecursive(IUIComponent rootComponent)
+        {
+            Document.Add(ExtractContext(rootComponent));
+
+            foreach (var child in rootComponent.Children)
+            {
+                ExtractContextRecursive(child);
+            }
+        }
+
+        private static ComponentContext ExtractContext(IUIComponent component, ComponentContext? parentContext = null)
+        {
+            return new ComponentContext
+            {
+                Style = component.Style,
+                Constraint = parentContext
+            };
+        }
+
+        private static CalculateIntrinsicSize(ComponentContext context)
+        {
+
+        }
+
+        private static ApplySizeConstraint(ComponentContext context)
+        {
+
+        }
+
+        private static ApplyPositionConstraint()
+        {
+
+        }
+    }
+
+    public struct DistributionContext(
+int leftOverSpace,
+int childCount
+)
+    {
+        public int LeftOverSpace = leftOverSpace;
+
+        public int ChildCount = childCount;
+    }
+
+    public struct DistributionInstructions(
+        int initialOffset,
+        int spacing)
+    {
+        public int InitialOffset = initialOffset;
+
+        public int Spacing = spacing;
+    }
+}

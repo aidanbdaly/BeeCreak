@@ -8,7 +8,7 @@ namespace BeeCreak.Engine.Services
 
         private readonly Dictionary<Type, Func<App, object>> services = [];
 
-        private Point resolution;
+        private Point canvasSize;
 
         private Action<App> onBeginRun = _ => { };
 
@@ -34,13 +34,13 @@ namespace BeeCreak.Engine.Services
             return this;
         }
 
-        public SceneBuilder SetResolution(int width, int height)
+        public SceneBuilder ConfigureCanvas(int width, int height)
         {
-            resolution = new Point(width, height);
+            canvasSize = new Point(width, height);
             return this;
         }
 
-        public SceneBuilder SetOnBeginRun(Action<App> onBeginRun)
+        public SceneBuilder SetRunAction(Action<App> onBeginRun)
         {
             this.onBeginRun = onBeginRun;
             return this;
@@ -51,7 +51,7 @@ namespace BeeCreak.Engine.Services
             return new Scene(
                 services,
                 components,
-                resolution,
+                canvasSize,
                 onBeginRun
             );
         }

@@ -14,16 +14,6 @@ namespace BeeCreak.Engine.Services
             startSceneId = sceneId;
         }
 
-        public void RegisterGlobalService<TService>(Func<App, TService> factory) where TService : class
-        {
-            services[typeof(TService)] = app => factory(app);
-        }
-
-        public Dictionary<Type, Func<App, object>> GetRegisteredGlobalServices()
-        {
-            return services;
-        }
-
         public void RegisterScene(string sceneId, IScene factory)
         {
             scenes[sceneId] = factory;

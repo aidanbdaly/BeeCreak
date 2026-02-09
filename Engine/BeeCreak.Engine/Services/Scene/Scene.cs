@@ -6,7 +6,7 @@ namespace BeeCreak.Engine.Services
     public class Scene(
     Dictionary<Type, Func<App, object>> services,
     List<Func<App, IGameComponent>> components,
-    Point resolution,
+    Point canvasSize,
     Action<App> onBeginRun
 ) : IScene
     {
@@ -14,7 +14,7 @@ namespace BeeCreak.Engine.Services
 
         public ImmutableDictionary<Type, Func<App, object>> Services { get; } = services.ToImmutableDictionary();
 
-        public Point Resolution { get; } = resolution;
+        public Point CanvasSize { get; } = canvasSize;
 
         public Action<App> OnBeginRun { get; } = onBeginRun;
     }

@@ -1521,11 +1521,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/aidan/Repos/Github/BeeCreak/Engine/BeeCreak.Engine.Extension/BeeCreak.Engine.Extension.csproj",
+      "projectUniqueName": "/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine.Extension/BeeCreak.Engine.Extension.csproj",
       "projectName": "BeeCreak.Engine.Extension",
-      "projectPath": "/Users/aidan/Repos/Github/BeeCreak/Engine/BeeCreak.Engine.Extension/BeeCreak.Engine.Extension.csproj",
+      "projectPath": "/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine.Extension/BeeCreak.Engine.Extension.csproj",
       "packagesPath": "/Users/aidan/.nuget/packages/",
-      "outputPath": "/Users/aidan/Repos/Github/BeeCreak/Engine/BeeCreak.Engine.Extension/obj/",
+      "outputPath": "/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine.Extension/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/aidan/.nuget/NuGet/NuGet.Config"
@@ -1580,22 +1580,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.21, 8.0.21]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.21, 8.0.21]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100-rc.2.25502.107/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -11,3 +11,16 @@
 /Users/aidan/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/refint/BeeCreak.Engine.dll
 /Users/aidan/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.pdb
 /Users/aidan/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/ref/BeeCreak.Engine.dll
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/bin/Debug/net8.0/BeeCreak.Engine.deps.json
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/bin/Debug/net8.0/BeeCreak.Engine.dll
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/bin/Debug/net8.0/BeeCreak.Engine.pdb
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.csproj.AssemblyReference.cache
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.GeneratedMSBuildEditorConfig.editorconfig
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.AssemblyInfoInputs.cache
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.AssemblyInfo.cs
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.csproj.CoreCompileInputs.cache
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.sourcelink.json
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.dll
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/refint/BeeCreak.Engine.dll
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/BeeCreak.Engine.pdb
+/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine/obj/Debug/net8.0/ref/BeeCreak.Engine.dll

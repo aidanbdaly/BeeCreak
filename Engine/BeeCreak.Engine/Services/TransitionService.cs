@@ -21,7 +21,7 @@ namespace BeeCreak.Engine.Services
 
             if (screen is not null)
             {
-                component.DestinationRectangle.Set((prev) => new(Point.Zero, screen.Size));
+                component.DestinationRectangle.Set((prev) => new(Point.Zero, screen.ScaledSize));
             }
             else
             {

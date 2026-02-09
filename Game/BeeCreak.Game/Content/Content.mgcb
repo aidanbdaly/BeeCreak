@@ -36,10 +36,10 @@
 /processorParam:TextureFormat=Color
 /build:Image/spritesheet_menu_button.png
 
-#begin Spritesheet/menu_button.spritesheet
+#begin SpriteSheet/menu_button.spritesheet
 /importer:SpriteSheetImporter
 /processor:SpriteSheetProcessor
-/build:Spritesheet/menu_button.spritesheet
+/build:SpriteSheet/menu_button.spritesheet
 
 #begin Game/default.game
 /importer:GameRecordImporter

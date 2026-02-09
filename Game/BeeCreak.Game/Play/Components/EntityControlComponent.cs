@@ -11,26 +11,27 @@ namespace BeeCreak.Game.Domain.Entity
         private CollisionService CollisionService
             => app.Services.GetService<CollisionService>();
 
-        private InputService Input => app.Services.GetService<InputService>();
+        private KeyboardInputService Keyboard
+            => app.Services.GetService<KeyboardInputService>();
 
         public override void Update(GameTime gameTime)
         {
-            if (Input.IsKeyDown(Keys.W))
+            if (Keyboard.IsKeyDown(Keys.W))
             {
                 MoveEntity(-Vector2.UnitY);
             }
 
-            if (Input.IsKeyDown(Keys.S))
+            if (Keyboard.IsKeyDown(Keys.S))
             {
                 MoveEntity(Vector2.UnitY);
             }
 
-            if (Input.IsKeyDown(Keys.A))
+            if (Keyboard.IsKeyDown(Keys.A))
             {
                 MoveEntity(-Vector2.UnitX);
             }
 
-            if (Input.IsKeyDown(Keys.D))
+            if (Keyboard.IsKeyDown(Keys.D))
             {
                 MoveEntity(Vector2.UnitX);
             }

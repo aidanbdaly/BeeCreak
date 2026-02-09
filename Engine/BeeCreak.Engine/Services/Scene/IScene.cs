@@ -9,7 +9,7 @@ namespace BeeCreak.Engine.Services
 
         ImmutableList<Func<App, IGameComponent>> Components { get; }
 
-        Point Resolution { get; }
+        Point CanvasSize { get; }
 
         Action<App> OnBeginRun { get; }
     }

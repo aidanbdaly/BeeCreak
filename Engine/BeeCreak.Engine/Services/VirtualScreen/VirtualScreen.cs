@@ -3,19 +3,21 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Engine.Services
 {
-    public sealed class VirtualScreen(SpriteBatch spriteBatch, Point resolution)
+    public sealed class VirtualScreen(SpriteBatch spriteBatch, Point size)
     {
         private readonly RenderTarget2D renderTarget = new(
             spriteBatch.GraphicsDevice,
-            resolution.X,
-            resolution.Y,
+            size.X,
+            size.Y,
             false,
             SurfaceFormat.Color,
             DepthFormat.None);
 
-        public float Scale { get; private set; }
+        public int Scale { get; private set; }
 
-        public Point Size { get; private set; }
+        public Point OriginalSize => size;
+
+        public Point ScaledSize { get; private set; }
 
         public Point Offset { get; private set; }
 
@@ -27,15 +29,15 @@ namespace BeeCreak.Engine.Services
         {
             var viewportSize = spriteBatch.GraphicsDevice.Viewport.Bounds.Size;
 
-            var scale = viewportSize.ToVector2() / resolution.ToVector2();
+            var scale = viewportSize / size;
 
             Scale = Math.Min(scale.X, scale.Y);
 
-            Size = new Vector2(resolution.X * Scale, resolution.Y * Scale).ToPoint();
+            ScaledSize = new Point(size.X * Scale, size.Y * Scale);
 
-            Offset = (viewportSize - Size) / new Point(2);
+            Offset = (viewportSize - ScaledSize) / new Point(2);
 
-            Bounds = new Rectangle(Offset, Size);
+            Bounds = new Rectangle(Offset, ScaledSize);
         }
 
         internal void Dispose() => renderTarget.Dispose();

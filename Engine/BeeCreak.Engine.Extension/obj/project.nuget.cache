@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IeeS6UZLZxg=",
+  "dgSpecHash": "kgiGURk+E5M=",
   "success": true,
-  "projectFilePath": "/Users/aidan/Repos/Github/BeeCreak/Engine/BeeCreak.Engine.Extension/BeeCreak.Engine.Extension.csproj",
+  "projectFilePath": "/Volumes/Projects/Repos/Github/BeeCreak/Engine/BeeCreak.Engine.Extension/BeeCreak.Engine.Extension.csproj",
   "expectedPackageFiles": [
     "/Users/aidan/.nuget/packages/assimpnet/4.1.0/assimpnet.4.1.0.nupkg.sha512",
     "/Users/aidan/.nuget/packages/microsoft.netcore.app/2.1.30/microsoft.netcore.app.2.1.30.nupkg.sha512",
@@ -19,9 +19,7 @@
     "/Users/aidan/.nuget/packages/sharpdx/4.0.1/sharpdx.4.0.1.nupkg.sha512",
     "/Users/aidan/.nuget/packages/sharpdx.d3dcompiler/4.0.1/sharpdx.d3dcompiler.4.0.1.nupkg.sha512",
     "/Users/aidan/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
-    "/Users/aidan/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
-    "/Users/aidan/.nuget/packages/microsoft.netcore.app.ref/8.0.21/microsoft.netcore.app.ref.8.0.21.nupkg.sha512",
-    "/Users/aidan/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512"
+    "/Users/aidan/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }
