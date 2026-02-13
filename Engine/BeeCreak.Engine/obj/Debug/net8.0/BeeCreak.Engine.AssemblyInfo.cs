@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BeeCreak.Engine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55c211c9aca73c4eef04117f70a00992a54f1f7e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75c9d95d4852a7caf15b7498a9bba86ca9246f94")]
 [assembly: System.Reflection.AssemblyProductAttribute("BeeCreak.Engine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BeeCreak.Engine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

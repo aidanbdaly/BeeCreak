@@ -1,5 +1,6 @@
 using BeeCreak.Engine;
 using BeeCreak.Game.Cell;
+using BeeCreak.Game.Domain.Map;
 using BeeCreak.Game.Services;
 
 namespace BeeCreak.Game.Play
@@ -14,7 +15,9 @@ namespace BeeCreak.Game.Play
             var cellManager = app.Services.GetService<CellManager>()
                 ?? throw new Exception("CellManager service not found");
 
-            cellManager.ChangeCell(saveService.Game.CellReference);
+            //cellManager.ChangeCell(saveService.Game.CellReference);
+
+            app.Components.Add(new MapComponent(app, new(200, 200)));
         }
     }
 }

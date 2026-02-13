@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Engine.Services
 {
-    public sealed class VirtualScreen(SpriteBatch spriteBatch, Point size)
+    public sealed class Canvas(SpriteBatch spriteBatch, Point size)
     {
-        private readonly RenderTarget2D renderTarget = new(
+        public RenderTarget2D renderTarget = new(
             spriteBatch.GraphicsDevice,
             size.X,
             size.Y,
@@ -46,17 +46,10 @@ namespace BeeCreak.Engine.Services
         {
             spriteBatch.GraphicsDevice.SetRenderTarget(renderTarget);
             spriteBatch.GraphicsDevice.Clear(Clear);
-
-            spriteBatch.Begin(
-                sortMode: SpriteSortMode.Deferred,
-                blendState: BlendState.AlphaBlend,
-                samplerState: SamplerState.PointClamp
-            );
         }
 
         internal void EndDraw()
         {
-            spriteBatch.End();
             spriteBatch.GraphicsDevice.SetRenderTarget(null);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque, SamplerState.PointClamp);
             spriteBatch.Draw(renderTarget, Bounds, Color.White);

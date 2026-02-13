@@ -4,19 +4,11 @@ namespace BeeCreak.Engine.Services
 {
     public class SceneBuilder
     {
-        private readonly List<Func<App, IGameComponent>> components = [];
-
         private readonly Dictionary<Type, Func<App, object>> services = [];
 
         private Point canvasSize;
 
         private Action<App> onBeginRun = _ => { };
-
-        public SceneBuilder AddComponent(Func<App, IGameComponent> component)
-        {
-            components.Add(component);
-            return this;
-        }
 
         public SceneBuilder RegisterService<TIService, TService>(Func<App, TService> service)
             where TIService : class
@@ -34,7 +26,7 @@ namespace BeeCreak.Engine.Services
             return this;
         }
 
-        public SceneBuilder ConfigureCanvas(int width, int height)
+        public SceneBuilder SetCanvas(int width, int height)
         {
             canvasSize = new Point(width, height);
             return this;
@@ -50,7 +42,6 @@ namespace BeeCreak.Engine.Services
         {
             return new Scene(
                 services,
-                components,
                 canvasSize,
                 onBeginRun
             );

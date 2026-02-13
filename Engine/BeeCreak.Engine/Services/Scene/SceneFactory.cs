@@ -1,43 +1,26 @@
+using BeeCreak.Engine.Core;
+
 namespace BeeCreak.Engine.Services
 {
     // This really is the factory for the entire game implementation
     public class SceneFactory
     {
-        private readonly Dictionary<string, IScene> scenes = [];
+        private readonly Dictionary<AppState, IScene> scenes = [];
 
-        private readonly Dictionary<Type, Func<App, object>> services = [];
-
-        private string startSceneId = string.Empty;
-
-        public void SetStartScene(string sceneId)
+        public void RegisterScene(AppState scene, IScene factory)
         {
-            startSceneId = sceneId;
+            scenes[scene] = factory;
         }
 
-        public void RegisterScene(string sceneId, IScene factory)
+        public IScene TryGetScene(AppState scene)
         {
-            scenes[sceneId] = factory;
-        }
-
-        public IScene TryGetStartScene()
-        {
-            if (string.IsNullOrEmpty(startSceneId))
+            if (scenes.TryGetValue(scene, out var result))
             {
-                throw new InvalidOperationException("Start scene not set.");
-            }
-
-            return TryGetScene(startSceneId);
-        }
-
-        public IScene TryGetScene(string sceneId)
-        {
-            if (scenes.TryGetValue(sceneId, out var scene))
-            {
-                return scene;
+                return result;
             }
             else
             {
-                throw new InvalidOperationException($"Scene '{sceneId}' not found.");
+                throw new InvalidOperationException($"Scene '{scene}' not found.");
             }
         }
     }

@@ -9,7 +9,7 @@ namespace BeeCreak.Engine
         // You made it private readonly, there's not much point since this can be fetched anywhere
         private readonly GraphicsDeviceManager graphicsDeviceManager;
 
-        private readonly VirtualScreenManager virtualScreenManager;
+        private readonly ScreenService screenService;
 
         public SceneManager SceneManager
         {
@@ -29,11 +29,11 @@ namespace BeeCreak.Engine
             }
         }
 
-        public IVirtualScreenService VirtualScreenService
+        public IScreenService ScreenService
         {
             get
             {
-                return Services.GetService<IVirtualScreenService>()
+                return Services.GetService<IScreenService>()
                 ?? throw new InvalidOperationException("No virtual screen service");
             }
         }
@@ -44,6 +44,14 @@ namespace BeeCreak.Engine
             {
                 return Services.GetService<SpriteBatch>()
                 ?? throw new InvalidOperationException("No spritebatch");
+            }
+        }
+
+        public IMouseInputService Mouse
+        {
+            get
+            {
+                return mouse;
             }
         }
 
@@ -61,7 +69,7 @@ namespace BeeCreak.Engine
                 new SceneFactory()
             );
 
-            virtualScreenManager = new VirtualScreenManager(this);
+            screenService = new ScreenService(this);
             graphicsDeviceManager = new GraphicsDeviceManager(this);
             mouse = new MouseInputService(this);
             keyboard = new KeyboardInputService(this);
@@ -77,7 +85,7 @@ namespace BeeCreak.Engine
             graphicsDeviceManager.ApplyChanges();
 
             Window.AllowUserResizing = true;
-            Window.ClientSizeChanged += (_, __) => virtualScreenManager.OnWindowResize();
+            Window.ClientSizeChanged += (_, __) => screenService.OnWindowResize();
 
             Exiting += (_, __) => { };
 
@@ -94,7 +102,6 @@ namespace BeeCreak.Engine
 
         protected override void BeginRun()
         {
-            SceneManager.StageFirst();
             SceneManager.Reveal();
         }
 
@@ -107,15 +114,15 @@ namespace BeeCreak.Engine
 
         protected override void Draw(GameTime gameTime)
         {
-            var screen = virtualScreenManager.Screen;
+            var canvas = screenService.Canvas;
 
-            if (screen is not null)
+            if (canvas is not null)
             {
-                screen.BeginDraw();
+                canvas.BeginDraw();
 
                 base.Draw(gameTime);
 
-                screen.EndDraw();
+                canvas.EndDraw();
             }
             else
             {

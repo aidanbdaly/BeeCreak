@@ -1,3 +1,4 @@
+using BeeCreak.Engine.Core;
 using Microsoft.Xna.Framework;
 
 namespace BeeCreak.Engine.Services
@@ -6,23 +7,19 @@ namespace BeeCreak.Engine.Services
     {
         IScene Scene { get; }
 
-        void Stage(string sceneId);
+        void Stage(AppState scene);
 
         void Reveal();
     }
 
-    public class SceneManager(App app) : ISceneService
+    public class SceneManager(App app) : ISceneService 
     {
-        public IScene Scene { get; private set; } = app.SceneFactory.TryGetStartScene();
+        public IScene Scene { get; private set; } = app.SceneFactory.TryGetScene(default!)
+            ?? throw new InvalidOperationException("Default scene not found.");
 
-        public void StageFirst()
+        public void Stage(AppState scene)
         {
-            Scene = app.SceneFactory.TryGetStartScene();
-        }
-
-        public void Stage(string sceneId)
-        {
-            Scene = app.SceneFactory.TryGetScene(sceneId);
+            Scene = app.SceneFactory.TryGetScene(scene);
         }
 
         public void Reveal()
@@ -31,7 +28,7 @@ namespace BeeCreak.Engine.Services
 
             if (Scene.CanvasSize != Point.Zero)
             {
-                app.Services.GetService<VirtualScreenManager>().CreateScreen(Scene.CanvasSize);
+                app.Services.GetService<ScreenService>().CreateCanvas(Scene.CanvasSize);
             }
 
             foreach (var service in Scene.Services)
@@ -42,11 +39,6 @@ namespace BeeCreak.Engine.Services
                 );
             }
 
-            foreach (var component in Scene.Components)
-            {
-                app.Components.Add(component(app));
-            }
-            
             Scene.OnBeginRun(app);
         }
     }

@@ -7,8 +7,6 @@ namespace BeeCreak.Engine.Services
     {
         ImmutableDictionary<Type, Func<App, object>> Services { get; }
 
-        ImmutableList<Func<App, IGameComponent>> Components { get; }
-
         Point CanvasSize { get; }
 
         Action<App> OnBeginRun { get; }

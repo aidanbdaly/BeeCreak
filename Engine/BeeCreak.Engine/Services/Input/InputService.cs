@@ -3,7 +3,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BeeCreak.Engine.Services
 {
-    public class MouseInputService(App app)
+    public interface IMouseInputService
+    {
+        bool DidLeftClick();
+
+        bool DidRightClick();
+
+        Point GetMousePosition();    
+    }
+
+    public class MouseInputService(App app) : IMouseInputService
     {
         private MouseState previous = Mouse.GetState();
 
@@ -29,7 +38,7 @@ namespace BeeCreak.Engine.Services
 
         public Point GetMousePosition()
         {
-            return app.VirtualScreenService.ToVirtualScreenCoordinates(current.Position);
+            return app.ScreenService.ToScreenCoordinates(current.Position);
         }
     }
 
