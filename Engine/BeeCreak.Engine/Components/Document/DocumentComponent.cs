@@ -3,17 +3,30 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BeeCreak.Engine.Services.Layout
 {
-    // DocumentComponent
-    public sealed class DocumentComponent(
-        App app,
-        DocumentNode document,
-        Func<Point>? sizeProvider = null) : DrawableGameComponent(app)
+    public sealed class DocumentComponent(App app) : DrawableGameComponent(app)
     {
         private RenderNode? layout;
 
         private Rectangle lastBounds = Rectangle.Empty;
 
         private Texture2D? pixel;
+
+        public DocumentNode? Document { get; set; }
+
+        public Func<Point>? SizeProvider { get; set; }
+
+        public static DocumentComponent Create(App app, DocumentNode? document = null, Func<Point>? sizeProvider = null)
+        {
+            var component = new DocumentComponent(app)
+            {
+                Document = document,
+                SizeProvider = sizeProvider
+            };
+
+            app.Components.Add(component);
+
+            return component;
+        }
 
         protected override void LoadContent()
         {
@@ -63,20 +76,23 @@ namespace BeeCreak.Engine.Services.Layout
 
         private void EnsureLayout()
         {
-            var bounds = ResolveBounds();
-
-            if (layout == null || document.IsDirty || bounds != lastBounds)
+            if (Document != null)
             {
-                layout = LayoutEngine.Build(document, bounds);
-                lastBounds = bounds;
+                var bounds = ResolveBounds();
+
+                if (layout == null || Document.IsDirty || bounds != lastBounds)
+                {
+                    layout = LayoutEngine.Build(Document, bounds);
+                    lastBounds = bounds;
+                }
             }
         }
 
         private Rectangle ResolveBounds()
         {
-            if (sizeProvider != null)
+            if (SizeProvider != null)
             {
-                var size = sizeProvider();
+                var size = SizeProvider();
                 return new Rectangle(0, 0, size.X, size.Y);
             }
 

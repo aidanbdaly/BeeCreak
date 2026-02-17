@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "BeeCreak.Game.Server/1.0.0": {
+        "runtime": {
+          "BeeCreak.Game.Server.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BeeCreak.Game.Server/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
