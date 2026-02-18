@@ -37,6 +37,7 @@ builder.Services.AddSingleton<KubectlInvoker>();
 builder.Services.AddSingleton<IGameServerOrchestrator, KubectlGameServerOrchestrator>();
 
 var app = builder.Build();
+var enableHttpsRedirection = builder.Configuration.GetValue("Orchestrator:EnableHttpsRedirection", true);
 
 if (app.Environment.IsDevelopment())
 {
@@ -44,7 +45,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (enableHttpsRedirection)
+{
+    app.UseHttpsRedirection();
+}
 
 app.Use(async (context, next) =>
 {

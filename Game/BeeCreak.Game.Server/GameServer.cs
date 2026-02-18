@@ -38,6 +38,10 @@ public sealed class GameServer
     {
         _logger.LogInformation("Starting UDP server on port {Port} at {TickRate} Hz.", _options.Port, _options.TickRate);
         _logger.LogInformation("Max clients: {MaxClients}, Session timeout: {TimeoutSeconds}s.", _options.MaxClients, _options.TimeoutSeconds);
+        if (!string.IsNullOrWhiteSpace(_options.ServerId))
+        {
+            _logger.LogInformation("Server id: {ServerId}.", _options.ServerId);
+        }
 
         var receiveTask = ReceiveLoopAsync(cancellationToken);
         var loopTask = GameLoopAsync(cancellationToken);

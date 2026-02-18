@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BeeCreak.Game.Orchestrator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+931f4ad134da713b883c516bd0a5ecf6e3158812")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de86ba7c241ef85adf940020316b464ba0e4f16d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BeeCreak.Game.Orchestrator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BeeCreak.Game.Orchestrator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

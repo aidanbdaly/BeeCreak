@@ -12,6 +12,7 @@ public static class KubernetesYaml
         IReadOnlyDictionary<string, string> annotations,
         string image,
         int containerPort,
+        int healthPort,
         IReadOnlyList<string> args,
         string heartbeatPath,
         int initialDelaySeconds,
@@ -55,16 +56,19 @@ public static class KubernetesYaml
         }
         builder.AppendLine("    ports:");
         builder.AppendLine($"    - containerPort: {containerPort}");
+        builder.AppendLine("      protocol: UDP");
+        builder.AppendLine($"    - containerPort: {healthPort}");
+        builder.AppendLine("      protocol: TCP");
         builder.AppendLine("    livenessProbe:");
         builder.AppendLine("      httpGet:");
         builder.AppendLine($"        path: {Escape(heartbeatPath)}");
-        builder.AppendLine($"        port: {containerPort}");
+        builder.AppendLine($"        port: {healthPort}");
         builder.AppendLine($"      initialDelaySeconds: {initialDelaySeconds}");
         builder.AppendLine($"      periodSeconds: {periodSeconds}");
         builder.AppendLine("    readinessProbe:");
         builder.AppendLine("      httpGet:");
         builder.AppendLine($"        path: {Escape(heartbeatPath)}");
-        builder.AppendLine($"        port: {containerPort}");
+        builder.AppendLine($"        port: {healthPort}");
         builder.AppendLine($"      initialDelaySeconds: {initialDelaySeconds}");
         builder.AppendLine($"      periodSeconds: {periodSeconds}");
         return builder.ToString();
@@ -103,6 +107,7 @@ public static class KubernetesYaml
         builder.AppendLine("  - name: game");
         builder.AppendLine($"    port: {port}");
         builder.AppendLine($"    targetPort: {port}");
+        builder.AppendLine("    protocol: UDP");
         return builder.ToString();
     }
 

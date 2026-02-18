@@ -3,8 +3,9 @@ namespace BeeCreak.Game.Orchestrator.Options;
 public sealed class OrchestratorOptions
 {
     public string Namespace { get; set; } = "default";
-    public string ServerImage { get; set; } = "beecreak/gameserver:latest";
+    public string ServerImage { get; set; } = "ghcr.io/aidanbdaly/beecreak-game-server:latest";
     public int ContainerPort { get; set; } = 7777;
+    public int HealthPort { get; set; } = 8080;
     public bool ExposeNodePort { get; set; } = true;
     public string HeartbeatPath { get; set; } = "/heartbeat";
     public int HeartbeatInitialDelaySeconds { get; set; } = 10;
@@ -32,7 +33,11 @@ public sealed class OrchestratorOptions
         "--port",
         "{port}",
         "--session-id",
-        "{serverId}"
+        "{serverId}",
+        "--health-port",
+        "{healthPort}",
+        "--heartbeat-path",
+        "{heartbeatPath}"
     };
 
     public string? KubeConfigPath { get; set; }

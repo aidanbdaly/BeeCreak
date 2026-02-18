@@ -75,6 +75,7 @@ public sealed class KubectlGameServerOrchestrator : IGameServerOrchestrator
             annotations,
             image,
             port,
+            _options.HealthPort,
             args,
             _options.HeartbeatPath,
             _options.HeartbeatInitialDelaySeconds,
@@ -154,7 +155,9 @@ public sealed class KubectlGameServerOrchestrator : IGameServerOrchestrator
         foreach (var arg in _options.DefaultArgs)
         {
             args.Add(arg.Replace("{serverId}", serverId, StringComparison.Ordinal)
-                .Replace("{port}", port.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal));
+                .Replace("{port}", port.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal)
+                .Replace("{healthPort}", _options.HealthPort.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal)
+                .Replace("{heartbeatPath}", _options.HeartbeatPath, StringComparison.Ordinal));
         }
 
         if (requestArgs is { Count: > 0 })
