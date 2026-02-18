@@ -9,7 +9,7 @@
             "name": "Run Script: start",
             "request": "launch",
             "command": "npm run start",
-            "cwd": "${workspaceFolder}/Tooling/BeeCreak.Tooling.ContentAdmin"
+            "cwd": "${workspaceFolder}/BeeCreak.Tooling.ContentAdmin"
         }
     ]
 }

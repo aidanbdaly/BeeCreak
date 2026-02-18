@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeeCreak Content Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <div>
+      <h1>BeeCreak Content Admin</h1>
+      <p>Edit the assets stored in <code>BeeCreak.Client/BeeCreak.Client.App/Content</code>.</p>
+    </div>
+    <div class="path-row">
+      <span class="label">Content root:</span>
+      <span id="rootPath" class="path-value">Loading...</span>
+    </div>
+  </header>
+
+  <main class="app-layout">
+    <section class="tree-panel">
+      <div class="panel-header">
+        <div class="panel-title">Content Files</div>
+        <div class="panel-actions">
+          <button id="refreshBtn" type="button">Refresh</button>
+          <button id="newFileBtn" type="button">New File</button>
+        </div>
+      </div>
+      <div id="treeContainer" class="tree-container">
+        <p class="panel-placeholder">Loading content tree...</p>
+      </div>
+    </section>
+
+    <section class="editor-panel">
+      <div class="panel-header">
+        <div>
+          <div id="editorTitle" class="panel-title">No file selected</div>
+          <div id="editorPath" class="path-value"></div>
+        </div>
+        <div class="panel-actions">
+          <button id="saveBtn" type="button" disabled>Save</button>
+        </div>
+      </div>
+      <textarea id="editor" spellcheck="false" disabled></textarea>
+      <div class="editor-footer">
+        <span id="editorStatus">Select a file to begin editing.</span>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="renderer.js"></script>
+</body>
+
+</html>

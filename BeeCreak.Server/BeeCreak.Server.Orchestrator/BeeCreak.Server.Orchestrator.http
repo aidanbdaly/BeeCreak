@@ -1,0 +1,27 @@
+@BeeCreak.Server.Orchestrator_HostAddress = http://localhost:5228
+
+GET {{BeeCreak.Server.Orchestrator_HostAddress}}/health
+Accept: application/json
+
+###
+
+GET {{BeeCreak.Server.Orchestrator_HostAddress}}/servers
+Accept: application/json
+
+###
+
+POST {{BeeCreak.Server.Orchestrator_HostAddress}}/servers
+Content-Type: application/json
+
+{
+  "metadata": {
+    "region": "local",
+    "map": "arena"
+  }
+}
+
+###
+
+DELETE {{BeeCreak.Server.Orchestrator_HostAddress}}/servers/{{serverId}}
+
+###

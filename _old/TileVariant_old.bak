@@ -1,4 +1,4 @@
-namespace BeeCreak.Game.Domain.Tile;
+namespace BeeCreak.Domain.Tile;
 
 public enum TileVariant {
     Default,

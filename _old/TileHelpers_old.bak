@@ -1,7 +1,7 @@
-using BeeCreak.Game.Domain.Tile;
+using BeeCreak.Domain.Tile;
 using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Game.Domain.Tile
+namespace BeeCreak.Domain.Tile
 {
     
     public class TileUtils

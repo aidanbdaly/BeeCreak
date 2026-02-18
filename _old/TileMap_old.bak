@@ -1,7 +1,7 @@
-using BeeCreak.Game.Models;
+using BeeCreak.Models;
 using Microsoft.Xna.Framework;
 
-namespace BeeCreak.Game.Domain.Tile
+namespace BeeCreak.Domain.Tile
 {
     public class TileMapOld(List<TileReference> tileMap)
     {

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.2.1105" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BeeCreak.Client.Engine.Extension\BeeCreak.Client.Engine.Extension.csproj"
+      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+  <Target Name="CopyContentPipelineExtensions" AfterTargets="ResolveReferences">
+    <Message Text="Copying Content Pipeline Extensions..." Importance="high" />
+    <Copy
+      SourceFiles="..\BeeCreak.Client.Engine.Extension\bin\Debug\net8.0\BeeCreak.Client.Engine.Extension.dll"
+      DestinationFolder="..\BeeCreak.Client.App\Content\Extensions" />
+  </Target>
+</Project>

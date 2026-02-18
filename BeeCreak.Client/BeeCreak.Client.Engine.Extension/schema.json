@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.becreak.dev/content/assets",
+  "title": "BeeCreak Content Assets",
+  "description": "Schema definitions describing the JSON payload for each BeeCreak content asset type.",
+  "x-runtimeNamespace": "BeeCreak.Engine.Data",
+  "x-runtimeAssembly": "BeeCreak.Client.Engine",
+  "type": "object",
+  "definitions": {
+    "Animation": {
+      "x-fileExtension": ".as",
+      "title": "Animation",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique animation identifier."
+        },
+        "texture": {
+          "type": "string",
+          "minLength": 1,
+          "x-referenceAsset": "Texture"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "integer" },
+              "y": { "type": "integer" },
+              "w": { "type": "integer" },
+              "h": { "type": "integer" }
+            }
+          },
+          "minItems": 1
+        }
+      },
+      "required": ["id", "spriteSheet", "data"]
+    },
+    "AnimationCollection": {
+      "x-fileExtension": ".asc",
+      "title": "AnimationCollection",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1,
+            "x-referenceAsset": "Animation"
+          }
+        }
+      }
+    },
+    "BoundingBoxSheet": {
+      "x-fileExtension": ".bbs",
+      "title": "BoundingBoxSheet",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "boundingBoxes": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "integer" },
+              "y": { "type": "integer" },
+              "w": { "type": "integer" },
+              "h": { "type": "integer" }
+            },
+            "required": ["x", "y", "w", "h"]
+          }
+        }
+      },
+      "required": ["id", "boundingBoxes"]
+    },
+    "Locale": {
+      "x-fileExtension": ".json",
+      "title": "Locale",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "translations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["id", "translations"]
+    },
+    "SpriteSheet": {
+      "x-fileExtension": ".spritesheet",
+      "title": "SpriteSheet",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "texture": {
+          "type": "string",
+          "minLength": 1,
+          "x-referenceAsset": "Texture"
+        },
+        "data": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "integer" },
+              "y": { "type": "integer" },
+              "w": { "type": "integer" },
+              "h": { "type": "integer" }
+            },
+            "required": ["x", "y", "w", "h"]
+          }
+        }
+      },
+      "required": ["id", "image", "data"]
+    },
+    "TextSet": {
+      "x-fileExtension": ".bts",
+      "title": "TextSet",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "font": {
+          "type": "string"
+        },
+        "text": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["id", "font", "text"]
+    }
+  }
+}

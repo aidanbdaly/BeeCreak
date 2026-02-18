@@ -1,0 +1,15 @@
+services:
+  orchestrator:
+    build: .
+    image: beecreak/orchestrator:local
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_URLS: "http://+:8080"
+      Orchestrator__EnableHttpsRedirection: "false"
+      Orchestrator__ApiKey: "change-me"
+      Orchestrator__KubeContext: "docker-desktop"
+      Orchestrator__KubeConfigPath: "/kube/config"
+      Orchestrator__ServerImage: "ghcr.io/aidanbdaly/beecreak-game-server:latest"
+    volumes:
+      - ./kubeconfig.docker-desktop.yaml:/kube/config:ro
